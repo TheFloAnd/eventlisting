@@ -1,7 +1,15 @@
 <?php
 
 spl_autoload_register(function ($class) {
-   require __DIR__.'../../module/' . strtolower($class) . '.module.php';
+    $module = __DIR__.'module/' . strtolower($class) . '.module.php';
+    if(file_exists($module)){
+        require $module;
+    }
+
+    $controller = __DIR__.'controller/' . strtolower($class) . '.controller.php';
+    if(file_exists($controller)){
+        require $conroller;
+    }
 });
 
 /*

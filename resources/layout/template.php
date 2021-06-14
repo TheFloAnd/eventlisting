@@ -4,14 +4,17 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta http-equiv="refresh" content="1"> -->
 
     <title>Liste</title>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+
     <!-- Bootstrap CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
   </head>
   <body>
     <main class="container">
-    <h1>Auflistung</h1>
     <?php
 
       require __DIR__ . '/../views/'. blade .'.blade.php';

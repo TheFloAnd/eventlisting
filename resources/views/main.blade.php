@@ -9,8 +9,15 @@
           <tbody>
             <tr>
               <th scope="row">
-                <a href="?blade=worker">
-                  3
+                <a href="?blade=employee">
+                  Mitarbeiter
+                </a>
+              </th>
+            </tr>
+            <tr>
+              <th scope="row">
+                <a href="?blade=events">
+                  Events
                 </a>
               </th>
             </tr>
