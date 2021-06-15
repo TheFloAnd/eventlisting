@@ -1,45 +1,171 @@
-<h1 id="reloading"><?php echo date('d.m.Y - H:i:s'); ?></h1>
-<article>
-    <section>
-        <table class="table table-striped table-hover" id="table-to-refresh">
-            <thead>
-              <tr>
-                <th scope="col">Vorhaben</th>
-                <th scope="col">Vom</th>
-                <th scope="col">Bis zum</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
+<nav class="navbar navbar-light bg-light">
+  <a href="?b=main">
+  <div class="container-fluid">
+    <span class="navbar-text">
+      Hauptseite
+    </span>
+  </div>
+</a>
+</nav>
+<article class="row">
+    <section class="col">
+      <div class="card">
+        <div class="card-body">
 
-                use app\controller\events;
-                require './app/controller/events.controller.php';
+          <nav>
+            <div class="nav nav-tabs justify-content-evenly" id="nav-tab" role="tablist">
+              <button class="nav-link active col" id="nav-event-tab" data-bs-toggle="tab" data-bs-target="#nav-event" type="button" role="tab" aria-controls="nav-event" aria-selected="true">
+                Events
+              </button>
+              <button class="nav-link col" id="nav-group-tab" data-bs-toggle="tab" data-bs-target="#nav-group" type="button" role="tab" aria-controls="nav-group" aria-selected="false">
+                Gruppe
+              </button>
+            </div>
+          </nav>
+          
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="nav-event" role="tabpanel" aria-labelledby="nav-event-tab">
+              
+              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                <div class="row mt-3 g-3 justify-content-center">
+                  <div class="col-md-10">
+                    <fieldset>
+                      <div class="form-floating">
+                        <input type="text" class="form-control" name="event" id="event" placeholder="" list="event_list" required>
+                        <label for="floatingInput">
+                          Event
+                          <span style="color: red;">
+                            *
+                          </span>
+                        </label>
+                        <datalist id="event_list">
+                          <?php
+                          use app\controller\events;
 
-                foreach(events::index() as $row){
-                    echo'
-              <tr>
-                <td>'. $row['event'] .'</td>
-                <td>'. $row['start'] .'</td>
-                <td>'. $row['end'] .'</td>
-              </tr>';
-                  }
-              ?>
-            </tbody>
-        </table>
+                          foreach(events::proposals() as $row){
+                            echo'<option value="'. $row['event'] .'">';
+                          }
+                          ?>
+                        </datalist>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-7">
+                    <fieldset>
+                      <div class="form-floating">
+                        <select class="form-select" name="group" id="group" aria-label="Floating label select example" required>
+                          <?php
+
+                            use app\controller\group;
+
+                            foreach(group::index() as $row){
+                              echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
+                            }
+                          ?>
+                        </select>
+                        <label for="floatingSelect">
+                          Gruppe
+                          <span style="color: red;">
+                            *
+                          </span>
+                        </label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-3">
+                    <fieldset>
+                      <div class="form-floating">
+                        <input type="text" class="form-control" name="room" id="room" placeholder="Werkstadt" required>
+                        <label for="room">
+                          Raum
+                          <span style="color: red;">
+                            *
+                          </span>
+                        </label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-5">
+                    <fieldset>
+                      <div class="form-floating">
+                        <input type="date" class="form-control" name="start_date" id="start_date" placeholder="" required>
+                        <label for="floatingInput">
+                          Start Datum
+                          <span style="color: red;">
+                            *
+                          </span>
+                        </label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-5">
+                    <fieldset>
+                      <div class="form-floating">
+                        <input type="date" class="form-control" name="end_date" id="end_date" placeholder="" required>
+                        <label for="floatingInput">
+                          End Datum
+                          <span style="color: red;">
+                            *
+                          </span>
+                        </label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="col-8">
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-outline-success w-100" name="submit_event" value="submit">
+                        Hinzufügen
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="nav-group" role="tabpanel" aria-labelledby="nav-group-tab">
+
+              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                <div class="row mt-3 g-3 justify-content-center">
+                  <div class="col-md-10">
+                    <fieldset>
+                      <div class="form-floating">
+                        <input type="text" class="form-control" name="group_name" id="group_name" placeholder="" required>
+                        <label for="floatingInput">
+                          Gruppen Name
+                          <span style="color: red;">
+                            *
+                          </span>
+                        </label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="col-md-10">
+                    <fieldset>
+                      <div class="form-floating">
+                        <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="" required>
+                        <label for="floatingInput">
+                          Gruppen Alias
+                          <span style="color: red;">
+                            *
+                          </span>
+                        </label>
+                      </div>
+                    </fieldset>
+                  </div>
+                  
+                  <div class="col-8">
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-outline-success w-100" name="submit_group" value="submit">
+                        Hinzufügen
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
     </section>
 </article>
-<script>
-refresh_loop();
-
-var i = 1
-function refresh_loop(){
-    setTimeout(function(){
-        // console.log('Hallo');
-        window.location.reload();
-        i++;
-        if(i < 10){
-            refresh_loop();
-        }
-    }, 60 * 1000)
-}
-</script>
