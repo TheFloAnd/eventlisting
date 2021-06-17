@@ -1,5 +1,5 @@
 
-    <a class="btn btn-hidden" type="button" style="border: none;" href="?b=events">
+    <a class="btn btn-hidden" type="button" style="border: none;" href="?b=create">
       <span class="navbar-toggler-icon"></span>
     </a>
 
@@ -25,37 +25,29 @@
               <?php
 
                 use app\controller\events;
+                use app\controller\group;
 
                 foreach(events::index() as $row){
-                  switch ($row['team']){
-                    case 'FISI19':
-                      $group_badge = 'primary';
-                      break;
-                    case 'FISI20':
-                      $group_badge = 'success';
-                      break;
-                    case 'BVB':
-                      $group_badge = 'danger';
-                      break;
-                    default:
-                      $group_badge = 'secondary';
+                    foreach(group::index() as $group){
+                      if($row['team'] == $group['alias']){
+                        $group_badge = $group['color'];
+                      }
+                    }
 
-                  }
                     echo'
               <tr>
                 <td>'. $row['event'] .'</td>';
-                echo'<td><span class="badge bg-'. $group_badge .'">'. $row['team'] .'</span></td>';
+                echo'<td><span class="badge" style="background-color:'. $group_badge .'">'. $row['team'] .'</span></td>';
                 echo'<td>'. $row['room'] .'</td>';
                 if($row['start'] != $row['end']){
-                  echo'<td>'. $row['start'] .'</td>';
-                  echo'<td>'. $row['end'] .'</td>';
+                  echo'<td>'. date('d.m.Y', strtotime($row['start'])) .'</td>';
+                  echo'<td>'. date('d.m.Y', strtotime($row['end'])) .'</td>';
                 }
                 if($row['start'] == $row['end']){
-                  echo'<td colspan="2">'. $row['start'] .'</td>';
+                  echo'<td colspan="2">'. date('d.m.Y', strtotime($row['start'])) .'</td>';
                 }
-                
+              }
               echo'</tr>';
-                  }
               ?>
             </tbody>
         </table>
@@ -75,33 +67,26 @@
                 <th scope="col">Raum</th>
                 <th scope="col">Vom</th>
                 <th scope="col">Bis zum</th>
+                <th scope="col">In</th>
               </tr>
             </thead>
             <tbody>
               <?php
 
                 foreach(events::future() as $row){
-                  switch ($row['team']){
-                    case 'FISI19':
-                      $group_badge = 'primary';
-                      break;
-                    case 'FISI20':
-                      $group_badge = 'success';
-                      break;
-                    case 'BVB':
-                      $group_badge = 'danger';
-                      break;
-                    default:
-                      $group_badge = 'secondary';
-
-                  }
+                    foreach(group::index() as $group){
+                      if($row['team'] == $group['alias']){
+                        $group_badge = $group['color'];
+                      }
+                    }
                     echo'
               <tr>
                 <td>'. $row['event'] .'</td>
-                <td><span class="badge bg-'. $group_badge .'">'. $row['team'] .'</span></td>
+                <td><span class="badge" style="background-color:'. $group_badge .'">'. $row['team'] .'</span></td>
                 <td>'. $row['room'] .'</td>
-                <td>'. $row['start'] .'</td>
-                <td>'. $row['end'] .'</td>
+                <td>'. date('d.m.Y', strtotime($row['start'])) .'</td>
+                <td>'. date('d.m.Y', strtotime($row['end'])) .'</td>
+                <td>'. date('j', strtotime($row['start']) - strtotime(date('Y-m-d').' +1 day')) .' Tagen</td>
               </tr>';
                   }
               ?>
@@ -112,7 +97,7 @@
     </div>
   </section>
 </article>
-<script>
+<!-- <script>
 refresh_loop();
 
 var i = 1
@@ -126,4 +111,4 @@ function refresh_loop(){
         }
     }, 5 * 1000)
 }
-</script>
+</script> -->

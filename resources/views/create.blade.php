@@ -1,31 +1,27 @@
 <nav class="navbar navbar-light bg-light">
-  <a href="?b=main">
   <div class="container-fluid">
-    <span class="navbar-text">
-      Hauptseite
-    </span>
+    <div class="row">
+      <div class="col">
+        <a href="?b=main">
+          <span class="navbar-text">
+            Hauptseite
+          </span>
+        </a>
+      </div>
+      <div class="col">
+        <a href="?b=groups">
+          <span class="navbar-text">
+            Gruppen
+          </span>
+        </a>
+      </div>
+    </div>
   </div>
-</a>
 </nav>
 <article class="row">
     <section class="col">
       <div class="card">
         <div class="card-body">
-
-          <nav>
-            <div class="nav nav-tabs justify-content-evenly" id="nav-tab" role="tablist">
-              <button class="nav-link active col" id="nav-event-tab" data-bs-toggle="tab" data-bs-target="#nav-event" type="button" role="tab" aria-controls="nav-event" aria-selected="true">
-                Events
-              </button>
-              <button class="nav-link col" id="nav-group-tab" data-bs-toggle="tab" data-bs-target="#nav-group" type="button" role="tab" aria-controls="nav-group" aria-selected="false">
-                Gruppe
-              </button>
-            </div>
-          </nav>
-          
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="nav-event" role="tabpanel" aria-labelledby="nav-event-tab">
-              
               <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                 <div class="row mt-3 g-3 justify-content-center">
                   <div class="col-md-10">
@@ -59,7 +55,7 @@
                             use app\controller\group;
 
                             foreach(group::index() as $row){
-                              echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
+                                echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
                             }
                           ?>
                         </select>
@@ -118,50 +114,6 @@
                 </div>
               </form>
             </div>
-            <div class="tab-pane fade" id="nav-group" role="tabpanel" aria-labelledby="nav-group-tab">
-
-              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
-                <div class="row mt-3 g-3 justify-content-center">
-                  <div class="col-md-10">
-                    <fieldset>
-                      <div class="form-floating">
-                        <input type="text" class="form-control" name="group_name" id="group_name" placeholder="" required>
-                        <label for="floatingInput">
-                          Gruppen Name
-                          <span style="color: red;">
-                            *
-                          </span>
-                        </label>
-                      </div>
-                    </fieldset>
-                  </div>
-                  <div class="col-md-10">
-                    <fieldset>
-                      <div class="form-floating">
-                        <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="" required>
-                        <label for="floatingInput">
-                          Gruppen Alias
-                          <span style="color: red;">
-                            *
-                          </span>
-                        </label>
-                      </div>
-                    </fieldset>
-                  </div>
-                  
-                  <div class="col-8">
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-outline-success w-100" name="submit_group" value="submit">
-                        Hinzufügen
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-
-            </div>
-          </div>
-          
         </div>
       </div>
     </section>

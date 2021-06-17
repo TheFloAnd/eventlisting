@@ -19,7 +19,7 @@ class events{
 
     public static function future(){
 
-        $stmt = "SELECT * FROM `events` where start <= '". date('Y-m-d', strtotime(date("Y-m-d") . ' +7 Days')) ."' AND start >= '". date('Y-m-d', strtotime(date("Y-m-d") . ' +1 Days')) ."' ORDER BY start ASC";
+        $stmt = "SELECT * FROM `events` where start <= '". date('Y-m-d', strtotime(date("Y-m-d") . ' + 7 Day')) ."' AND start >= '". date('Y-m-d', strtotime(date("Y-m-d") . ' +1 Days')) ."' ORDER BY start ASC";
 
 
         $data = DB::connection()->query($stmt);

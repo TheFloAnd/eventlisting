@@ -27,5 +27,6 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="/resources/js/bootstrap.bundle.js"></script>
+    <script>$(".switch").bootstrapSwitch()</script>
   </body>
 </html>

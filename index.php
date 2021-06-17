@@ -35,4 +35,14 @@ if(isset($_POST['submit_group'])){
           </div>';
   }
 }
+
+if(isset($_POST['submit_edit_group'])){
+  $update_group = group::update($_POST);
+  if($update_group['0'] == true){
+    echo'<div class="alert alert-success text-center alert-dismissible fade show" role="alert">
+            Die Gruppe '. $update_group['1'] .' wurde Erfolgreich geändert!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+  }
+}
 require __DIR__.'/resources/layout/template.php';
