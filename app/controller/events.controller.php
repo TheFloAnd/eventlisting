@@ -9,7 +9,7 @@ class events{
     
     public static function index(){
 
-        $stmt = "SELECT * FROM `events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."'";
+        $stmt = "SELECT * FROM `events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
 
         $data = DB::connection()->query($stmt);
         $result = $data->fetchAll();
@@ -19,7 +19,7 @@ class events{
 
     public static function future(){
 
-        $stmt = "SELECT * FROM `events` where start <= '". date('Y-m-d', strtotime(date("Y-m-d") . ' +7 Days')) ."' AND start >= '". date('Y-m-d', strtotime(date("Y-m-d") . ' +1 Days')) ."'";
+        $stmt = "SELECT * FROM `events` where start <= '". date('Y-m-d', strtotime(date("Y-m-d") . ' +7 Days')) ."' AND start >= '". date('Y-m-d', strtotime(date("Y-m-d") . ' +1 Days')) ."' ORDER BY start ASC";
 
 
         $data = DB::connection()->query($stmt);

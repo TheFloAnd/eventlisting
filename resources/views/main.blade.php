@@ -9,8 +9,9 @@
     <div class="card-header">
       <h1 id="reloading"><?php echo date('d.m.Y - H:i'); ?></h1>
     </div>
-    <div class="card-body table-responsive">
-        <table class="table table-striped table-hover" id="table-to-refresh">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table align-center table-striped table-hover" id="table-to-refresh">
             <thead>
               <tr>
                 <th scope="col">Vorhaben</th>
@@ -42,22 +43,30 @@
                   }
                     echo'
               <tr>
-                <td>'. $row['event'] .'</td>
-                <td><span class="badge bg-'. $group_badge .'">'. $row['team'] .'</span></td>
-                <td>'. $row['room'] .'</td>
-                <td>'. $row['start'] .'</td>
-                <td>'. $row['end'] .'</td>
-              </tr>';
+                <td>'. $row['event'] .'</td>';
+                echo'<td><span class="badge bg-'. $group_badge .'">'. $row['team'] .'</span></td>';
+                echo'<td>'. $row['room'] .'</td>';
+                if($row['start'] != $row['end']){
+                  echo'<td>'. $row['start'] .'</td>';
+                  echo'<td>'. $row['end'] .'</td>';
+                }
+                if($row['start'] == $row['end']){
+                  echo'<td colspan="2">'. $row['start'] .'</td>';
+                }
+                
+              echo'</tr>';
                   }
               ?>
             </tbody>
         </table>
+        </div>
     </div>
     </div>
   </section>
   <section class="col-12">
   <div class="card">
-    <div class="card-body table-responsive">
+    <div class="card-body">
+      <div class="table-responsive">
         <table class="table table-striped table-hover" id="table-to-refresh">
             <thead>
               <tr>
@@ -98,11 +107,12 @@
               ?>
             </tbody>
         </table>
+      </div>
     </div>
     </div>
   </section>
 </article>
-<!-- <script>
+<script>
 refresh_loop();
 
 var i = 1
@@ -116,4 +126,4 @@ function refresh_loop(){
         }
     }, 5 * 1000)
 }
-</script> -->
+</script>

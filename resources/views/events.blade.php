@@ -75,12 +75,9 @@
                   <div class="col-md-3">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="room" id="room" placeholder="Werkstadt" required>
+                        <input type="text" class="form-control" name="room" id="room" placeholder="Werkstadt">
                         <label for="room">
                           Raum
-                          <span style="color: red;">
-                            *
-                          </span>
                         </label>
                       </div>
                     </fieldset>
@@ -88,7 +85,7 @@
                   <div class="col-md-5">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="date" class="form-control" name="start_date" id="start_date" placeholder="" required>
+                        <input type="date" class="form-control" name="start_date" id="start_date" value="<?php echo date("Y-m-d") ?>" required>
                         <label for="floatingInput">
                           Start Datum
                           <span style="color: red;">
@@ -101,7 +98,7 @@
                   <div class="col-md-5">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="date" class="form-control" name="end_date" id="end_date" placeholder="" required>
+                        <input type="date" class="form-control" name="end_date" id="end_date" value="<?php echo date("Y-m-d") ?>" required>
                         <label for="floatingInput">
                           End Datum
                           <span style="color: red;">
@@ -169,3 +166,26 @@
       </div>
     </section>
 </article>
+    <script>
+        var start_date = document.getElementById("start_date");
+        var end_date = document.getElementById("end_date");
+        
+        start_date.onchange = function () {
+          if (start_date.value > end_date.value) {
+            end_date.value = start_date.value
+          }
+
+          if (!end_date.value) {
+            end_date.value = start_date.value
+          }
+        };
+        end_date.onchange = function () {
+          if (end_date.value < start_date.value) {
+            start_date.value = end_date.value
+          }
+
+          if (!start_date.value) {
+            start_date.value = end_date.value
+          }
+        };
+    </script>

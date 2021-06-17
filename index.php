@@ -21,6 +21,18 @@ if(isset($_POST['submit_event'])){
   events::store($_POST);
 }
 if(isset($_POST['submit_group'])){
-  group::store($_POST);
+  $add_group = group::store($_POST);
+  if($add_group['0'] == false){
+    echo'<div class="alert alert-warning text-center alert-dismissible fade show" role="alert">
+            Der Gruppen Alias '. $add_group['1'] .' Existiert schon!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+  }else{
+
+    echo'<div class="alert alert-success text-center alert-dismissible fade show" role="alert">
+            Der Gruppen Alias '. $add_group['1'] .' wurde Erstellt!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+  }
 }
 require __DIR__.'/resources/layout/template.php';
