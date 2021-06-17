@@ -97,7 +97,7 @@
     </div>
   </section>
 </article>
-<!-- <script>
+<script>
 refresh_loop();
 
 var i = 1
@@ -111,4 +111,4 @@ function refresh_loop(){
         }
     }, 5 * 1000)
 }
-</script> -->
+</script>
