@@ -37,7 +37,7 @@
                     echo'
               <tr>
                 <td>'. $row['event'] .'</td>';
-                echo'<td><span class="badge" style="background-color:'. $group_badge .'">'. $row['team'] .'</span></td>';
+                echo'<td><span class="badge text-dark" style="background-color:'. $group_badge .';">'. $row['team'] .'</span></td>';
                 echo'<td>'. $row['room'] .'</td>';
                 if($row['start'] != $row['end']){
                   echo'<td>'. date('d.m.Y', strtotime($row['start'])) .'</td>';
@@ -82,7 +82,7 @@
                     echo'
               <tr>
                 <td>'. $row['event'] .'</td>
-                <td><span class="badge" style="background-color:'. $group_badge .'">'. $row['team'] .'</span></td>
+                <td><span class="badge text-dark" style="background-color:'. $group_badge .'">'. $row['team'] .'</span></td>
                 <td>'. $row['room'] .'</td>
                 <td>'. date('d.m.Y', strtotime($row['start'])) .'</td>
                 <td>'. date('d.m.Y', strtotime($row['end'])) .'</td>
