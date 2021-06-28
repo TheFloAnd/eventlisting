@@ -58,7 +58,7 @@ class events{
         return $result;
     }
 
-    public static function show_event($id){
+    public static function find($id){
 
         $stmt = "SELECT * FROM `events` where id = '". $id ."' LIMIT 1";
 

@@ -25,3 +25,11 @@ $lang['project']        = 'Vorhaben';
 $lang['from']           = 'Vom';
 $lang['till']           = 'Bis';
 $lang['remaining_days'] = 'In';
+$lang['repeat']         = 'Wiederholungen';
+
+$lang['monday']         = 'Montag';
+$lang['tuesday']         = 'Dienstag';
+$lang['wednesday']         = 'Mittwoch';
+$lang['thursday']         = 'Donnerstag';
+$lang['friday']         = 'Freitag';
+$lang['weeks']         = 'Wochen';

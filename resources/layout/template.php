@@ -29,5 +29,6 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="/resources/js/bootstrap.bundle.js"></script>
+    <script src="/resources/js/bootstrap-toggle.min.js"></script>
   </body>
 </html>

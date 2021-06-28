@@ -116,6 +116,82 @@
                       </div>
                     </fieldset>
                   </div>
+                  <div class="col-auto">
+                    <fieldset>
+                      <div class="form-group">
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="set_repeat" data-toggle="toggle" autocomplete="off">
+                          <label class="form-check-label" for="set_repeat">
+                            <?php echo$lang['repeat'] ?>
+                          </label>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                  <div class="col-10">
+                    <div class="row g-2 justify-content-around" id="repeat_time">
+                      <div class="col-3">
+                        <div class="form-group">
+                          <fieldset>
+                            <label class="form-label" for="weeks">
+                              <?php echo$lang['weeks'] ?> :
+                            </label>
+                            <input class="form-control" type="number" value="1" min="1" name="repeat_weeks" id="repeat_weeks">
+                          </fieldset>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="form-check">
+                          <fieldset>
+                            <input class="form-check-input" type="checkbox" value="" name="repeat_monday" id="repeat_monday">
+                            <label class="form-check-label" for="repeat_monday">
+                              <?php echo$lang['monday'] ?>
+                            </label>
+                          </fieldset>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="form-check">
+                          <fieldset>
+                            <input class="form-check-input" type="checkbox" value="" name="repeat_tuesday" id="repeat_tuesday">
+                            <label class="form-check-label" for="repeat_tuesday">
+                              <?php echo$lang['tuesday'] ?>
+                            </label>
+                          </fieldset>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="form-check">
+                          <fieldset>
+                            <input class="form-check-input" type="checkbox" value="" name="repeat_wednesday" id="repeat_wednesday">
+                            <label class="form-check-label" for="repeat_wednesday">
+                              <?php echo$lang['wednesday'] ?>
+                            </label>
+                          </fieldset>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="form-check">
+                          <fieldset>
+                            <input class="form-check-input" type="checkbox" value="" name="repeat_thursday" id="repeat_thursday">
+                            <label class="form-check-label" for="repeat_thursday">
+                              <?php echo$lang['thursday'] ?>
+                            </label>
+                          </fieldset>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="form-check">
+                          <fieldset>
+                            <input class="form-check-input" type="checkbox" value="" name="repeat_friday" id="repeat_friday">
+                            <label class="form-check-label" for="repeat_friday">
+                              <?php echo$lang['friday'] ?>
+                            </label>
+                          </fieldset>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="col-8">
                     <div class="form-group">
                       <button type="submit" class="btn btn-outline-success w-100" name="submit_event" value="submit">
@@ -187,6 +263,20 @@
           </div>
         </section>
       </article>
+
+    <script>
+        var set_repeat = document.getElementById("set_repeat");
+        var set_repeat_time = document.getElementById("repeat_time");
+
+        set_repeat_time.style.display = "block";
+        set_repeat.onchange = function () {
+          if (set_repeat_time.style.display === "none") {
+            set_repeat_time.style.display = "block";
+          } else {
+            set_repeat_time.style.display = "none";
+          }
+        };
+    </script>
     <script>
         var start_date = document.getElementById("start_date");
         var end_date = document.getElementById("end_date");

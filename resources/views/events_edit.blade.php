@@ -1,6 +1,6 @@
 <?php 
 use app\controller\events;
-$event = events::show_event($_GET['id']);
+$event = events::find($_GET['id']);
 ?>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
