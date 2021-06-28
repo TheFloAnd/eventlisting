@@ -46,4 +46,36 @@ class events{
         $exec->execute();
 
     }
+
+    public static function show(){
+
+        $stmt = "SELECT * FROM `events` where start >= '". date('Y-m-d') ."' OR end >= '". date('Y-m-d') ."' ORDER BY start ASC";
+
+
+        $data = DB::connection()->query($stmt);
+        $result = $data->fetchAll();
+
+        return $result;
+    }
+
+    public static function show_event($id){
+
+        $stmt = "SELECT * FROM `events` where id = '". $id ."' LIMIT 1";
+
+        $data = DB::connection()->query($stmt);
+        $result = $data->fetch();
+
+        return $result;
+    }
+
+    
+    public static function update($input){
+
+        $stmt = "UPDATE `events` SET `event`='". $input['event'] ."',`team`='". $input['group'] ."' ,`start`='". $input['start_date'] ."' ,`end`='". $input['end_date'] ."' ,`room`='". $input['room'] ."' WHERE id = '". $input['event_id'] ."'";
+
+        $exec = DB::connection()->prepare($stmt);
+        $exec->execute();
+
+        return array(true, $input);
+    }
 }

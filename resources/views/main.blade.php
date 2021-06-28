@@ -1,7 +1,27 @@
 
-    <a class="btn btn-hidden" type="button" style="border: none;" href="?b=create">
+    <button class="btn btn-hidden" type="button" style="border: none;" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
       <span class="navbar-toggler-icon"></span>
-    </a>
+    </button>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasTopLabel">Navigation</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="row">
+        <a href="?b=events">
+          <span class="navbar-text">
+            <?php echo$lang['events'] ?>
+          </span>
+        </a>
+        <a href="?b=groups">
+          <span class="navbar-text">
+            <?php echo$lang['groups'] ?>
+          </span>
+        </a>
+    </div>
+  </div>
+</div>
 
 <article class="row g-3">
   <section class="col-12">
@@ -14,11 +34,11 @@
         <table class="table align-center table-striped table-hover" id="table-to-refresh">
             <thead>
               <tr>
-                <th scope="col">Vorhaben</th>
-                <th scope="col">Gruppe</th>
-                <th scope="col">Raum</th>
-                <th scope="col">Vom</th>
-                <th scope="col">Bis zum</th>
+                <th scope="col"><?php echo$lang['project'] ?></th>
+                <th scope="col"><?php echo$lang['group'] ?></th>
+                <th scope="col"><?php echo$lang['room'] ?></th>
+                <th scope="col"><?php echo$lang['from'] ?></th>
+                <th scope="col"><?php echo$lang['till'] ?></th>
               </tr>
             </thead>
             <tbody>
@@ -62,12 +82,12 @@
         <table class="table table-striped table-hover" id="table-to-refresh">
             <thead>
               <tr>
-                <th scope="col">Vorhaben</th>
-                <th scope="col">Gruppe</th>
-                <th scope="col">Raum</th>
-                <th scope="col">Vom</th>
-                <th scope="col">Bis zum</th>
-                <th scope="col">In</th>
+                <th scope="col"><?php echo$lang['project'] ?></th>
+                <th scope="col"><?php echo$lang['group'] ?></th>
+                <th scope="col"><?php echo$lang['room'] ?></th>
+                <th scope="col"><?php echo$lang['from'] ?></th>
+                <th scope="col"><?php echo$lang['till'] ?></th>
+                <th scope="col"><?php echo$lang['remaining_days'] ?></th>
               </tr>
             </thead>
             <tbody>
@@ -109,6 +129,6 @@ function refresh_loop(){
         if(i < 10){
             refresh_loop();
         }
-    }, 5 * 1000)
+    }, 15 * 1000)
 }
 </script>

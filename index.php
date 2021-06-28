@@ -1,15 +1,18 @@
 <?php
 use app\controller\events;
 use app\controller\group;
+use app\module\notification;
 require './app/controller/events.controller.php';
 require './app/controller/group.controller.php';
+require './app/lang/lang_de.php';
+require './app/module/notification.module.php';
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1); 
 ini_set('error_reporting', E_ALL);
 
 require __DIR__.'/app/conf/config.php';
-require_once __DIR__.'/app/init.php';
+require __DIR__.'/app/init.php';
 
 if(isset($_GET['b'])){
   define('blade',$_GET['b']);
@@ -23,26 +26,23 @@ if(isset($_POST['submit_event'])){
 if(isset($_POST['submit_group'])){
   $add_group = group::store($_POST);
   if($add_group['0'] == false){
-    echo'<div class="alert alert-warning text-center alert-dismissible fade show" role="alert">
-            Der Gruppen Alias '. $add_group['1'] .' Existiert schon!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>';
+    notification::error('Der Gruppen Alias '. $add_group['1'] .' Existiert schon!');
   }else{
 
-    echo'<div class="alert alert-success text-center alert-dismissible fade show" role="alert">
-            Der Gruppen Alias '. $add_group['1'] .' wurde Erstellt!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>';
+    notification::success('Der Gruppen Alias '. $add_group['1'] .' wurde Erstellt!');
   }
 }
 
 if(isset($_POST['submit_edit_group'])){
   $update_group = group::update($_POST);
   if($update_group['0'] == true){
-    echo'<div class="alert alert-success text-center alert-dismissible fade show" role="alert">
-            Die Gruppe '. $update_group['1'] .' wurde Erfolgreich geändert!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>';
+    notification::success('Die Gruppe '. $update_group['1'] .' wurde Erfolgreich geändert!');
+  }
+}
+if(isset($_POST['submit_edit_event'])){
+  $update_event = events::update($_POST);
+  if($update_event['0'] == true){
+    notification::success('Der Termin "'. $update_event['1']['event'] .'" vom '. date('d.m.Y', strtotime($update_event['1']['start_date'])) .' bis zum '. date('d.m.Y', strtotime($update_event['1']['end_date'])) .' der Gruppe '. $update_event['1']['group'] .' wurde Erfolgreich geändert!');
   }
 }
 require __DIR__.'/resources/layout/template.php';

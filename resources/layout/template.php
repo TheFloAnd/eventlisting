@@ -14,6 +14,8 @@
     <link href="/resources/css/custom.css" rel="stylesheet" />
     <!-- Bootstrap CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">
   </head>
   <body>
     <main class="container">

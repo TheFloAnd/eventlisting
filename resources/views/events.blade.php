@@ -4,24 +4,36 @@
       <div class="col">
         <a href="?b=main">
           <span class="navbar-text">
-            Hauptseite
+            <?php echo$lang['index'] ?>
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=groups">
           <span class="navbar-text">
-            Gruppen
+            <?php echo$lang['groups'] ?>
           </span>
         </a>
       </div>
     </div>
   </div>
 </nav>
-<article class="row">
+  <article class="row">
     <section class="col">
       <div class="card">
         <div class="card-body">
+          <nav>
+            <div class="nav nav-tabs justify-content-evenly" id="nav-tab" role="tablist">
+              <button class="nav-link col active" id="nav-event_add-tab" data-bs-toggle="tab" data-bs-target="#nav-event_add" type="button" role="tab" aria-controls="nav-event_add" aria-selected="false">
+                <?php echo$lang['event'] .' '. $lang['add'] ?>
+              </button>
+              <button class="nav-link col" id="nav-event_edit-tab" data-bs-toggle="tab" data-bs-target="#nav-event_edit" type="button" role="tab" aria-controls="nav-event_edit" aria-selected="true">
+                <?php echo$lang['events'] .' '. $lang['edit'] ?>
+              </button>
+            </div>
+          </nav>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="nav-event_add" role="tabpanel" aria-labelledby="nav-event_add-tab">
               <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                 <div class="row mt-3 g-3 justify-content-center">
                   <div class="col-md-10">
@@ -29,7 +41,7 @@
                       <div class="form-floating">
                         <input type="text" class="form-control" name="event" id="event" placeholder="" list="event_list" required>
                         <label for="floatingInput">
-                          Event
+                            <?php echo$lang['event'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -60,7 +72,7 @@
                           ?>
                         </select>
                         <label for="floatingSelect">
-                          Gruppe
+                            <?php echo$lang['group'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -71,9 +83,9 @@
                   <div class="col-md-3">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="room" id="room" placeholder="Werkstadt">
+                        <input type="text" class="form-control" name="room" id="room" placeholder="<?php echo$lang['room'] ?>">
                         <label for="room">
-                          Raum
+                          <?php echo$lang['room'] ?>
                         </label>
                       </div>
                     </fieldset>
@@ -83,7 +95,7 @@
                       <div class="form-floating">
                         <input type="date" class="form-control" name="start_date" id="start_date" value="<?php echo date("Y-m-d") ?>" required>
                         <label for="floatingInput">
-                          Start Datum
+                          <?php echo$lang['start'] .' '. $lang['date'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -96,7 +108,7 @@
                       <div class="form-floating">
                         <input type="date" class="form-control" name="end_date" id="end_date" value="<?php echo date("Y-m-d") ?>" required>
                         <label for="floatingInput">
-                          End Datum
+                          <?php echo$lang['end'] .' '. $lang['date'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -107,17 +119,74 @@
                   <div class="col-8">
                     <div class="form-group">
                       <button type="submit" class="btn btn-outline-success w-100" name="submit_event" value="submit">
-                        Hinzufügen
+                        <?php echo$lang['add'] ?>
                       </button>
                     </div>
                   </div>
                 </div>
               </form>
             </div>
-        </div>
-      </div>
-    </section>
-</article>
+
+            <div class="tab-pane fade" id="nav-event_edit" role="tabpanel" aria-labelledby="nav-event_edit-tab">
+              <div class="table-responsive">
+                  <table class="table table-striped table-hover" id="table-to-refresh">
+                      <thead>
+                        <tr>
+                          <th scope="col"><?php echo$lang['project'] ?></th>
+                          <th scope="col"><?php echo$lang['group'] ?></th>
+                          <th scope="col"><?php echo$lang['room'] ?></th>
+                          <th scope="col"><?php echo$lang['from'] ?></th>
+                          <th scope="col"><?php echo$lang['till'] ?></th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        foreach(events::show() as $row){
+                          foreach(group::index() as $group){
+                            if($row['team'] == $group['alias']){
+                              $group_badge = $group['color'];
+                            }
+                          }
+
+                          echo'<tr>
+                              <td>
+                                <a href="?b=events_edit&id='. $row['id'] .'">
+                                  '. $row['event'] .'
+                                </a>
+                              </td>';
+                          echo'<td>
+                              <span class="badge text-dark" style="background-color:'. $group_badge .';">
+                                '. $row['team'] .'
+                              </span>
+                            </td>';
+                          echo'<td>
+                              '. $row['room'] .'
+                            </td>';
+                          if($row['start'] != $row['end']){
+                            echo'<td>'. date('d.m.Y', strtotime($row['start'])) .'</td>';
+                            echo'<td>'. date('d.m.Y', strtotime($row['end'])) .'</td>';
+                          }
+                          if($row['start'] == $row['end']){
+                            echo'<td colspan="2">'. date('d.m.Y', strtotime($row['start'])) .'</td>';
+                          }
+                          echo'<td>
+                            <a href="?b=events_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
+                              <i class="bi bi-wrench"></i>
+                            </a>
+                          </td>';
+                        }
+                        echo'</tr>';
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </article>
     <script>
         var start_date = document.getElementById("start_date");
         var end_date = document.getElementById("end_date");

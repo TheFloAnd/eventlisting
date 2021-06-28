@@ -43,7 +43,7 @@ class group{
         return $result;
     }
 
-    public static function show_group($group){
+    public static function find($group){
 
         $stmt = "SELECT * FROM `teams` where alias = '". $group ."' LIMIT 1";
 

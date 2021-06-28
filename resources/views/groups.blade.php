@@ -4,14 +4,14 @@
       <div class="col">
         <a href="?b=main">
           <span class="navbar-text">
-            Hauptseite
+            <?php echo$lang['index'] ?>
           </span>
         </a>
       </div>
       <div class="col">
-        <a href="?b=create">
+        <a href="?b=events">
           <span class="navbar-text">
-            Hinzufügen
+            <?php echo$lang['events'] ?>
           </span>
         </a>
       </div>
@@ -27,13 +27,13 @@
                     <div class="nav nav-tabs justify-content-evenly" id="nav-tab" role="tablist">
 
                         <button class="nav-link col active" id="nav-group_create-tab" data-bs-toggle="tab" data-bs-target="#nav-group_create" type="button" role="tab" aria-controls="nav-group_create" aria-selected="false">
-                            Gruppe Hinzufügen
+                            <?php echo$lang['group'] .' '. $lang['add'] ?>
                         </button>
                         <button class="nav-link col" id="nav-active_group-tab" data-bs-toggle="tab" data-bs-target="#nav-active_group" type="button" role="tab" aria-controls="nav-active_group" aria-selected="true">
-                            Aktive Gruppen
+                            <?php echo$lang['active'] .' '. $lang['groups'] ?>
                         </button>
                         <button class="nav-link col" id="nav-deactivated_group-tab" data-bs-toggle="tab" data-bs-target="#nav-deactivated_group" type="button" role="tab" aria-controls="nav-deactivated_group" aria-selected="false">
-                            Deaktivierte Gruppen
+                            <?php echo$lang['inactive'] .' '. $lang['groups'] ?>
                         </button>
                     </div>
                 </nav>
@@ -47,7 +47,7 @@
                       <div class="form-floating">
                         <input type="text" class="form-control" name="group_name" id="group_name" placeholder="" required>
                         <label for="floatingInput">
-                          Gruppen Name
+                          <?php echo$lang['groups'] .' '. $lang['name'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -60,7 +60,7 @@
                       <div class="form-floating">
                         <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="" required>
                         <label for="floatingInput">
-                          Gruppen Alias
+                          <?php echo$lang['groups'] .' '. $lang['alias'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -73,7 +73,7 @@
                     <fieldset>
                       <div class="form-group">
                         <label for="floatingInput">
-                          Gruppen Farbe
+                          <?php echo$lang['groups'] .' '. $lang['color'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -86,7 +86,7 @@
                   <div class="col-8">
                     <div class="form-group">
                       <button type="submit" class="btn btn-outline-success w-100" name="submit_group" value="submit">
-                        Hinzufügen
+                        <?php echo$lang['add'] ?>
                       </button>
                     </div>
                   </div>
@@ -98,9 +98,10 @@
                             <table class="table table-striped table-hover" id="table-to-refresh">
                                 <thead>
                                     <tr>
-                                    <th scope="col">Alias</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Farbe</th>
+                                    <th scope="col"><?php echo$lang['alias'] ?></th>
+                                    <th scope="col"><?php echo$lang['name'] ?></th>
+                                    <th scope="col"><?php echo$lang['color'] ?></th>
+                                    <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,9 +112,14 @@
                                             echo'
                                             <tr>
                                             
-                                                <td><a href="?b=group_edit&g='. $group['alias'] .'">'. $group['alias'] .'</a></td>
+                                                <td>'. $group['alias'] .'</td>
                                                 <td>'. $group['name'] .'</td>
                                                 <td style="background-color:'. $group['color'] .';">'. $group['color'] .'</td>
+                                                <td>
+                                                  <a href="?b=group_edit&g='. $group['name'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
+                                                    <i class="bi bi-wrench"></i>
+                                                  </a>
+                                                </td>
                                             </tr>';
                                         }
                                     }
@@ -127,9 +133,10 @@
                             <table class="table table-striped table-hover" id="table-to-refresh">
                                 <thead>
                                     <tr>
-                                    <th scope="col">Alias</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Farbe</th>
+                                    <th scope="col"><?php echo$lang['alias'] ?></th>
+                                    <th scope="col"><?php echo$lang['name'] ?></th>
+                                    <th scope="col"><?php echo$lang['color'] ?></th>
+                                    <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -141,6 +148,11 @@
                                                 <td><a href="?b=group_edit&g='. $group['alias'] .'">'. $group['alias'] .'</a></td>
                                                 <td>'. $group['name'] .'</td>
                                                 <td style="background-color:'. $group['color'] .';">'. $group['color'] .'</td>
+                                                <td>
+                                                  <a href="?b=group_edit&g='. $group['name'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
+                                                    <i class="bi bi-wrench"></i>
+                                                  </a>
+                                                </td>
                                             </tr>';
                                         }
                                     }

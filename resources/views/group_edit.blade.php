@@ -1,6 +1,6 @@
 <?php 
 use app\controller\group;
-$group = group::show_group($_GET['g']);
+$group = group::find($_GET['g']);
 ?>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
@@ -8,21 +8,21 @@ $group = group::show_group($_GET['g']);
       <div class="col">
         <a href="?b=main">
           <span class="navbar-text">
-            Hauptseite
+            <?php echo$lang['index'] ?>
           </span>
         </a>
       </div>
       <div class="col">
-        <a href="?b=create">
+        <a href="?b=events">
           <span class="navbar-text">
-            Hinzufügen
+            <?php echo$lang['events'] ?>
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=groups">
           <span class="navbar-text">
-            Gruppen
+            <?php echo$lang['groups'] ?>
           </span>
         </a>
       </div>
@@ -47,7 +47,7 @@ $group = group::show_group($_GET['g']);
                         ?>
                             <input class="form-check-input" type="checkbox" name="deactivate_group" id="deactivate_group" value="1" <?php echo$checked; ?>>
                             <label class="form-check-label" for="deactivate_group">
-                                Aktiviert
+                                <?php echo$lang['active'] .' '. $lang['group'] ?>
                             </label>
                         </div>
                     </fieldset>
@@ -57,7 +57,7 @@ $group = group::show_group($_GET['g']);
                       <div class="form-floating">
                         <input type="text" class="form-control" name="group_name" id="group_name" placeholder="" value="<?php echo$group['name'] ?>" required>
                         <label for="floatingInput">
-                          Gruppen Name
+                          <?php echo$lang['groups'] .' '. $lang['name'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -70,7 +70,7 @@ $group = group::show_group($_GET['g']);
                       <div class="form-floating">
                         <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="" value="<?php echo $group['alias'] ?>" required readonly deactivated>
                         <label for="floatingInput">
-                          Gruppen Alias
+                          <?php echo$lang['groups'] .' '. $lang['alias'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -83,7 +83,7 @@ $group = group::show_group($_GET['g']);
                     <fieldset>
                       <div class="form-group">
                         <label for="floatingInput">
-                          Gruppen Farbe
+                          <?php echo$lang['groups'] .' '. $lang['color'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -96,7 +96,7 @@ $group = group::show_group($_GET['g']);
                   <div class="col-8">
                     <div class="form-group">
                       <button type="submit" class="btn btn-outline-success w-100" name="submit_edit_group" value="submit">
-                        Ändern
+                        <?php echo$lang['update'] ?>
                       </button>
                     </div>
                   </div>
