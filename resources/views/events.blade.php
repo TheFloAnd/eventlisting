@@ -116,7 +116,7 @@
                       </div>
                     </fieldset>
                   </div>
-                  <div class="col-auto">
+                  <div class="col-md-10">
                     <fieldset>
                       <div class="form-group">
                         <div class="form-check form-switch">
@@ -128,70 +128,27 @@
                       </div>
                     </fieldset>
                   </div>
-                  <div class="col-10">
-                    <div class="row g-2 justify-content-around" id="repeat_time">
-                      <div class="col-3">
+                      <div class="col-md-5">
                         <div class="form-group">
-                          <fieldset>
-                            <label class="form-label" for="weeks">
-                              <?php echo$lang['weeks'] ?> :
+                          <fieldset id="set_repeat_input_1" disabled>
+                            <label class="form-label" for="days">
+                              <?php echo$lang['days'] ?> :
                             </label>
-                            <input class="form-control" type="number" value="1" min="1" name="repeat_weeks" id="repeat_weeks">
+                            <input class="form-control" type="number" value="0" min="0" name="repeat_days" id="repeat_days">
                           </fieldset>
                         </div>
                       </div>
-                      <div class="col-auto">
-                        <div class="form-check">
-                          <fieldset>
-                            <input class="form-check-input" type="checkbox" value="" name="repeat_monday" id="repeat_monday">
-                            <label class="form-check-label" for="repeat_monday">
-                              <?php echo$lang['monday'] ?>
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <fieldset id="set_repeat_input_2" disabled>
+                            <label class="form-label" for="repeats">
+                              <?php echo$lang['repeat'] ?> :
                             </label>
+                            <input class="form-control" type="number" value="0" min="0" name="repeats" id="repeats">
                           </fieldset>
                         </div>
                       </div>
-                      <div class="col-auto">
-                        <div class="form-check">
-                          <fieldset>
-                            <input class="form-check-input" type="checkbox" value="" name="repeat_tuesday" id="repeat_tuesday">
-                            <label class="form-check-label" for="repeat_tuesday">
-                              <?php echo$lang['tuesday'] ?>
-                            </label>
-                          </fieldset>
-                        </div>
-                      </div>
-                      <div class="col-auto">
-                        <div class="form-check">
-                          <fieldset>
-                            <input class="form-check-input" type="checkbox" value="" name="repeat_wednesday" id="repeat_wednesday">
-                            <label class="form-check-label" for="repeat_wednesday">
-                              <?php echo$lang['wednesday'] ?>
-                            </label>
-                          </fieldset>
-                        </div>
-                      </div>
-                      <div class="col-auto">
-                        <div class="form-check">
-                          <fieldset>
-                            <input class="form-check-input" type="checkbox" value="" name="repeat_thursday" id="repeat_thursday">
-                            <label class="form-check-label" for="repeat_thursday">
-                              <?php echo$lang['thursday'] ?>
-                            </label>
-                          </fieldset>
-                        </div>
-                      </div>
-                      <div class="col-auto">
-                        <div class="form-check">
-                          <fieldset>
-                            <input class="form-check-input" type="checkbox" value="" name="repeat_friday" id="repeat_friday">
-                            <label class="form-check-label" for="repeat_friday">
-                              <?php echo$lang['friday'] ?>
-                            </label>
-                          </fieldset>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                      
                   <div class="col-8">
                     <div class="form-group">
                       <button type="submit" class="btn btn-outline-success w-100" name="submit_event" value="submit">
@@ -219,20 +176,19 @@
                       <tbody>
                         <?php
                         foreach(events::show() as $row){
-                          foreach(group::index() as $group){
-                            if($row['team'] == $group['alias']){
-                              $group_badge = $group['color'];
-                            }
-                          }
+                        if($row['not_applicable'] == 1){
+                          $disabled = 'class="table-danger strikeout"';
+                        }else{
+                          $disabled = '';
+                        }
 
-                          echo'<tr>
+                        echo'
+                            <tr '.$disabled.'>
                               <td>
-                                <a href="?b=events_edit&id='. $row['id'] .'">
-                                  '. $row['event'] .'
-                                </a>
+                                '. $row['event'] .'
                               </td>';
                           echo'<td>
-                              <span class="badge text-dark" style="background-color:'. $group_badge .';">
+                              <span class="badge text-dark" style="background-color:'. $row['team_color'] .';">
                                 '. $row['team'] .'
                               </span>
                             </td>';
@@ -248,7 +204,7 @@
                           }
                           echo'<td>
                             <a href="?b=events_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
-                              <i class="bi bi-wrench"></i>
+                              <i class="bi bi-gear-wide"></i>
                             </a>
                           </td>';
                         }
@@ -266,14 +222,22 @@
 
     <script>
         var set_repeat = document.getElementById("set_repeat");
-        var set_repeat_time = document.getElementById("repeat_time");
+        var repeat_input_1 = document.getElementById("set_repeat_input_1");
+        var repeat_input_2 = document.getElementById("set_repeat_input_2");
 
-        set_repeat_time.style.display = "block";
+        repeat_input_1.disabled = true;
+        repeat_input_2.disabled = true;
         set_repeat.onchange = function () {
-          if (set_repeat_time.style.display === "none") {
-            set_repeat_time.style.display = "block";
+          if (repeat_input_1.hasAttribute('disabled')) {
+            repeat_input_1.disabled = false;
           } else {
-            set_repeat_time.style.display = "none";
+            repeat_input_1.disabled = true;
+          }
+
+          if (repeat_input_2.hasAttribute('disabled')) {
+            repeat_input_2.disabled = false;
+          } else {
+            repeat_input_2.disabled = true;
           }
         };
     </script>

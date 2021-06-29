@@ -27,3 +27,19 @@ td {
 .table td {
   text-align: center;
 }
+td {
+  position: relative;
+}
+tr.strikeout td:before {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  border-bottom: 1px solid #111;
+  width: 90%;
+}
+
+tr.strikeout td:after {
+  content: "\00B7";
+  font-size: 1px;
+}

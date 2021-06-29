@@ -48,16 +48,16 @@
                 use app\controller\group;
 
                 foreach(events::index() as $row){
-                    foreach(group::index() as $group){
-                      if($row['team'] == $group['alias']){
-                        $group_badge = $group['color'];
-                      }
+                    if($row['not_applicable'] == 1){
+                      $disabled = 'class="table-danger strikeout"';
+                    }else{
+                        $disabled = '';
                     }
 
                     echo'
-              <tr>
+              <tr '.$disabled.'>
                 <td>'. $row['event'] .'</td>';
-                echo'<td><span class="badge text-dark" style="background-color:'. $group_badge .';">'. $row['team'] .'</span></td>';
+                echo'<td><span class="badge text-dark" style="background-color:'. $row['team_color'] .';">'. $row['team'] .'</span></td>';
                 echo'<td>'. $row['room'] .'</td>';
                 if($row['start'] != $row['end']){
                   echo'<td>'. date('d.m.Y', strtotime($row['start'])) .'</td>';
@@ -94,15 +94,16 @@
               <?php
 
                 foreach(events::future() as $row){
-                    foreach(group::index() as $group){
-                      if($row['team'] == $group['alias']){
-                        $group_badge = $group['color'];
-                      }
+                    if($row['not_applicable'] == 1){
+                      $disabled = 'class="table-danger strikeout"';
+                    }else{
+                        $disabled = '';
                     }
+
                     echo'
-              <tr>
+              <tr '.$disabled.'>
                 <td>'. $row['event'] .'</td>
-                <td><span class="badge text-dark" style="background-color:'. $group_badge .'">'. $row['team'] .'</span></td>
+                <td><span class="badge text-dark" style="background-color:'. $row['team_color'] .'">'. $row['team'] .'</span></td>
                 <td>'. $row['room'] .'</td>
                 <td>'. date('d.m.Y', strtotime($row['start'])) .'</td>
                 <td>'. date('d.m.Y', strtotime($row['end'])) .'</td>

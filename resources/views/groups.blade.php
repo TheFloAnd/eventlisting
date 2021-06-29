@@ -116,8 +116,8 @@
                                                 <td>'. $group['name'] .'</td>
                                                 <td style="background-color:'. $group['color'] .';">'. $group['color'] .'</td>
                                                 <td>
-                                                  <a href="?b=group_edit&g='. $group['name'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
-                                                    <i class="bi bi-wrench"></i>
+                                                  <a href="?b=group_edit&g='. $group['alias'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
+                                                    <i class="bi bi-gear-wide"></i>
                                                   </a>
                                                 </td>
                                             </tr>';

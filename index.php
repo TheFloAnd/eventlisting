@@ -45,4 +45,9 @@ if(isset($_POST['submit_edit_event'])){
     notification::success('Der Termin "'. $update_event['1']['event'] .'" vom '. date('d.m.Y', strtotime($update_event['1']['start_date'])) .' bis zum '. date('d.m.Y', strtotime($update_event['1']['end_date'])) .' der Gruppe '. $update_event['1']['group'] .' wurde Erfolgreich geändert!');
   }
 }
+
+if(isset($_POST['submit_delete_event'])){
+  $del_event = events::delete($_POST);
+  header('location:?b=events');
+}
 require __DIR__.'/resources/layout/template.php';
