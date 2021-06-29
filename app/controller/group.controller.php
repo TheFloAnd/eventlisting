@@ -8,7 +8,7 @@ class group{
     
     public static function index(){
 
-        $stmt = "SELECT * FROM `teams` where active = 1 ORDER BY name ASC";
+        $stmt = "SELECT * FROM `v_teams_active`";
 
         $data = DB::connection()->query($stmt);
         $result = $data->fetchAll();
@@ -17,13 +17,13 @@ class group{
     }
 
     public static function store($input){
-        $stmt_exists = "SELECT alias FROM `teams` where alias = '". $input['group_alias'] ."' LIMIT 1";
+        $stmt_exists = "SELECT alias FROM `v_teams` where alias = '". $input['group_alias'] ."' LIMIT 1";
         $exists = DB::connection()->prepare($stmt_exists);
         $exists->execute();
         $alias = $exists->fetchColumn();
         if(!$alias){
 
-            $stmt = "INSERT INTO `teams`(`name`, `alias`, `color`) VALUES ('". $input['group_name'] ."', '". $input['group_alias'] ."', '". $input['group_color'] ."')";
+            $stmt = "INSERT INTO `v_teams`(`name`, `alias`, `color`) VALUES ('". $input['group_name'] ."', '". $input['group_alias'] ."', '". $input['group_color'] ."')";
         
             $exec = DB::connection()->prepare($stmt);
             $exec->execute();
@@ -33,9 +33,18 @@ class group{
         }
 
     }
-    public static function show(){
+    public static function show_active(){
 
-        $stmt = "SELECT * FROM `teams` ORDER BY name ASC";
+        $stmt = "SELECT * FROM `v_teams_active`";
+
+        $data = DB::connection()->query($stmt);
+        $result = $data->fetchAll();
+
+        return $result;
+    }
+    public static function show_inactive(){
+
+        $stmt = "SELECT * FROM `v_teams_inactive`";
 
         $data = DB::connection()->query($stmt);
         $result = $data->fetchAll();
@@ -45,7 +54,7 @@ class group{
 
     public static function find($group){
 
-        $stmt = "SELECT * FROM `teams` where alias = '". $group ."' LIMIT 1";
+        $stmt = "SELECT * FROM `v_teams` where alias = '". $group ."' LIMIT 1";
 
         $data = DB::connection()->query($stmt);
         $result = $data->fetch();
@@ -53,12 +62,11 @@ class group{
         return $result;
     }
     public static function update($group){
-        if(!empty($group['deactivate_group'])){
-            $active = 1;
+        if(isset($group['deactivate_group'])){
+            $stmt = "UPDATE `v_teams` SET `name`='". $group['group_name'] ."',`color`='". $group['group_color'] ."',`active`= 1 WHERE alias = '". $group['group_alias'] ."'";
         }else{
-            $active = 0;
+            $stmt = "UPDATE `v_teams` SET `active`= 0 WHERE alias = '". $group['group_alias'] ."'";
         }
-        $stmt = "UPDATE `teams` SET `name`='". $group['group_name'] ."',`color`='". $group['group_color'] ."',`active`='". $active ."' WHERE alias = '". $group['group_alias'] ."'";
 
         $exec = DB::connection()->prepare($stmt);
         $exec->execute();

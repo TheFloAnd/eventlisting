@@ -1,6 +1,14 @@
 <?php 
 use app\controller\group;
 $group = group::find($_GET['g']);
+
+if($group['active'] == 1){
+    $checked = 'checked';
+    $disabled = '';
+}else{
+    $checked = '';
+    $disabled = 'disabled';
+}
 ?>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
@@ -38,13 +46,6 @@ $group = group::find($_GET['g']);
                 <div class="col-md-10">
                     <fieldset>
                         <div class="form-check">
-                        <?php
-                        if($group['active'] == 1){
-                            $checked = 'checked';
-                        }else{
-                            $checked = '';
-                        }
-                        ?>
                             <input class="form-check-input" type="checkbox" name="deactivate_group" id="deactivate_group" value="1" <?php echo$checked; ?>>
                             <label class="form-check-label" for="deactivate_group">
                                 <?php echo$lang['active'] .' '. $lang['group'] ?>
@@ -53,7 +54,7 @@ $group = group::find($_GET['g']);
                     </fieldset>
                   </div>
                   <div class="col-md-10">
-                    <fieldset>
+                    <fieldset id="input_name" <?php echo$disabled ?>>
                       <div class="form-floating">
                         <input type="text" class="form-control" name="group_name" id="group_name" placeholder="" value="<?php echo$group['name'] ?>" required>
                         <label for="floatingInput">
@@ -80,7 +81,7 @@ $group = group::find($_GET['g']);
                   </div>
 
                   <div class="col-md-2">
-                    <fieldset>
+                    <fieldset id="input_color" <?php echo$disabled ?>>
                       <div class="form-group">
                         <label for="floatingInput">
                           <?php echo$lang['groups'] .' '. $lang['color'] ?>
@@ -106,3 +107,22 @@ $group = group::find($_GET['g']);
         </div>
     </section>
 </article>
+    <script>
+        var disable = document.getElementById("deactivate_group");
+        var input_name = document.getElementById("input_name");
+        var input_color = document.getElementById("input_color");
+
+        disable.onchange = function () {
+          if (input_name.hasAttribute('disabled')) {
+            input_name.disabled = false;
+          } else {
+            input_name.disabled = true;
+          }
+
+          if (input_color.hasAttribute('disabled')) {
+            input_color.disabled = false;
+          } else {
+            input_color.disabled = true;
+          }
+        };
+    </script>

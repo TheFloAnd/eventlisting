@@ -78,7 +78,7 @@
                             *
                           </span>
                         </label>
-                        <input type="color" class="form-control form-control-color" name="group_color" id="group_color" placeholder="" required>
+                        <input type="color" class="form-control form-control-color" name="group_color" id="group_color" value="<?php echo'#'.substr(str_shuffle("0123456789abcdef"), 6, 6); ?>" required>
                       </div>
                     </fieldset>
                   </div>
@@ -107,8 +107,7 @@
                                 <tbody>
                                 <?php
                                     use app\controller\group;
-                                    foreach(group::show() as $group){
-                                        if($group['active'] == 1){
+                                    foreach(group::show_active() as $group){
                                             echo'
                                             <tr>
                                             
@@ -121,7 +120,6 @@
                                                   </a>
                                                 </td>
                                             </tr>';
-                                        }
                                     }
                                 ?>
                                 </tbody>
@@ -141,20 +139,18 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                    foreach(group::show() as $group){
-                                        if($group['active'] == 0){
+                                    foreach(group::show_inactive() as $group){
                                             echo'
                                             <tr>
-                                                <td><a href="?b=group_edit&g='. $group['alias'] .'">'. $group['alias'] .'</a></td>
+                                                <td>'. $group['alias'] .'</td>
                                                 <td>'. $group['name'] .'</td>
                                                 <td style="background-color:'. $group['color'] .';">'. $group['color'] .'</td>
                                                 <td>
-                                                  <a href="?b=group_edit&g='. $group['name'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
-                                                    <i class="bi bi-wrench"></i>
+                                                  <a href="?b=group_edit&g='. $group['alias'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
+                                                    <i class="bi bi-gear-wide"></i>
                                                   </a>
                                                 </td>
                                             </tr>';
-                                        }
                                     }
                                 ?>
                                 </tbody>
