@@ -130,7 +130,7 @@
                   </div>
                       <div class="col-md-5">
                         <div class="form-group">
-                          <fieldset id="set_repeat_input_1" disabled>
+                          <fieldset id="set_repeat_input_1" readonly>
                             <label class="form-label" for="days">
                               <?php echo$lang['days'] ?> :
                             </label>
@@ -140,7 +140,7 @@
                       </div>
                       <div class="col-md-5">
                         <div class="form-group">
-                          <fieldset id="set_repeat_input_2" disabled>
+                          <fieldset id="set_repeat_input_2" readonly>
                             <label class="form-label" for="repeats">
                               <?php echo$lang['repeat'] ?> :
                             </label>
@@ -225,19 +225,19 @@
         var repeat_input_1 = document.getElementById("set_repeat_input_1");
         var repeat_input_2 = document.getElementById("set_repeat_input_2");
 
-        repeat_input_1.disabled = true;
-        repeat_input_2.disabled = true;
+        repeat_input_1.readonly = true;
+        repeat_input_2.readonly = true;
         set_repeat.onchange = function () {
-          if (repeat_input_1.hasAttribute('disabled')) {
-            repeat_input_1.disabled = false;
+          if (repeat_input_1.hasAttribute('readonly')) {
+            repeat_input_1.readonly = false;
           } else {
-            repeat_input_1.disabled = true;
+            repeat_input_1.readonly = true;
           }
 
-          if (repeat_input_2.hasAttribute('disabled')) {
-            repeat_input_2.disabled = false;
+          if (repeat_input_2.hasAttribute('readonly')) {
+            repeat_input_2.readonly = false;
           } else {
-            repeat_input_2.disabled = true;
+            repeat_input_2.readonly = true;
           }
         };
     </script>
