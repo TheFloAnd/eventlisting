@@ -53,6 +53,7 @@ use app\controller\config;
 
                 use app\controller\events;
                 $events_current = events::index('v_events_current');
+                //$events_current = events::index('events');
                 if($events_current){
 
                 foreach($events_current as $row){

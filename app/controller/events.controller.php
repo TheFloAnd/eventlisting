@@ -11,6 +11,7 @@ class events{
 
         // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
         $stmt = "SELECT * FROM `". $table ."` ORDER BY `id` ASC";
+       // $stmt = DB::select($table);
 
         $data = DB::connection()->query($stmt);
         // $result = $data->fetchAll();

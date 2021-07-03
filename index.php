@@ -9,6 +9,9 @@ require './app/controller/config.controller.php';
 require './app/lang/lang_de.php';
 require './app/module/notification.module.php';
 
+require './app/model/events.model.php';
+require './app/model/group.model.php';
+
 error_reporting(E_ALL);
 ini_set("display_errors", 1); 
 ini_set('error_reporting', E_ALL);

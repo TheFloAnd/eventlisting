@@ -3,13 +3,13 @@
 namespace app\controller;
 
 use app\module\DB;
+use app\model\group_model;
 use \PDO;
 class group{
     
     public static function index($table){
 
         $stmt = "SELECT * FROM `". $table ."` ORDER BY `id` ASC";
-
         $data = DB::connection()->query($stmt);
         $result = $data->fetchAll();
 
