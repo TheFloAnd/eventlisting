@@ -1,9 +1,11 @@
 <?php
 use app\controller\events;
 use app\controller\group;
+use app\controller\config;
 use app\module\notification;
 require './app/controller/events.controller.php';
 require './app/controller/group.controller.php';
+require './app/controller/config.controller.php';
 require './app/lang/lang_de.php';
 require './app/module/notification.module.php';
 
@@ -21,8 +23,29 @@ if(isset($_GET['b'])){
 }
 
 if(isset($_POST['submit_event'])){
-  events::store($_POST);
+  if(!isset($_POST['set_repeat'])){
+    events::store($_POST);
+  }else{
+    events::store_repeat($_POST);
+  }
 }
+
+if(isset($_POST['submit_edit_event'])){
+  $update_event = events::update($_POST);
+  if($update_event['0'] == true){
+    notification::success('Der Termin "'. $update_event['1']['event'] .'" vom '. date('d.m.Y', strtotime($update_event['1']['start_date'])) .' bis zum '. date('d.m.Y', strtotime($update_event['1']['end_date'])) .' der Gruppe '. $update_event['1']['group'] .' wurde Erfolgreich geändert!');
+  }
+}
+
+if(isset($_POST['submit_delete_event'])){
+  if(isset($_POST['delete_repeat'])){
+    events::delete_repeat($_POST);
+  }else{
+    events::delete($_POST);
+  }
+    header('location:?b=events');
+}
+
 if(isset($_POST['submit_group'])){
   $add_group = group::store($_POST);
   if($add_group['0'] == false){
@@ -39,15 +62,11 @@ if(isset($_POST['submit_edit_group'])){
     notification::success('Die Gruppe '. $update_group['1'] .' wurde Erfolgreich geändert!');
   }
 }
-if(isset($_POST['submit_edit_event'])){
-  $update_event = events::update($_POST);
-  if($update_event['0'] == true){
-    notification::success('Der Termin "'. $update_event['1']['event'] .'" vom '. date('d.m.Y', strtotime($update_event['1']['start_date'])) .' bis zum '. date('d.m.Y', strtotime($update_event['1']['end_date'])) .' der Gruppe '. $update_event['1']['group'] .' wurde Erfolgreich geändert!');
-  }
-}
 
-if(isset($_POST['submit_delete_event'])){
-  $del_event = events::delete($_POST);
-  header('location:?b=events');
+if(isset($_POST['submit_edit_setting'])){
+  $set_setting = config::update($_POST);
+  if($set_setting == true){
+    notification::success('Einstellung wurde Erfolgreich geändert!');
+  }
 }
 require __DIR__.'/resources/layout/template.php';

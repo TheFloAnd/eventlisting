@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Erstellungszeit: 01. Jul 2021 um 08:45
+-- Erstellungszeit: 01. Jul 2021 um 12:05
 -- Server-Version: 10.3.29-MariaDB-0+deb10u1
 -- PHP-Version: 7.3.27-1~deb10u1
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `config` (
   `id` int(11) NOT NULL,
+  `view` varchar(50) NOT NULL,
   `setting` varchar(50) NOT NULL,
   `value` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -36,9 +37,10 @@ CREATE TABLE `config` (
 -- Daten für Tabelle `config`
 --
 
-INSERT INTO `config` (`id`, `setting`, `value`) VALUES
-(1, 'refresh', '15'),
-(2, 'future_day', '30');
+INSERT INTO `config` (`id`, `view`, `setting`, `value`) VALUES
+(1, 'Automatisches Neuladen (in Sekunden)', 'refresh', '15'),
+(2, 'Termin Preview Zeitraum (in Tagen)', 'future_day', '30'),
+(3, 'Überschrift', 'name', '');
 
 -- --------------------------------------------------------
 
@@ -278,7 +280,7 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT für Tabelle `config`
 --
 ALTER TABLE `config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT für Tabelle `events`
 --

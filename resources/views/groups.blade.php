@@ -15,6 +15,13 @@
           </span>
         </a>
       </div>
+      <div class="col">
+        <a href="?b=settings">
+          <span class="navbar-text">
+            <?php echo$lang['settings'] ?>
+          </span>
+        </a>
+      </div>
     </div>
   </div>
 </nav>
@@ -26,10 +33,10 @@
                 <nav>
                     <div class="nav nav-tabs justify-content-evenly" id="nav-tab" role="tablist">
 
-                        <button class="nav-link col active" id="nav-group_create-tab" data-bs-toggle="tab" data-bs-target="#nav-group_create" type="button" role="tab" aria-controls="nav-group_create" aria-selected="false">
+                        <button class="nav-link col" id="nav-group_create-tab" data-bs-toggle="tab" data-bs-target="#nav-group_create" type="button" role="tab" aria-controls="nav-group_create" aria-selected="false">
                             <?php echo$lang['group'] .' '. $lang['add'] ?>
                         </button>
-                        <button class="nav-link col" id="nav-active_group-tab" data-bs-toggle="tab" data-bs-target="#nav-active_group" type="button" role="tab" aria-controls="nav-active_group" aria-selected="true">
+                        <button class="nav-link col active" id="nav-active_group-tab" data-bs-toggle="tab" data-bs-target="#nav-active_group" type="button" role="tab" aria-controls="nav-active_group" aria-selected="true">
                             <?php echo$lang['active'] .' '. $lang['groups'] ?>
                         </button>
                         <button class="nav-link col" id="nav-deactivated_group-tab" data-bs-toggle="tab" data-bs-target="#nav-deactivated_group" type="button" role="tab" aria-controls="nav-deactivated_group" aria-selected="false">
@@ -39,14 +46,14 @@
                 </nav>
 
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="nav-group_create" role="tabpanel" aria-labelledby="nav-group_create-tab">
+                    <div class="tab-pane fade" id="nav-group_create" role="tabpanel" aria-labelledby="nav-group_create-tab">
                         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
                 <div class="row mt-3 g-3 justify-content-center">
                   <div class="col-md-10">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="group_name" id="group_name" placeholder="" required>
-                        <label for="floatingInput">
+                        <input type="text" class="form-control" name="group_name" id="group_name" placeholder="<?php echo$lang['groups'] .' '. $lang['name'] ?>" required>
+                        <label for="group_name">
                           <?php echo$lang['groups'] .' '. $lang['name'] ?>
                           <span style="color: red;">
                             *
@@ -58,8 +65,8 @@
                   <div class="col-md-8">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="" required>
-                        <label for="floatingInput">
+                        <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="<?php echo$lang['groups'] .' '. $lang['alias'] ?>" required>
+                        <label for="group_alias">
                           <?php echo$lang['groups'] .' '. $lang['alias'] ?>
                           <span style="color: red;">
                             *
@@ -93,7 +100,7 @@
                 </div>
               </form>
                     </div>
-                    <div class="tab-pane fade" id="nav-active_group" role="tabpanel" aria-labelledby="nav-active_group-tab">
+                    <div class="tab-pane fade show active" id="nav-active_group" role="tabpanel" aria-labelledby="nav-active_group-tab">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id="table-to-refresh">
                                 <thead>
@@ -107,7 +114,7 @@
                                 <tbody>
                                 <?php
                                     use app\controller\group;
-                                    foreach(group::show_active() as $group){
+                                    foreach(group::index('v_teams_active') as $group){
                                             echo'
                                             <tr>
                                             
@@ -139,7 +146,7 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                    foreach(group::show_inactive() as $group){
+                                    foreach(group::index('v_teams_inactive') as $group){
                                             echo'
                                             <tr>
                                                 <td>'. $group['alias'] .'</td>

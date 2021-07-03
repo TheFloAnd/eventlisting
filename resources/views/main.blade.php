@@ -1,4 +1,6 @@
-
+<?php
+use app\controller\config;
+?>
     <button class="btn btn-hidden" type="button" style="border: none;" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,6 +21,11 @@
             <?php echo$lang['groups'] ?>
           </span>
         </a>
+        <a href="?b=settings">
+          <span class="navbar-text">
+            <?php echo$lang['settings'] ?>
+          </span>
+        </a>
     </div>
   </div>
 </div>
@@ -27,7 +34,7 @@
   <section class="col-12">
   <div class="card">
     <div class="card-header">
-      <h1 id="reloading"><?php echo date('d.m.Y - H:i'); ?></h1>
+      <h1><?php echo config::get('name')->return . date('d.m.Y - H:i'); ?></h1>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -47,7 +54,7 @@
                 use app\controller\events;
                 use app\controller\group;
 
-                foreach(events::index() as $row){
+                foreach(events::index('v_events_current') as $row){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikeout"';
                     }else{
@@ -93,7 +100,7 @@
             <tbody>
               <?php
 
-                foreach(events::future() as $row){
+                foreach(events::index('v_events_future') as $row){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikeout"';
                     }else{
@@ -130,6 +137,6 @@ function refresh_loop(){
         if(i < 10){
             refresh_loop();
         }
-    }, 15 * 1000)
+    }, <?php echo config::get('refresh')->return ?> * 1000)
 }
 </script>

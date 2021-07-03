@@ -6,9 +6,9 @@ use app\module\DB;
 use \PDO;
 class group{
     
-    public static function index(){
+    public static function index($table){
 
-        $stmt = "SELECT * FROM `v_teams_active`";
+        $stmt = "SELECT * FROM `". $table ."` ORDER BY `id` ASC";
 
         $data = DB::connection()->query($stmt);
         $result = $data->fetchAll();
@@ -33,33 +33,15 @@ class group{
         }
 
     }
-    public static function show_active(){
-
-        $stmt = "SELECT * FROM `v_teams_active`";
-
-        $data = DB::connection()->query($stmt);
-        $result = $data->fetchAll();
-
-        return $result;
-    }
-    public static function show_inactive(){
-
-        $stmt = "SELECT * FROM `v_teams_inactive`";
-
-        $data = DB::connection()->query($stmt);
-        $result = $data->fetchAll();
-
-        return $result;
-    }
 
     public static function find($group){
 
         $stmt = "SELECT * FROM `v_teams` where alias = '". $group ."' LIMIT 1";
 
         $data = DB::connection()->query($stmt);
-        $result = $data->fetch();
+        // $result = $data->fetch();
 
-        return $result;
+        return $data->fetchObject();
     }
     public static function update($group){
         if(isset($group['deactivate_group'])){

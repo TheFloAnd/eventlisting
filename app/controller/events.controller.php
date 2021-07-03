@@ -7,26 +7,15 @@ use app\module\DB;
 
 class events{
     
-    public static function index(){
+    public static function index($table){
 
         // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
-        $stmt = "SELECT * FROM `v_events_current`";
+        $stmt = "SELECT * FROM `". $table ."` ORDER BY `id` ASC";
 
         $data = DB::connection()->query($stmt);
-        $result = $data->fetchAll();
+        // $result = $data->fetchAll();
 
-        return $result;
-    }
-
-    public static function future(){
-
-        // $stmt = "SELECT * FROM `v_events_future` where start <= '". date('Y-m-d', strtotime(date("Y-m-d") . ' + 30 Day')) ."' AND start >= '". date('Y-m-d', strtotime(date("Y-m-d") . ' +1 Days')) ."' ORDER BY start ASC";
-        $stmt = "SELECT * FROM `v_events_future`";
-
-        $data = DB::connection()->query($stmt);
-        $result = $data->fetchAll();
-
-        return $result;
+        return $data->fetchAll();
     }
 
     public static function proposals(){
@@ -42,13 +31,14 @@ class events{
 
     public static function store($input){
 
-        if($input['repeat_days'] == 0 || $input['repeats'] == 0){
             $stmt = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`, `room`) VALUES ('". $input['event'] ."', '". $input['group'] ."', '". $input['start_date'] ."', '". $input['end_date'] ."', '". $input['room'] ."')";
         
             $exec = DB::connection()->prepare($stmt);
             $exec->execute();
-        }
-        if($input['repeat_days'] > 0 || $input['repeats'] > 0){
+            return;
+
+    }
+    public static function store_repeat($input){
 
             $stmt = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`,`repeat`, `room`) VALUES ('". $input['event'] ."', '". $input['group'] ."', '". $input['start_date'] ."', '". $input['end_date'] ."', '". $input['repeats'] ."', '". $input['room'] ."')";
             $exec = DB::connection()->prepare($stmt);
@@ -71,19 +61,16 @@ class events{
                 $exec_repeat = DB::connection()->prepare($stmt_repeat);
                 $exec_repeat->execute();
             }
-        }
-
+            return;
     }
 
     public static function show(){
 
         $stmt = "SELECT * FROM `v_events` where start >= '". date('Y-m-d') ."' OR end >= '". date('Y-m-d') ."' ORDER BY start ASC";
-
-
         $data = DB::connection()->query($stmt);
-        $result = $data->fetchAll();
+        // $result = $data->fetchAll();
 
-        return $result;
+        return $data->fetchAll();
     }
 
     public static function find($id){
@@ -91,9 +78,9 @@ class events{
         $stmt = "SELECT * FROM `v_events` where id = '". $id ."' LIMIT 1";
 
         $data = DB::connection()->query($stmt);
-        $result = $data->fetch();
+        // $result = $data->fetchAll();
 
-        return $result;
+        return $data->fetchObject();
     }
 
     
@@ -115,22 +102,20 @@ class events{
     }
 
     public static function delete($input){
-        if(!isset($input['delete_repeat'])){
-            $stmt = "UPDATE `events` SET `deleted_at`= '". date('Y-m-d H:i:s') ."' WHERE id = '". $input['event_id'] ."'";
+        $stmt = "UPDATE `events` SET `deleted_at`= '". date('Y-m-d H:i:s') ."' WHERE id = '". $input['event_id'] ."'";
 
-            $exec = DB::connection()->prepare($stmt);
-            $exec->execute();
-        }
-        if(isset($input['delete_repeat'])){
-            $event = events::find($input['event_id']);
+        $exec = DB::connection()->prepare($stmt);
+        $exec->execute();
 
+        return array(true, $input);
+    }
+    public static function delete_repeat($input){
+        $event = events::find($input['event_id']);
+        $stmt = "UPDATE `events` SET `deleted_at`= '". date('Y-m-d H:i:s') ."' WHERE id = '". $event['id'] ."' OR `repeat_parent` = '". $event['id'] ."' OR `repeat_parent` = '". $event['repeat_parent'] ."' AND `start` > '". $event['start'] ."'";
 
-            $stmt = "UPDATE `events` SET `deleted_at`= '". date('Y-m-d H:i:s') ."' WHERE id = '". $event['id'] ."' OR `repeat_parent` = '". $event['id'] ."' OR `repeat_parent` = '". $event['repeat_parent'] ."' AND `start` > '". $event['start'] ."'";
-
-            $exec = DB::connection()->prepare($stmt);
-            $exec->execute();
-        }
-
+        $exec = DB::connection()->prepare($stmt);
+        $exec->execute();
+        
         return array(true, $input);
     }
 }

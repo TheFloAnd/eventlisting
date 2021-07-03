@@ -15,6 +15,13 @@
           </span>
         </a>
       </div>
+      <div class="col">
+        <a href="?b=settings">
+          <span class="navbar-text">
+            <?php echo$lang['settings'] ?>
+          </span>
+        </a>
+      </div>
     </div>
   </div>
 </nav>
@@ -39,8 +46,8 @@
                   <div class="col-md-10">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="event" id="event" placeholder="" list="event_list" required>
-                        <label for="floatingInput">
+                        <input type="text" class="form-control" name="event" id="event" placeholder="<?php echo$lang['event'] ?>" list="event_list" required>
+                        <label for="event">
                             <?php echo$lang['event'] ?>
                           <span style="color: red;">
                             *
@@ -49,7 +56,6 @@
                         <datalist id="event_list">
                           <?php
                           use app\controller\events;
-
                           foreach(events::proposals() as $row){
                             echo'<option value="'. $row['event'] .'">';
                           }
@@ -63,15 +69,13 @@
                       <div class="form-floating">
                         <select class="form-select" name="group" id="group" aria-label="Floating label select example" required>
                           <?php
-
                             use app\controller\group;
-
-                            foreach(group::index() as $row){
+                            foreach(group::index('v_teams_active') as $row){
                                 echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
                             }
                           ?>
                         </select>
-                        <label for="floatingSelect">
+                        <label for="group">
                             <?php echo$lang['group'] ?>
                           <span style="color: red;">
                             *
@@ -94,7 +98,7 @@
                     <fieldset>
                       <div class="form-floating">
                         <input type="date" class="form-control" name="start_date" id="start_date" value="<?php echo date("Y-m-d") ?>" required>
-                        <label for="floatingInput">
+                        <label for="start_date">
                           <?php echo$lang['start'] .' '. $lang['date'] ?>
                           <span style="color: red;">
                             *
@@ -107,7 +111,7 @@
                     <fieldset>
                       <div class="form-floating">
                         <input type="date" class="form-control" name="end_date" id="end_date" value="<?php echo date("Y-m-d") ?>" required>
-                        <label for="floatingInput">
+                        <label for="end_date">
                           <?php echo$lang['end'] .' '. $lang['date'] ?>
                           <span style="color: red;">
                             *
@@ -130,21 +134,21 @@
                   </div>
                       <div class="col-md-5">
                         <div class="form-group">
-                          <fieldset id="set_repeat_input_1" readonly>
+                          <fieldset id="set_repeat_input_1" disabled>
                             <label class="form-label" for="days">
                               <?php echo$lang['days'] ?> :
                             </label>
-                            <input class="form-control" type="number" value="0" min="0" name="repeat_days" id="repeat_days">
+                            <input class="form-control" type="number" placeholder="<?php echo$lang['days'] ?>" min="0" name="repeat_days" id="repeat_days">
                           </fieldset>
                         </div>
                       </div>
                       <div class="col-md-5">
                         <div class="form-group">
-                          <fieldset id="set_repeat_input_2" readonly>
+                          <fieldset id="set_repeat_input_2" disabled>
                             <label class="form-label" for="repeats">
                               <?php echo$lang['repeat'] ?> :
                             </label>
-                            <input class="form-control" type="number" value="0" min="0" name="repeats" id="repeats">
+                            <input class="form-control" type="number" placeholder="<?php echo$lang['repeat'] ?>" min="0" name="repeats" id="repeats">
                           </fieldset>
                         </div>
                       </div>
@@ -181,7 +185,6 @@
                         }else{
                           $disabled = '';
                         }
-
                         echo'
                             <tr '.$disabled.'>
                               <td>
@@ -225,19 +228,16 @@
         var repeat_input_1 = document.getElementById("set_repeat_input_1");
         var repeat_input_2 = document.getElementById("set_repeat_input_2");
 
-        repeat_input_1.readonly = true;
-        repeat_input_2.readonly = true;
         set_repeat.onchange = function () {
-          if (repeat_input_1.hasAttribute('readonly')) {
-            repeat_input_1.readonly = false;
+          if (repeat_input_1.hasAttribute('disabled')) {
+            repeat_input_1.disabled = false;
           } else {
-            repeat_input_1.readonly = true;
+            repeat_input_1.disabled = true;
           }
-
-          if (repeat_input_2.hasAttribute('readonly')) {
-            repeat_input_2.readonly = false;
+          if (repeat_input_2.hasAttribute('disabled')) {
+            repeat_input_2.disabled = false;
           } else {
-            repeat_input_2.readonly = true;
+            repeat_input_2.disabled = true;
           }
         };
     </script>
@@ -249,7 +249,6 @@
           if (start_date.value > end_date.value) {
             end_date.value = start_date.value
           }
-
           if (!end_date.value) {
             end_date.value = start_date.value
           }
@@ -258,7 +257,6 @@
           if (end_date.value < start_date.value) {
             start_date.value = end_date.value
           }
-
           if (!start_date.value) {
             start_date.value = end_date.value
           }

@@ -2,7 +2,7 @@
 use app\controller\group;
 $group = group::find($_GET['g']);
 
-if($group['active'] == 1){
+if($group->active == 1){
     $checked = 'checked';
     $disabled = '';
 }else{
@@ -34,6 +34,13 @@ if($group['active'] == 1){
           </span>
         </a>
       </div>
+      <div class="col">
+        <a href="?b=settings">
+          <span class="navbar-text">
+            <?php echo$lang['settings'] ?>
+          </span>
+        </a>
+      </div>
     </div>
   </div>
 </nav>
@@ -56,8 +63,8 @@ if($group['active'] == 1){
                   <div class="col-md-10">
                     <fieldset id="input_name" <?php echo$disabled ?>>
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="group_name" id="group_name" placeholder="" value="<?php echo$group['name'] ?>" required>
-                        <label for="floatingInput">
+                        <input type="text" class="form-control" name="group_name" id="group_name" placeholder="<?php echo$group->name ?: $lang['groups'] .' '. $lang['name'] ?>" value="<?php echo$group->name ?>" required>
+                        <label for="group_name">
                           <?php echo$lang['groups'] .' '. $lang['name'] ?>
                           <span style="color: red;">
                             *
@@ -69,8 +76,8 @@ if($group['active'] == 1){
                   <div class="col-md-8">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="" value="<?php echo $group['alias'] ?>" required readonly deactivated>
-                        <label for="floatingInput">
+                        <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="<?php echo $group->alias ?: $lang['groups'] .' '. $lang['alias'] ?>" value="<?php echo $group->alias ?>" required deactivated>
+                        <label for="group_alias">
                           <?php echo$lang['groups'] .' '. $lang['alias'] ?>
                           <span style="color: red;">
                             *
@@ -83,22 +90,33 @@ if($group['active'] == 1){
                   <div class="col-md-2">
                     <fieldset id="input_color" <?php echo$disabled ?>>
                       <div class="form-group">
-                        <label for="floatingInput">
+                        <label for="group_color">
                           <?php echo$lang['groups'] .' '. $lang['color'] ?>
                           <span style="color: red;">
                             *
                           </span>
                         </label>
-                        <input type="color" class="form-control form-control-color" name="group_color" id="group_color" placeholder="" value="<?php echo $group['color'] ?>" required>
+                        <input type="color" class="form-control form-control-color" name="group_color" id="group_color" placeholder="<?php echo $group->color ?>" value="<?php echo $group->color ?>" required>
                       </div>
                     </fieldset>
                   </div>
                   
-                  <div class="col-8">
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-outline-success w-100" name="submit_edit_group" value="submit">
-                        <?php echo$lang['update'] ?>
-                      </button>
+                  <div class="col-md-10">
+                    <div class="row g-2 justify-content-evenly">
+                      <div class="col-8">
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-outline-success w-100" name="submit_edit_group" value="submit">
+                            <?php echo$lang['update'] ?>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                          <div class="form-group">
+                              <a type="button" class="btn btn-outline-secondary w-100" href="?b=groups">
+                                  <?php echo$lang['back'] ?>
+                              </a>
+                          </div>
+                      </div>
                     </div>
                   </div>
                 </div>
