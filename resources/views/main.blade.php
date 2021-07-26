@@ -54,7 +54,7 @@ use app\controller\config;
                 use app\controller\events;
                 use app\controller\group;
 
-                foreach(events::index('v_events_current') as $row){
+                foreach(events::today() as $row){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikeout"';
                     }else{
@@ -100,7 +100,7 @@ use app\controller\config;
             <tbody>
               <?php
 
-                foreach(events::index('v_events_future') as $row){
+                foreach(events::future() as $row){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikeout"';
                     }else{
