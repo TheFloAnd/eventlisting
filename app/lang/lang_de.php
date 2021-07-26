@@ -25,7 +25,6 @@ $lang['room']           = 'Raum';
 $lang['start']          = 'Start';
 $lang['end']            = 'End';
 $lang['date']           = 'Datum';
-$lang['no_entry']       = 'Es sind Keine Einträge vorhanden';
 
 $lang['project']        = 'Vorhaben';
 $lang['from']           = 'Vom';

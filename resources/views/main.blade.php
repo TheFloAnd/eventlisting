@@ -52,11 +52,9 @@ use app\controller\config;
               <?php
 
                 use app\controller\events;
-                $events_current = events::index('v_events_current');
-                //$events_current = events::index('events');
-                if($events_current){
+                use app\controller\group;
 
-                foreach($events_current as $row){
+                foreach(events::index('v_events_current') as $row){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikeout"';
                     }else{
@@ -77,9 +75,6 @@ use app\controller\config;
                 }
               }
               echo'</tr>';
-            }else{
-              echo'<tr><td colspan="5">'. $lang['no_entry'] .'</td></tr>';
-            }
               ?>
             </tbody>
         </table>
@@ -105,9 +100,7 @@ use app\controller\config;
             <tbody>
               <?php
 
-                $events_future = events::index('v_events_future');
-                if($events_future){
-                foreach($events_future as $row){
+                foreach(events::index('v_events_future') as $row){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikeout"';
                     }else{
@@ -124,9 +117,6 @@ use app\controller\config;
                 <td>'. date('j', strtotime($row['start']) - strtotime(date('Y-m-d').' +1 day')) .' Tagen</td>
               </tr>';
                   }
-            }else{
-              echo'<tr><td colspan="6">'. $lang['no_entry'] .'</td></tr>';
-            }
               ?>
             </tbody>
         </table>

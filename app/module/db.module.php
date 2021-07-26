@@ -23,12 +23,4 @@ use \PDO;
 
             }
         }
-        public static function select($table){
-            "SELECT * FROM `". $table ."`";
-            return;
-        }
-        public static function select_raw($select, $table){
-
-            
-        }
     }

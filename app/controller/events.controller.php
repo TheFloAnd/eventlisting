@@ -11,7 +11,28 @@ class events{
 
         // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
         $stmt = "SELECT * FROM `". $table ."` ORDER BY `id` ASC";
-       // $stmt = DB::select($table);
+
+        $data = DB::connection()->query($stmt);
+        // $result = $data->fetchAll();
+
+        return $data->fetchAll();
+    }
+
+    public static function future(){
+
+        // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
+        $stmt = "SELECT * FROM `". $table ."` ORDER BY `id` ASC";
+
+        $data = DB::connection()->query($stmt);
+        // $result = $data->fetchAll();
+
+        return $data->fetchAll();
+    }
+
+    public static function today(){
+
+        // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
+        $stmt = "SELECT * FROM `". $table ."` WHERE `start` <= curdate() and `end` >= curdate() ORDER BY `id` ASC";
 
         $data = DB::connection()->query($stmt);
         // $result = $data->fetchAll();
