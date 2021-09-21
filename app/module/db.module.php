@@ -124,13 +124,59 @@ use \PDO;
                                                 order by `teams`.`name` ;"
                                             );
 
-                $pdo->query("CREATE VIEW IF NOT EXISTS  `v_events_future`  AS  select `id` AS `id`,`not_applicable` AS `not_applicable`,`event` AS `event`,`team` AS `team`,`start` AS `start`,`end` AS `end`,`repeat` AS `repeat`,`repeat_parent` AS `repeat_parent`,`room` AS `room`,`teams`.`name` AS `team_name`,`teams`.`color` AS `team_color` from (`events` join `teams` on(`team` = `teams`.`alias`)) where `start` <= curdate() + interval (select `config`.`value` from `config` where `config`.`setting` = 'future_day') day and `start` >= curdate() + interval 1 day and `deleted_at` is null order by `start`;");
+                $pdo->query("CREATE VIEW IF NOT EXISTS  `v_events_future`  AS  select 
+                                                    `events`.`id` AS `id`,
+                                                    `events`.`not_applicable` AS `not_applicable`,
+                                                    `events`.`event` AS `event`,
+                                                    `events`.`team` AS `team`,
+                                                    `events`.`start` AS `start`,
+                                                    `events`.`end` AS `end`,
+                                                    `events`.`repeat` AS `repeat`,
+                                                    `events`.`repeat_parent` AS `repeat_parent`,
+                                                    `events`.`room` AS `room`,
+                                                    `teams`.`name` AS `team_name`,
+                                                    `teams`.`color` AS `team_color` 
+                                                    from (`events` join `teams` on(`team` = `teams`.`alias`)) 
+                                                    where `start` <= curdate() + interval (select `config`.`value` from `config` where `config`.`setting` = 'future_day') day 
+                                                        and `start` >= curdate() + interval 1 day 
+                                                        and `deleted_at` is null 
+                                                    order by `start`;");
 
-                $pdo->query("CREATE VIEW IF NOT EXISTS  `v_events_current`  AS  select `id` AS `id`,`not_applicable` AS `not_applicable`,`event` AS `event`,`team` AS `team`,`start` AS `start`,`end` AS `end`,`repeat` AS `repeat`,`repeat_parent` AS `repeat_parent`,`room` AS `room`,`teams`.`name` AS `team_name`,`teams`.`color` AS `team_color` from (`events` join `teams` on(`team` = `teams`.`alias`)) where `deleted_at` is null and `start` <= curdate() and `end` >= curdate() order by `start` ;");
+                $pdo->query("CREATE VIEW IF NOT EXISTS  `v_events_current`  AS  select 
+                                                    `events`.`id` AS `id`,
+                                                    `events`.`not_applicable` AS `not_applicable`,
+                                                    `events`.`event` AS `event`,
+                                                    `events`.`team` AS `team`,
+                                                    `events`.`start` AS `start`,
+                                                    `events`.`end` AS `end`,
+                                                    `events`.`repeat` AS `repeat`,
+                                                    `events`.`repeat_parent` AS `repeat_parent`,
+                                                    `events`.`room` AS `room`,
+                                                    `teams`.`name` AS `team_name`,
+                                                    `teams`.`color` AS `team_color` 
+                                                    from (`events` join `teams` on(`team` = `teams`.`alias`)) 
+                                                    where `deleted_at` is null 
+                                                        and `start` <= curdate() 
+                                                        and `end` >= curdate() 
+                                                    order by `start` ;");
 
-                $pdo->query("CREATE VIEW IF NOT EXISTS `v_teams_active`  AS  select `teams`.`id` AS `id`,`teams`.`name` AS `name`,`teams`.`alias` AS `alias`,`teams`.`color` AS `color` from `teams` where `teams`.`active` = 1 order by `teams`.`name` ;");
+                $pdo->query("CREATE VIEW IF NOT EXISTS `v_teams_active`  AS  select 
+                                                    `teams`.`id` AS `id`,
+                                                    `teams`.`name` AS `name`,
+                                                    `teams`.`alias` AS `alias`,
+                                                    `teams`.`color` AS `color` 
+                                                from `teams` 
+                                                where `teams`.`active` = 1 
+                                                order by `teams`.`name` ;");
 
-                $pdo->query("CREATE VIEW IF NOT EXISTS `v_teams_inactive`  AS  select `teams`.`id` AS `id`,`teams`.`name` AS `name`,`teams`.`alias` AS `alias`,`teams`.`color` AS `color` from `teams` where `teams`.`active` = 0 order by `teams`.`name` ;");
+                $pdo->query("CREATE VIEW IF NOT EXISTS `v_teams_inactive`  AS  select 
+                                                `teams`.`id` AS `id`,
+                                                `teams`.`name` AS `name`,
+                                                `teams`.`alias` AS `alias`,
+                                                `teams`.`color` AS `color` 
+                                            from `teams` 
+                                            where `teams`.`active` = 0 
+                                            order by `teams`.`name` ;");
 
             }catch(\PDOException $e){
 
