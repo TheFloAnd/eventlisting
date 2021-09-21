@@ -7,9 +7,6 @@ use app\module\notification;
 require __DIR__.'/app/conf/config.php';
 require __DIR__.'/init.php';
 
-// require './app/controller/events.controller.php';
-// require './app/controller/group.controller.php';
-// require './app/controller/config.controller.php';
 require './app/lang/lang_de.php';
 
 error_reporting(E_ALL);

@@ -18,11 +18,11 @@ use \PDO;
                 return$pdo;
             }
             catch(\PDOException $e) {
-                DB::createConnection();
+                DB::createDB();
             }
 
         }
-        private static function createConnection(){
+        private static function createDB(){
 
             $server = db['host'];
             $user_login= 'root';
