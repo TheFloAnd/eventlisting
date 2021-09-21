@@ -3,18 +3,18 @@ use app\controller\events;
 use app\controller\group;
 use app\controller\config;
 use app\module\notification;
-require './app/controller/events.controller.php';
-require './app/controller/group.controller.php';
-require './app/controller/config.controller.php';
+
+require __DIR__.'/app/conf/config.php';
+require __DIR__.'/init.php';
+
+// require './app/controller/events.controller.php';
+// require './app/controller/group.controller.php';
+// require './app/controller/config.controller.php';
 require './app/lang/lang_de.php';
-require './app/module/notification.module.php';
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1); 
 ini_set('error_reporting', E_ALL);
-
-require __DIR__.'/app/conf/config.php';
-require __DIR__.'/app/init.php';
 
 if(isset($_GET['b'])){
   define('blade',$_GET['b']);

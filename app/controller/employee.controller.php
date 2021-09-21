@@ -2,7 +2,6 @@
 
 namespace app\controller;
 use \PDO;
-require './app/module/db.module.php';
 
 use app\module\DB as DB;
 

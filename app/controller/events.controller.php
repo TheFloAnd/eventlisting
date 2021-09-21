@@ -1,7 +1,6 @@
 <?php
 
 namespace app\controller;
-require './app/module/db.module.php';
 
 use app\module\DB;
 use app\controller\config;
