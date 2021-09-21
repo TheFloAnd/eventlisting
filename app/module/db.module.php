@@ -15,15 +15,12 @@ use \PDO;
 
                 $pdo = new PDO("mysql:host=".$server.";dbname=".$database.";charset=utf8", $user, $password);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+                return$pdo;
             }
             catch(\PDOException $e) {
                 DB::createConnection();
-                echo"Connection failed: ".$e->getMassage();
             }
 
-
-                return$pdo;
         }
         private static function createConnection(){
 
@@ -104,12 +101,13 @@ use \PDO;
                 $pdo->query("CREATE  VIEW `v_events`  AS  select `events`.`id` AS `id`,`events`.`not_applicable` AS `not_applicable`,`events`.`event` AS `event`,`events`.`team` AS `team`,`events`.`start` AS `start`,`events`.`end` AS `end`,`events`.`repeat` AS `repeat`,`events`.`repeat_parent` AS `repeat_parent`,`events`.`room` AS `room`,`teams`.`name` AS `team_name`,`teams`.`color` AS `team_color` from (`events` join `teams` on((`events`.`team` = `teams`.`alias`))) where (`events`.`deleted_at` is null)");
 
                 $pdo->query("CREATE VIEW `v_teams`  AS  select `teams`.`id` AS `id`,`teams`.`name` AS `name`,`teams`.`alias` AS `alias`,`teams`.`color` AS `color`,`teams`.`active` AS `active` from `teams` order by `teams`.`name` ;");
-                DB::connection();
 
-            }catch(PDOException $e){
+            }catch(\PDOException $e){
 
-                echo"Connection failed: ".$e->getMassage();
+                echo"Connection failed: ".$e;
 
             }
+            header("Refresh:0");
+            return;
         }
     }
