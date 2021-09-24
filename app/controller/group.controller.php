@@ -8,7 +8,7 @@ class group{
     
     public static function index($table){
 
-        $stmt = "SELECT * FROM `". $table ."` ORDER BY `id` ASC";
+        $stmt = "SELECT * FROM `". $table ."` ORDER BY `name` ASC";
 
         $data = DB::connection()->query($stmt);
         $result = $data->fetchAll();

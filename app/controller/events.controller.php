@@ -58,6 +58,8 @@ class events{
         
             $exec = DB::connection()->prepare($stmt);
             $exec->execute();
+
+            
             return;
 
     }

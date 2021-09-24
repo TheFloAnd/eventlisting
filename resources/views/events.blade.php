@@ -64,26 +64,38 @@
                       </div>
                     </fieldset>
                   </div>
-                  <div class="col-md-7">
-                    <fieldset>
-                      <div class="form-floating">
-                        <select class="form-select" name="group" id="group" aria-label="Floating label select example" required>
-                          <?php
-                            use app\controller\group;
-                            foreach(group::index('v_teams_active') as $row){
-                                echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
-                            }
-                          ?>
-                        </select>
-                        <label for="group">
-                            <?php echo$lang['group'] ?>
-                          <span style="color: red;">
-                            *
-                          </span>
-                        </label>
+                  <div class="col-md-10">
+                    <div class="row g-3" id="groups">
+                      <div class="col-11">
+                        <fieldset>
+                          <div class="form-floating input-group">
+                            <select class="form-select" name="group" id="group" aria-label="Floating label select example" required>
+                              <?php
+                                use app\controller\group;
+                                foreach(group::index('v_teams_active') as $row){
+                                    echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
+                                }
+                              ?>
+                            </select>
+                              <label for="group">
+                              <?php echo$lang['group'] ?>
+                            <span style="color: red;">
+                              *
+                              </span>
+                            </label>
                       </div>
                     </fieldset>
                   </div>
+                  <div class="col-1">
+
+                      <button type="button" class="btn btn-secondary" onclick="add_group()">
+                        <i class="bi bi-plus"></i>
+                      </button>
+                  </div>
+                </div>
+              </div>
+                  <div class="col-md-10">
+                    <div class="row">
                   <div class="col-md-3">
                     <fieldset>
                       <div class="form-floating">
@@ -93,6 +105,8 @@
                         </label>
                       </div>
                     </fieldset>
+                  </div>
+                  </div>
                   </div>
                   <div class="col-md-5">
                     <fieldset>
@@ -261,4 +275,40 @@
             start_date.value = end_date.value
           }
         };
+    </script>
+    <script>
+      function add_group(el) {
+        let groups = document.getElementById("groups");
+        let new_content = groups.firstChild.nextElementSibling.cloneNode(true);
+        count_child = groups.children.length;
+        new_content.id = 'select_' + count_child
+        change_id_and_name = new_content.getElementsByTagName('select');
+        change_id_and_name[0].id= "group_"+ count_child
+        change_id_and_name[0].name= "group_"+ count_child
+        
+        add_del = new_content.getElementsByTagName('fieldset');
+        del_button = document.createElement('botton');
+        del_button.setAttribute('class', 'btn btn-outline-secondary')
+        del_button.setAttribute('type', 'button')
+        del_button.setAttribute('id', 'select_' + count_child)
+        del_button.setAttribute("onclick", "remove_select('select_" + count_child + "');")
+        del_button.innerHTML = '<i class="bi bi-trash"></i>';
+        // del_button = '<button class="btn btn-outline-secondary" type="button" id="del_select" onclick="remove_select("select_' + count_child + '");"><i class="bi bi-trash"></i></button>';
+        add_del[0].firstElementChild.appendChild(del_button)
+
+        // change_button_id= new_content.getElementsByTagName('button');
+        // change_button_id[0].id =  "del_select_"+ count_child
+        // change_button_id[0].setAttribute("onclick", "remove_select('select_" + count_child + "');")
+
+        insertAfter(new_content, groups.firstElementChild.nextSibling)
+      }
+
+      function insertAfter(newNode, existingNode) {
+        existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+      }
+      function remove_select(el) {
+        let groups = document.getElementById("groups");
+        let node = document.getElementById(el)
+        groups.removeChild(node);
+      }
     </script>
