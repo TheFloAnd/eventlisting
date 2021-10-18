@@ -93,7 +93,7 @@ $event = events::find($_GET['id']);
                                         <?php
                                         use app\controller\group;
                                         $current_group = group::find($event->team);
-                                        echo'<option value="'. $current_group['alias'] .'">'. $current_group['name'] .' ('. $current_group['alias'] .')</option>';
+                                        echo'<option value="'. $current_group->alias .'">'. $current_group->name .' ('. $current_group->alias .')</option>';
                                         
                                         foreach(group::index('v_teams_active') as $row){
                                             if($row['alias'] != $event->team){
