@@ -136,7 +136,7 @@ class events{
     }
     public static function delete_repeat($input){
         $event = events::find($input['event_id']);
-        $stmt = "UPDATE `events` SET `deleted_at`= '". date('Y-m-d H:i:s') ."' WHERE id = '". $event['id'] ."' OR `repeat_parent` = '". $event['id'] ."' OR `repeat_parent` = '". $event['repeat_parent'] ."' AND `start` > '". $event['start'] ."'";
+        $stmt = "UPDATE `events` SET `deleted_at`= '". date('Y-m-d H:i:s') ."' WHERE id = '". $event->id ."' OR `repeat_parent` = '". $event->id ."' OR `repeat_parent` = '". $event->repeat_parent ."' AND `start` > '". $event->start ."'";
 
         $exec = DB::connection()->prepare($stmt);
         $exec->execute();

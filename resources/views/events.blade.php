@@ -139,7 +139,7 @@
                     <fieldset>
                       <div class="form-group">
                         <div class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" id="set_repeat" data-toggle="toggle" autocomplete="off">
+                          <input class="form-check-input" type="checkbox" id="set_repeat" name="set_repeat" data-toggle="toggle" autocomplete="off">
                           <label class="form-check-label" for="set_repeat">
                             <?php echo$lang['repeat'] ?>
                           </label>

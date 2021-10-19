@@ -34,7 +34,10 @@ use app\controller\config;
   <section class="col-12">
   <div class="card">
     <div class="card-header">
-      <h1><?php echo config::get('name')->return . date('d.m.Y - H:i'); ?></h1>
+<nav class="navbar navbar-dark">
+      <h1 class="header-secondary"><?php echo config::get('name')->return ?></h1>
+      <h2 class="header-secondary"><?php echo  date('d.m.Y - H:i'); ?></h2>
+</nav>
     </div>
     <div class="card-body">
       <div class="table-responsive">
