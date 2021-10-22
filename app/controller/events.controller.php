@@ -19,10 +19,7 @@ class events{
     }
 
     public static function future(){
-        $conf = CONFIG::get('future_day');
-
-        // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
-        $stmt = "SELECT * FROM `v_events` WHERE `start` <= curdate() + interval (". $conf->return .") day and `start` >= curdate() + interval 1 day ORDER BY `start` ASC";
+        $stmt = "SELECT * FROM `v_events` WHERE `start` <= curdate() + interval (". CONFIG::get('future_day')->return .") day and `start` >= curdate() + interval 1 day ORDER BY `start` ASC";
 
         $data = DB::connection()->query($stmt);
         // $result = $data->fetchAll();
@@ -32,7 +29,6 @@ class events{
 
     public static function today(){
 
-        // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
         $stmt = "SELECT * FROM `v_events` WHERE `start` <= curdate() and `end` >= curdate() ORDER BY `start` ASC";
 
         $data = DB::connection()->query($stmt);

@@ -214,11 +214,11 @@
                               '. $row['room'] .'
                             </td>';
                           if($row['start'] != $row['end']){
-                            echo'<td>'. date('d.m.Y', strtotime($row['start'])) .'</td>';
-                            echo'<td>'. date('d.m.Y', strtotime($row['end'])) .'</td>';
+                            echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+                            echo'<td>'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
                           }
                           if($row['start'] == $row['end']){
-                            echo'<td colspan="2">'. date('d.m.Y', strtotime($row['start'])) .'</td>';
+                            echo'<td colspan="2">'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
                           }
                           echo'<td>
                             <a href="?b=events_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative">

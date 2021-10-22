@@ -11,6 +11,10 @@ define("db", array(
 ));
 
 /*
+* Settings
+*/
+// setlocale(LC_ALL, 'de_DE');
+/*
  * Server path
  */
 

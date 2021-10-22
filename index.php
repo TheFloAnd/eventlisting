@@ -13,6 +13,10 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1); 
 ini_set('error_reporting', E_ALL);
 
+date_default_timezone_set(date_default_timezone_get());
+
+setlocale(LC_ALL, 'de_DE.utf8') or die('Locale not installed');
+
 if(isset($_GET['b'])){
   define('blade',$_GET['b']);
 }else{

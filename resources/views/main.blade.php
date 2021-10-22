@@ -36,8 +36,7 @@ use app\controller\config;
     <div class="card-header">
 <nav class="navbar navbar-dark">
       <h1 class="header-secondary"><?php echo config::get('name')->return ?></h1>
-      <!-- <h2 class="header-secondary" id="clock"><?php echo  date('d.m.Y - H:i'); ?></h2> -->
-      <h2 class="header-secondary"><?php echo  date('d.m.Y - '); ?><span id="display_time"></span></h2>
+      <h2 class="header-secondary"><?php echo  strftime('%A %d.%m.%Y - '); ?><span id="display_time"></span></h2>
 </nav>
     </div>
     <div class="card-body">
@@ -71,11 +70,11 @@ use app\controller\config;
                 echo'<td><span class="badge text-dark" style="background-color:'. $row['team_color'] .';">'. $row['team'] .'</span></td>';
                 echo'<td>'. $row['room'] .'</td>';
                 if($row['start'] != $row['end']){
-                  echo'<td>'. date('d.m.Y', strtotime($row['start'])) .'</td>';
-                  echo'<td>'. date('d.m.Y', strtotime($row['end'])) .'</td>';
+                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
+                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['end'])) .'</td>';
                 }
                 if($row['start'] == $row['end']){
-                  echo'<td colspan="2">'. date('d.m.Y', strtotime($row['start'])) .'</td>';
+                  echo'<td colspan="2">'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
                 }
               }
               echo'</tr>';
@@ -117,11 +116,11 @@ use app\controller\config;
                 <td><span class="badge text-dark" style="background-color:'. $row['team_color'] .'">'. $row['team'] .'</span></td>
                 <td>'. $row['room'] .'</td>';
                 if($row['start'] != $row['end']){
-                  echo'<td>'. date('d.m.Y', strtotime($row['start'])) .'</td>';
-                  echo'<td>'. date('d.m.Y', strtotime($row['end'])) .'</td>';
+                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
+                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['end'])) .'</td>';
                 }
                 if($row['start'] == $row['end']){
-                  echo'<td colspan="2">'. date('d.m.Y', strtotime($row['start'])) .'</td>';
+                  echo'<td colspan="2">'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
                 }
               echo'<td>'. date('j', strtotime($row['start']) - strtotime(date('Y-m-d').' +1 day')) .' Tagen</td>
               </tr>';
