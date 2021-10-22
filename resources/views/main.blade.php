@@ -115,10 +115,15 @@ use app\controller\config;
               <tr '.$disabled.'>
                 <td>'. $row['event'] .'</td>
                 <td><span class="badge text-dark" style="background-color:'. $row['team_color'] .'">'. $row['team'] .'</span></td>
-                <td>'. $row['room'] .'</td>
-                <td>'. date('d.m.Y', strtotime($row['start'])) .'</td>
-                <td>'. date('d.m.Y', strtotime($row['end'])) .'</td>
-                <td>'. date('j', strtotime($row['start']) - strtotime(date('Y-m-d').' +1 day')) .' Tagen</td>
+                <td>'. $row['room'] .'</td>';
+                if($row['start'] != $row['end']){
+                  echo'<td>'. date('d.m.Y', strtotime($row['start'])) .'</td>';
+                  echo'<td>'. date('d.m.Y', strtotime($row['end'])) .'</td>';
+                }
+                if($row['start'] == $row['end']){
+                  echo'<td colspan="2">'. date('d.m.Y', strtotime($row['start'])) .'</td>';
+                }
+              echo'<td>'. date('j', strtotime($row['start']) - strtotime(date('Y-m-d').' +1 day')) .' Tagen</td>
               </tr>';
                   }
               ?>
