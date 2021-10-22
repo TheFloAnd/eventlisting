@@ -36,7 +36,8 @@ use app\controller\config;
     <div class="card-header">
 <nav class="navbar navbar-dark">
       <h1 class="header-secondary"><?php echo config::get('name')->return ?></h1>
-      <h2 class="header-secondary"><?php echo  date('d.m.Y - H:i'); ?></h2>
+      <!-- <h2 class="header-secondary" id="clock"><?php echo  date('d.m.Y - H:i'); ?></h2> -->
+      <h2 class="header-secondary"><?php echo  date('d.m.Y - '); ?><span id="display_time"></span></h2>
 </nav>
     </div>
     <div class="card-body">
@@ -130,6 +131,7 @@ use app\controller\config;
 </article>
 <script>
 refresh_loop();
+show_clock()
 
 var i = 1
 function refresh_loop(){
@@ -141,5 +143,22 @@ function refresh_loop(){
             refresh_loop();
         }
     }, <?php echo config::get('refresh')->return ?> * 1000)
+}
+
+function show_clock(){
+  const today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  display_time = document.getElementById("display_time");
+  // display_time.innerHTML = h + ":" + m + ":" + s;
+  display_time.innerHTML = h + ":" + m;
+  setTimeout(show_clock, 1000)
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
 }
 </script>
