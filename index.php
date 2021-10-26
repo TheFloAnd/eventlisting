@@ -3,6 +3,7 @@ use app\controller\events;
 use app\controller\group;
 use app\controller\config;
 use app\module\notification;
+use app\module\updates;
 
 require __DIR__.'/app/conf/config.php';
 require __DIR__.'/init.php';
@@ -16,6 +17,11 @@ ini_set('error_reporting', E_ALL);
 date_default_timezone_set(date_default_timezone_get());
 
 setlocale(LC_ALL, 'de_DE.utf8') or die('Locale not installed');
+
+if(strftime('%a - %H') == 'Mo - 08'){
+  updates::get_updates();
+}
+
 
 if(isset($_GET['b'])){
   define('blade',$_GET['b']);
