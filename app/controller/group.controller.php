@@ -6,21 +6,21 @@ use app\module\DB;
 use \PDO;
 class group{
     
-    public static function index($table){
+    public static function index(){
 
-        $stmt = "SELECT * FROM `". $table ."` ORDER BY `name` ASC";
+        $stmt_active = "SELECT * FROM `v_teams_active` ORDER BY `name` ASC";
+        $data_active = DB::connection()->query($stmt_active);
+        $active = $data_active->fetchAll();
 
-        $data = DB::connection()->query($stmt);
-        $result = $data->fetchAll();
+        $stmt_inactive = "SELECT * FROM `v_teams_inactive` ORDER BY `name` ASC";
+        $data_inactive = DB::connection()->query($stmt_inactive);
+        $inactive = $data_inactive->fetchAll();
 
-        return $result;
+        return compact('active', 'inactive');
     }
 
     public static function store($input){
-        $stmt_exists = "SELECT alias FROM `v_teams` where alias = '". $input['group_alias'] ."' LIMIT 1";
-        $exists = DB::connection()->prepare($stmt_exists);
-        $exists->execute();
-        $alias = $exists->fetchColumn();
+        $alias = GROUP::find($input['group_alias']);
         if(!$alias){
 
             $stmt = "INSERT INTO `v_teams`(`name`, `alias`, `color`) VALUES ('". $input['group_name'] ."', '". $input['group_alias'] ."', '". $input['group_color'] ."')";

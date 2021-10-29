@@ -1,6 +1,10 @@
 <?php 
 use app\controller\events;
-$event = events::find($_GET['id']);
+use app\controller\group;
+
+$data = events::edit($_GET['id']);
+
+$current_group = group::find($data['result']->team);
 ?>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
@@ -44,14 +48,14 @@ $event = events::find($_GET['id']);
                         <div class="row mt-3 g-3 justify-content-center">
                             <fieldset class="" hidden>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo$event->id ?>" >
+                                    <input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo$data['result']->id ?>" >
                                 </div>
                             </fieldset>
                             <div class="col-md-10">
                                 <fieldset>
                                     <div class="form-check">
                                     <?php
-                                    if($event->not_applicable == 1){
+                                    if($data['result']->not_applicable == 1){
                                         $checked = 'checked';
                                     }else{
                                         $checked = '';
@@ -68,7 +72,7 @@ $event = events::find($_GET['id']);
                             <div class="col-md-10">
                                 <fieldset>
                                     <div class="form-floating">
-                                    <input type="text" class="form-control" name="event" id="event" placeholder="<?php echo$event->event ?: $lang['event'] ?>" value="<?php echo$event->event ?>" list="event_list" required>
+                                    <input type="text" class="form-control" name="event" id="event" placeholder="<?php echo$data['result']->event ?: $lang['event'] ?>" value="<?php echo$data['result']->event ?>" list="event_list" required>
                                     <label for="event">
                                         <?php echo$lang['event'] ?>
                                         <span style="color: red;">
@@ -78,7 +82,7 @@ $event = events::find($_GET['id']);
                                     <datalist id="event_list">
                                     <?php
 
-                                    foreach(events::proposals() as $row){
+                                    foreach($data['proposals'] as $row){
                                         echo'<option value="'. $row['event'] .'">';
                                     }
                                     ?>
@@ -91,12 +95,10 @@ $event = events::find($_GET['id']);
                                 <div class="form-floating">
                                     <select class="form-select" name="group" id="group" aria-label="Floating label select example" required>
                                         <?php
-                                        use app\controller\group;
-                                        $current_group = group::find($event->team);
                                         echo'<option value="'. $current_group->alias .'">'. $current_group->name .' ('. $current_group->alias .')</option>';
                                         
-                                        foreach(group::index('v_teams_active') as $row){
-                                            if($row['alias'] != $event->team){
+                                        foreach($data['group'] as $row){
+                                            if($row['alias'] != $data['result']->team){
                                                 echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
                                             }
                                         }
@@ -114,7 +116,7 @@ $event = events::find($_GET['id']);
                         <div class="col-md-3">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" name="room" id="room" placeholder="<?php echo$event->room ?: $lang['room'] ?>" value="<?php echo$event->room ?>" >
+                                    <input type="text" class="form-control" name="room" id="room" placeholder="<?php echo$data['result']->room ?: $lang['room'] ?>" value="<?php echo$data['result']->room ?>" >
                                     <label for="room">
                                         <?php echo$lang['room'] ?>
                                     </label>
@@ -124,7 +126,7 @@ $event = events::find($_GET['id']);
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="date" class="form-control" name="start_date" id="start_date" value="<?php echo$event->start ?>" required>
+                                    <input type="date" class="form-control" name="start_date" id="start_date" value="<?php echo$data['result']->start ?>" required>
                                     <label for="start_date">
                                         <?php echo$lang['start'] .' '. $lang['date'] ?>
                                         <span style="color: red;">
@@ -137,7 +139,7 @@ $event = events::find($_GET['id']);
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="date" class="form-control" name="end_date" id="end_date" value="<?php echo$event->end ?>" required>
+                                    <input type="date" class="form-control" name="end_date" id="end_date" value="<?php echo$data['result']->end ?>" required>
                                     <label for="end_date">
                                         <?php echo$lang['end'] .' '. $lang['date'] ?>
                                         <span style="color: red;">
