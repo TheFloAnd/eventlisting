@@ -1,5 +1,7 @@
 <?php
 use app\controller\config;
+use app\controller\main;
+$main = MAIN::index();
 ?>
     <button class="btn btn-hidden" type="button" style="border: none;" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
       <span class="navbar-toggler-icon"></span>
@@ -54,10 +56,7 @@ use app\controller\config;
             <tbody>
               <?php
 
-                use app\controller\events;
-                use app\controller\group;
-
-                foreach(events::today() as $row){
+                foreach($main['today'] as $row){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikeout"';
                     }else{
@@ -103,7 +102,7 @@ use app\controller\config;
             <tbody>
               <?php
 
-                foreach(events::future() as $row){
+                foreach($main['future'] as $row){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikeout"';
                     }else{

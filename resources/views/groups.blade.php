@@ -1,3 +1,7 @@
+<?php
+use app\controller\group;
+$group = GROUP::index();
+?>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <div class="row">
@@ -113,16 +117,15 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                    use app\controller\group;
-                                    foreach(group::index('v_teams_active') as $group){
+                                    foreach($group['active'] as $active){
                                             echo'
                                             <tr>
                                             
-                                                <td>'. $group['alias'] .'</td>
-                                                <td>'. $group['name'] .'</td>
-                                                <td style="background-color:'. $group['color'] .';">'. $group['color'] .'</td>
+                                                <td>'. $active['alias'] .'</td>
+                                                <td>'. $active['name'] .'</td>
+                                                <td style="background-color:'. $active['color'] .';">'. $active['color'] .'</td>
                                                 <td>
-                                                  <a href="?b=group_edit&g='. $group['alias'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
+                                                  <a href="?b=group_edit&g='. $active['alias'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
                                                     <i class="bi bi-gear-wide"></i>
                                                   </a>
                                                 </td>
@@ -146,14 +149,14 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                    foreach(group::index('v_teams_inactive') as $group){
+                                    foreach($group['inactive']  as $inactive){
                                             echo'
                                             <tr>
-                                                <td>'. $group['alias'] .'</td>
-                                                <td>'. $group['name'] .'</td>
-                                                <td style="background-color:'. $group['color'] .';">'. $group['color'] .'</td>
+                                                <td>'. $inactive['alias'] .'</td>
+                                                <td>'. $inactive['name'] .'</td>
+                                                <td style="background-color:'. $inactive['color'] .';">'. $inactive['color'] .'</td>
                                                 <td>
-                                                  <a href="?b=group_edit&g='. $group['alias'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
+                                                  <a href="?b=group_edit&g='. $inactive['alias'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
                                                     <i class="bi bi-gear-wide"></i>
                                                   </a>
                                                 </td>

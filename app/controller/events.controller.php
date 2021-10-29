@@ -4,48 +4,39 @@ namespace app\controller;
 
 use app\module\DB;
 use app\controller\config;
+use app\controller\group;
 
 class events{
     
-    public static function index($table){
+    public static function index(){
 
         // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
-        $stmt = "SELECT * FROM `". $table ."` ORDER BY `start` ASC";
-
-        $data = DB::connection()->query($stmt);
-        // $result = $data->fetchAll();
-
-        return $data->fetchAll();
-    }
-
-    public static function future(){
-        $stmt = "SELECT * FROM `v_events` WHERE `start` <= curdate() + interval (". CONFIG::get('future_day')->return .") day and `start` >= curdate() + interval 1 day ORDER BY `start` ASC";
-
-        $data = DB::connection()->query($stmt);
-        // $result = $data->fetchAll();
-
-        return $data->fetchAll();
-    }
-
-    public static function today(){
-
-        $stmt = "SELECT * FROM `v_events` WHERE `start` <= curdate() and `end` >= curdate() ORDER BY `start` ASC";
-
-        $data = DB::connection()->query($stmt);
-        // $result = $data->fetchAll();
-
-        return $data->fetchAll();
-    }
-
-    public static function proposals(){
-
-        $stmt = "SELECT `event`, COUNT(`event`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
-
+        $stmt = "SELECT * FROM `v_events` where start >= '". date('Y-m-d') ."' OR end >= '". date('Y-m-d') ."' ORDER BY start ASC";
 
         $data = DB::connection()->query($stmt);
         $result = $data->fetchAll();
 
-        return $result;
+        $stmt_proposals = "SELECT `event`, COUNT(`event`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
+        $data_proposals = DB::connection()->query($stmt_proposals);
+        $proposals = $data_proposals->fetchAll();
+
+        $group = GROUP::index();
+        $group = $group['active'];
+
+        return compact('proposals', 'result', 'group');
+    }
+    public static function edit($id){
+
+        $result = events::find($id);
+        
+        $stmt_proposals = "SELECT `event`, COUNT(`event`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
+        $data_proposals = DB::connection()->query($stmt_proposals);
+        $proposals = $data_proposals->fetchAll();
+
+        $group = GROUP::index();
+        $group = $group['active'];
+
+        return compact('proposals', 'result', 'group');
     }
 
     public static function store($input){
@@ -83,15 +74,6 @@ class events{
                 $exec_repeat->execute();
             }
             return;
-    }
-
-    public static function show(){
-
-        $stmt = "SELECT * FROM `v_events` where start >= '". date('Y-m-d') ."' OR end >= '". date('Y-m-d') ."' ORDER BY start ASC";
-        $data = DB::connection()->query($stmt);
-        // $result = $data->fetchAll();
-
-        return $data->fetchAll();
     }
 
     public static function find($id){
