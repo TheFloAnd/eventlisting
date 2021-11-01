@@ -58,16 +58,13 @@ class events{
     }
     public static function store_repeat($input){
 
-            if(!is_array($input['group'])){
-                $group = $input['group'];
-            }else{
                 $group = '';
                 $i = 0;
                 foreach($input['group'] as $row){
                     $group .= $input['group'][$i] . ';';
                     $i++;
                 }
-            }
+            
 
             $stmt = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`,`repeat`, `room`) VALUES ('". $input['event'] ."', '". $group ."', '". $input['start_date'] ."', '". $input['end_date'] ."', '". $input['repeats'] ."', '". $input['room'] ."')";
             $exec = DB::connection()->prepare($stmt);
@@ -105,8 +102,14 @@ class events{
 
     
     public static function update($input){
+        $group = '';
+        $i = 0;
+        foreach($input['group'] as $row){
+            $group .= $input['group'][$i] . ';';
+            $i++;
+        }
         if(!isset($input['removed'])){
-            $stmt = "UPDATE `v_events` SET `not_applicable`= NULL, `event`='". $input['event'] ."',`team`='". $input['group'] ."' ,`start`='". $input['start_date'] ."' ,`end`='". $input['end_date'] ."' ,`room`='". $input['room'] ."' WHERE id = '". $input['event_id'] ."'";
+            $stmt = "UPDATE `v_events` SET `not_applicable`= NULL, `event`='". $input['event'] ."',`team`='". $group ."' ,`start`='". $input['start_date'] ."' ,`end`='". $input['end_date'] ."' ,`room`='". $input['room'] ."' WHERE id = '". $input['event_id'] ."'";
 
             $exec = DB::connection()->prepare($stmt);
             $exec->execute();

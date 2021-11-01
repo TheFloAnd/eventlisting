@@ -32,7 +32,6 @@ if(isset($_GET['b'])){
 if(isset($_POST['submit_event'])){
   if(!isset($_POST['set_repeat'])){
     events::store($_POST);
-    var_dump($_POST['group']);
   }else{
     events::store_repeat($_POST);
   }
@@ -41,7 +40,7 @@ if(isset($_POST['submit_event'])){
 if(isset($_POST['submit_edit_event'])){
   $update_event = events::update($_POST);
   if($update_event['0']){
-    notification::success('Der Termin "'. $update_event['1']['event'] .'" vom '. date('d.m.Y', strtotime($update_event['1']['start_date'])) .' bis zum '. date('d.m.Y', strtotime($update_event['1']['end_date'])) .' der Gruppe '. $update_event['1']['group'] .' wurde Erfolgreich geändert!');
+    //notification::success('Der Termin "'. $update_event['1']['event'] .'" vom '. date('d.m.Y', strtotime($update_event['1']['start_date'])) .' bis zum '. date('d.m.Y', strtotime($update_event['1']['end_date'])) .' der Gruppe '. $update_event['1']['group'] .' wurde Erfolgreich geändert!');
   }
 }
 
