@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/resources/css/select2.min.css">
   </head>
   <body>
-    <main class="container">
+    <main class="container-fluid">
     <?php
 
       require __DIR__ . '/../views/'. blade .'.blade.php';
