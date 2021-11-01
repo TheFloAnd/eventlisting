@@ -93,9 +93,6 @@ use \PDO;
                                                 MODIFY `id` int NOT NULL AUTO_INCREMENT
                                                 ;");
 
-                $pdo->query("ALTER TABLE `events`
-                                                ADD CONSTRAINT `team` FOREIGN KEY (`team`) REFERENCES `teams` (`alias`) ON DELETE RESTRICT ON UPDATE RESTRICT;");
-
                 $pdo->query("CREATE VIEW IF NOT EXISTS `v_events`  AS  select 
                                                     `events`.`id` AS `id`,
                                                     `events`.`not_applicable` AS `not_applicable`,
