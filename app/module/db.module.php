@@ -63,7 +63,7 @@ use \PDO;
                                                 `id` int NOT NULL,
                                                 `not_applicable` int DEFAULT NULL,
                                                 `event` varchar(255),
-                                                `team` varchar(10) DEFAULT NULL,
+                                                `team` varchar(255) DEFAULT NULL,
                                                 `start` date NOT NULL,
                                                 `end` date NOT NULL,
                                                 `repeat` int DEFAULT NULL,
