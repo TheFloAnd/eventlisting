@@ -116,31 +116,27 @@ $current_group = group::find($data['result']->team);
                         <div class="col-md-7">
 
                         <fieldset>
-                          <div class="input-group">
-                              <label for="group">
-                              <?php 
-                              $teams = explode(';', $data['result']->team );
-                              array_pop($teams);
-                                echo$lang['group']; 
-
-                      foreach($teams as $team){
-                        $color = GROUP::find($team)->color;
-                        echo' <span class="badge text-dark" style="background-color:'. $color.';">'. $team .'</span> ';
-                      }
-                                ?>
-                            <span style="color: red;">
-                              *
-                              </span>
+                        <div class="input-group">
+                            <label for="group">
+                                <?php echo$lang['group'] ?>
+                                <span style="color: red;">
+                                    *
+                                </span>
                             </label>
                             <select class="form-select multiple-select" name="group[]"  multiple="multiple" required>
-                              <?php
-                              
+                            <?php
+                                $teams = explode(';', $data['result']->team );
+                                array_pop($teams);
                                 foreach($data['group'] as $row){
-                                    echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
+                                    if(in_array($row['alias'], $teams)){
+                                        echo'<option value="'. $row['alias'] .'" selected>'. $row['name'] .' ('. $row['alias'] .')</option>';
+                                    }else{
+                                        echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
+                                    }
                                 }
-                              ?>
+                            ?>
                             </select>
-                      </div>
+                        </div>
                     </fieldset>
                         </div>
                         <div class="col-md-3">
@@ -223,12 +219,12 @@ $current_group = group::find($data['result']->team);
 
                     <fieldset class="" hidden>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo$event->id ?>" >
+                            <input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo$data['result']->id ?>" >
                         </div>
                     </fieldset>
                     <p>Wollen die den Termin wirklich Löschen?</p>
 <?php
-if(!empty($event->repeat) || !empty($event->repeat_parent)){
+if(!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)){
     echo'<fieldset>
         <div class="form-group">
             <div class="form-check form-switch">
