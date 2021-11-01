@@ -1,5 +1,6 @@
 <?php
 use app\controller\events;
+use app\controller\group;
 
 $events = events::index();
 ?>
@@ -72,6 +73,31 @@ $events = events::index();
                     <div class="row g-3" id="groups">
                       <div class="col-12">
                         <fieldset>
+                          <div class="input-group">
+                              <label for="group">
+                              <?php echo$lang['group'] ?>
+                            <span style="color: red;">
+                              *
+                              </span>
+                            </label>
+                            <select class="form-select multiple-select" name="group[]"  multiple="multiple" required>
+                              <?php
+                              
+                                foreach($events['group'] as $row){
+                                    echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
+                                }
+                              ?>
+                            </select>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <!--
+                  <div class="col-md-10">
+                    <div class="row g-3" id="groups">
+                      <div class="col-12">
+                        <fieldset>
                           <div class="form-floating input-group">
                             <select class="form-select" name="group" id="group" aria-label="Floating label select example" required>
                               <?php
@@ -90,15 +116,8 @@ $events = events::index();
                       </div>
                     </fieldset>
                   </div>
-                  <!--
-                  <div class="col-1">
-                      <button type="button" class="btn btn-secondary" onclick="add_group()">
-                        <i class="bi bi-plus"></i>
-                      </button>
-                  </div>
-                -->
                 </div>
-              </div>
+              </div>-->
                   <div class="col-md-10">
                     <div class="row">
                   <div class="col-md-3">
@@ -208,13 +227,19 @@ $events = events::index();
                             <tr '.$disabled.'>
                               <td>
                                 '. $row['event'] .'
-                              </td>';
-                          echo'<td>
-                              <span class="badge text-dark" style="background-color:'. $row['team_color'] .';">
-                                '. $row['team'] .'
-                              </span>
-                            </td>';
-                          echo'<td>
+                              </td>
+                              <td>';
+
+                  $teams = explode(';', $row['team']);
+                      array_pop($teams);
+                      foreach($teams as $team){
+                        $color = GROUP::find($team)->color;
+                        echo'<span class="badge text-dark" style="background-color:'. $color.';">'. $team .'</span> ';
+                      }
+                  
+                  
+                  echo'</td>
+                  <td>
                               '. $row['room'] .'
                             </td>';
                           if($row['start'] != $row['end']){
