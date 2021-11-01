@@ -5,9 +5,9 @@
 
 define("db", array(
     "host" => "localhost",
-    "user" => "event_listing.loc",
-    "password" => "admin",
-    "database" => "event_listing.loc",
+    "user" => "events",
+    "password" => "",
+    "database" => "events",
 ));
 
 /*
