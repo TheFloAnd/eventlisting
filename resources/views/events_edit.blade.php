@@ -90,6 +90,7 @@ $current_group = group::find($data['result']->team);
                                 </div>
                             </fieldset>
                         </div>
+                        <!--
                         <div class="col-md-7">
                             <fieldset>
                                 <div class="form-floating">
@@ -98,9 +99,8 @@ $current_group = group::find($data['result']->team);
                                         echo'<option value="'. $current_group->alias .'">'. $current_group->name .' ('. $current_group->alias .')</option>';
                                         
                                         foreach($data['group'] as $row){
-                                            if($row['alias'] != $data['result']->team){
                                                 echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
-                                            }
+                                            
                                         }
                                         ?>
                                     </select>
@@ -112,6 +112,36 @@ $current_group = group::find($data['result']->team);
                                     </label>
                                 </div>
                             </fieldset>
+                        </div>-->
+                        <div class="col-md-7">
+
+                        <fieldset>
+                          <div class="input-group">
+                              <label for="group">
+                              <?php 
+                              $teams = explode(';', $data['result']->team );
+                              array_pop($teams);
+                                echo$lang['group']; 
+
+                      foreach($teams as $team){
+                        $color = GROUP::find($team)->color;
+                        echo' <span class="badge text-dark" style="background-color:'. $color.';">'. $team .'</span> ';
+                      }
+                                ?>
+                            <span style="color: red;">
+                              *
+                              </span>
+                            </label>
+                            <select class="form-select multiple-select" name="group[]"  multiple="multiple" required>
+                              <?php
+                              
+                                foreach($data['group'] as $row){
+                                    echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
+                                }
+                              ?>
+                            </select>
+                      </div>
+                    </fieldset>
                         </div>
                         <div class="col-md-3">
                             <fieldset>

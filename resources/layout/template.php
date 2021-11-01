@@ -16,6 +16,7 @@
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
     
     <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/resources/css/select2.min.css">
   </head>
   <body>
     <main class="container">
@@ -30,5 +31,20 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="/resources/js/bootstrap.bundle.js"></script>
     <!-- <script src="/resources/js/bootstrap-toggle.min.js"></script> -->
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script src="/resources/js/select2.full.min.js"></script>
+    <script>
+      $(document).ready(function() {
+    $('.multiple-select').select2();
+});
+    </script>
   </body>
 </html>

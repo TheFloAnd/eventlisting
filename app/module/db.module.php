@@ -105,12 +105,8 @@ use \PDO;
                                                     `events`.`end` AS `end`,
                                                     `events`.`repeat` AS `repeat`,
                                                     `events`.`repeat_parent` AS `repeat_parent`,
-                                                    `events`.`room` AS `room`,
-                                                    `teams`.`name` AS `team_name`,
-                                                    `teams`.`color` AS `team_color` 
-                                                from (`events` join 
-                                                    `teams` 
-                                                    on((`events`.`team` = `teams`.`alias`))) 
+                                                    `events`.`room` AS `room`
+                                                from `events`
                                                 where (`events`.`deleted_at` is null);"
                                             );
 
@@ -133,10 +129,8 @@ use \PDO;
                                                     `events`.`end` AS `end`,
                                                     `events`.`repeat` AS `repeat`,
                                                     `events`.`repeat_parent` AS `repeat_parent`,
-                                                    `events`.`room` AS `room`,
-                                                    `teams`.`name` AS `team_name`,
-                                                    `teams`.`color` AS `team_color` 
-                                                    from (`events` join `teams` on(`team` = `teams`.`alias`)) 
+                                                    `events`.`room` AS `room`
+                                                    from `events` 
                                                     where `start` <= curdate() + interval (select `config`.`value` from `config` where `config`.`setting` = 'future_day') day 
                                                         and `start` >= curdate() + interval 1 day 
                                                         and `deleted_at` is null 
@@ -151,10 +145,8 @@ use \PDO;
                                                     `events`.`end` AS `end`,
                                                     `events`.`repeat` AS `repeat`,
                                                     `events`.`repeat_parent` AS `repeat_parent`,
-                                                    `events`.`room` AS `room`,
-                                                    `teams`.`name` AS `team_name`,
-                                                    `teams`.`color` AS `team_color` 
-                                                    from (`events` join `teams` on(`team` = `teams`.`alias`)) 
+                                                    `events`.`room` AS `room`
+                                                    from `events` 
                                                     where `deleted_at` is null 
                                                         and `start` <= curdate() 
                                                         and `end` >= curdate() 

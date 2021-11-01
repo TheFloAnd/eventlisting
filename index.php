@@ -32,6 +32,7 @@ if(isset($_GET['b'])){
 if(isset($_POST['submit_event'])){
   if(!isset($_POST['set_repeat'])){
     events::store($_POST);
+    var_dump($_POST['group']);
   }else{
     events::store_repeat($_POST);
   }
