@@ -1,6 +1,7 @@
 <?php
 use app\controller\config;
 use app\controller\main;
+use app\controller\group;
 $main = MAIN::index();
 ?>
     <button class="btn btn-hidden" type="button" style="border: none;" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
@@ -66,7 +67,17 @@ $main = MAIN::index();
                     echo'
               <tr '.$disabled.'>
                 <td>'. $row['event'] .'</td>';
-                echo'<td><span class="badge text-dark" style="background-color:'. $row['team_color'] .';">'. $row['team'] .'</span></td>';
+                echo'<td>';
+
+                  $teams = explode(';', $row['team']);
+                      array_pop($teams);
+                      foreach($teams as $team){
+                        $color = GROUP::find($team)->color;
+                        echo'<span class="badge text-dark" style="background-color:'. $color.';">'. $team .'</span> ';
+                      }
+                  
+                  
+                  echo'</td>';
                 echo'<td>'. $row['room'] .'</td>';
                 if($row['start'] != $row['end']){
                   echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
@@ -112,7 +123,16 @@ $main = MAIN::index();
                     echo'
               <tr '.$disabled.'>
                 <td>'. $row['event'] .'</td>
-                <td><span class="badge text-dark" style="background-color:'. $row['team_color'] .'">'. $row['team'] .'</span></td>
+                <td>';
+
+                  $teams = explode(';', $row['team']);
+                      array_pop($teams);
+                      foreach($teams as $team){
+                        $group_color = GROUP::find($team)->color;
+                        echo'<span class="badge text-dark" style="background-color:'. $group_color.';">'. $team .'</span> ';
+                      }
+                  
+                  echo'</td>
                 <td>'. $row['room'] .'</td>';
                 if($row['start'] != $row['end']){
                   echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
