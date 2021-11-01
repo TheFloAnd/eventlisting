@@ -57,7 +57,7 @@ use \PDO;
                                                 ADD UNIQUE KEY `setting` (`setting`),
                                                 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;");
 
-                $pdo->query("INSERT INTO `config` (`id`, `view`, `setting`, `value`) VALUES (1, 'Automatisches Neuladen (in Sekunden)', 'refresh', '15'), (2, 'Termin Preview Zeitraum (in Tagen)', 'future_day', '30'), (3, 'Überschrift', 'name', '');");
+                $pdo->query("INSERT INTO `config` (`id`, `view`, `setting`, `value`) VALUES (1, 'Automatisches Neuladen (in Sekunden)', 'refresh', '900'), (2, 'Termin Preview Zeitraum (in Tagen)', 'future_day', '30'), (3, 'Überschrift', 'name', '');");
 
                 $pdo->query("CREATE TABLE   IF NOT EXISTS `events` (
                                                 `id` int NOT NULL,
