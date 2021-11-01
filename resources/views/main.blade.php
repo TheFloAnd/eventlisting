@@ -32,12 +32,12 @@ $main = MAIN::index();
   </div>
 </div>
 
-<article class="row g-3">
+<article class="row g-3 main">
   <section class="col-12">
   <div class="card">
     <div class="card-header">
 <nav class="navbar navbar-dark">
-      <h1 class="header-secondary"><?php echo config::get('name')->return ?></h1>
+      <h1 class="header-primary"><?php echo config::get('name')->return ?></h1>
       <h2 class="header-secondary"><?php echo  strftime('%A %d.%m.%Y - '); ?><span id="display_time"></span></h2>
 </nav>
     </div>

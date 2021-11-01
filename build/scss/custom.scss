@@ -41,5 +41,13 @@ tr.strikeout td:before {
 
 tr.strikeout td:after {
   content: "\00B7";
-  font-size: 1px;
+  font-size: 1em;
+}
+.main *{
+  font-size: 1.055em;
+}
+
+.header-primary,
+.header-secondary{
+  font-size: 2em !important;
 }
