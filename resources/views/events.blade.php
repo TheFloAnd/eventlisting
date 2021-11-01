@@ -1,3 +1,8 @@
+<?php
+use app\controller\events;
+
+$events = events::index();
+?>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <div class="row">
@@ -55,8 +60,7 @@
                         </label>
                         <datalist id="event_list">
                           <?php
-                          use app\controller\events;
-                          foreach(events::proposals() as $row){
+                          foreach($events['proposals'] as $row){
                             echo'<option value="'. $row['event'] .'">';
                           }
                           ?>
@@ -71,8 +75,8 @@
                           <div class="form-floating input-group">
                             <select class="form-select" name="group" id="group" aria-label="Floating label select example" required>
                               <?php
-                                use app\controller\group;
-                                foreach(group::index('v_teams_active') as $row){
+                              
+                                foreach($events['group'] as $row){
                                     echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
                                 }
                               ?>
@@ -194,7 +198,7 @@
                       </thead>
                       <tbody>
                         <?php
-                        foreach(events::show() as $row){
+                        foreach($events['result'] as $row){
                         if($row['not_applicable'] == 1){
                           $disabled = 'class="table-danger strikeout"';
                         }else{
