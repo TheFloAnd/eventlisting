@@ -31,7 +31,12 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="/resources/js/bootstrap.bundle.js"></script>
     <!-- <script src="/resources/js/bootstrap-toggle.min.js"></script> -->
-
+    <script>
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      })
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
