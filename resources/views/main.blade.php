@@ -39,7 +39,7 @@ $main = MAIN::index();
     <div class="card-header">
 <nav class="navbar navbar-dark">
       <h1 class="header-primary"><?php echo config::get('name')->return ?></h1>
-      <h2 class="header-secondary"><?php echo  strftime('%A %d.%m.%Y - '); ?><span id="display_time"></span></h2>
+      <h1 class="header-primary"><?php echo  strftime('%A %d.%m.%Y - '); ?><span id="display_time"></span></h2>
 </nav>
     </div>
     <div class="card-body">
@@ -97,6 +97,12 @@ $main = MAIN::index();
   </section>
   <section class="col-12">
   <div class="card">
+    <div class="card-header">
+<nav class="navbar navbar-dark">
+      <h2 class="header-secondary"><?php echo$lang['event'] .' '. $lang['preview']; ?></h1>
+      <h2 class="header-secondary"><?php echo  config::get('future_day')->return; ?> Tage</h2>
+</nav>
+    </div>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-striped table-hover" id="table-to-refresh">

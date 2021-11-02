@@ -21,6 +21,8 @@ $lang['name']           = 'Name';
 $lang['alias']          = 'Alias';
 $lang['color']          = 'Farbe';
 
+$lang['preview']          = 'Vorschau';
+
 $lang['room']           = 'Raum';
 $lang['start']          = 'Start';
 $lang['end']            = 'End';
