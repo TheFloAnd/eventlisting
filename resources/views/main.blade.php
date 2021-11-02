@@ -99,7 +99,7 @@ $main = MAIN::index();
   <div class="card">
     <div class="card-header">
 <nav class="navbar navbar-dark">
-      <h2 class="header-secondary"><?php echo$lang['event'] .' '. $lang['preview']; ?></h1>
+      <h2 class="header-secondary"><?php echo$lang['event'] .' '. $lang['preview']; ?></h2>
       <h2 class="header-secondary"><?php echo  config::get('future_day')->return; ?> Tage</h2>
 </nav>
     </div>
