@@ -4,7 +4,7 @@ use app\controller\main;
 use app\controller\group;
 $main = MAIN::index();
 ?>
-    <button class="btn btn-hidden" type="button" style="border: none;" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+    <button class="btn btn-hidden" type="button" style="border: none;z-index:999;" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
@@ -121,7 +121,7 @@ $main = MAIN::index();
 
                 foreach($main['future'] as $row){
                     if($row['not_applicable'] == 1){
-                      $disabled = 'class="table-danger strikeout"';
+                      $disabled = 'class="table-danger strikethrough"';
                     }else{
                         $disabled = '';
                     }
