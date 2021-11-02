@@ -93,31 +93,6 @@ $events = events::index();
                   </div>
                 </div>
               </div>
-              <!--
-                  <div class="col-md-10">
-                    <div class="row g-3" id="groups">
-                      <div class="col-12">
-                        <fieldset>
-                          <div class="form-floating input-group">
-                            <select class="form-select" name="group" id="group" aria-label="Floating label select example" required>
-                              <?php
-                              
-                                foreach($events['group'] as $row){
-                                    echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
-                                }
-                              ?>
-                            </select>
-                              <label for="group">
-                              <?php echo$lang['group'] ?>
-                            <span style="color: red;">
-                              *
-                              </span>
-                            </label>
-                      </div>
-                    </fieldset>
-                  </div>
-                </div>
-              </div>-->
                   <div class="col-md-10">
                     <div class="row">
                   <div class="col-md-3">
@@ -306,62 +281,3 @@ $events = events::index();
           }
         };
     </script>
-    <!--
-    <script>
-      function add_group(el) {
-        let groups = document.getElementById("groups");
-        let new_content = groups.firstChild.nextElementSibling.cloneNode(true);
-        count_child = groups.children.length;
-        new_content.id = 'group_' + count_child
-        change_id_and_name = new_content.getElementsByTagName('select');
-        change_id_and_name[0].id= "select_"+ count_child
-        change_id_and_name[0].name= "select_"+ count_child
-        
-        add_del = new_content.getElementsByTagName('fieldset');
-        del_button = document.createElement('button');
-        del_button.setAttribute('class', 'btn btn-outline-secondary')
-        del_button.setAttribute('type', 'button')
-        del_button.setAttribute('id', 'select_button_' + count_child)
-        del_button.setAttribute("onclick", "remove_select('group_" + parseInt(count_child) -1 + "');")
-        del_button.innerHTML = '<i class="bi bi-trash"></i>';
-        add_del[0].firstElementChild.appendChild(del_button)
-
-        insertAfter(new_content, groups.lastElementChild)
-
-        rename()
-      }
-
-      function insertAfter(newNode, existingNode) {
-        existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
-      }
-      function remove_select(el) {
-        let groups = document.getElementById("groups");
-        let node = document.getElementById(el)
-        groups.removeChild(node);
-
-        rename()
-      }
-
-      function rename() {
-        let groups = document.getElementById("groups");
-        let count_child = groups.children.length;
-
-        for (let j = 1; count_child >= j; j++) {
-          let child = groups.childNodes[j+3];
-          let name_group = 'group_' + j;
-          let name_select = 'select_' + j;
-          let name_button = 'del_button_' + j;
-
-          child.id = name_group;
-
-          select = child.getElementsByTagName('select');
-          button = child.getElementsByTagName('button');
-          console.log(button)
-          select[0].id = name_select;
-          select[0].name = name_select;
-          button[0].id = name_button;
-          button[0].onclick = "remove_select(name_group)";
-        }
-      }
-    </script>
-  -->
