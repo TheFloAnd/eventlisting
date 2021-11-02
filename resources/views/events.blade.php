@@ -52,7 +52,7 @@ $events = events::index();
                   <div class="col-md-10">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="event" id="event" placeholder="<?php echo$lang['event'] ?>" list="event_list" required>
+                        <input type="text" class="form-control" name="event" id="event" placeholder="<?php echo$lang['event'] ?>" list="event_list" required />
                         <label for="event">
                             <?php echo$lang['event'] ?>
                           <span style="color: red;">
@@ -151,7 +151,7 @@ $events = events::index();
                             <label class="form-label" for="days">
                               <?php echo$lang['days'] ?> :
                             </label>
-                            <input class="form-control" type="number" placeholder="<?php echo$lang['days'] ?>" min="0" name="repeat_days" id="repeat_days">
+                            <input class="form-control" type="number" placeholder="<?php echo$lang['days'] ?>" min="0" name="repeat_days" id="repeat_days" data-bs-toggle="tooltip" data-bs-placement="top" title="In wievielen Tagen sich der Termin wiederholen soll">
                           </fieldset>
                         </div>
                       </div>
@@ -161,7 +161,7 @@ $events = events::index();
                             <label class="form-label" for="repeats">
                               <?php echo$lang['repeat'] ?> :
                             </label>
-                            <input class="form-control" type="number" placeholder="<?php echo$lang['repeat'] ?>" min="0" name="repeats" id="repeats">
+                            <input class="form-control" type="number" placeholder="<?php echo$lang['repeat'] ?>" min="0" name="repeats" id="repeats" data-bs-toggle="tooltip" data-bs-placement="top" title="Wie oft sich der Termin wiederholen soll">
                           </fieldset>
                         </div>
                       </div>
