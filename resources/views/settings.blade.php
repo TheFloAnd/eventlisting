@@ -44,9 +44,22 @@
                         foreach(config::index() as $row){
                         echo'
                             <tr>
-                              <td>
-                                '. ucwords($row['view']) .'
-                              </td>
+                              <td>';
+              switch ($row['time_unit']){
+                case 'day':
+                  $output_time_unit = '(in Tagen)';
+                  break;
+                case 'week':
+                  $output_time_unit = '(in Wochen)';
+                  break;
+                case 'seconds':
+                  $output_time_unit = '(in Skunden)';
+                  break;
+                default:
+                  $output_time_unit = '';
+                }
+                                echo ucwords($row['view']) .' '. $output_time_unit;
+                                echo'</td>
                               <td>
                                 '. $row['value'] .'
                               </td>';
