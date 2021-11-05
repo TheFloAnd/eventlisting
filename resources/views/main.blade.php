@@ -4,54 +4,69 @@ use app\controller\main;
 use app\controller\group;
 $main = MAIN::index();
 ?>
-    <button class="btn btn-hidden" type="button" style="border: none;z-index:999;" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+<button class="btn btn-hidden" type="button" style="border: none;z-index:999;" href="?b=events"
+  data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
   <div class="offcanvas-header">
     <h5 id="offcanvasTopLabel">Navigation</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
     <div class="row">
-        <a href="?b=events">
-          <span class="navbar-text">
-            <?php echo$lang['events'] ?>
-          </span>
-        </a>
-        <a href="?b=groups">
-          <span class="navbar-text">
-            <?php echo$lang['groups'] ?>
-          </span>
-        </a>
-        <a href="?b=settings">
-          <span class="navbar-text">
-            <?php echo$lang['settings'] ?>
-          </span>
-        </a>
+      <a href="?b=events">
+        <span class="navbar-text">
+          <?php echo$lang['events'] ?>
+        </span>
+      </a>
+      <a href="?b=groups">
+        <span class="navbar-text">
+          <?php echo$lang['groups'] ?>
+        </span>
+      </a>
+      <a href="?b=settings">
+        <span class="navbar-text">
+          <?php echo$lang['settings'] ?>
+        </span>
+      </a>
     </div>
   </div>
 </div>
 
 <article class="row g-3 main">
   <section class="col-12">
-  <div class="card">
-    <div class="card-header">
-<nav class="navbar navbar-dark">
-      <h1 class="header-primary"><?php echo config::get('name')->return ?></h1>
-      <h1 class="header-primary"><?php echo  strftime('%A %d.%m.%Y - '); ?><span id="display_time"></span></h2>
-</nav>
-    </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table align-center table-striped table-hover" id="table-to-refresh">
+    <div class="card">
+      <div class="card-header">
+        <nav class="navbar navbar-dark">
+          <h1 class="header-primary">
+            <?php echo config::get('name')->value; ?>
+          </h1>
+          <h1 class="header-primary">
+            <?php echo  strftime('%A %d.%m.%Y - '); ?><span id="display_time"></span>
+          </h1>
+        </nav>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table align-center table-striped table-hover" id="table-to-refresh">
             <thead>
               <tr>
-                <th scope="col"><?php echo$lang['project'] ?></th>
-                <th scope="col"><?php echo$lang['group'] ?></th>
-                <th scope="col"><?php echo$lang['room'] ?></th>
-                <th scope="col"><?php echo$lang['from'] ?></th>
-                <th scope="col"><?php echo$lang['till'] ?></th>
+                <th scope="col">
+                  <?php echo$lang['project'] ?>
+                </th>
+                <th scope="col">
+                  <?php echo$lang['group'] ?>
+                </th>
+                <th scope="col">
+                  <?php echo$lang['room'] ?>
+                </th>
+                <th scope="col">
+                  <?php echo$lang['from'] ?>
+                </th>
+                <th scope="col">
+                  <?php echo$lang['till'] ?>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -90,30 +105,58 @@ $main = MAIN::index();
               echo'</tr>';
               ?>
             </tbody>
-        </table>
+          </table>
         </div>
-    </div>
+      </div>
     </div>
   </section>
   <section class="col-12">
-  <div class="card">
-    <div class="card-header">
-<nav class="navbar navbar-dark">
-      <h2 class="header-secondary"><?php echo$lang['event'] .' '. $lang['preview']; ?></h2>
-      <h2 class="header-secondary"><?php echo  config::get('future_day')->return; ?> Tage</h2>
-</nav>
-    </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-striped table-hover" id="table-to-refresh">
+    <div class="card">
+      <div class="card-header">
+        <nav class="navbar navbar-dark">
+          <h2 class="header-secondary">
+            <?php echo$lang['event'] .' '. $lang['preview']; ?>
+          </h2>
+          <h2 class="header-secondary">
+            <?php 
+              $future = config::get('future_day');
+              switch ($future->time_value){
+                case 'day':
+                  $output_time_value = 'Tage';
+                  break;
+                case 'week':
+                  $output_time_value = 'Wochen';
+                  break;
+                }
+
+              echo $future->value . ' '.  $output_time_value;
+                  ?>
+          </h2>
+        </nav>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover" id="table-to-refresh">
             <thead>
               <tr>
-                <th scope="col"><?php echo$lang['project'] ?></th>
-                <th scope="col"><?php echo$lang['group'] ?></th>
-                <th scope="col"><?php echo$lang['room'] ?></th>
-                <th scope="col"><?php echo$lang['from'] ?></th>
-                <th scope="col"><?php echo$lang['till'] ?></th>
-                <th scope="col"><?php echo$lang['remaining_days'] ?></th>
+                <th scope="col">
+                  <?php echo$lang['project'] ?>
+                </th>
+                <th scope="col">
+                  <?php echo$lang['group'] ?>
+                </th>
+                <th scope="col">
+                  <?php echo$lang['room'] ?>
+                </th>
+                <th scope="col">
+                  <?php echo$lang['from'] ?>
+                </th>
+                <th scope="col">
+                  <?php echo$lang['till'] ?>
+                </th>
+                <th scope="col">
+                  <?php echo$lang['remaining_days'] ?>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -152,15 +195,15 @@ $main = MAIN::index();
                   }
               ?>
             </tbody>
-        </table>
+          </table>
+        </div>
       </div>
-    </div>
     </div>
   </section>
 </article>
 <script>
-refresh_loop();
-show_clock()
+  refresh_loop();
+show_clock();
 
 var i = 1
 function refresh_loop(){
@@ -171,7 +214,7 @@ function refresh_loop(){
         if(i < 10){
             refresh_loop();
         }
-    }, <?php echo config::get('refresh')->return ?> * 1000)
+    }, <?php echo config::get('refresh')->value ?> * 1000)
 }
 
 function show_clock(){
