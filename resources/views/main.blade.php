@@ -120,16 +120,16 @@ $main = MAIN::index();
           <h2 class="header-secondary">
             <?php 
               $future = config::get('future_day');
-              switch ($future->time_value){
+              switch ($future->time_unit){
                 case 'day':
-                  $output_time_value = 'Tage';
+                  $output_time_unit = 'Tage';
                   break;
                 case 'week':
-                  $output_time_value = 'Wochen';
+                  $output_time_unit = 'Wochen';
                   break;
                 }
 
-              echo $future->value . ' '.  $output_time_value;
+              echo $future->value . ' '.  $output_time_unit;
                   ?>
           </h2>
         </nav>

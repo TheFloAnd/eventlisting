@@ -84,17 +84,17 @@ $setting = config::find($_GET['id']);
                   <div class="col-md-4">
                     <fieldset id="input_name">
                       <div class="form-floating">
-                        <select class="form-select" id="time_value" name="time_value" aria-label="Einheit">';
-              if($setting->time_value == 'day'){
+                        <select class="form-select" id="time_unit" name="time_unit" aria-label="Einheit">';
+              if($setting->time_unit == 'day'){
                 echo'<option value="day">in Tagen</option>';
                 echo'<option value="week">in Wochen</option>';
               }
-              if($setting->time_value == 'week'){
+              if($setting->time_unit == 'week'){
                 echo'<option value="week">in Wochen</option>';
                 echo'<option value="day">in Tagen</option>';
               }
                         echo'</select>
-                        <label for="time_value">Einheit</label>
+                        <label for="time_unit">Einheit</label>
                       </div>
                     </fieldset>
                   </div>

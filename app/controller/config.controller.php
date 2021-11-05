@@ -19,14 +19,14 @@ class config{
         return $data->fetchObject();
     }
     public static function get($setting){
-        $stmt = "SELECT `value`, `time_value` FROM `config` where `setting` = '". $setting ."'";
+        $stmt = "SELECT `value`, `time_unit` FROM `config` where `setting` = '". $setting ."'";
         $data = DB::connection()->query($stmt);
         return $data->fetchObject();
     }
                 
     public static function update($setting){
         if($setting['setting_id'] == '2'){
-            $stmt = "UPDATE `config` SET `value` = '". $setting['setting_value'] ."', `time_value` = '". $setting['time_value'] ."' where `id` = '". $setting['setting_id'] ."'";
+            $stmt = "UPDATE `config` SET `value` = '". $setting['setting_value'] ."', `time_unit` = '". $setting['time_unit'] ."' where `id` = '". $setting['setting_id'] ."'";
         }else{
             $stmt = "UPDATE `config` SET `value` = '". $setting['setting_value'] ."' where `id` = '". $setting['setting_id'] ."'";
         }

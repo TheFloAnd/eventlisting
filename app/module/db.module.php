@@ -51,14 +51,14 @@ use \PDO;
                                                 `view` varchar(50) NOT NULL,
                                                 `setting` varchar(50) NOT NULL,
                                                 `value` varchar(50) NOT NULL,
-                                                `time_value` varchar(50) NOT NULL
+                                                `time_unit` varchar(50) NOT NULL
                                             );");
                 $pdo->query("ALTER TABLE `config`
                                                 ADD PRIMARY KEY (`id`),
                                                 ADD UNIQUE KEY `setting` (`setting`),
                                                 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;");
 
-                $pdo->query("INSERT INTO `config` (`id`, `view`, `setting`, `value`, `time_value`) VALUES (1, 'Automatisches Neuladen (in Sekunden)', 'refresh', '900', 'Sekunden'), (2, 'Termin Preview Zeitraum (in Tagen)', 'future_day', '30', 'Tage'), (3, 'Überschrift', 'name', '', '');");
+                $pdo->query("INSERT INTO `config` (`id`, `view`, `setting`, `value`, `time_unit`) VALUES (1, 'Automatisches Neuladen (in Sekunden)', 'refresh', '900', 'Sekunden'), (2, 'Termin Preview Zeitraum (in Tagen)', 'future_day', '30', 'Tage'), (3, 'Überschrift', 'name', '', '');");
 
                 $pdo->query("CREATE TABLE   IF NOT EXISTS `events` (
                                                 `id` int NOT NULL,

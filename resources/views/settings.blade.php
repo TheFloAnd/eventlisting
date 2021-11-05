@@ -45,20 +45,20 @@
                         echo'
                             <tr>
                               <td>';
-              switch ($row['time_value']){
+              switch ($row['time_unit']){
                 case 'day':
-                  $output_time_value = '(in Tagen)';
+                  $output_time_unit = '(in Tagen)';
                   break;
                 case 'week':
-                  $output_time_value = '(in Wochen)';
+                  $output_time_unit = '(in Wochen)';
                   break;
                 case 'seconds':
-                  $output_time_value = '(in Skunden)';
+                  $output_time_unit = '(in Skunden)';
                   break;
                 default:
-                  $output_time_value = '';
+                  $output_time_unit = '';
                 }
-                                echo ucwords($row['view']) .' '. $output_time_value;
+                                echo ucwords($row['view']) .' '. $output_time_unit;
                                 echo'</td>
                               <td>
                                 '. $row['value'] .'

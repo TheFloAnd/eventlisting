@@ -14,7 +14,7 @@ class MAIN{
 
         $data_today = DB::connection()->query($stmt_today);
 
-        $stmt_future= "SELECT * FROM `v_events` WHERE `start` <= curdate() + interval (". CONFIG::get('future_day')->value .") ". CONFIG::get('future_day')->time_value ." and `start` >= curdate() + interval 1 day ORDER BY `start` ASC";
+        $stmt_future= "SELECT * FROM `v_events` WHERE `start` <= curdate() + interval (". CONFIG::get('future_day')->value .") ". CONFIG::get('future_day')->time_unit ." and `start` >= curdate() + interval 1 day ORDER BY `start` ASC";
 
         $data_future = DB::connection()->query($stmt_future);
         // $result = $data->fetchAll();
