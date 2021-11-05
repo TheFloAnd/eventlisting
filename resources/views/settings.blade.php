@@ -53,7 +53,7 @@
                   $output_time_unit = '(in Wochen)';
                   break;
                 case 'seconds':
-                  $output_time_unit = '(in Skunden)';
+                  $output_time_unit = '(in Sekunden)';
                   break;
                 default:
                   $output_time_unit = '';
