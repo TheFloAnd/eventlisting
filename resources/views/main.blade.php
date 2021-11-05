@@ -59,7 +59,7 @@ $main = MAIN::index();
 
                 foreach($main['today'] as $row){
                     if($row['not_applicable'] == 1){
-                      $disabled = 'class="table-danger strikeout"';
+                      $disabled = 'class="table-danger strikethrough"';
                     }else{
                         $disabled = '';
                     }
