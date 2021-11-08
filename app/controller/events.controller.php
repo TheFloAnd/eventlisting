@@ -2,7 +2,7 @@
 
 namespace app\controller;
 
-use app\module\DB;
+use database\connection\connect;
 use app\controller\config;
 use app\controller\group;
 
@@ -13,11 +13,11 @@ class events{
         // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
         $stmt = "SELECT * FROM `v_events` where start >= '". date('Y-m-d') ."' OR end >= '". date('Y-m-d') ."' ORDER BY start ASC";
 
-        $data = DB::connection()->query($stmt);
+        $data = connect::connection()->query($stmt);
         $result = $data->fetchAll();
 
         $stmt_proposals = "SELECT `event`, COUNT(`event`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
-        $data_proposals = DB::connection()->query($stmt_proposals);
+        $data_proposals = connect::connection()->query($stmt_proposals);
         $proposals = $data_proposals->fetchAll();
 
         $group = GROUP::index();
@@ -30,7 +30,7 @@ class events{
         $result = events::find($id);
         
         $stmt_proposals = "SELECT `event`, COUNT(`event`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
-        $data_proposals = DB::connection()->query($stmt_proposals);
+        $data_proposals = connect::connection()->query($stmt_proposals);
         $proposals = $data_proposals->fetchAll();
 
         $group = GROUP::index();
@@ -49,7 +49,7 @@ class events{
 
             $stmt = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`, `room`) VALUES ('". $input['event'] ."', '". $group."', '". $input['start_date'] ."', '". $input['end_date'] ."', '". $input['room'] ."')";
         
-            $exec = DB::connection()->prepare($stmt);
+            $exec = connect::connection()->prepare($stmt);
             $exec->execute();
 
             
@@ -67,11 +67,11 @@ class events{
             
 
             $stmt = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`,`repeat`, `room`) VALUES ('". $input['event'] ."', '". $group ."', '". $input['start_date'] ."', '". $input['end_date'] ."', '". $input['repeats'] ."', '". $input['room'] ."')";
-            $exec = DB::connection()->prepare($stmt);
+            $exec = connect::connection()->prepare($stmt);
             $exec->execute();
 
             $stmt_find = "SELECT * FROM `v_events` where `event` = '". $input['event'] ."' AND `team` = '". $group ."' AND `start` = '". $input['start_date'] ."' AND `end` = '". $input['end_date'] ."' LIMIT 1";
-            $data_find = DB::connection()->query($stmt_find);
+            $data_find = connect::connection()->query($stmt_find);
             $result_found = $data_find->fetch();
 
 
@@ -84,7 +84,7 @@ class events{
 
                 $stmt_repeat = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`,`repeat_parent`, `room`) VALUES ('". $input['event'] ."', '". $group ."', '". $start_date ."', '". $end_date ."', '". $result_found['id'] ."', '". $input['room'] ."')";
         
-                $exec_repeat = DB::connection()->prepare($stmt_repeat);
+                $exec_repeat = connect::connection()->prepare($stmt_repeat);
                 $exec_repeat->execute();
             }
             return;
@@ -94,7 +94,7 @@ class events{
 
         $stmt = "SELECT * FROM `v_events` where id = '". $id ."' LIMIT 1";
 
-        $data = DB::connection()->query($stmt);
+        $data = connect::connection()->query($stmt);
         // $result = $data->fetchAll();
 
         return $data->fetchObject();
@@ -111,13 +111,13 @@ class events{
         if(!isset($input['removed'])){
             $stmt = "UPDATE `v_events` SET `not_applicable`= NULL, `event`='". $input['event'] ."',`team`='". $group ."' ,`start`='". $input['start_date'] ."' ,`end`='". $input['end_date'] ."' ,`room`='". $input['room'] ."' WHERE id = '". $input['event_id'] ."'";
 
-            $exec = DB::connection()->prepare($stmt);
+            $exec = connect::connection()->prepare($stmt);
             $exec->execute();
         }
         if(isset($input['removed'])){
             $stmt = "UPDATE `v_events` SET `not_applicable`= 1 WHERE id = '". $input['event_id'] ."'";
 
-            $exec = DB::connection()->prepare($stmt);
+            $exec = connect::connection()->prepare($stmt);
             $exec->execute();
         }
 
@@ -127,7 +127,7 @@ class events{
     public static function delete($input){
         $stmt = "UPDATE `events` SET `deleted_at`= '". date('Y-m-d H:i:s') ."' WHERE id = '". $input['event_id'] ."'";
 
-        $exec = DB::connection()->prepare($stmt);
+        $exec = connect::connection()->prepare($stmt);
         $exec->execute();
 
         return array(true, $input);
@@ -136,7 +136,7 @@ class events{
         $event = events::find($input['event_id']);
         $stmt = "UPDATE `events` SET `deleted_at`= '". date('Y-m-d H:i:s') ."' WHERE id = '". $event->id ."' OR `repeat_parent` = '". $event->id ."' OR `repeat_parent` = '". $event->repeat_parent ."' AND `start` > '". $event->start ."'";
 
-        $exec = DB::connection()->prepare($stmt);
+        $exec = connect::connection()->prepare($stmt);
         $exec->execute();
         
         return array(true, $input);

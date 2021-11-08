@@ -5,6 +5,7 @@ use app\controller\config;
 use app\module\notification;
 use app\module\updates;
 use app\module\system;
+use database\connection\connect;
 
 require __DIR__.'/app/conf/config.php';
 require __DIR__.'/init.php';
