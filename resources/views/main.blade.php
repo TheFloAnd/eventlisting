@@ -3,6 +3,7 @@ use app\controller\config;
 use app\controller\main;
 use app\controller\group;
 $main = MAIN::index();
+// var_dump($main);
 ?>
 <button class="btn btn-hidden" type="button" style="border: none;z-index:999;" href="?b=events"
   data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
@@ -73,6 +74,7 @@ $main = MAIN::index();
               <?php
 
                 foreach($main['today'] as $row){
+                  if(strftime('%Y-%m-%d', strtotime($row['start'])) <= strftime('%Y-%m-%d') AND strftime('%Y-%m-%d', strtotime($row['end'])) >= strftime('%Y-%m-%d')){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikethrough"';
                     }else{
@@ -87,6 +89,7 @@ $main = MAIN::index();
                   $teams = explode(';', $row['team']);
                       array_pop($teams);
                       foreach($teams as $team){
+
                         $color = GROUP::find($team)->color;
                         echo'<span class="badge text-dark" style="background-color:'. $color.';">'. $team .'</span> ';
                       }
@@ -94,17 +97,32 @@ $main = MAIN::index();
                   
                   echo'</td>';
                 echo'<td>'. $row['room'] .'</td>';
-                if($row['start'] != $row['end']){
-                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
-                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['end'])) .'</td>';
-                }
-                if($row['start'] == $row['end']){
-                  echo'<td colspan="2">'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
-                }
+                
+                          if(strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))){
+
+                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                              echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+                            }else{
+                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
+                            }
+                            if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
+                              echo'<td>'. strftime('%d.%m.%Y ', strtotime($row['end'])) .'</td>';
+                            }else{
+                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['end'])) .'</td>';
+                            }
+                          }
+                          if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end'])) ){
+                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                              echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
+                            }else{
+                              echo'<td colspan="2">'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
+                            }
+                          }
+                        }
               }
               echo'</tr>';
               ?>
-            </tbody>
+</tbody>
           </table>
         </div>
       </div>
@@ -162,7 +180,11 @@ $main = MAIN::index();
             <tbody>
               <?php
 
-                foreach($main['future'] as $row){
+                foreach($main['today'] as $row){
+                  $start = strftime('%Y-%m-%d', strtotime($row['start']));
+                  $end = strftime('%Y-%m-%d', strtotime($row['end']));
+                  $config = config::find('future_day');
+                  if($start <= strftime('%Y-%m-%d', strtotime($row['start'] . '+ '. $config->)) AND $start >= strftime('%Y-%m-%d', strtotime($row['start'] . '+ 1 days'))){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikethrough"';
                     }else{
@@ -183,15 +205,30 @@ $main = MAIN::index();
                   
                   echo'</td>
                 <td>'. $row['room'] .'</td>';
-                if($row['start'] != $row['end']){
-                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
-                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['end'])) .'</td>';
-                }
-                if($row['start'] == $row['end']){
-                  echo'<td colspan="2">'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
-                }
+                
+                          if(strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))){
+
+                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                              echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+                            }else{
+                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
+                            }
+                            if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
+                              echo'<td>'. strftime('%d.%m.%Y ', strtotime($row['end'])) .'</td>';
+                            }else{
+                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['end'])) .'</td>';
+                            }
+                          }
+                          if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))){
+                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                              echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
+                            }else{
+                              echo'<td colspan="2">'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
+                            }
+                          }
               echo'<td>'. date('j', strtotime($row['start']) - strtotime(date('Y-m-d').' +1 day')) .' Tagen</td>
               </tr>';
+                  }
                   }
               ?>
             </tbody>
@@ -202,8 +239,7 @@ $main = MAIN::index();
   </section>
 </article>
 <script>
-
-refresh_loop();
+  refresh_loop();
 show_clock();
 
 var i = 1

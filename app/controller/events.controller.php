@@ -11,7 +11,7 @@ class events{
     public static function index(){
 
         // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
-        $stmt = "SELECT * FROM `v_events` where start >= '". date('Y-m-d') ."' OR end >= '". date('Y-m-d') ."' ORDER BY start ASC";
+        $stmt = "SELECT * FROM `v_events` where `start` >= '". strftime('%Y-%m-%d') ."' OR `end` >= '". strftime('%Y-%m-%d') ."' ORDER BY start ASC";
 
         $data = connect::connection()->query($stmt);
         $result = $data->fetchAll();
