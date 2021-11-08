@@ -47,9 +47,9 @@ $main = MAIN::index();
           </h1>
         </nav>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="refresh">
         <div class="table-responsive">
-          <table class="table align-center table-striped table-hover" id="table-to-refresh">
+          <table class="table align-center table-striped table-hover">
             <thead>
               <tr>
                 <th scope="col">
@@ -134,9 +134,9 @@ $main = MAIN::index();
           </h2>
         </nav>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="refresh_2">
         <div class="table-responsive">
-          <table class="table table-striped table-hover" id="table-to-refresh">
+          <table class="table table-striped table-hover">
             <thead>
               <tr>
                 <th scope="col">
@@ -202,18 +202,16 @@ $main = MAIN::index();
   </section>
 </article>
 <script>
-  refresh_loop();
+
+refresh_loop();
 show_clock();
 
 var i = 1
 function refresh_loop(){
-    setTimeout(function(){
-        // console.log('Hallo');
-        window.location.reload();
-        i++;
-        if(i < 10){
-            refresh_loop();
-        }
+    setInterval(function(){
+        // window.location.reload();
+    $( "#refresh" ).load(window.location.href + " #refresh > *" );
+    $( "#refresh_2" ).load(window.location.href + " #refresh_2 > *" );
     }, <?php echo config::get('refresh')->value ?> * 1000)
 }
 

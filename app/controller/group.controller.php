@@ -29,7 +29,7 @@ class group{
             $exec->execute();
             return array(true, $input['group_alias']);
         }else{
-            return array(false, $alias);
+            return array(false, $alias->alias);
         }
 
     }
