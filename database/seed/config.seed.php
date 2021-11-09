@@ -56,7 +56,7 @@ class config extends admin_connect
                 1,
                 'Automatisches Neuladen',
                 'refresh',
-                '900',
+                '15',
                 'seconds'
             ),(
                 2,
