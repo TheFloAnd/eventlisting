@@ -53,3 +53,8 @@ tr.strikeout td:after {
 .header-secondary{
   font-size: 1.50em !important;
 }
+.main-card{
+  z-index: 999;
+  position: sticky;
+  top: 0;
+}

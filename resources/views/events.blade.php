@@ -190,7 +190,7 @@ $events = events::index();
           </div>
 
           <div class="tab-pane fade" id="nav-event_edit" role="tabpanel" aria-labelledby="nav-event_edit-tab">
-            <div class="table-responsive">
+            <div class="table-responsive" id="refresh_edit">
               <table class="table table-striped table-hover" id="table-to-refresh">
                 <thead>
                   <tr>
@@ -334,4 +334,11 @@ $events = events::index();
             start_date.value = end_date.value
           }
         };
+refresh_loop();
+function refresh_loop(){
+    setInterval(function(){
+        // window.location.reload();
+    $( "#refresh_edit" ).load(window.location.href + " #refresh_edit > *" );
+    }, <?php echo config::get('refresh')->value ?> * 1000)
+}
 </script>

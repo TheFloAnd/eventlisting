@@ -35,7 +35,7 @@ $result = MAIN::index();
 </div>
 
 <article class="row g-3 main">
-  <section class="col-12">
+  <section class="col-12 main-card">
     <div class="card">
       <div class="card-header">
         <nav class="navbar navbar-dark">
@@ -273,9 +273,6 @@ $result = MAIN::index();
 </article>
 <script>
   refresh_loop();
-show_clock();
-
-var i = 1
 function refresh_loop(){
     setInterval(function(){
         // window.location.reload();
@@ -283,7 +280,7 @@ function refresh_loop(){
     $( "#refresh_2" ).load(window.location.href + " #refresh_2 > *" );
     }, <?php echo config::get('refresh')->value ?> * 1000)
 }
-
+show_clock();
 function show_clock(){
   const today = new Date();
   let h = today.getHours();
