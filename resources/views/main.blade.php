@@ -39,9 +39,10 @@ $result = MAIN::index();
     <div class="card">
       <div class="card-header">
         <nav class="navbar navbar-dark">
+          <div id="refresh_title">
           <h1 class="header-primary">
             <?php echo config::get('name')->value; ?>
-          </h1>
+          </h1></div>
           <h1 class="header-primary">
             <?php echo  strftime('%A %d.%m.%Y - '); ?><span id="display_time"></span>
           </h1>
@@ -147,7 +148,7 @@ $result = MAIN::index();
   <section class="col-12">
     <div class="card">
       <div class="card-header">
-        <nav class="navbar navbar-dark">
+        <nav class="navbar navbar-dark" id="refresh_title_future">
           <h2 class="header-secondary">
             <?php echo$lang['event'] .' '. $lang['preview']; ?>
           </h2>
@@ -278,6 +279,8 @@ function refresh_loop(){
         // window.location.reload();
     $( "#refresh" ).load(window.location.href + " #refresh > *" );
     $( "#refresh_2" ).load(window.location.href + " #refresh_2 > *" );
+    $( "#refresh_title" ).load(window.location.href + " #refresh_title > *" );
+    $( "#refresh_title_future" ).load(window.location.href + " #refresh_title_future > *" );
     }, <?php echo config::get('refresh')->value ?> * 1000)
 }
 show_clock();

@@ -5,6 +5,8 @@
   position: absolute;
   top: 0;
   left: 0;
+  background-color: #000;
+  z-index: 9999 !important;
   &:focus {
     border: none !important;
     box-shadow: none !important;
@@ -57,4 +59,7 @@ tr.strikeout td:after {
   z-index: 999;
   position: sticky;
   top: 0;
+  & > .card{
+    border-bottom: 5px solid #000;
+  }
 }
