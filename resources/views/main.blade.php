@@ -2,7 +2,7 @@
 use app\controller\config;
 use app\controller\main;
 use app\controller\group;
-$main = MAIN::index();
+$result = MAIN::index();
 ?>
 <button class="btn btn-hidden" type="button" style="border: none;z-index:999;" href="?b=events"
   data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
@@ -47,9 +47,9 @@ $main = MAIN::index();
           </h1>
         </nav>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="refresh">
         <div class="table-responsive">
-          <table class="table align-center table-striped table-hover" id="table-to-refresh">
+          <table class="table align-center table-striped table-hover">
             <thead>
               <tr>
                 <th scope="col">
@@ -72,7 +72,9 @@ $main = MAIN::index();
             <tbody>
               <?php
 
-                foreach($main['today'] as $row){
+                foreach($result as $row){
+                  if(strftime('%Y-%m-%d', strtotime($row['start'])) <= strftime('%Y-%m-%d')){
+                    if(strftime('%Y-%m-%d', strtotime($row['end'])) >= strftime('%Y-%m-%d')){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikethrough"';
                     }else{
@@ -87,6 +89,7 @@ $main = MAIN::index();
                   $teams = explode(';', $row['team']);
                       array_pop($teams);
                       foreach($teams as $team){
+
                         $color = GROUP::find($team)->color;
                         echo'<span class="badge text-dark" style="background-color:'. $color.';">'. $team .'</span> ';
                       }
@@ -94,14 +97,30 @@ $main = MAIN::index();
                   
                   echo'</td>';
                 echo'<td>'. $row['room'] .'</td>';
-                if($row['start'] != $row['end']){
-                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
-                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['end'])) .'</td>';
-                }
-                if($row['start'] == $row['end']){
-                  echo'<td colspan="2">'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
-                }
+                
+                          if(strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))){
+
+                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                              echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+                            }else{
+                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
+                            }
+                            if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
+                              echo'<td>'. strftime('%d.%m.%Y ', strtotime($row['end'])) .'</td>';
+                            }else{
+                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['end'])) .'</td>';
+                            }
+                          }
+                          if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end'])) ){
+                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                              echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
+                            }else{
+                              echo'<td colspan="2">'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
+                            }
+                          }
+                        }
               }
+            }
               echo'</tr>';
               ?>
             </tbody>
@@ -134,9 +153,9 @@ $main = MAIN::index();
           </h2>
         </nav>
       </div>
-      <div class="card-body">
+      <div class="card-body" id="refresh_2">
         <div class="table-responsive">
-          <table class="table table-striped table-hover" id="table-to-refresh">
+          <table class="table table-striped table-hover">
             <thead>
               <tr>
                 <th scope="col">
@@ -161,8 +180,12 @@ $main = MAIN::index();
             </thead>
             <tbody>
               <?php
-
-                foreach($main['future'] as $row){
+                $config = config::get('future_day');
+                foreach($result as $row){
+                  $start = strftime('%Y-%m-%d', strtotime($row['start']));
+                  $end = strftime('%Y-%m-%d', strtotime($row['end']));
+                  if($start >= strftime('%Y-%m-%d', strtotime('+ 1 day'))){
+                  if($start <= strftime('%Y-%m-%d', strtotime(' + '. $config->value .' '. $config->time_unit))){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikethrough"';
                     }else{
@@ -183,15 +206,31 @@ $main = MAIN::index();
                   
                   echo'</td>
                 <td>'. $row['room'] .'</td>';
-                if($row['start'] != $row['end']){
-                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
-                  echo'<td>'. strftime('%a %d.%m.%Y', strtotime($row['end'])) .'</td>';
-                }
-                if($row['start'] == $row['end']){
-                  echo'<td colspan="2">'. strftime('%a %d.%m.%Y', strtotime($row['start'])) .'</td>';
-                }
-              echo'<td>'. date('j', strtotime($row['start']) - strtotime(date('Y-m-d').' +1 day')) .' Tagen</td>
+                
+                          if(strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))){
+
+                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                              echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+                            }else{
+                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
+                            }
+                            if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
+                              echo'<td>'. strftime('%d.%m.%Y ', strtotime($row['end'])) .'</td>';
+                            }else{
+                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['end'])) .'</td>';
+                            }
+                          }
+                          if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))){
+                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                              echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
+                            }else{
+                              echo'<td colspan="2">'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
+                            }
+                          }
+              echo'<td>'. date('j', strtotime($row['start']) - strtotime(strftime('%Y-%m-%d').' +1 day')) .' Tagen</td>
               </tr>';
+                  }
+                }
                   }
               ?>
             </tbody>
@@ -207,13 +246,10 @@ show_clock();
 
 var i = 1
 function refresh_loop(){
-    setTimeout(function(){
-        // console.log('Hallo');
-        window.location.reload();
-        i++;
-        if(i < 10){
-            refresh_loop();
-        }
+    setInterval(function(){
+        // window.location.reload();
+    $( "#refresh" ).load(window.location.href + " #refresh > *" );
+    $( "#refresh_2" ).load(window.location.href + " #refresh_2 > *" );
     }, <?php echo config::get('refresh')->value ?> * 1000)
 }
 
