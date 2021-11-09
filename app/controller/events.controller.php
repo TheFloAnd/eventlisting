@@ -78,8 +78,8 @@ class events{
             $end_date = $input['end_date'];
 
             for($i= 1; $i <= $input['repeats']; $i++){
-                $start_date = strftime('%Y-%m-%d', strtotime($start_date . ' +'. $input['repeat_days'] .' Days'));
-                $end_date = strftime('%Y-%m-%d', strtotime($end_date . ' +'. $input['repeat_days'] .' Days'));
+                $start_date = strftime('%Y-%m-%d %H:%M', strtotime($start_date . ' +'. $input['repeat_days'] .' Days'));
+                $end_date = strftime('%Y-%m-%d %H:%M', strtotime($end_date . ' +'. $input['repeat_days'] .' Days'));
 
                 $stmt_repeat = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`,`repeat_parent`, `room`) VALUES ('". $input['event'] ."', '". $group ."', '". $start_date ."', '". $end_date ."', '". $result_found['id'] ."', '". $input['room'] ."')";
         

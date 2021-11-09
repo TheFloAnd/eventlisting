@@ -256,11 +256,26 @@ $events = events::index();
                             }
                           }
                           if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))){
-                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                              echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
-                            }else{
-                              echo'<td colspan="2">'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
-                            }
+                          if(strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))){
+                          
+                          if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                          echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
+                          }else{
+                          echo'<td colspan="2">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+                          }
+                          }
+                          if(strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))){
+                          if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                          echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+                          }else{
+                          echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+                          }
+                          if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
+                          echo'<td>'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
+                          }else{
+                          echo'<td>'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
+                          }
+                          }
                           }
                           echo'<td>
                             <a href="?b=events_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
