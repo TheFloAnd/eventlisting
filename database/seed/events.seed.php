@@ -68,47 +68,47 @@ class events extends admin_connect
             ;"
             );
 
-            $pdo->query(
-                "CREATE VIEW IF NOT EXISTS  `v_events_future`  AS  select 
-                `events`.`id` AS `id`,
-                `events`.`not_applicable` AS `not_applicable`,
-                `events`.`event` AS `event`,
-                `events`.`team` AS `team`,
-                `events`.`start` AS `start`,
-                `events`.`end` AS `end`,
-                `events`.`repeat` AS `repeat`,
-                `events`.`repeat_parent` AS `repeat_parent`,
-                `events`.`room` AS `room`
-            from `events` 
-                where `start` <= curdate() + interval (
-                    select `config`.`value` from `config` 
-                        where `config`.`setting` = 'future_day'
-                    ) day 
-                and 
-                    `start` >= curdate() + interval 1 day 
-                and `deleted_at` is null 
-            order by `start`
-        ;"
-            );
+        //     $pdo->query(
+        //         "CREATE VIEW IF NOT EXISTS  `v_events_future`  AS  select 
+        //         `events`.`id` AS `id`,
+        //         `events`.`not_applicable` AS `not_applicable`,
+        //         `events`.`event` AS `event`,
+        //         `events`.`team` AS `team`,
+        //         `events`.`start` AS `start`,
+        //         `events`.`end` AS `end`,
+        //         `events`.`repeat` AS `repeat`,
+        //         `events`.`repeat_parent` AS `repeat_parent`,
+        //         `events`.`room` AS `room`
+        //     from `events` 
+        //         where `start` <= curdate() + interval (
+        //             select `config`.`value` from `config` 
+        //                 where `config`.`setting` = 'future_day'
+        //             ) day 
+        //         and 
+        //             `start` >= curdate() + interval 1 day 
+        //         and `deleted_at` is null 
+        //     order by `start`
+        // ;"
+        //     );
 
-            $pdo->query(
-                "CREATE VIEW IF NOT EXISTS  `v_events_current`  AS  select 
-                `events`.`id` AS `id`,
-                `events`.`not_applicable` AS `not_applicable`,
-                `events`.`event` AS `event`,
-                `events`.`team` AS `team`,
-                `events`.`start` AS `start`,
-                `events`.`end` AS `end`,
-                `events`.`repeat` AS `repeat`,
-                `events`.`repeat_parent` AS `repeat_parent`,
-                `events`.`room` AS `room`
-            from `events` 
-                where `deleted_at` is null 
-                and `start` <= curdate() 
-                and `end` >= curdate() 
-            order by `start`
-        ;"
-            );
+        //     $pdo->query(
+        //         "CREATE VIEW IF NOT EXISTS  `v_events_current`  AS  select 
+        //         `events`.`id` AS `id`,
+        //         `events`.`not_applicable` AS `not_applicable`,
+        //         `events`.`event` AS `event`,
+        //         `events`.`team` AS `team`,
+        //         `events`.`start` AS `start`,
+        //         `events`.`end` AS `end`,
+        //         `events`.`repeat` AS `repeat`,
+        //         `events`.`repeat_parent` AS `repeat_parent`,
+        //         `events`.`room` AS `room`
+        //     from `events` 
+        //         where `deleted_at` is null 
+        //         and `start` <= curdate() 
+        //         and `end` >= curdate() 
+        //     order by `start`
+        // ;"
+        //     );
             return;
         } catch (\PDOException $e) {
             echo "PDOException: " . $e->getMessage();

@@ -10,7 +10,6 @@ class events{
     
     public static function index(){
 
-        // $stmt = "SELECT * FROM `v_events` where start <= '". date("Y-m-d") ."' AND end >= '".date("Y-m-d")."' ORDER BY start ASC";
         $stmt = "SELECT * FROM `v_events` where `start` >= '". strftime('%Y-%m-%d') ."' OR `end` >= '". strftime('%Y-%m-%d') ."' ORDER BY start ASC";
 
         $data = connect::connection()->query($stmt);
@@ -79,8 +78,8 @@ class events{
             $end_date = $input['end_date'];
 
             for($i= 1; $i <= $input['repeats']; $i++){
-                $start_date = date('Y-m-d', strtotime($start_date . ' +'. $input['repeat_days'] .' Days'));
-                $end_date = date('Y-m-d', strtotime($end_date . ' +'. $input['repeat_days'] .' Days'));
+                $start_date = strftime('%Y-%m-%d', strtotime($start_date . ' +'. $input['repeat_days'] .' Days'));
+                $end_date = strftime('%Y-%m-%d', strtotime($end_date . ' +'. $input['repeat_days'] .' Days'));
 
                 $stmt_repeat = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`,`repeat_parent`, `room`) VALUES ('". $input['event'] ."', '". $group ."', '". $start_date ."', '". $end_date ."', '". $result_found['id'] ."', '". $input['room'] ."')";
         
@@ -125,7 +124,7 @@ class events{
     }
 
     public static function delete($input){
-        $stmt = "UPDATE `events` SET `deleted_at`= '". date('Y-m-d H:i:s') ."' WHERE id = '". $input['event_id'] ."'";
+        $stmt = "UPDATE `events` SET `deleted_at`= '". strftime('%Y-%m-%d %H:%M:%S') ."' WHERE id = '". $input['event_id'] ."'";
 
         $exec = connect::connection()->prepare($stmt);
         $exec->execute();
@@ -134,11 +133,12 @@ class events{
     }
     public static function delete_repeat($input){
         $event = events::find($input['event_id']);
-        $id = $event->id ? $event->id : $event->repeat_parent;
+        $id = $event->repeat_parent ? $event->repeat_parent : $event->id;
         $stmt = "UPDATE `events` SET 
-            `deleted_at` = '". date('Y-m-d H:i:s') ."' 
-        WHERE id = '". $event->id ."'
+            `deleted_at` = '".  strftime('%Y-%m-%d %H:%M:%S') ."' 
+        WHERE id = '". $id ."'
             OR `repeat_parent` = ". $id ."
+            OR `id` = ". $event->id ."
             AND `start` > '". $event->start ."'";
         var_dump($stmt);
         $exec = connect::connection()->prepare($stmt);

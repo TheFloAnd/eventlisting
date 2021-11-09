@@ -116,7 +116,7 @@ $events = events::index();
                   <fieldset>
                     <div class="form-floating">
                       <input type="datetime-local" class="form-control" name="start_date" id="start_date"
-                        value="<?php echo date(" Y-m-d H:i") ?>" required>
+                        value="<?php echo strftime('%Y-%m-%d %H:%M') ?>" required>
                       <label for="start_date">
                         <?php echo$lang['start'] .' '. $lang['date'] ?>
                         <span style="color: red;">
@@ -130,7 +130,7 @@ $events = events::index();
                   <fieldset>
                     <div class="form-floating">
                       <input type="datetime-local" class="form-control" name="end_date" id="end_date"
-                        value="<?php echo date(" Y-m-d H:i") ?>" required>
+                        value="<?php echo strftime("%Y-%m-%d %H:%M") ?>" required>
                       <label for="end_date">
                         <?php echo$lang['end'] .' '. $lang['date'] ?>
                         <span style="color: red;">
@@ -215,6 +215,9 @@ $events = events::index();
                 <tbody>
                   <?php
                         foreach($events['result'] as $row){
+                          $start = strftime('%Y-%m-%d', strtotime($row['start']));
+                  $end = strftime('%Y-%m-%d', strtotime($row['end']));
+                          if($start >= strftime('%Y-%m-%d') OR $end >= strftime('%Y-%m-%d')){
                         if($row['not_applicable'] == 1){
                           $disabled = 'class="table-danger strikeout"';
                         }else{
@@ -265,6 +268,7 @@ $events = events::index();
                             </a>
                           </td>';
                         }
+                      }
                         echo'</tr>';
                         ?>
                 </tbody>

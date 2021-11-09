@@ -2,8 +2,7 @@
 use app\controller\config;
 use app\controller\main;
 use app\controller\group;
-$main = MAIN::index();
-// var_dump($main);
+$result = MAIN::index();
 ?>
 <button class="btn btn-hidden" type="button" style="border: none;z-index:999;" href="?b=events"
   data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
@@ -73,8 +72,9 @@ $main = MAIN::index();
             <tbody>
               <?php
 
-                foreach($main['today'] as $row){
-                  if(strftime('%Y-%m-%d', strtotime($row['start'])) <= strftime('%Y-%m-%d') AND strftime('%Y-%m-%d', strtotime($row['end'])) >= strftime('%Y-%m-%d')){
+                foreach($result as $row){
+                  if(strftime('%Y-%m-%d', strtotime($row['start'])) <= strftime('%Y-%m-%d')){
+                    if(strftime('%Y-%m-%d', strtotime($row['end'])) >= strftime('%Y-%m-%d')){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikethrough"';
                     }else{
@@ -120,9 +120,10 @@ $main = MAIN::index();
                           }
                         }
               }
+            }
               echo'</tr>';
               ?>
-</tbody>
+            </tbody>
           </table>
         </div>
       </div>
@@ -179,12 +180,12 @@ $main = MAIN::index();
             </thead>
             <tbody>
               <?php
-
-                foreach($main['today'] as $row){
+                $config = config::get('future_day');
+                foreach($result as $row){
                   $start = strftime('%Y-%m-%d', strtotime($row['start']));
                   $end = strftime('%Y-%m-%d', strtotime($row['end']));
-                  $config = config::find('future_day');
-                  if($start <= strftime('%Y-%m-%d', strtotime($row['start'] . '+ '. $config->)) AND $start >= strftime('%Y-%m-%d', strtotime($row['start'] . '+ 1 days'))){
+                  if($start >= strftime('%Y-%m-%d', strtotime('+ 1 day'))){
+                  if($start <= strftime('%Y-%m-%d', strtotime(' + '. $config->value .' '. $config->time_unit))){
                     if($row['not_applicable'] == 1){
                       $disabled = 'class="table-danger strikethrough"';
                     }else{
@@ -226,9 +227,10 @@ $main = MAIN::index();
                               echo'<td colspan="2">'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
                             }
                           }
-              echo'<td>'. date('j', strtotime($row['start']) - strtotime(date('Y-m-d').' +1 day')) .' Tagen</td>
+              echo'<td>'. date('j', strtotime($row['start']) - strtotime(strftime('%Y-%m-%d').' +1 day')) .' Tagen</td>
               </tr>';
                   }
+                }
                   }
               ?>
             </tbody>
