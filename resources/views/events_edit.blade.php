@@ -129,7 +129,7 @@ $current_group = group::find($data['result']->team);
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%d %H:%M', strtotime($data['result']->start)) ?>" required>
+                                    <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="<?php echo strftime('%d.%m.%Y %H:%M', strtotime($data['result']->start)) ?>" required>
                                     <label for="start_date">
                                         <?php echo$lang['start'] .' '. $lang['date'] ?>
                                         <span style="color: red;">
@@ -142,7 +142,7 @@ $current_group = group::find($data['result']->team);
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="<?php  echo strftime('%Y-%m-%d %H:%M', strtotime($data['result']->end)) ?>" required>
+                                    <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="<?php  echo strftime('%d.%m.%Y %H:%M', strtotime($data['result']->end)) ?>" required>
                                     <label for="end_date">
                                         <?php echo$lang['end'] .' '. $lang['date'] ?>
                                         <span style="color: red;">
