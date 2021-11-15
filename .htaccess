@@ -1,0 +1,4 @@
+
+# Fehler Meldungen
+
+ErrorDocument 404 /resources/layout/error/404.error.php

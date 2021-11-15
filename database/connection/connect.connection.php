@@ -1,5 +1,6 @@
 <?php
 namespace database\connection;
+
 use \PDO;
 use database\seed\user;
 use database\seed\config;

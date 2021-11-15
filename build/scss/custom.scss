@@ -45,21 +45,21 @@ tr.strikeout td:after {
   content: "\00B7";
   font-size: 1em;
 }
-.main *{
+.main * {
   font-size: 1.055em;
 }
 
-.header-primary{
+.header-primary {
   font-size: 2em !important;
 }
-.header-secondary{
-  font-size: 1.50em !important;
+.header-secondary {
+  font-size: 1.5em !important;
 }
-.main-card{
+.main-card {
   z-index: 999;
   position: sticky;
   top: 0;
-  & > .card{
+  & > .card {
     border-bottom: 5px solid #000;
   }
 }

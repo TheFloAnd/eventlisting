@@ -19,7 +19,7 @@ date_default_timezone_set(date_default_timezone_get());
 
 setlocale(LC_ALL, 'de_DE.utf8') or die('Locale not installed');
 
-if(strftime('%a - %H') == 'Mo - 08'){
+if(strftime('%H:%M') == '08:00'){
   system::get_updates();
   updates::get_updates();
 }

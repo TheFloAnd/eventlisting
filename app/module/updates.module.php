@@ -19,6 +19,8 @@ class updates{
             $path = __DIR__ . '/../../';
             exec("cd ". $path);
             exec("git pull https://github.com/TheFloAnd/eventlisting.git production");
+            
+            header("Refresh:0");
         }
         return;
     }
