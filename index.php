@@ -6,10 +6,13 @@ use app\module\notification;
 use app\module\updates;
 use app\module\system;
 
+use app\web\Route;
+
 require __DIR__.'/app/conf/config.php';
 require __DIR__.'/init.php';
+require __DIR__.'/app/lang/lang_de.php';
 
-require './app/lang/lang_de.php';
+define('lang', $lang['de']);
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1); 
@@ -19,16 +22,23 @@ date_default_timezone_set(date_default_timezone_get());
 
 setlocale(LC_ALL, 'de_DE.utf8') or die('Locale not installed');
 
+if(isset($_GET['b'])){
+  define('blade',$_GET['b']);
+$blade = $_GET['b'];
+}
+// Define a global basepath
+Route::add('/', function() {
+  define('blade','main');
+  $blade = 'main';
+});
+
+// Run the Router with the given Basepath
+Route::run();
+include __DIR__.'/resources/layout/template.php';
+
 if(strftime('%H:%M') == '08:00'){
   system::get_updates();
   updates::get_updates();
-}
-
-
-if(isset($_GET['b'])){
-  define('blade',$_GET['b']);
-}else{
-  define('blade','main');
 }
 
 if(isset($_POST['submit_event'])){
@@ -78,4 +88,3 @@ if(isset($_POST['submit_edit_setting'])){
     notification::success('Einstellung wurde Erfolgreich geändert!');
   }
 }
-require __DIR__.'/resources/layout/template.php';

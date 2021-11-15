@@ -7,30 +7,30 @@ $setting = config::find($_GET['id']);
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <a href="?b=main">
+<a href="/">
           <span class="navbar-text">
-            <?php echo$lang['index'] ?>
+<?php echo lang['index'] ?>
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=events">
           <span class="navbar-text">
-            <?php echo$lang['events'] ?>
+<?php echo lang['events'] ?>
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=groups">
           <span class="navbar-text">
-            <?php echo$lang['groups'] ?>
+<?php echo lang['groups'] ?>
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=settings">
           <span class="navbar-text">
-            <?php echo$lang['settings'] ?>
+<?php echo lang['settings'] ?>
           </span>
         </a>
       </div>
@@ -53,10 +53,10 @@ $setting = config::find($_GET['id']);
               <fieldset id="input_name">
                 <div class="form-floating">
                   <input type="text" class="form-control" name="setting_name" id="setting_name"
-                    placeholder="<?php echo ucwords($setting->view) ?: ucwords($lang['settings']) ?>"
+placeholder="<?php echo ucwords($setting->view) ?: ucwords( lang['settings']) ?>"
                     value="<?php echo ucwords($setting->view) ?>" required disabled>
                   <label for="setting_name">
-                    <?php echo$lang['settings'] ?>
+<?php echo lang['settings'] ?>
                     <span style="color: red;">
                       *
                     </span>
@@ -73,7 +73,7 @@ $setting = config::find($_GET['id']);
                       <div class="form-floating">
                         <input type="text" class="form-control" name="setting_value" id="setting_value" placeholder="'. $setting->value .'" value="'. $setting->value .'" required>
                         <label for="setting_value">
-                          '. $lang['value'] .'
+'. lang['value'] .'
                           <span style="color: red;">
                             *
                           </span>
@@ -106,7 +106,7 @@ $setting = config::find($_GET['id']);
                       <div class="form-floating">
                         <input type="text" class="form-control" name="setting_value" id="setting_value" placeholder="'. $setting->value.'" value="'. $setting->value .'" required>
                         <label for="setting_value">
-                          '. $lang['value'] .'
+'. lang['value'] .'
                           <span style="color: red;">
                             *
                           </span>
@@ -123,14 +123,14 @@ $setting = config::find($_GET['id']);
                   <div class="form-group">
                     <button type="submit" class="btn btn-outline-success w-100" name="submit_edit_setting"
                       value="submit">
-                      <?php echo$lang['update'] ?>
+<?php echo lang['update'] ?>
                     </button>
                   </div>
                 </div>
                 <div class="col-4">
                   <div class="form-group">
                     <a type="button" class="btn btn-outline-secondary w-100" href="?b=settings">
-                      <?php echo$lang['back'] ?>
+<?php echo lang['back'] ?>
                     </a>
                   </div>
                 </div>

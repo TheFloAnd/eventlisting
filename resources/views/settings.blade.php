@@ -2,23 +2,23 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <a href="?b=main">
+<a href="/">
           <span class="navbar-text">
-            <?php echo$lang['index'] ?>
+<?php echo lang['index'] ?>
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=events">
           <span class="navbar-text">
-            <?php echo$lang['events'] ?>
+<?php echo lang['events'] ?>
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=groups">
           <span class="navbar-text">
-            <?php echo$lang['groups'] ?>
+<?php echo lang['groups'] ?>
           </span>
         </a>
       </div>
@@ -33,8 +33,12 @@
                   <table class="table table-striped table-hover" id="table-to-refresh">
                       <thead>
                         <tr>
-                          <th scope="col"><?php echo$lang['settings'] ?></th>
-                          <th scope="col"><?php echo$lang['value'] ?></th>
+<th scope="col">
+                            <?php echo lang['settings'] ?>
+                          </th>
+                          <th scope="col">
+                            <?php echo lang['value'] ?>
+                          </th>
                           <th scope="col"></th>
                         </tr>
                       </thead>
