@@ -8,27 +8,20 @@ use app\module\system;
 
 require __DIR__.'/app/conf/config.php';
 require __DIR__.'/init.php';
+require __DIR__ . '/app/lang/lang_de.php';
+define('lang', $lang['de']);
 
-require './app/lang/lang_de.php';
-
-error_reporting(E_ALL);
-ini_set("display_errors", 1); 
-ini_set('error_reporting', E_ALL);
-
-date_default_timezone_set(date_default_timezone_get());
-
-setlocale(LC_ALL, 'de_DE.utf8') or die('Locale not installed');
+if(isset($_GET['b'])){
+  define('blade',$_GET['b']);
+$blade = $_GET['b'];
+}else{
+  define('blade','main');
+}
+include __DIR__.'/resources/layout/template.php';
 
 if(strftime('%H:%M') == '08:00'){
   system::get_updates();
   updates::get_updates();
-}
-
-
-if(isset($_GET['b'])){
-  define('blade',$_GET['b']);
-}else{
-  define('blade','main');
 }
 
 if(isset($_POST['submit_event'])){
@@ -78,4 +71,3 @@ if(isset($_POST['submit_edit_setting'])){
     notification::success('Einstellung wurde Erfolgreich geändert!');
   }
 }
-require __DIR__.'/resources/layout/template.php';

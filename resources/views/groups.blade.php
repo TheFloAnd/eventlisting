@@ -6,23 +6,23 @@ $group = GROUP::index();
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <a href="?b=main">
+<a href="/">
           <span class="navbar-text">
-            <?php echo$lang['index'] ?>
+<?php echo lang['index'] ?>
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=events">
           <span class="navbar-text">
-            <?php echo$lang['events'] ?>
+<?php echo lang['events'] ?>
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=settings">
           <span class="navbar-text">
-            <?php echo$lang['settings'] ?>
+<?php echo lang['settings'] ?>
           </span>
         </a>
       </div>
@@ -38,13 +38,13 @@ $group = GROUP::index();
                     <div class="nav nav-tabs justify-content-evenly" id="nav-tab" role="tablist">
 
                         <button class="nav-link col" id="nav-group_create-tab" data-bs-toggle="tab" data-bs-target="#nav-group_create" type="button" role="tab" aria-controls="nav-group_create" aria-selected="false">
-                            <?php echo$lang['group'] .' '. $lang['add'] ?>
+<?php echo lang['group'] .' '.  lang['add'] ?>
                         </button>
                         <button class="nav-link col active" id="nav-active_group-tab" data-bs-toggle="tab" data-bs-target="#nav-active_group" type="button" role="tab" aria-controls="nav-active_group" aria-selected="true">
-                            <?php echo$lang['active'] .' '. $lang['groups'] ?>
+<?php echo lang['active'] .' '.  lang['groups'] ?>
                         </button>
                         <button class="nav-link col" id="nav-deactivated_group-tab" data-bs-toggle="tab" data-bs-target="#nav-deactivated_group" type="button" role="tab" aria-controls="nav-deactivated_group" aria-selected="false">
-                            <?php echo$lang['inactive'] .' '. $lang['groups'] ?>
+<?php echo lang['inactive'] .' '.  lang['groups'] ?>
                         </button>
                     </div>
                 </nav>
@@ -56,9 +56,10 @@ $group = GROUP::index();
                   <div class="col-md-10">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="group_name" id="group_name" placeholder="<?php echo$lang['groups'] .' '. $lang['name'] ?>" required>
+<input type="text" class="form-control" name="group_name" id="group_name"
+                          placeholder="<?php echo lang['groups'] .' '.  lang['name'] ?>" required>
                         <label for="group_name">
-                          <?php echo$lang['groups'] .' '. $lang['name'] ?>
+<?php echo lang['groups'] .' '.  lang['name'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -69,9 +70,10 @@ $group = GROUP::index();
                   <div class="col-md-8">
                     <fieldset>
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="<?php echo$lang['groups'] .' '. $lang['alias'] ?>" required>
+<input type="text" class="form-control" name="group_alias" id="group_alias"
+                          placeholder="<?php echo lang['groups'] .' '.  lang['alias'] ?>" required>
                         <label for="group_alias">
-                          <?php echo$lang['groups'] .' '. $lang['alias'] ?>
+<?php echo lang['groups'] .' '.  lang['alias'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -84,7 +86,7 @@ $group = GROUP::index();
                     <fieldset>
                       <div class="form-group">
                         <label for="floatingInput">
-                          <?php echo$lang['groups'] .' '. $lang['color'] ?>
+<?php echo lang['groups'] .' '.  lang['color'] ?>
                           <span style="color: red;">
                             *
                           </span>
@@ -97,7 +99,7 @@ $group = GROUP::index();
                   <div class="col-8">
                     <div class="form-group">
                       <button type="submit" class="btn btn-outline-success w-100" name="submit_group" value="submit">
-                        <?php echo$lang['add'] ?>
+<?php echo lang['add'] ?>
                       </button>
                     </div>
                   </div>
@@ -109,9 +111,15 @@ $group = GROUP::index();
                             <table class="table table-striped table-hover" id="table-to-refresh">
                                 <thead>
                                     <tr>
-                                    <th scope="col"><?php echo$lang['alias'] ?></th>
-                                    <th scope="col"><?php echo$lang['name'] ?></th>
-                                    <th scope="col"><?php echo$lang['color'] ?></th>
+<th scope="col">
+                                      <?php echo lang['alias'] ?>
+                                    </th>
+                                    <th scope="col">
+                                      <?php echo lang['name'] ?>
+                                    </th>
+                                    <th scope="col">
+                                      <?php echo lang['color'] ?>
+                                    </th>
                                     <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -141,9 +149,15 @@ $group = GROUP::index();
                             <table class="table table-striped table-hover" id="table-to-refresh">
                                 <thead>
                                     <tr>
-                                    <th scope="col"><?php echo$lang['alias'] ?></th>
-                                    <th scope="col"><?php echo$lang['name'] ?></th>
-                                    <th scope="col"><?php echo$lang['color'] ?></th>
+<th scope="col">
+                                      <?php echo lang['alias'] ?>
+                                    </th>
+                                    <th scope="col">
+                                      <?php echo lang['name'] ?>
+                                    </th>
+                                    <th scope="col">
+                                      <?php echo lang['color'] ?>
+                                    </th>
                                     <th scope="col"></th>
                                     </tr>
                                 </thead>
