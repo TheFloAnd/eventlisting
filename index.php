@@ -6,8 +6,6 @@ use app\module\notification;
 use app\module\updates;
 use app\module\system;
 
-use app\web\Route;
-
 require __DIR__.'/app/conf/config.php';
 require __DIR__.'/init.php';
 require __DIR__ . '/app/lang/lang_de.php';
@@ -16,15 +14,9 @@ define('lang', $lang['de']);
 if(isset($_GET['b'])){
   define('blade',$_GET['b']);
 $blade = $_GET['b'];
-}
-// Define a global basepath
-Route::add('/', function() {
+}else{
   define('blade','main');
-  $blade = 'main';
-});
-
-// Run the Router with the given Basepath
-Route::run();
+}
 include __DIR__.'/resources/layout/template.php';
 
 if(strftime('%H:%M') == '08:00'){
