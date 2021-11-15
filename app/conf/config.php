@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Datenbank
  */
@@ -13,7 +14,25 @@ define("db", array(
 /*
 * Settings
 */
-// setlocale(LC_ALL, 'de_DE');
+
+error_reporting(E_ALL);
+ini_set("display_errors", 1); 
+ini_set('error_reporting', E_ALL);
+
+/*
+* Language
+*/
+
+setlocale(LC_ALL, 'de_DE.utf8');
+
+// require __DIR__ . '/app/lang/lang_de.php';
+// define('lang', $lang['de']);
+
+/*
+* Time
+*/
+date_default_timezone_set(date_default_timezone_get());
+
 /*
  * Server path
  */
