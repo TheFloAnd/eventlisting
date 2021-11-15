@@ -5,6 +5,7 @@ namespace app\controller;
 use database\connection\connect;
 use app\controller\config;
 use app\controller\group;
+use \PDO;
 
 class events{
     
@@ -17,7 +18,7 @@ class events{
 
         $stmt_proposals = "SELECT `event`, COUNT(`event`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
         $data_proposals = connect::connection()->query($stmt_proposals);
-        $proposals = $data_proposals->fetchAll();
+        $proposals = $data_proposals->fetchAll(PDO::FETCH_CLASS);
 
         $group = GROUP::index();
         $group = $group['active'];

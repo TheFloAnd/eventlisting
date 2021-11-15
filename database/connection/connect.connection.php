@@ -15,10 +15,13 @@ use database\seed\teams;
             $user = db['user'];
             $password = db['password'];
             $database = db['database'];
+            $options = [
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
+            ];
 
             try{
 
-                $pdo = new PDO("mysql:host=".$server.";dbname=".$database.";charset=utf8", $user, $password);
+                $pdo = new PDO("mysql:host=".$server.";dbname=".$database.";charset=utf8", $user, $password, $options);
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return$pdo;
             }

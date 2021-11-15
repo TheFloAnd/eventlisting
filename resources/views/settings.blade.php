@@ -49,7 +49,7 @@
                         echo'
                             <tr>
                               <td>';
-              switch ($row['time_unit']){
+switch ($row->time_unit){
                 case 'day':
                   $output_time_unit = '(in Tagen)';
                   break;
@@ -62,13 +62,13 @@
                 default:
                   $output_time_unit = '';
                 }
-                                echo ucwords($row['view']) .' '. $output_time_unit;
+echo ucwords($row->view) .' '. $output_time_unit;
                                 echo'</td>
                               <td>
-                                '. $row['value'] .'
+'. $row->value .'
                               </td>';
                           echo'<td>
-                            <a href="?b=settings_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
+<a href="?b=settings_edit&id='. $row->id .'" type="button" class="btn btn-sm btn-secondary position-relative">
                               <i class="bi bi-gear-wide"></i>
                             </a>
                           </td>';

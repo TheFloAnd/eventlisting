@@ -17,7 +17,6 @@ $blade = $_GET['b'];
 }else{
   define('blade','main');
 }
-include __DIR__.'/resources/layout/template.php';
 
 if(strftime('%H:%M') == '08:00'){
   system::get_updates();
@@ -45,7 +44,7 @@ if(isset($_POST['submit_delete_event'])){
   }else{
     events::delete($_POST);
   }
-    header('location:?b=events');
+    header('Location: ?b=events');
 }
 
 if(isset($_POST['submit_group'])){
@@ -71,3 +70,5 @@ if(isset($_POST['submit_edit_setting'])){
     notification::success('Einstellung wurde Erfolgreich geändert!');
   }
 }
+
+include __DIR__.'/resources/layout/template.php';

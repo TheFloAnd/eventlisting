@@ -85,7 +85,7 @@ $current_group = group::find($data['result']->team);
                                     <?php
 
                                     foreach($data['proposals'] as $row){
-                                        echo'<option value="'. $row['event'] .'">';
+echo'<option value="'. $row->event .'">';
                                     }
                                     ?>
                                     </datalist>
@@ -107,10 +107,10 @@ $current_group = group::find($data['result']->team);
                                 $teams = explode(';', $data['result']->team );
                                 array_pop($teams);
                                 foreach($data['group'] as $row){
-                                    if(in_array($row['alias'], $teams)){
-                                        echo'<option value="'. $row['alias'] .'" selected>'. $row['name'] .' ('. $row['alias'] .')</option>';
+if(in_array($row->alias, $teams)){
+echo'<option value="'. $row->alias .'" selected>'. $row->name .' ('. $row->alias .')</option>';
                                     }else{
-                                        echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
+echo'<option value="'. $row->alias .'">'. $row->name .' ('. $row->alias .')</option>';
                                     }
                                 }
                             ?>

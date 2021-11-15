@@ -74,9 +74,9 @@ $result = MAIN::index();
               <?php
 
                 foreach($result as $row){
-                  if(strftime('%Y-%m-%d', strtotime($row['start'])) <= strftime('%Y-%m-%d')){
-                    if(strftime('%Y-%m-%d', strtotime($row['end'])) >= strftime('%Y-%m-%d')){
-                    if($row['not_applicable'] == 1){
+if(strftime('%Y-%m-%d', strtotime($row->start)) <= strftime('%Y-%m-%d')){
+                    if(strftime('%Y-%m-%d', strtotime($row->end)) >= strftime('%Y-%m-%d')){
+                    if($row->not_applicable == 1){
                       $disabled = 'class="table-danger strikethrough"';
                     }else{
                         $disabled = '';
@@ -84,10 +84,10 @@ $result = MAIN::index();
 
                     echo'
               <tr '.$disabled.'>
-                <td>'. $row['event'] .'</td>';
+<td>'. $row->event .'</td>';
                 echo'<td>';
 
-                  $teams = explode(';', $row['team']);
+$teams = explode(';', $row->team);
                       array_pop($teams);
                       foreach($teams as $team){
 
@@ -97,40 +97,40 @@ $result = MAIN::index();
                   
                   
                   echo'</td>';
-                echo'<td>'. $row['room'] .'</td>';
+echo'<td>'. $row->room .'</td>';
                 
-                          if(strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))){
+if(strftime('%d.%m.%Y', strtotime($row->start)) != strftime('%d.%m.%Y', strtotime($row->end))){
 
-                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                              echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+if(strftime('%H:%M', strtotime($row->start)) == '00:00'){
+echo'<td>'. strftime('%d.%m.%Y', strtotime($row->start)) .'</td>';
                             }else{
-                              echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row->start)) .'</td>';
                             }
-                            if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
-                              echo'<td>'. strftime('%d.%m.%Y ', strtotime($row['end'])) .'</td>';
+if(strftime('%H:%M', strtotime($row->end)) == '00:00'){
+echo'<td>'. strftime('%d.%m.%Y ', strtotime($row->end)) .'</td>';
                             }else{
-                              echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['end'])) .'</td>';
+echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row->end)) .'</td>';
                             }
                           }
-                          if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))){
-                          if(strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))){
+if(strftime('%d.%m.%Y', strtotime($row->start)) == strftime('%d.%m.%Y', strtotime($row->end))){
+if(strftime('%H:%M', strtotime($row->start)) == strftime('%H:%M', strtotime($row->end))){
                           
-                          if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                          echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
+if(strftime('%H:%M', strtotime($row->start)) == '00:00'){
+echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row->start)) .'</td>';
                           }else{
-                          echo'<td colspan="2">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+echo'<td colspan="2">'. strftime('%d.%m.%Y - %H:%M', strtotime($row->start)) .'</td>';
                           }
                           }
-                          if(strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))){
-                          if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                          echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+if(strftime('%H:%M', strtotime($row->start)) != strftime('%H:%M', strtotime($row->end))){
+if(strftime('%H:%M', strtotime($row->start)) == '00:00'){
+echo'<td>'. strftime('%d.%m.%Y', strtotime($row->start)) .'</td>';
                           }else{
-                          echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row->start)) .'</td>';
                           }
-                          if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
-                          echo'<td>'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
+if(strftime('%H:%M', strtotime($row->end)) == '00:00'){
+echo'<td>'. strftime('%d.%m.%Y', strtotime($row->end)) .'</td>';
                           }else{
-                          echo'<td>'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
+echo'<td>'. strftime('%H:%M', strtotime($row->end)) .'</td>';
                           }
                           }
                           }
@@ -198,11 +198,11 @@ $result = MAIN::index();
               <?php
                 $config = config::get('future_day');
                 foreach($result as $row){
-                  $start = strftime('%Y-%m-%d', strtotime($row['start']));
-                  $end = strftime('%Y-%m-%d', strtotime($row['end']));
+$start = strftime('%Y-%m-%d', strtotime($row->start));
+                  $end = strftime('%Y-%m-%d', strtotime($row->end));
                   if($start >= strftime('%Y-%m-%d', strtotime('+ 1 day'))){
                   if($start <= strftime('%Y-%m-%d', strtotime(' + '. $config->value .' '. $config->time_unit))){
-                    if($row['not_applicable'] == 1){
+if($row->not_applicable == 1){
                       $disabled = 'class="table-danger strikethrough"';
                     }else{
                         $disabled = '';
@@ -210,10 +210,10 @@ $result = MAIN::index();
 
                     echo'
               <tr '.$disabled.'>
-                <td>'. $row['event'] .'</td>
+<td>'. $row->event .'</td>
                 <td>';
 
-                  $teams = explode(';', $row['team']);
+$teams = explode(';', $row->team);
                       array_pop($teams);
                       foreach($teams as $team){
                         $group_color = GROUP::find($team)->color;
@@ -221,45 +221,45 @@ $result = MAIN::index();
                       }
                   
                   echo'</td>
-                <td>'. $row['room'] .'</td>';
+<td>'. $row->room .'</td>';
                 
-                          if(strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))){
+if(strftime('%d.%m.%Y', strtotime($row->start)) != strftime('%d.%m.%Y', strtotime($row->end))){
 
-                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                              echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+if(strftime('%H:%M', strtotime($row->start)) == '00:00'){
+echo'<td>'. strftime('%d.%m.%Y', strtotime($row->start)) .'</td>';
                             }else{
-                              echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row->start)) .'</td>';
                             }
-                            if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
-                              echo'<td>'. strftime('%d.%m.%Y ', strtotime($row['end'])) .'</td>';
+if(strftime('%H:%M', strtotime($row->end)) == '00:00'){
+echo'<td>'. strftime('%d.%m.%Y ', strtotime($row->end)) .'</td>';
                             }else{
-                              echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['end'])) .'</td>';
+echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row->end)) .'</td>';
                             }
                           }
 
-                          if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))){
-                            if(strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))){
+if(strftime('%d.%m.%Y', strtotime($row->start)) == strftime('%d.%m.%Y', strtotime($row->end))){
+if(strftime('%H:%M', strtotime($row->start)) == strftime('%H:%M', strtotime($row->end))){
 
-                              if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                                echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
+if(strftime('%H:%M', strtotime($row->start)) == '00:00'){
+echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row->start)) .'</td>';
                               }else{
-                                echo'<td colspan="2">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+echo'<td colspan="2">'. strftime('%d.%m.%Y - %H:%M', strtotime($row->start)) .'</td>';
                               }
                           }
-                          if(strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))){
-                            if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                              echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+if(strftime('%H:%M', strtotime($row->start)) != strftime('%H:%M', strtotime($row->end))){
+if(strftime('%H:%M', strtotime($row->start)) == '00:00'){
+echo'<td>'. strftime('%d.%m.%Y', strtotime($row->start)) .'</td>';
                             }else{
-                              echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row->start)) .'</td>';
                             }
-                            if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
-                                echo'<td>'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
+if(strftime('%H:%M', strtotime($row->end)) == '00:00'){
+echo'<td>'. strftime('%d.%m.%Y', strtotime($row->end)) .'</td>';
                               }else{
-                                echo'<td>'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
+echo'<td>'. strftime('%H:%M', strtotime($row->end)) .'</td>';
                               }
                           }
                           }
-              echo'<td>'. date('j', strtotime($row['start']) - strtotime(strftime('%Y-%m-%d').' +1 day')) .' Tagen</td>
+echo'<td>'. date('j', strtotime($row->start) - strtotime(strftime('%Y-%m-%d').' +1 day')) .' Tagen</td>
               </tr>';
                   }
                 }
