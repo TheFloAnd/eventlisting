@@ -5,29 +5,32 @@ use app\controller\group;
 $events = events::index();
 ?>
 <div class="table-responsive">
-    <table class="table table-striped table-hover" id="refresh_edit">
-        <thead>
-            <tr>
-                <th scope="col">
-                    <?php echo lang['project'] ?>
-                </th>
-                <th scope="col">
-                    <?php echo lang['group'] ?>
-                </th>
-                <th scope="col">
-                    <?php echo lang['room'] ?>
-                </th>
-                <th scope="col">
-                    <?php echo lang['from'] ?>
-                </th>
-                <th scope="col">
-                    <?php echo lang['till'] ?>
-                </th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
+<table class="table dataTable stripe display row-border hover order-column compact w-100" id="refresh_edit">
+  <thead>
+    <tr>
+      <th scope="col">
+#
+</th>
+<th scope="col">
+<?php echo lang['project'] ?>
+</th>
+<th scope="col">
+  <?php echo lang['group'] ?>
+</th>
+<th scope="col">
+  <?php echo lang['room'] ?>
+</th>
+<th scope="col">
+  <?php echo lang['from'] ?>
+</th>
+<th scope="col">
+  <?php echo lang['till'] ?>
+</th>
+</tr>
+</thead>
+<tbody>
+  <?php
+$i = 0;
                         foreach($events['result'] as $row){
                           $start = strftime('%Y-%m-%d', strtotime($row['start']));
                   $end = strftime('%Y-%m-%d', strtotime($row['end']));
@@ -40,54 +43,57 @@ $events = events::index();
                         echo'
                             <tr '.$disabled.'>
                               <td>
+'. ++$i .'
+</td>
+<td class="table_search">
                                 '. $row['event'] .'
                               </td>
-                              <td>';
+<td>';
 
                   $teams = explode(';', $row['team']);
                       array_pop($teams);
                       foreach($teams as $team){
                         $color = GROUP::find($team)->color;
-                        echo'<span class="badge text-dark" style="background-color:'. $color.';">'. $team .'</span> ';
+echo'<span class="badge text-dark table_search" style="background-color:'. $color.';">'. $team .'</span> ';
                       }
                   
                   
                   echo'</td>
-                  <td>
+<td class="table_search">
                               '. $row['room'] .'
                             </td>';
                           if(strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))){
 
                             if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
+echo'<td class="table_search">'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
                             }else{
-                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
+echo'<td class="table_search">'. strftime('%d.%m.%Y %H:%M', strtotime($row['start'])) .'</td>';
                             }
                             if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
-                              echo'<td>'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
+echo'<td class="table_search">'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
                             }else{
-                              echo'<td>'. strftime('%d.%m.%Y %H:%M', strtotime($row['end'])) .'</td>';
+echo'<td class="table_search">'. strftime('%d.%m.%Y %H:%M', strtotime($row['end'])) .'</td>';
                             }
                           }
                           if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))){
                           if(strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))){
                           
                           if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                          echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
+echo'<td class="table_search" colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
                           }else{
-                          echo'<td colspan="2">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+echo'<td class="table_search" colspan="2">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
                           }
                           }
                           if(strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))){
                           if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                          echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+echo'<td class="table_search">'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
                           }else{
-                          echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+echo'<td class="table_search">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
                           }
                           if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
-                          echo'<td>'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
+echo'<td class="table_search">'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
                           }else{
-                          echo'<td>'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
+echo'<td class="table_search">'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
                           }
                           }
                           }
@@ -100,6 +106,6 @@ $events = events::index();
                       }
                         echo'</tr>';
                         ?>
-        </tbody>
+</tbody>
     </table>
 </div>

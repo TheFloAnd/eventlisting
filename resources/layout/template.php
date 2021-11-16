@@ -18,6 +18,8 @@
     
     <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/resources/css/select2.min.css">
+    <!--<link rel="stylesheet" href="/resources/css/jquery.dataTables.min.css">-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css"
   </head>
   <body>
     <main class="container-fluid">
@@ -39,15 +41,45 @@
       })
     </script>
 
-    <script src="/resources/js/jquery-3.3.1.min.js"></script>
-
+    <script src="/resources/js/jquery.min.js"></script>
     <script src="/resources/js/jquery-ui.min.js"></script>
+    
+    <script src="/resources/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+    $(document).ready(function() {
+    $(".dataTable").DataTable({
+        'responsive': true,
+        'displayLength': 15,
+        'autoWidth': false,
+        'stateSave': true,
+        lengthMenu: [
+            [15, 25, 50, -1],
+            [15, 25, 50, "All"],
+        ],
+        "order": [],
+        initComplete: function() {
+            var api = this.api();
+            api.$(".table_search").click(function() {
+                api.search($.trim(this.innerHTML)).draw();
+            });
+        },
+    });
+    $(".dataTable_default tbody").on("click", "tr", function() {
+        if ($(this).hasClass("selected")) {
+            $(this).removeClass("selected");
+        } else {
+            table.$("tr.selected").removeClass("selected");
+            $(this).addClass("selected");
+        }
+    });
+});
+</script>
     <script src="/resources/js/select2.full.min.js"></script>
     <script>
       $(document).ready(function() {
-    $('.multiple-select').select2();
-    
-});
+        $('.multiple-select').select2();
+      });
     </script>
   </body>
 </html>

@@ -4,7 +4,7 @@ use \PDO;
     class admin_connect
     {
         private $admin_user = 'root';
-        private $admin_pass = 'admin';
+        private $admin_pass = '';
 
         private $server = db['host'];
         private $database = db['database'];
