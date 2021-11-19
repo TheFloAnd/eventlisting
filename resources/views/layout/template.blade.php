@@ -1,11 +1,3 @@
-<?php
-// include __DIR__ ."/../views/lib/BladeOne.php";
-// use eftec\bladeone;
-// $views = __DIR__ . '/../../public/views'; // it uses the folder /views to read the templates
-// $cache = __DIR__ . '/../../public/cache'; // it uses the folder /cache to compile the result. 
-// $blade = new bladeone\BladeOne($views,$cache,bladeone\BladeOne::MODE_AUTO);
-
-?>
 <!doctype html>
 <html lang="de">
 
@@ -31,14 +23,7 @@
 
 <body>
   <main class="container-fluid">
-    @php
-    // $path = __DIR__ . '/../views/'. $blade .'.blade.php';
-    // if(file_exists($path)){
-    // require $path;
-    // }
-    echo $blade->run("main");
-
-    @endphp
+@include($content)
   </main>
   <!-- Optional JavaScript; choose one of the two! -->
 

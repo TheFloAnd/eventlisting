@@ -17,17 +17,17 @@ define('lang', $lang['de']);
 
 if(isset($_GET['b'])){
   define('blade',$_GET['b']);
-$blade = $_GET['b'];
+$content = $_GET['b'];
 }else{
   define('blade','main');
-$blade = 'main';
+$content = 'main';
 }
 
 $views = __DIR__ . '/resources/views'; // it uses the folder /views to read the templates
 $cache = __DIR__ . '/resources/cache'; // it uses the folder /cache to compile the result. 
 $blade = new bladeone\BladeOne($views,$cache,bladeone\BladeOne::MODE_AUTO);
 
-  echo $blade->run("layout.template", array("blade"=>$blade));
+  echo $blade->run("layout.template", compact('content'));
 
 // route::add('/', function() {
 //   define('blade','main');

@@ -1,25 +1,24 @@
-<?php
-echo'<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-<a href="/">
+        <a href="/">
           <span class="navbar-text">
-'. lang['index'] .'
+            {{ lang['index'] }}
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=groups">
           <span class="navbar-text">
-'. lang['groups'] .'
+            {{ lang['groups'] }}
           </span>
         </a>
       </div>
       <div class="col">
         <a href="?b=settings">
           <span class="navbar-text">
-'. lang['settings'] .'
+            {{ lang['settings'] }}
           </span>
         </a>
       </div>
@@ -35,21 +34,20 @@ echo'<nav class="navbar navbar-light bg-light">
             <button class="nav-link col active" id="nav-event_add-tab" data-bs-toggle="tab"
               data-bs-target="#nav-event_add" type="button" role="tab" aria-controls="nav-event_add"
               aria-selected="false">
-'. lang['event'] .' '. lang['add'] .'
+              {{ lang['event'] }} {{ lang['add'] }}
             </button>
             <button class="nav-link col" id="nav-event_edit-tab" data-bs-toggle="tab" data-bs-target="#nav-event_edit"
               type="button" role="tab" aria-controls="nav-event_edit" aria-selected="true">
-'. lang['events'] .' '. lang['edit'] .'
+              {{ lang['events'] }} {{ lang['edit'] }}
             </button>
           </div>
         </nav>
         <div class="tab-content" id="myTabContent">
-<div class="tab-pane fade show active" id="nav-event_add" role="tabpanel" aria-labelledby="nav-event_add-tab">';
-  require __DIR__ . '/components/events/add.blade.php';
-  echo'</div>
-<div class="tab-pane fade" id="nav-event_edit" role="tabpanel" aria-labelledby="nav-event_edit-tab">';
-  require __DIR__ . '/components/events/list.blade.php';
-  echo'</div>
+          <div class="tab-pane fade show active" id="nav-event_add" role="tabpanel" aria-labelledby="nav-event_add-tab">
+            @include('components.events.add')
+          </div>
+          <div class="tab-pane fade" id="nav-event_edit" role="tabpanel" aria-labelledby="nav-event_edit-tab">
+            @include('components.events.list')</div>
         </div>
       </div>
     </div>
@@ -94,4 +92,4 @@ if (repeat_input_2.hasAttribute("disabled")) {
             start_date.value = end_date.value
           }
         };
-</script>';
+</script>
