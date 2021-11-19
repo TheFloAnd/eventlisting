@@ -216,6 +216,7 @@ $events = events::index();
                   <th scope="col">
                     <?php echo lang['till'] ?>
                   </th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
