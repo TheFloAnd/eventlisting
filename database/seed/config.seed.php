@@ -25,7 +25,9 @@ class config extends admin_connect
                 `view` varchar(50) NOT NULL,
                 `setting` varchar(50) NOT NULL,
                 `value` varchar(50) NOT NULL,
-                `time_unit` varchar(50) NOT NULL
+                `time_unit` varchar(50) NOT NULL,
+                `created_at` datetime DEFAULT NULL,
+                `updated_at` datetime DEFAULT NULL
             );"
             );
             $pdo->query(
@@ -51,25 +53,29 @@ class config extends admin_connect
                 `view`,
                 `setting`,
                 `value`,
-                `time_unit`
+                `time_unit`,
+                `created_at`
             ) VALUES (
                 1,
                 'Automatisches Neuladen',
                 'refresh',
                 '15',
-                'seconds'
+                'seconds',
+                '". strftime('%Y-%m-%dT%H:%M') ."'
             ),(
                 2,
                 'Termin Preview Zeitraum',
                 'future_day',
                 '30',
-                'day'
+                'day',
+                '". strftime('%Y-%m-%dT%H:%M') ."'
             ), (
                 3,
                 'Überschrift',
                 'name',
                 '',
-                ''
+                '',
+                '". strftime('%Y-%m-%dT%H:%M') ."'
             );"
             );
             return;

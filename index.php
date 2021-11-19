@@ -17,7 +17,6 @@ $blade = $_GET['b'];
 }else{
   define('blade','main');
 }
-include __DIR__.'/resources/layout/template.php';
 
 if(strftime('%H:%M') == '08:00'){
   system::get_updates();
@@ -27,8 +26,10 @@ if(strftime('%H:%M') == '08:00'){
 if(isset($_POST['submit_event'])){
   if(!isset($_POST['set_repeat'])){
     events::store($_POST);
+    header('location:?b=events');
   }else{
     events::store_repeat($_POST);
+    header('location:?b=events');
   }
 }
 
@@ -36,6 +37,8 @@ if(isset($_POST['submit_edit_event'])){
   $update_event = events::update($_POST);
   if($update_event['0']){
     //notification::success('Der Termin "'. $update_event['1']['event'] .'" vom '. strftime('%d.%m.%Y', strtotime($update_event['1']['start_date'])) .' bis zum '. strftime('%d.%m.%Y', strtotime($update_event['1']['end_date'])) .' der Gruppe '. $update_event['1']['group'] .' wurde Erfolgreich geändert!');
+
+    header('location:?b=groups');
   }
 }
 
@@ -53,8 +56,8 @@ if(isset($_POST['submit_group'])){
   if($add_group['0'] == false){
     notification::error('Der Gruppen Alias '. $add_group['1'] .' Existiert schon!');
   }else{
-
     notification::success('Der Gruppen Alias '. $add_group['1'] .' wurde Erstellt!');
+    header('location:?b=groups');
   }
 }
 
@@ -71,3 +74,5 @@ if(isset($_POST['submit_edit_setting'])){
     notification::success('Einstellung wurde Erfolgreich geändert!');
   }
 }
+
+include __DIR__.'/resources/layout/template.php';

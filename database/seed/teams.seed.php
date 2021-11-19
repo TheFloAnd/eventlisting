@@ -24,7 +24,9 @@ class teams extends admin_connect
                 `name` varchar(255) NOT NULL,
                 `alias` varchar(10) NOT NULL,
                 `color` varchar(7) NOT NULL,
-                `active` int NOT NULL DEFAULT '1'
+                `active` int NOT NULL DEFAULT '1',
+                `created_at` datetime DEFAULT NULL,
+                `updated_at` datetime DEFAULT NULL
             );"
             );
 
@@ -51,7 +53,9 @@ class teams extends admin_connect
                 `teams`.`name` AS `name`,
                 `teams`.`alias` AS `alias`,
                 `teams`.`color` AS `color`,
-                `teams`.`active` AS `active`
+                `teams`.`active` AS `active`,
+                `events`.`created_at` AS `created_at`,
+                `events`.`updated_at` AS `updated_at`
             from `teams` 
                 order by `teams`.`name` 
             ;"
@@ -62,7 +66,9 @@ class teams extends admin_connect
                 `teams`.`id` AS `id`,
                 `teams`.`name` AS `name`,
                 `teams`.`alias` AS `alias`,
-                `teams`.`color` AS `color` 
+                `teams`.`color` AS `color` ,
+                `events`.`created_at` AS `created_at`,
+                `events`.`updated_at` AS `updated_at`
             from `teams` 
                 where `teams`.`active` = 1 
                 order by `teams`.`name`
@@ -74,7 +80,9 @@ class teams extends admin_connect
                 `teams`.`id` AS `id`,
                 `teams`.`name` AS `name`,
                 `teams`.`alias` AS `alias`,
-                `teams`.`color` AS `color` 
+                `teams`.`color` AS `color` ,
+                `events`.`created_at` AS `created_at`,
+                `events`.`updated_at` AS `updated_at`
             from `teams` 
                 where `teams`.`active` = 0 
                 order by `teams`.`name`

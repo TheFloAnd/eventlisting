@@ -10,7 +10,12 @@ define("db", array(
     "password" => "",
     "database" => "events",
 ));
-
+define("db_admin", array(
+    "host" => "localhost",
+    "user" => "root",
+    "pass" => "admin",
+    "database" => "events",
+));
 /*
 * Settings
 */
