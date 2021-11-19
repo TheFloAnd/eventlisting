@@ -142,16 +142,19 @@ $events = events::index();
     <div class="col-md-10">
       <fieldset>
         <div class="form-group">
-          <div class="form-check form-check-inline">
+          <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Keine Wiederholungen">
             <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_none" value="none"
               checked>
             <label class="form-check-label" for="set_repeat_none">Keine Wiederholung</label>
           </div>
-          <div class="form-check form-check-inline">
+          <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Setzt die Wiederholung automatisch auf 10 Mal">
             <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_days" value="days">
             <label class="form-check-label" for="set_repeat_days">Tage</label>
           </div>
-          <div class="form-check form-check-inline">
+          <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Setzt die Wiederholung automatisch auf ein Jahr (52 Mal)">
             <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_weeks"
               value="weeks">
             <label class="form-check-label" for="set_repeat_weeks">Wochen</label>
@@ -160,26 +163,26 @@ $events = events::index();
       </fieldset>
     </div>
     <div class="col-md-5">
-      <div class="form-group">
-        <fieldset id="set_repeat_input_1" disabled>
+      <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="In wievielen Tagen/Wochen sich der Termin wiederholen soll">
+        <fieldset>
           <label class="form-label" for="days">
-            <?php echo lang['days'] .' '. lang['weeks'] ?> :
+            <?php echo lang['days'] .'/'. lang['weeks'] ?> :
           </label>
-          <input class="form-control" type="number" placeholder="<?php echo lang['days'] ?>" min="1" name="repeat_days"
-            id="repeat_days" data-bs-toggle="tooltip" data-bs-placement="top"
-            title="In wievielen Tagen sich der Termin wiederholen soll" value="1">
+          <input class="form-control disable" type="number" placeholder="<?php echo lang['days'] ?>" min="1" name="repeat_days"
+            id="repeat_days" value="1" disabled>
         </fieldset>
       </div>
     </div>
     <div class="col-md-5">
-      <div class="form-group">
-        <fieldset id="set_repeat_input_2" disabled>
+      <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="Wie oft sich der Termin wiederholen soll">
+        <fieldset>
           <label class="form-label" for="repeats">
             <?php echo lang['repeat'] ?> :
           </label>
-          <input class="form-control" type="number" placeholder="<?php echo lang['repeat'] ?>" min="1" name="repeats"
-            id="repeats" data-bs-toggle="tooltip" data-bs-placement="top"
-            title="Wie oft sich der Termin wiederholen soll" value="1">
+          <input class="form-control disable" type="number" placeholder="<?php echo lang['repeat'] ?>" min="1" name="repeats"
+            id="repeats"  value="1" disabled>
         </fieldset>
       </div>
     </div>
@@ -303,18 +306,31 @@ $events = events::index();
 <script>
   var set_repeat = document.getElementsByName('set_repeat');
   var set_disable = document.getElementById('set_repeat_none');
-  var repeat_input_1 = document.getElementById("set_repeat_input_1");
-  var repeat_input_2 = document.getElementById("set_repeat_input_2");
+  var disable = document.getElementsByClassName('disable');
   set_disable.checked = true;
         for(i = 0; i<set_repeat.length; i++) {
         set_repeat[i].onclick = function () {
-          if(this.value == 'none'){
-            repeat_input_1.disabled = true;
-            repeat_input_2.disabled = true;
-          }else{
-            repeat_input_1.disabled = false;
-            repeat_input_2.disabled = false;
-          }
+            switch(this.value){
+              case 'weeks':
+                for(j = 0; j < disable.length; j++){
+                  disable[j].disabled = false;
+                }
+                document.getElementById('repeats').value = 52;
+                break;
+              case 'days':
+                for(j = 0; j < disable.length; j++){
+                  disable[j].disabled = false;
+                }
+                document.getElementById('repeats').value = 10;
+                break;
+              case 'none':
+                for(j = 0; j < disable.length; j++){
+                  disable[j].disabled = true;
+                }
+                document.getElementById('repeats').value = 1;
+                break;
+            }
+          
         }
       }
 </script>
