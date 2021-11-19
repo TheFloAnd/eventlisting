@@ -30,6 +30,8 @@ class events extends admin_connect
                 `repeat` int DEFAULT NULL,
                 `repeat_parent` int DEFAULT NULL,
                 `room` varchar(50) DEFAULT NULL,
+                `created_at` datetime DEFAULT NULL,
+                `updated_at` datetime DEFAULT NULL,
                 `deleted_at` datetime DEFAULT NULL
                 ) ;"
             );
@@ -62,7 +64,9 @@ class events extends admin_connect
                 `events`.`end` AS `end`,
                 `events`.`repeat` AS `repeat`,
                 `events`.`repeat_parent` AS `repeat_parent`,
-                `events`.`room` AS `room`
+                `events`.`room` AS `room`,
+                `events`.`created_at` AS `created_at`,
+                `events`.`updated_at` AS `updated_at`
             from `events`
                 where (`events`.`deleted_at` is null)
             ;"

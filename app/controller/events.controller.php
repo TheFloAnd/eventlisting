@@ -46,7 +46,7 @@ class events{
                     $i++;
                 }
 
-            $stmt = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`, `room`) VALUES ('". $input['event'] ."', '". $group."', '". $input['start_date'] ."', '". $input['end_date'] ."', '". $input['room'] ."')";
+            $stmt = "INSERT INTO `events`(`event`, `team`, `start`, `end`, `room`, `created_at`) VALUES ('". $input['event'] ."', '". $group."', '". $input['start_date'] ."', '". $input['end_date'] ."', '". $input['room'] ."', '". strftime('%Y-%m-%dT%H:%M') ."')";
         
             $exec = connect::connection()->prepare($stmt);
             $exec->execute();
@@ -65,7 +65,7 @@ class events{
                 }
             
 
-            $stmt = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`,`repeat`, `room`) VALUES ('". $input['event'] ."', '". $group ."', '". $input['start_date'] ."', '". $input['end_date'] ."', '". $input['repeats'] ."', '". $input['room'] ."')";
+            $stmt = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat`, `room`, `created_at`) VALUES ('". $input['event'] ."', '". $group ."', '". $input['start_date'] ."', '". $input['end_date'] ."', '". $input['repeats'] ."', '". $input['room'] ."', '". strftime('%Y-%m-%dT%H:%M') ."')";
             $exec = connect::connection()->prepare($stmt);
             $exec->execute();
 
@@ -73,15 +73,21 @@ class events{
             $data_find = connect::connection()->query($stmt_find);
             $result_found = $data_find->fetch();
 
+            switch($input['set_repeat']){
+                case 'week':
+                    $start_date = $input['start_date'] * 7;
+                    $end_date = $input['end_date'] * 7;
+                    break;
+                default:
+                    $start_date = $input['start_date'];
+                    $end_date = $input['end_date'];
+                    break;
+            }
+            for($i= 1; $i < $input['repeats']; $i++){
+                $start_date = strftime('%Y-%m-%d %H:%M', strtotime($start_date . ' +'. $input['repeat_days'] .' '. $input['set_repeat'] .''));
+                $end_date = strftime('%Y-%m-%d %H:%M', strtotime($end_date . ' +'. $input['repeat_days'] .' '. $input['set_repeat'] .''));
 
-            $start_date = $input['start_date'];
-            $end_date = $input['end_date'];
-
-            for($i= 1; $i <= $input['repeats']; $i++){
-                $start_date = strftime('%Y-%m-%d %H:%M', strtotime($start_date . ' +'. $input['repeat_days'] .' Days'));
-                $end_date = strftime('%Y-%m-%d %H:%M', strtotime($end_date . ' +'. $input['repeat_days'] .' Days'));
-
-                $stmt_repeat = "INSERT INTO `v_events`(`event`, `team`, `start`, `end`,`repeat_parent`, `room`) VALUES ('". $input['event'] ."', '". $group ."', '". $start_date ."', '". $end_date ."', '". $result_found['id'] ."', '". $input['room'] ."')";
+                $stmt_repeat = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat_parent`, `room`, `created_at`) VALUES ('". $input['event'] ."', '". $group ."', '". $start_date ."', '". $end_date ."', '". $result_found['id'] ."', '". $input['room'] ."', '". strftime('%Y-%m-%dT%H:%M') ."')";
         
                 $exec_repeat = connect::connection()->prepare($stmt_repeat);
                 $exec_repeat->execute();
@@ -108,13 +114,13 @@ class events{
             $i++;
         }
         if(!isset($input['removed'])){
-            $stmt = "UPDATE `v_events` SET `not_applicable`= NULL, `event`='". $input['event'] ."',`team`='". $group ."' ,`start`='". $input['start_date'] ."' ,`end`='". $input['end_date'] ."' ,`room`='". $input['room'] ."' WHERE id = '". $input['event_id'] ."'";
+            $stmt = "UPDATE `events` SET `not_applicable`= NULL, `event`='". $input['event'] ."',`team`='". $group ."' ,`start`='". $input['start_date'] ."' ,`end`='". $input['end_date'] ."' ,`room`='". $input['room'] ."', `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE id = '". $input['event_id'] ."'";
 
             $exec = connect::connection()->prepare($stmt);
             $exec->execute();
         }
         if(isset($input['removed'])){
-            $stmt = "UPDATE `v_events` SET `not_applicable`= 1 WHERE id = '". $input['event_id'] ."'";
+            $stmt = "UPDATE `events` SET `not_applicable`= 1, `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE id = '". $input['event_id'] ."'";
 
             $exec = connect::connection()->prepare($stmt);
             $exec->execute();
@@ -124,7 +130,7 @@ class events{
     }
 
     public static function delete($input){
-        $stmt = "UPDATE `events` SET `deleted_at`= '". strftime('%Y-%m-%d %H:%M:%S') ."' WHERE id = '". $input['event_id'] ."'";
+        $stmt = "UPDATE `events` SET `deleted_at`= '". strftime('%Y-%m-%d %H:%M:%S') ."', `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE id = '". $input['event_id'] ."'";
 
         $exec = connect::connection()->prepare($stmt);
         $exec->execute();
@@ -135,7 +141,8 @@ class events{
         $event = events::find($input['event_id']);
         $id = $event->repeat_parent ? $event->repeat_parent : $event->id;
         $stmt = "UPDATE `events` SET 
-            `deleted_at` = '".  strftime('%Y-%m-%d %H:%M:%S') ."' 
+            `deleted_at` = '".  strftime('%Y-%m-%d %H:%M:%S') ."',
+            `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' 
         WHERE id = '". $id ."'
             OR `repeat_parent` = ". $id ."
             OR `id` = ". $event->id ."

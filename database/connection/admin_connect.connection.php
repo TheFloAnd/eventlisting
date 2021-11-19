@@ -3,8 +3,8 @@ namespace database\connection;
 use \PDO;
     class admin_connect
     {
-        private $admin_user = 'root';
-        private $admin_pass = '';
+        private $admin_user = db_admin['user'];
+        private $admin_pass = db_admin['pass'];
 
         private $server = db['host'];
         private $database = db['database'];
