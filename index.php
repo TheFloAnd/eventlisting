@@ -6,6 +6,10 @@ use app\module\notification;
 use app\module\updates;
 use app\module\system;
 
+use app\module\route;
+include __DIR__ ."/resources/lib/BladeOne.php";
+use eftec\bladeone;
+
 require __DIR__.'/app/conf/config.php';
 require __DIR__.'/init.php';
 require __DIR__ . '/app/lang/lang_de.php';
@@ -16,7 +20,19 @@ if(isset($_GET['b'])){
 $blade = $_GET['b'];
 }else{
   define('blade','main');
+$blade = 'main';
 }
+
+$views = __DIR__ . '/resources/views'; // it uses the folder /views to read the templates
+$cache = __DIR__ . '/resources/cache'; // it uses the folder /cache to compile the result. 
+$blade = new bladeone\BladeOne($views,$cache,bladeone\BladeOne::MODE_AUTO);
+
+  echo $blade->run("layout.template", array("blade"=>$blade));
+
+// route::add('/', function() {
+//   define('blade','main');
+//   $blade = 'main';
+// });
 
 if(strftime('%H:%M') == '08:00'){
   system::get_updates();
@@ -71,4 +87,4 @@ if(isset($_POST['submit_edit_setting'])){
   }
 }
 
-include __DIR__.'/resources/layout/template.php';
+// include __DIR__.'/resources/views/layout/template.blade.php';

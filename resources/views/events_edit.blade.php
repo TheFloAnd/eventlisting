@@ -7,53 +7,53 @@ $data = events::edit($_GET['id']);
 $current_group = group::find($data['result']->team);
 ?>
 <nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-<a href="/">
-          <span class="navbar-text">
-<?php echo lang['index'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=events">
-          <span class="navbar-text">
-<?php echo lang['events'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=groups">
-          <span class="navbar-text">
-<?php echo lang['groups'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=settings">
-          <span class="navbar-text">
-<?php echo lang['settings'] ?>
-          </span>
-        </a>
-      </div>
+<div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <a href="/">
+                    <span class="navbar-text">
+                        <?php echo lang['index'] ?>
+                    </span>
+                </a>
+            </div>
+            <div class="col">
+                <a href="?b=events">
+                    <span class="navbar-text">
+                        <?php echo lang['events'] ?>
+                    </span>
+                </a>
+            </div>
+            <div class="col">
+                <a href="?b=groups">
+                    <span class="navbar-text">
+                        <?php echo lang['groups'] ?>
+                    </span>
+                </a>
+            </div>
+            <div class="col">
+                <a href="?b=settings">
+                    <span class="navbar-text">
+                        <?php echo lang['settings'] ?>
+                    </span>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>
 <article class="row">
     <section class="col">
         <div class="card">
             <div class="card-body">
-                    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
-                        <div class="row mt-3 g-3 justify-content-center">
-                            <fieldset class="" hidden>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo$data['result']->id ?>" >
+<form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <div class="row mt-3 g-3 justify-content-center">
+                        <fieldset class="" hidden>
+                            <div class="form-group">
+<input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo$data['result']->id ?>">
                                 </div>
-                            </fieldset>
-                            <div class="col-md-10">
-                                <fieldset>
-                                    <div class="form-check">
+                                </fieldset>
+                                <div class="col-md-10">
+                                    <fieldset>
+                                        <div class="form-check">
                                     <?php
                                     if($data['result']->not_applicable == 1){
                                         $checked = 'checked';
@@ -62,19 +62,19 @@ $current_group = group::find($data['result']->team);
                                     }
 
                                     ?>
-                                        <input class="form-check-input" type="checkbox" value="1" name="removed" id="removed" <?php echo$checked ?>>
-                                        <label class="form-check-label" for="removed">
-<?php echo lang['not_applicable'] ?>
-                                        </label>
+<input class="form-check-input" type="checkbox" value="1" name="removed" id="removed" <?php echo$checked ?>>
+                                    <label class="form-check-label" for="removed">
+                                        <?php echo lang['not_applicable'] ?>
+                                    </label>
                                     </div>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-10">
-                                <fieldset>
-                                    <div class="form-floating">
-<input type="text" class="form-control" name="event" id="event"
-                                        placeholder="<?php echo$data['result']->event ?:  lang['event'] ?>" value="<?php echo$data['result']->event ?>"
-                                        list="event_list" required>
+                                    </fieldset>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <fieldset>
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" name="event" id="event"
+placeholder="<?php echo$data['result']->event ?:  lang['event'] ?>"
+                                        value="<?php echo$data['result']->event ?>" list="event_list" required>
                                     <label for="event">
 <?php echo lang['event'] ?>
                                         <span style="color: red;">
@@ -82,7 +82,7 @@ $current_group = group::find($data['result']->team);
                                         </span>
                                     </label>
                                     <datalist id="event_list">
-                                    <?php
+<?php
 
                                     foreach($data['proposals'] as $row){
 echo'<option value="'. $row->event .'">';
@@ -94,16 +94,16 @@ echo'<option value="'. $row->event .'">';
                         </div>
                         <div class="col-md-7">
 
-                        <fieldset>
-                        <div class="input-group">
-                            <label for="group">
-<?php echo lang['group'] ?>
-                                <span style="color: red;">
-                                    *
-                                </span>
-                            </label>
-                            <select class="form-select multiple-select" name="group[]"  multiple="multiple" required>
-                            <?php
+<fieldset>
+                                <div class="input-group">
+                                    <label for="group">
+                                        <?php echo lang['group'] ?>
+                                        <span style="color: red;">
+                                            *
+                                        </span>
+                                    </label>
+<select class="form-select multiple-select" name="group[]" multiple="multiple" required>
+                                        <?php
                                 $teams = explode(';', $data['result']->team );
                                 array_pop($teams);
                                 foreach($data['group'] as $row){
@@ -114,15 +114,16 @@ echo'<option value="'. $row->alias .'">'. $row->name .' ('. $row->alias .')</opt
                                     }
                                 }
                             ?>
-                            </select>
-                        </div>
-                    </fieldset>
+</select>
+                                    </div>
+                                    </fieldset>
                         </div>
                         <div class="col-md-3">
                             <fieldset>
                                 <div class="form-floating">
 <input type="text" class="form-control" name="room" id="room"
-                                        placeholder="<?php echo$data['result']->room ?:  lang['room'] ?>" value="<?php echo$data['result']->room ?>">
+placeholder="<?php echo$data['result']->room ?:  lang['room'] ?>"
+                                        value="<?php echo$data['result']->room ?>">
                                     <label for="room">
 <?php echo lang['room'] ?>
                                     </label>
@@ -132,7 +133,8 @@ echo'<option value="'. $row->alias .'">'. $row->name .' ('. $row->alias .')</opt
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->start)) ?>" required>
+<input type="datetime-local" class="form-control" name="start_date" id="start_date"
+                                        value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->start)) ?>" required>
                                     <label for="start_date">
 <?php echo lang['start'] .' '.  lang['date'] ?>
                                         <span style="color: red;">
@@ -145,7 +147,8 @@ echo'<option value="'. $row->alias .'">'. $row->name .' ('. $row->alias .')</opt
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="<?php  echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->end)) ?>" required>
+<input type="datetime-local" class="form-control" name="end_date" id="end_date"
+                                        value="<?php  echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->end)) ?>" required>
                                     <label for="end_date">
 <?php echo lang['end'] .' '.  lang['date'] ?>
                                         <span style="color: red;">
@@ -159,15 +162,15 @@ echo'<option value="'. $row->alias .'">'. $row->name .' ('. $row->alias .')</opt
                             <div class="row g-2 justify-content-evenly">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-outline-success w-100" name="submit_edit_event" value="submit">
-<?php echo lang['update'] ?>
+<button type="submit" class="btn btn-outline-success w-100" name="submit_edit_event" value="submit">
+                                            <?php echo lang['update'] ?>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
-<?php echo lang['delete'] ?>
+<button type="button" class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <?php echo lang['delete'] ?>
                                         </button>
                                     </div>
                                 </div>
@@ -181,7 +184,7 @@ echo'<option value="'. $row->alias .'">'. $row->name .' ('. $row->alias .')</opt
                             </div>
                         </div>
                     </div>
-                </form>          
+</form>
             </div>
         </div>
     </section>
@@ -201,7 +204,7 @@ echo'<option value="'. $row->alias .'">'. $row->name .' ('. $row->alias .')</opt
 
                     <fieldset class="" hidden>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo$data['result']->id ?>" >
+<input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo$data['result']->id ?>">
                         </div>
                     </fieldset>
                     <p>Wollen die den Termin wirklich Löschen?</p>
