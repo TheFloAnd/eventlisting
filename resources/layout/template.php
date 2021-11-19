@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/resources/css/select2.min.css">
     <!--<link rel="stylesheet" href="/resources/css/jquery.dataTables.min.css">-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css"
+    <link rel="stylesheet" type="text/css" href="/resources/css/jquery.dataTables.min.css">
   </head>
   <body>
     <main class="container-fluid">
@@ -45,7 +45,7 @@
     <script src="/resources/js/jquery-ui.min.js"></script>
     
     <script src="/resources/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="/resources/js/jquery.dataTables.min.js"></script>
     <script>
     $(document).ready(function() {
     $(".dataTable").DataTable({
