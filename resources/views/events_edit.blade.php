@@ -52,7 +52,7 @@ $current_group = group::find($data['result']->team);
                                 </div>
                             </fieldset>
                             <div class="col-md-10">
-                                <fieldset>
+                                <fieldset id="fieldset_remove">
                                     <div class="form-check">
                                     <?php
                                     if($data['result']->not_applicable == 1){
@@ -72,7 +72,7 @@ $current_group = group::find($data['result']->team);
                             <div class="col-md-10">
                                 <fieldset>
                                     <div class="form-floating">
-<input type="text" class="form-control" name="event" id="event"
+<input type="text" class="form-control disable" name="event" id="event"
                                         placeholder="<?php echo$data['result']->event ?:  lang['event'] ?>" value="<?php echo$data['result']->event ?>"
                                         list="event_list" required>
                                     <label for="event">
@@ -102,7 +102,7 @@ $current_group = group::find($data['result']->team);
                                     *
                                 </span>
                             </label>
-                            <select class="form-select multiple-select" name="group[]"  multiple="multiple" required>
+                            <select class="form-select multiple-select disable" name="group[]"  multiple="multiple" required>
                             <?php
                                 $teams = explode(';', $data['result']->team );
                                 array_pop($teams);
@@ -121,7 +121,7 @@ $current_group = group::find($data['result']->team);
                         <div class="col-md-3">
                             <fieldset>
                                 <div class="form-floating">
-<input type="text" class="form-control" name="room" id="room"
+<input type="text" class="form-control disable" name="room" id="room"
                                         placeholder="<?php echo$data['result']->room ?:  lang['room'] ?>" value="<?php echo$data['result']->room ?>">
                                     <label for="room">
 <?php echo lang['room'] ?>
@@ -132,7 +132,7 @@ $current_group = group::find($data['result']->team);
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->start)) ?>" required>
+                                    <input type="datetime-local" class="form-control disable" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->start)) ?>" required>
                                     <label for="start_date">
 <?php echo lang['start'] .' '.  lang['date'] ?>
                                         <span style="color: red;">
@@ -145,7 +145,7 @@ $current_group = group::find($data['result']->team);
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="<?php  echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->end)) ?>" required>
+                                    <input type="datetime-local" class="form-control disable" name="end_date" id="end_date" value="<?php  echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->end)) ?>" required>
                                     <label for="end_date">
 <?php echo lang['end'] .' '.  lang['date'] ?>
                                         <span style="color: red;">
@@ -233,3 +233,26 @@ if(!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)){
         </div>
     </div>
 </div>
+<script>
+    var toogle_disable = document.getElementById('removed');
+    var disable = document.getElementsByClassName('disable');
+if(toogle_disable.checked == true){
+        for(var i = 0; i < disable.length; i++){
+            disable[i].disabled=true;
+            disable[i].readOnly = true;
+        }
+    }
+    toogle_disable.onchange = function() {
+        if(toogle_disable.checked == true){
+            for(var i = 0; i < disable.length; i++){
+                disable[i].disabled = true;
+                disable[i].readOnly = true;
+            }
+        }else{
+            for(var i = 0; i < disable.length; i++){
+                disable[i].disabled = false;
+                disable[i].readOnly = false;
+            }
+        }
+    }
+</script>

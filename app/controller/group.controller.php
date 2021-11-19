@@ -45,14 +45,14 @@ class group{
     }
     public static function update($group){
         if(isset($group['deactivate_group'])){
-            $stmt = "UPDATE `v_teams` SET `name`='". $group['group_name'] ."',`color`='". $group['group_color'] ."',`active`= 1, `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE alias = '". $group['group_alias'] ."'";
+            $stmt = "UPDATE `teams` SET `name`='". $group['group_name'] ."',`color`='". $group['group_color'] ."',`active`= 1, `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE alias = '". $group['alias'] ."' AND id = '". $group['id'] ."'";
         }else{
-            $stmt = "UPDATE `v_teams` SET `active`= 0, `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE alias = '". $group['group_alias'] ."'";
+            $stmt = "UPDATE `teams` SET `active`= 0, `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE alias = '". $group['alias'] ."' AND id = '". $group['id'] ."'";
         }
 
         $exec = connect::connection()->prepare($stmt);
         $exec->execute();
 
-        return array(true, $group['group_alias']);
+        return array(true, $group['alias']);
     }
 }

@@ -26,10 +26,10 @@ if(strftime('%H:%M') == '08:00'){
 if(isset($_POST['submit_event'])){
   if(!isset($_POST['set_repeat'])){
     events::store($_POST);
-    header('location:?b=events');
+    header('Refresh:0');
   }else{
     events::store_repeat($_POST);
-    header('location:?b=events');
+    header('Refresh:0');
   }
 }
 
@@ -38,7 +38,7 @@ if(isset($_POST['submit_edit_event'])){
   if($update_event['0']){
     //notification::success('Der Termin "'. $update_event['1']['event'] .'" vom '. strftime('%d.%m.%Y', strtotime($update_event['1']['start_date'])) .' bis zum '. strftime('%d.%m.%Y', strtotime($update_event['1']['end_date'])) .' der Gruppe '. $update_event['1']['group'] .' wurde Erfolgreich geändert!');
 
-    header('location:?b=groups');
+    header('Refresh:0');
   }
 }
 
@@ -57,14 +57,16 @@ if(isset($_POST['submit_group'])){
     notification::error('Der Gruppen Alias '. $add_group['1'] .' Existiert schon!');
   }else{
     notification::success('Der Gruppen Alias '. $add_group['1'] .' wurde Erstellt!');
-    header('location:?b=groups');
+    header('Refresh:0');
   }
 }
 
 if(isset($_POST['submit_edit_group'])){
   $update_group = group::update($_POST);
   if($update_group['0'] == true){
+    // header('Location:?b=group_edit&g='. $update_group['1']);
     notification::success('Die Gruppe '. $update_group['1'] .' wurde Erfolgreich geändert!');
+    header('Refresh:0');
   }
 }
 
