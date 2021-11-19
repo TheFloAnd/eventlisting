@@ -267,9 +267,9 @@ $events = events::index();
                                     if(strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))){
                                     
                                     if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-          echo'<td class="table_search" colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td>';
+          echo'<td class="table_search" colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td><td style="display:none;"></td>';
                                     }else{
-          echo'<td class="table_search" colspan="2">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+          echo'<td class="table_search" colspan="2">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td><td style="display:none;"></td>';
                                     }
                                     }
                                     if(strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))){
