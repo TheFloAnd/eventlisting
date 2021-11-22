@@ -18,11 +18,6 @@ $blade = $_GET['b'];
   define('blade','main');
 }
 
-if(strftime('%H:%M') == '08:00'){
-  system::get_updates();
-  updates::get_updates();
-}
-
 if(isset($_POST['submit_event'])){
   if(!isset($_POST['set_repeat'])){
     events::store($_POST);
