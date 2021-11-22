@@ -1,3 +1,6 @@
+<?php
+use app\controller\config;
+?>
 <!doctype html>
 <html lang="de">
   <head>
@@ -7,7 +10,7 @@
     <!-- <meta http-equiv="refresh" content="1"> -->
     <link rel="icon" type="image/png" href="#"/>
 
-    <title>Liste</title>
+    <title><?php echo config::get('name')->value; ?></title>
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
