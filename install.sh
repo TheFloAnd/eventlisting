@@ -41,3 +41,5 @@ fi
 
 sudo crontab mycron
 sudo rm -rf mycron
+
+sudo reboot
