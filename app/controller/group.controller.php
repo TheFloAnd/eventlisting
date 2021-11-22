@@ -8,11 +8,11 @@ class group{
     
     public static function index(){
 
-        $stmt_active = "SELECT * FROM `v_teams_active` ORDER BY `name` ASC";
+        $stmt_active = "SELECT * FROM `v_teams` WHERE `deleted_at` IS NULL ORDER BY `name` ASC";
         $data_active = connect::connection()->query($stmt_active);
         $active = $data_active->fetchAll();
 
-        $stmt_inactive = "SELECT * FROM `v_teams_inactive` ORDER BY `name` ASC";
+        $stmt_inactive = "SELECT * FROM `v_teams` WHERE `deleted_at` IS NOT NULL ORDER BY `name` ASC";
         $data_inactive = connect::connection()->query($stmt_inactive);
         $inactive = $data_inactive->fetchAll();
 
@@ -45,9 +45,9 @@ class group{
     }
     public static function update($group){
         if(isset($group['deactivate_group'])){
-            $stmt = "UPDATE `teams` SET `name`='". $group['group_name'] ."',`color`='". $group['group_color'] ."',`active`= 1, `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE alias = '". $group['alias'] ."' AND id = '". $group['id'] ."'";
+            $stmt = "UPDATE `teams` SET `name`='". $group['group_name'] ."',`color`='". $group['group_color'] ."',`deleted_at`= NULL, `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE alias = '". $group['alias'] ."' AND id = '". $group['id'] ."'";
         }else{
-            $stmt = "UPDATE `teams` SET `active`= 0, `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE alias = '". $group['alias'] ."' AND id = '". $group['id'] ."'";
+            $stmt = "UPDATE `teams` SET `deleted_at`='". strftime('%Y-%m-%dT%H:%M') ."', `updated_at`='". strftime('%Y-%m-%dT%H:%M') ."' WHERE alias = '". $group['alias'] ."' AND id = '". $group['id'] ."'";
         }
 
         $exec = connect::connection()->prepare($stmt);

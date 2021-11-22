@@ -34,11 +34,16 @@ if(isset($_POST['submit_event'])){
 }
 
 if(isset($_POST['submit_edit_event'])){
-  $update_event = events::update($_POST);
+  if(isset($_POST['edit_repeat'])){
+    $update_event = events::update_repeat($_POST);
+  }
+  if(!isset($_POST['edit_repeat'])){
+    $update_event = events::update($_POST);
+  }
   if($update_event['0']){
     //notification::success('Der Termin "'. $update_event['1']['event'] .'" vom '. strftime('%d.%m.%Y', strtotime($update_event['1']['start_date'])) .' bis zum '. strftime('%d.%m.%Y', strtotime($update_event['1']['end_date'])) .' der Gruppe '. $update_event['1']['group'] .' wurde Erfolgreich geändert!');
 
-    header('Refresh:0');
+    // header('Refresh:0');
   }
 }
 
