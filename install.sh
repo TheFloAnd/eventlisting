@@ -1,7 +1,11 @@
 #!/bin/sh
 sudo apt update  # To get the latest package lists
 sudo apt upgrade -y
-sudo apt install apache2 mysql-common php git cron -y
+sudo apt install apache2  -y
+sudo apt install mariadb-server -y
+sudo apt install php -y
+sudo apt install git -y
+sudo apt install cron -y
 cd /var/www/
 git clone https://github.com/TheFloAnd/eventlisting.git  production
 sudo chmod -R 777 /var/www/production
@@ -18,7 +22,7 @@ sudo echo "@reboot chromium-browser --kiosk http://localhost" >> mycron
 sudo echo "@reboot firefox --kiosk http://localhost" >> mycron
 #install new cron file
 
-sudo crontab mycron
+crontab mycron
 sudo rm -rf mycron
 
 sudo apt autoremove -y
