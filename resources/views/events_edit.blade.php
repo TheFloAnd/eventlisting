@@ -68,6 +68,7 @@ $current_group = group::find($data['result']->team);
                                         </label>
                                     </div>
                                 </fieldset>
+
                             </div>
                             <div class="col-md-10">
                                 <fieldset>
@@ -155,11 +156,42 @@ $current_group = group::find($data['result']->team);
                                 </div>
                             </fieldset>
                         </div>
+
+
+<?php
+if(!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)){
+echo'<div class="col-md-10"><fieldset>
+    <div class="form-group">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle"
+                autocomplete="off">
+            <label class="form-check-label" for="edit_repeat">
+                '. lang['repeat'] .' ebenfalls '. lang['update'] .'?
+            </label>
+        </div>
+    </div>
+</fieldset>
+</div>
+                        <div class="col-md-5">
+                            <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="In wievielen Tagen/Wochen sich der Termin wiederholen soll">
+                                <fieldset>
+                                    <label class="form-label" for="days">
+                                        '. lang['days'] .' :
+                                    </label>
+                                    <input class="form-control" type="number" placeholder="'. lang['days'] .'" min="1" name="repeat_days" id="repeat_days" value="'. $data['result']->repeat_dif .'" disabled>
+                                </fieldset>
+                            </div>
+                        </div>';
+}
+?>
+
+
                         <div class="col-md-10">
                             <div class="row g-2 justify-content-evenly">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-outline-success w-100" name="submit_edit_event" value="submit">
+                                        <button type="submit" class="btn btn-outline-success w-100" name="submit_edit_event" data-bs-toggle="modal" data-bs-target="#editModal">
 <?php echo lang['update'] ?>
                                         </button>
                                     </div>
@@ -255,4 +287,39 @@ if(toogle_disable.checked == true){
             }
         }
     }
+</script>
+
+<script>
+    var start_date = document.getElementById("start_date");
+        var end_date = document.getElementById("end_date");
+        
+        start_date.onchange = function () {
+          if (start_date.value > end_date.value) {
+            end_date.value = start_date.value
+          }
+          if (!end_date.value) {
+            end_date.value = start_date.value
+          }
+        };
+        end_date.onchange = function () {
+          if (end_date.value < start_date.value) {
+            start_date.value = end_date.value
+          }
+          if (!start_date.value) {
+            start_date.value = end_date.value
+          }
+        };
+</script>
+<script>
+var edit_repeat = document.getElementById('edit_repeat');
+var set_repeat = document.getElementById('repeat_days');
+edit_repeat.checked = false;
+set_repeat.disabled = true;
+edit_repeat.onchange = function() {
+    if(edit_repeat.checked == true) {
+        set_repeat.disabled = false;
+    }else {
+        set_repeat.disabled = true;
+    }
+};
 </script>

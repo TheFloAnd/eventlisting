@@ -24,9 +24,9 @@ class teams extends admin_connect
                 `name` varchar(255) NOT NULL,
                 `alias` varchar(10) NOT NULL,
                 `color` varchar(7) NOT NULL,
-                `active` int NOT NULL DEFAULT '1',
                 `created_at` datetime DEFAULT NULL,
-                `updated_at` datetime DEFAULT NULL
+                `updated_at` datetime DEFAULT NULL,
+                `deleted_at` datetime DEFAULT NULL
             );"
             );
 
@@ -53,41 +53,41 @@ class teams extends admin_connect
                 `teams`.`name` AS `name`,
                 `teams`.`alias` AS `alias`,
                 `teams`.`color` AS `color`,
-                `teams`.`active` AS `active`,
-                `events`.`created_at` AS `created_at`,
-                `events`.`updated_at` AS `updated_at`
+                `teams`.`created_at` AS `created_at`,
+                `teams`.`updated_at` AS `updated_at`,
+                `teams`.`deleted_at` AS `deleted_at`
             from `teams` 
                 order by `teams`.`name` 
             ;"
             );
 
-            $pdo->query(
-                "CREATE VIEW IF NOT EXISTS `v_teams_active`  AS  select 
-                `teams`.`id` AS `id`,
-                `teams`.`name` AS `name`,
-                `teams`.`alias` AS `alias`,
-                `teams`.`color` AS `color` ,
-                `events`.`created_at` AS `created_at`,
-                `events`.`updated_at` AS `updated_at`
-            from `teams` 
-                where `teams`.`active` = 1 
-                order by `teams`.`name`
-            ;"
-            );
+            // $pdo->query(
+            //     "CREATE VIEW IF NOT EXISTS `v_teams_active`  AS  select 
+            //     `teams`.`id` AS `id`,
+            //     `teams`.`name` AS `name`,
+            //     `teams`.`alias` AS `alias`,
+            //     `teams`.`color` AS `color` ,
+            //     `events`.`created_at` AS `created_at`,
+            //     `events`.`updated_at` AS `updated_at`
+            // from `teams` 
+            //     where `teams`.`deleted_at` = NULL 
+            //     order by `teams`.`name`
+            // ;"
+            // );
 
-            $pdo->query(
-                "CREATE VIEW IF NOT EXISTS `v_teams_inactive`  AS  select 
-                `teams`.`id` AS `id`,
-                `teams`.`name` AS `name`,
-                `teams`.`alias` AS `alias`,
-                `teams`.`color` AS `color` ,
-                `events`.`created_at` AS `created_at`,
-                `events`.`updated_at` AS `updated_at`
-            from `teams` 
-                where `teams`.`active` = 0 
-                order by `teams`.`name`
-            ;"
-            );
+            // $pdo->query(
+            //     "CREATE VIEW IF NOT EXISTS `v_teams_inactive`  AS  select 
+            //     `teams`.`id` AS `id`,
+            //     `teams`.`name` AS `name`,
+            //     `teams`.`alias` AS `alias`,
+            //     `teams`.`color` AS `color` ,
+            //     `events`.`created_at` AS `created_at`,
+            //     `events`.`updated_at` AS `updated_at`
+            // from `teams` 
+            //     where `teams`.`deleted_at` != 0 
+            //     order by `teams`.`name`
+            // ;"
+            // );
             return;
         } catch (\PDOException $e) {
             echo "PDOException: " . $e->getMessage();

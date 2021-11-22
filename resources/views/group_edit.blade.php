@@ -2,7 +2,7 @@
 use app\controller\group;
 $group = group::find($_GET['g']);
 
-if($group->active == 1){
+if($group->deleted_at != 'NULL'){
     $checked = 'checked';
 }else{
     $checked = '';
