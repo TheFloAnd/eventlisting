@@ -1,26 +1,43 @@
 #!/bin/sh
-apt-get update  # To get the latest package lists
-apt-get upgrade -y
-apt-get install apache2 -y
-apt-get install mysql-common -y
-apt-get install php -y
-apt-get install git -y
-apt-get install cron -y
+sudo apt-get update  # To get the latest package lists
+sudo apt-get upgrade -y
+sudo apt-get install apache2 -y
+sudo apt-get install mysql-common -y
+sudo apt-get install php -y
+sudo apt-get install git -y
+sudo apt-get install cron -y
 cd /var/www/
 git clone https://github.com/TheFloAnd/eventlisting.git  production
-chmod -R 777 /var/www/production
-rm -rf /var/www/html
-mv -u /var/www/production/ /var/www/html/
+sudo chmod -R 777 /var/www/production
+sudo rm -rf /var/www/html
+sudo mv -u /var/www/production/ /var/www/html/
 
-systemctl enable cron.service
+sudo systemctl enable cron.service
 #write out current crontab
-crontab -l > mycron
+sudo crontab -l > mycron
 #echo new cron into cron file
-echo "00 06 * * 1-5 git clone https://github.com/TheFloAnd/eventlisting.git  production" >> mycron
-echo "@reboot firefox --kiosk http://localhost" >> mycron
+sudo echo "00 06 * * 1-5 git clone https://github.com/TheFloAnd/eventlisting.git  production" >> mycron
+# echo "@reboot firefox --kiosk http://localhost" >> mycron
+# echo "@reboot chromium-browser --kiosk http://localhost" >> mycron
 #install new cron file
-crontab mycron
-rm -rf mycron
 
 
-firefox --kiosk http://localhost
+# xdg-open http://localhost
+if chromium-browser --kiosk http://localhost
+then
+    sudo echo "@reboot chromium-browser --kiosk http://localhost" >> mycron
+else
+    if firefox --kiosk http://localhost
+    then
+        sudo echo "@reboot firefox --kiosk http://localhost" >> mycron
+    else
+        sudo echo "@reboot xdg-open http://localhost" >> mycron
+        sudo echo "@reboot xdotool key F11" >> mycron
+        sudo apt-get install xdotool -y
+        xdg-open http://localhost
+        xdotool key F11
+    fi
+fi
+
+sudo crontab mycron
+sudo rm -rf mycron
