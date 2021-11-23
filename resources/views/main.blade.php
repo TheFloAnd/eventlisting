@@ -8,7 +8,7 @@ $result = MAIN::index();
   data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
   <span class="navbar-toggler-icon"></span>
 </button>
-<div class="offcanvas offcanvas-start myOffcanvas show" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+<div class="offcanvas offcanvas-start myOffcanvas" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
   <div class="offcanvas-header">
     <h4 id="offcanvasTopLabel">Navigation</h4>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
