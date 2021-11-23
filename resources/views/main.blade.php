@@ -4,32 +4,20 @@ use app\controller\main;
 use app\controller\group;
 $result = MAIN::index();
 ?>
-<button class="btn btn-hidden" type="button" style="border: none;z-index:999;" href="?b=events"
+<button class="btn btn-lg btn-hidden" type="button" href="?b=events"
   data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
   <span class="navbar-toggler-icon"></span>
 </button>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+<div class="offcanvas offcanvas-start myOffcanvas show" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
   <div class="offcanvas-header">
-    <h5 id="offcanvasTopLabel">Navigation</h5>
+    <h4 id="offcanvasTopLabel">Navigation</h4>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <div class="row">
-      <a href="?b=events">
-        <span class="navbar-text">
-          <?php echo lang['events'] ?>
-        </span>
-      </a>
-      <a href="?b=groups">
-        <span class="navbar-text">
-          <?php echo lang['groups'] ?>
-        </span>
-      </a>
-      <a href="?b=settings">
-        <span class="navbar-text">
-          <?php echo lang['settings'] ?>
-        </span>
-      </a>
+    <div class="btn-group-vertical w-100">
+      <a href="?b=events" type="button" class="btn btn-outline-secondary"><?php echo lang['events'] ?></a>
+      <a href="?b=groups" type="button" class="btn btn-outline-secondary"><?php echo lang['groups'] ?></a>
+      <a href="?b=settings" type="button" class="btn btn-outline-secondary"><?php echo lang['settings'] ?></a>
     </div>
   </div>
 </div>
