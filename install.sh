@@ -16,7 +16,7 @@ sudo systemctl enable cron.service
 #write out current crontab
 sudo crontab -l > mycron
 #echo new cron into cron file
-sudo echo "00 06 * * 1-5 git pull https://github.com/TheFloAnd/eventlisting.git  production" >> mycron
+sudo echo "00 06 * * 1-5 cd /var/www/html && git pull https://github.com/TheFloAnd/eventlisting.git  production" >> mycron
 sudo echo "00 06 * * 1-5 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y" >> mycron
 sudo echo "@reboot chromium-browser --kiosk http://localhost" >> mycron
 sudo echo "@reboot firefox --kiosk http://localhost" >> mycron

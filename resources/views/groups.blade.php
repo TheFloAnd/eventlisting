@@ -147,6 +147,7 @@ $group = GROUP::index();
                 </thead>
                 <tbody>
                   <?php
+                    if(!empty($group['active'])){
                                     foreach($group['active'] as $active){
                                             echo'
                                             <tr>
@@ -161,6 +162,11 @@ $group = GROUP::index();
                                                 </td>
                                             </tr>';
                                     }
+                    }else{
+                      echo'<tr>
+                          <td colspan="4">Keine Einträge</td>
+                        </tr>';
+                    }
                                 ?>
                 </tbody>
               </table>
@@ -186,6 +192,7 @@ $group = GROUP::index();
                 </thead>
                 <tbody>
                   <?php
+if(!empty($group['inactive'])){
                                     foreach($group['inactive']  as $inactive){
                                             echo'
                                             <tr>
@@ -198,6 +205,10 @@ $group = GROUP::index();
                                                   </a>
                                                 </td>
                                             </tr>';
+                                    }}else{
+                                    echo'<tr>
+                                      <td colspan="4">Keine Einträge</td>
+                                    </tr>';
                                     }
                                 ?>
                 </tbody>
