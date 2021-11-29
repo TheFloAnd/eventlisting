@@ -2,7 +2,7 @@
 use app\controller\group;
 $group = group::find($_GET['g']);
 
-if($group->deleted_at != 'NULL'){
+if($group->deleted_at == NULL){
     $checked = 'checked';
 }else{
     $checked = '';
@@ -27,7 +27,7 @@ require __DIR__ . '/../layout/navigation.php';
             </fieldset>
             <div class="col-md-10">
               <fieldset>
-                <div class="form-check">
+                <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" name="deactivate_group" id="deactivate_group"
                     value="1" <?php echo$checked; ?>>
                   <label class="form-check-label" for="deactivate_group">

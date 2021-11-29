@@ -16,9 +16,9 @@ use app\controller\config;
 
     <!-- Custom CSS -->
     <link href="/resources/css/custom.css" rel="stylesheet" />
-    <!-- Bootstrap CSS 
+    <!-- Bootstrap CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">-->
+    <!-- <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">-->
 
     <link rel="stylesheet" href="/resources/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/jquery.dataTables.min.css">
@@ -55,6 +55,7 @@ use app\controller\config;
         'displayLength': 15,
         'autoWidth': false,
         'stateSave': true,
+        'ordering': true,
         lengthMenu: [
             [15, 25, 50, -1],
             [15, 25, 50, "All"],
@@ -66,6 +67,30 @@ use app\controller\config;
                 api.search($.trim(this.innerHTML)).draw();
             });
         },
+        "language": {
+    "decimal":        "",
+    "emptyTable":     "Es wurden keine Einträge gefunden!",
+    "info":           "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
+    "infoEmpty":      "Zeige 0 bis 0 von 0 Einträgen",
+    "infoFiltered":   "(Suche aus insgesamt _MAX_ Einträgen)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "Einträge anzeigen: _MENU_",
+    "loadingRecords": "Laden...",
+    "processing":     "Verarbeiten...",
+    "search":         "Suche:",
+    "zeroRecords":    "Es sind keine Einträge vorhanden!",
+    "paginate": {
+        "first":      "Erste",
+        "last":       "Letzte",
+        "next":       "Nächste",
+        "previous":   "Vorherige"
+    },
+    "aria": {
+        "sortAscending":  ": activate to sort column ascending",
+        "sortDescending": ": activate to sort column descending"
+    }
+}
     });
     $(".dataTable_default tbody").on("click", "tr", function() {
         if ($(this).hasClass("selected")) {

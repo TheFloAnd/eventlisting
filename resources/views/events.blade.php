@@ -174,7 +174,7 @@ require __DIR__ . '/../layout/navigation.php';
             </form>
           </div>
           <div class="tab-pane fade" id="nav-event_edit" role="tabpanel" aria-labelledby="nav-event_edit-tab">
-            <div class="table-responsive">
+            <div class="table-responsive mt-2">
               <table class="table dataTable stripe display row-border hover order-column compact w-100"
                 id="refresh_edit">
                 <thead>

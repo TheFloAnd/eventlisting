@@ -21,7 +21,7 @@ require __DIR__ . '/../layout/navigation.php';
                         </fieldset>
                         <div class="col-md-10">
                             <fieldset id="fieldset_remove">
-                                <div class="form-check">
+                                <div class="form-check form-switch">
                                     <?php
                                     if($data['result']->not_applicable == 1){
                                         $checked = 'checked';

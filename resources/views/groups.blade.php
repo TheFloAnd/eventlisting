@@ -104,7 +104,7 @@ require __DIR__ . '/../layout/navigation.php';
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="nav-active_group" role="tabpanel"
             aria-labelledby="nav-active_group-tab">
-            <div class="table-responsive">
+            <div class="table-responsive mt-2">
               <table class="table dataTable table-striped table-hover" id="table-to-refresh">
                 <thead>
                   <tr>
@@ -122,13 +122,12 @@ require __DIR__ . '/../layout/navigation.php';
                 </thead>
                 <tbody>
                   <?php
-                    if(!empty($group['active'])){
                                     foreach($group['active'] as $active){
                                             echo'
                                             <tr>
                                             
-                                                <td>'. $active['alias'] .'</td>
-                                                <td>'. $active['name'] .'</td>
+                                                <td class="table_search">'. $active['alias'] .'</td>
+                                                <td class="table_search">'. $active['name'] .'</td>
                                                 <td style="background-color:'. $active['color'] .';">'. $active['color'] .'</td>
                                                 <td>
                                                   <a href="?b=group_edit&g='. $active['alias'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
@@ -137,11 +136,6 @@ require __DIR__ . '/../layout/navigation.php';
                                                 </td>
                                             </tr>';
                                     }
-                    }else{
-                      echo'<tr>
-                          <td colspan="4">Keine Einträge</td>
-                        </tr>';
-                    }
                                 ?>
                 </tbody>
               </table>
@@ -149,7 +143,7 @@ require __DIR__ . '/../layout/navigation.php';
           </div>
           <div class="tab-pane fade" id="nav-deactivated_group" role="tabpanel"
             aria-labelledby="nav-deactivated_group-tab">
-            <div class="table-responsive">
+            <div class="table-responsive mt-2">
               <table class="table dataTable table-striped table-hover" id="table-to-refresh">
                 <thead>
                   <tr>
@@ -162,17 +156,16 @@ require __DIR__ . '/../layout/navigation.php';
                     <th scope="col">
                       <?php echo lang['color'] ?>
                     </th>
-                    <th scope="col"></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-if(!empty($group['inactive'])){
                                     foreach($group['inactive']  as $inactive){
                                             echo'
                                             <tr>
-                                                <td>'. $inactive['alias'] .'</td>
-                                                <td>'. $inactive['name'] .'</td>
+                                                <td class="table_search">'. $inactive['alias'] .'</td>
+                                                <td class="table_search">'. $inactive['name'] .'</td>
                                                 <td style="background-color:'. $inactive['color'] .';">'. $inactive['color'] .'</td>
                                                 <td>
                                                   <a href="?b=group_edit&g='. $inactive['alias'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
@@ -180,10 +173,6 @@ if(!empty($group['inactive'])){
                                                   </a>
                                                 </td>
                                             </tr>';
-                                    }}else{
-                                    echo'<tr>
-                                      <td colspan="4">Keine Einträge</td>
-                                    </tr>';
                                     }
                                 ?>
                 </tbody>
