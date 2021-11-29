@@ -18,12 +18,13 @@ require __DIR__ . '/../layout/navigation.php';
             <fieldset class="" hidden>
               <div class="form-group">
                 <input type="text" class="form-control" name="id" id="group_id" value="<?php echo$group->id ?>">
-            </div>
-          </fieldset><fieldset class="" hidden>
-            <div class="form-group">
-              <input type="text" class="form-control" name="alias" id="alias" value="<?php echo$group->alias ?>">
-            </div>
-          </fieldset>
+              </div>
+            </fieldset>
+            <fieldset class="" hidden>
+              <div class="form-group">
+                <input type="text" class="form-control" name="alias" id="alias" value="<?php echo$group->alias ?>">
+              </div>
+            </fieldset>
             <div class="col-md-10">
               <fieldset>
                 <div class="form-check">

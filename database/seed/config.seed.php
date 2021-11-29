@@ -61,21 +61,21 @@ class config extends admin_connect
                 'refresh',
                 '15',
                 'seconds',
-                '". strftime('%Y-%m-%dT%H:%M') ."'
+                '" . strftime('%Y-%m-%dT%H:%M') . "'
             ),(
                 2,
                 'Termin Preview Zeitraum',
                 'future_day',
                 '30',
                 'day',
-                '". strftime('%Y-%m-%dT%H:%M') ."'
+                '" . strftime('%Y-%m-%dT%H:%M') . "'
             ), (
                 3,
                 'Überschrift',
                 'name',
                 '',
                 '',
-                '". strftime('%Y-%m-%dT%H:%M') ."'
+                '" . strftime('%Y-%m-%dT%H:%M') . "'
             );"
             );
             return;

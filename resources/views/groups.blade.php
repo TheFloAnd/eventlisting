@@ -74,16 +74,16 @@ require __DIR__ . '/../layout/navigation.php';
     </div>
   </section>
 
-<!-- Auflistung -->
+  <!-- Auflistung -->
   <section class="col-12">
     <div class="card">
       <div class="card-header">
-      <nav class="navbar navbar-dark">
-        <h1 class="header-primary">
-          <?php echo lang['groups']; ?>
-        </h1>
-      </nav>
-    </div>
+        <nav class="navbar navbar-dark">
+          <h1 class="header-primary">
+            <?php echo lang['groups']; ?>
+          </h1>
+        </nav>
+      </div>
       <div class="card-body">
 
         <nav>
@@ -105,7 +105,7 @@ require __DIR__ . '/../layout/navigation.php';
           <div class="tab-pane fade show active" id="nav-active_group" role="tabpanel"
             aria-labelledby="nav-active_group-tab">
             <div class="table-responsive">
-              <table class="table table-striped table-hover" id="table-to-refresh">
+              <table class="table dataTable table-striped table-hover" id="table-to-refresh">
                 <thead>
                   <tr>
                     <th scope="col">
@@ -150,7 +150,7 @@ require __DIR__ . '/../layout/navigation.php';
           <div class="tab-pane fade" id="nav-deactivated_group" role="tabpanel"
             aria-labelledby="nav-deactivated_group-tab">
             <div class="table-responsive">
-              <table class="table table-striped table-hover" id="table-to-refresh">
+              <table class="table dataTable table-striped table-hover" id="table-to-refresh">
                 <thead>
                   <tr>
                     <th scope="col">

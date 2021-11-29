@@ -306,7 +306,7 @@ display_time = document.getElementById("display_time");
   // display_time.innerHTML = h + ":" + m + ":" + s;
   date = D + " " + d + "." + M + "." + y;
   time = h + ":" + m;
-  display_time.innerHTML = date + " " + time;
+  display_time.innerHTML = date + " - " + time;
   setTimeout(show_clock, 1000)
 }
 function checkTime(i) {

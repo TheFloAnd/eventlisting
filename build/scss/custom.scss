@@ -1,9 +1,12 @@
+@use "../../node_modules/bootstrap/scss/bootstrap";
+@use "../../node_modules/bootstrap-icons/font/bootstrap-icons";
+
 .card {
   border-radius: 0.5em !important;
 }
 .btn-hidden {
   border-top-left-radius: 0 !important;
-  border-bottom-right-radius: .75em !important;
+  border-bottom-right-radius: 0.75em !important;
   position: fixed;
   width: 5rem;
   height: 2.5rem;
@@ -14,7 +17,7 @@
     // border: none !important;
     box-shadow: none !important;
   }
-  &:hover{
+  &:hover {
     background-color: rgba(180, 180, 180, 0.25) !important;
   }
 }
@@ -66,10 +69,10 @@ tr.strikeout td:after {
   position: sticky;
   top: 0;
   & > .card {
-    border-bottom: 5px solid #000;
+    border-bottom: 2.5px solid #000;
   }
 }
-.myOffcanvas{
+.myOffcanvas {
   height: fit-content !important;
   border-bottom-right-radius: 1rem !important;
 }

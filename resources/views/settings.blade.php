@@ -1,25 +1,25 @@
 <?php
 require __DIR__ . '/../layout/navigation.php';
 ?>
-  <article class="row">
-    <section class="col">
-      <div class="card">
-        <div class="card-body">
-              <div class="table-responsive">
-                  <table class="table table-striped table-hover" id="table-to-refresh">
-                      <thead>
-                        <tr>
-<th scope="col">
-                            <?php echo lang['settings'] ?>
-                          </th>
-                          <th scope="col">
-                            <?php echo lang['value'] ?>
-                          </th>
-                          <th scope="col"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
+<article class="row">
+  <section class="col">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover" id="table-to-refresh">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <?php echo lang['settings'] ?>
+                </th>
+                <th scope="col">
+                  <?php echo lang['value'] ?>
+                </th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
                         use app\controller\config;
                         foreach(config::index() as $row){
                         echo'
@@ -51,10 +51,10 @@ require __DIR__ . '/../layout/navigation.php';
                         }
                         echo'</tr>';
                         ?>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-        </section>
-      </article>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>

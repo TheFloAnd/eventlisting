@@ -16,12 +16,11 @@ use app\controller\config;
 
     <!-- Custom CSS -->
     <link href="/resources/css/custom.css" rel="stylesheet" />
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS 
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
-    
-    <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">-->
+
     <link rel="stylesheet" href="/resources/css/select2.min.css">
-    <!--<link rel="stylesheet" href="/resources/css/jquery.dataTables.min.css">-->
     <link rel="stylesheet" type="text/css" href="/resources/css/jquery.dataTables.min.css">
   </head>
   <body>

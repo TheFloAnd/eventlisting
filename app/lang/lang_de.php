@@ -40,5 +40,7 @@ $lang['de']['tuesday']        = 'Dienstag';
 $lang['de']['wednesday']      = 'Mittwoch';
 $lang['de']['thursday']       = 'Donnerstag';
 $lang['de']['friday']         = 'Freitag';
+$lang['de']['saturday']         = 'Samstag';
+$lang['de']['sunday']         = 'Sonntag';
 $lang['de']['weeks']          = 'Wochen';
 $lang['de']['days']           = 'Tage';
