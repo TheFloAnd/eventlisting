@@ -1,30 +1,6 @@
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-<a href="/">
-          <span class="navbar-text">
-<?php echo lang['index'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=events">
-          <span class="navbar-text">
-<?php echo lang['events'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=groups">
-          <span class="navbar-text">
-<?php echo lang['groups'] ?>
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
-</nav>
+<?php
+require __DIR__ . '/../layout/navigation.php';
+?>
   <article class="row">
     <section class="col">
       <div class="card">
@@ -51,21 +27,21 @@
                               <td>';
               switch ($row['time_unit']){
                 case 'day':
-                  $output_time_unit = '(in Tagen)';
+                  $output_time_unit = 'Tagen';
                   break;
                 case 'week':
-                  $output_time_unit = '(in Wochen)';
+                  $output_time_unit = 'Wochen';
                   break;
                 case 'seconds':
-                  $output_time_unit = '(in Sekunden)';
+                  $output_time_unit = 'Sekunden';
                   break;
                 default:
                   $output_time_unit = '';
                 }
-                                echo ucwords($row['view']) .' '. $output_time_unit;
+                                echo ucwords($row['view']);
                                 echo'</td>
                               <td>
-                                '. $row['value'] .'
+                                '. $row['value'] .' '. $output_time_unit .'
                               </td>';
                           echo'<td>
                             <a href="?b=settings_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative">

@@ -33,7 +33,10 @@ $result = MAIN::index();
             </h1>
           </div>
           <h1 class="header-primary">
-            <?php echo  strftime('%A %d.%m.%Y - '); ?><span id="display_time"></span>
+            <!--
+            <?php echo  strftime('%A %d.%m.%Y - '); ?>
+            -->
+            <span id="display_time"></span>
           </h1>
         </nav>
       </div>
@@ -277,23 +280,38 @@ function refresh_loop(){
     $( "#refresh_2" ).load(window.location.href + " #refresh_2 > *" );
     $( "#refresh_title" ).load(window.location.href + " #refresh_title > *" );
     $( "#refresh_title_future" ).load(window.location.href + " #refresh_title_future > *" );
-    }, <?php echo config::get('refresh')->value ?> * 1000)
+    }, <?php echo config::get('refresh')->value; ?> * 1000)
 }
+</script>
+<?php
+echo'<script>
 show_clock();
 function show_clock(){
+const days = ["'. lang['sunday'] .'", "'. lang['monday'] .'", "'. lang['tuesday'] .'", "'. lang['wednesday'] .'", "'. lang['thursday'] .'", "'. lang['friday'] .'", "'. lang['saturday'] .'"];
+display_time = document.getElementById("display_time");
   const today = new Date();
+  let y = today.getFullYear();
+  let M = today.getMonth() + 1;
+  let d= today.getDate();
+  let D = today.getDay();
+  D = days[D];
   let h = today.getHours();
   let m = today.getMinutes();
   let s = today.getSeconds();
+  M = checkTime(M);
+  d = checkTime(d);
+  h = checkTime(h);
   m = checkTime(m);
   s = checkTime(s);
-  display_time = document.getElementById("display_time");
   // display_time.innerHTML = h + ":" + m + ":" + s;
-  display_time.innerHTML = h + ":" + m;
+  date = D + " " + d + "." + M + "." + y;
+  time = h + ":" + m;
+  display_time.innerHTML = date + " " + time;
   setTimeout(show_clock, 1000)
 }
 function checkTime(i) {
   if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
   return i;
 }
-</script>
+</script>';
+?>

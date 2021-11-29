@@ -1,34 +1,9 @@
 <?php
 use app\controller\group;
 $group = GROUP::index();
+
+require __DIR__ . '/../layout/navigation.php';
 ?>
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <a href="/">
-          <span class="navbar-text">
-            <?php echo lang['index'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=events">
-          <span class="navbar-text">
-            <?php echo lang['events'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=settings">
-          <span class="navbar-text">
-            <?php echo lang['settings'] ?>
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
-</nav>
 <article class="row g-3">
   <section class="col-12">
     <div class="card">
