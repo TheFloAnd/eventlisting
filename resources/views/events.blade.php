@@ -175,6 +175,11 @@ require __DIR__ . '/../layout/navigation.php';
           </div>
           <div class="tab-pane fade" id="nav-event_edit" role="tabpanel" aria-labelledby="nav-event_edit-tab">
             <div class="table-responsive mt-2">
+              <div class="my-2">
+                Toggle column:
+                <a class="toggle-vis" data-column="2"><?php echo lang['room'] ?></a> -
+                <a class="toggle-vis" data-column="5"><?php echo lang['settings'] ?></a>
+              </div>
               <table class="table dataTable stripe display row-border hover order-column compact w-100"
                 id="refresh_edit">
                 <thead>
@@ -199,79 +204,69 @@ require __DIR__ . '/../layout/navigation.php';
                 </thead>
                 <tbody>
                   <?php
-          $i = 0;
-                                  foreach($events['result'] as $row){
-                                    $start = strftime('%Y-%m-%d', strtotime($row['start']));
-                            $end = strftime('%Y-%m-%d', strtotime($row['end']));
-                                    if($start >= strftime('%Y-%m-%d') OR $end >= strftime('%Y-%m-%d')){
-                                  if($row['not_applicable'] == 1){
-                                    $disabled = 'class="table-danger strikethrough"';
-                                  }else{
-                                    $disabled = '';
-                                  }
-                                  echo'
-                                      <tr '.$disabled.'>
-          <td class="table_search">
-                                          '. $row['event'] .'
-                                        </td>
-          <td>';
-          
-                            $teams = explode(';', $row['team']);
-                                array_pop($teams);
-                                foreach($teams as $team){
-                                  $color = GROUP::find($team)->color;
-          echo'<span class="badge text-dark table_search" style="background-color:'. $color.';">'. $team .'</span> ';
-                                }
-                            
-                            
-                            echo'</td>
-          <td class="table_search">
-                                        '. $row['room'] .'
-                                      </td>';
-                                    if(strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))){
-                                    
-                                    if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                                    echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
-                                    }else{
-                                    echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
-                                    }
-                                    if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
-                                    echo'<td>'. strftime('%d.%m.%Y ', strtotime($row['end'])) .'</td>';
-                                    }else{
-                                    echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['end'])) .'</td>';
-                                    }
-                                    }
-                                    if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))){
-                                    if(strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))){
-                                    
-                                    if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                                    echo'<td colspan="2">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td><td style="display:none;">';
-                                    }else{
-                                    echo'<td colspan="2">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td><td style="display:none;">';
-                                    }
-                                    }
-                                    if(strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))){
-                                    if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                                    echo'<td>'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
-                                    }else{
-                                    echo'<td>'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
-                                    }
-                                    if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
-                                    echo'<td>'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
-                                    }else{
-                                    echo'<td>'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
-                                    }
-                                    }
-                                    }
-                                    echo'<td>
-                                      <a href="?b=events_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
-                                        <i class="bi bi-gear-wide"></i>
-                                      </a>
-                                    </td>';
-                                  }
-                                }
-                                  echo'</tr>';
-                                  ?>
+                  $i = 0;
+                  foreach($events['result'] as $row){
+                    $start = strftime('%Y-%m-%d', strtotime($row['start']));
+                    $end = strftime('%Y-%m-%d', strtotime($row['end']));
+                    if($start >= strftime('%Y-%m-%d') OR $end >= strftime('%Y-%m-%d')){
+                      if($row['not_applicable'] == 1){
+                        $disabled = 'class="table-danger strikethrough"';
+                      }else{
+                        $disabled = '';
+                      }
+                      echo'<tr '.$disabled.'>
+                        <td class="table_search">
+                          '. $row['event'] .'
+                        </td>
+                        <td>';
+                          $teams = explode(';', $row['team']);
+                          array_pop($teams);
+                          foreach($teams as $team){
+                            $color = GROUP::find($team)->color;
+                            echo'<span class="badge text-dark table_search" style="background-color:'. $color.';">'. $team .'</span> ';
+                          }
+                      echo'</td>
+                        <td class="table_search">
+                          '. $row['room'] .'
+                        </td>';
+                      if(strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))){              
+                        if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                          echo'<td class="table_search">'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+                        }else{
+                          echo'<td class="table_search">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+                        }
+                        if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
+                          echo'<td class="table_search">'. strftime('%d.%m.%Y ', strtotime($row['end'])) .'</td>';
+                        }else{
+                          echo'<td class="table_search">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['end'])) .'</td>';
+                        }
+                      }
+                      if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))){
+                        if(strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))){
+                          if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                            echo'<td colspan="2" class="table_search">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td><td style="display:none;">';
+                          }else{
+                            echo'<td colspan="2" class="table_search">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td><td style="display:none;">';
+                          }
+                        }
+                        if(strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))){
+                          if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
+                            echo'<td class="table_search">'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
+                          }else{
+                            echo'<td class="table_search">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+                          }
+                          if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
+                            echo'<td class="table_search">'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
+                          }else{
+                            echo'<td class="table_search">'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
+                          }
+                        }
+                      }
+                      echo'<td><a href="?b=events_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative"><i class="bi bi-gear-wide"></i></a></td>';
+                    }
+                  }
+                  echo'</tr>';
+                  ?>
                 </tbody>
               </table>
             </div>
