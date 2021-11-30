@@ -1,34 +1,9 @@
 <?php
 use app\controller\group;
 $group = GROUP::index();
+
+require __DIR__ . '/../layout/navigation.php';
 ?>
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <a href="/">
-          <span class="navbar-text">
-            <?php echo lang['index'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=events">
-          <span class="navbar-text">
-            <?php echo lang['events'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=settings">
-          <span class="navbar-text">
-            <?php echo lang['settings'] ?>
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
-</nav>
 <article class="row g-3">
   <section class="col-12">
     <div class="card">
@@ -99,16 +74,16 @@ $group = GROUP::index();
     </div>
   </section>
 
-<!-- Auflistung -->
+  <!-- Auflistung -->
   <section class="col-12">
     <div class="card">
       <div class="card-header">
-      <nav class="navbar navbar-dark">
-        <h1 class="header-primary">
-          <?php echo lang['groups']; ?>
-        </h1>
-      </nav>
-    </div>
+        <nav class="navbar navbar-dark">
+          <h1 class="header-primary">
+            <?php echo lang['groups']; ?>
+          </h1>
+        </nav>
+      </div>
       <div class="card-body">
 
         <nav>
@@ -129,8 +104,13 @@ $group = GROUP::index();
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="nav-active_group" role="tabpanel"
             aria-labelledby="nav-active_group-tab">
-            <div class="table-responsive">
-              <table class="table table-striped table-hover" id="table-to-refresh">
+            <div class="table-responsive mt-2">
+              <div class="my-2">
+                Toggle column:
+                <a class="toggle-vis" data-column="2">Farbe</a> -
+                <a class="toggle-vis" data-column="3">Settings</a>
+              </div>
+              <table class="table dataTable_group_active table-striped table-hover mt-5" id="table-to-refresh">
                 <thead>
                   <tr>
                     <th scope="col">
@@ -142,18 +122,17 @@ $group = GROUP::index();
                     <th scope="col">
                       <?php echo lang['color'] ?>
                     </th>
-                    <th scope="col"></th>
+                    <th class="no-sort" scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                    if(!empty($group['active'])){
                                     foreach($group['active'] as $active){
                                             echo'
                                             <tr>
                                             
-                                                <td>'. $active['alias'] .'</td>
-                                                <td>'. $active['name'] .'</td>
+                                                <td class="table_search">'. $active['alias'] .'</td>
+                                                <td class="table_search">'. $active['name'] .'</td>
                                                 <td style="background-color:'. $active['color'] .';">'. $active['color'] .'</td>
                                                 <td>
                                                   <a href="?b=group_edit&g='. $active['alias'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
@@ -162,11 +141,6 @@ $group = GROUP::index();
                                                 </td>
                                             </tr>';
                                     }
-                    }else{
-                      echo'<tr>
-                          <td colspan="4">Keine Einträge</td>
-                        </tr>';
-                    }
                                 ?>
                 </tbody>
               </table>
@@ -174,8 +148,13 @@ $group = GROUP::index();
           </div>
           <div class="tab-pane fade" id="nav-deactivated_group" role="tabpanel"
             aria-labelledby="nav-deactivated_group-tab">
-            <div class="table-responsive">
-              <table class="table table-striped table-hover" id="table-to-refresh">
+            <div class="table-responsive mt-2">
+              <div class="my-2">
+                Toggle column:
+                <a class="toggle-vis" data-column="2">Farbe</a> -
+                <a class="toggle-vis" data-column="3">Settings</a>
+              </div>
+              <table class="table dataTable_group_inactive table-striped table-hover" id="table-to-refresh">
                 <thead>
                   <tr>
                     <th scope="col">
@@ -187,17 +166,16 @@ $group = GROUP::index();
                     <th scope="col">
                       <?php echo lang['color'] ?>
                     </th>
-                    <th scope="col"></th>
+                    <th class="no-sort"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-if(!empty($group['inactive'])){
                                     foreach($group['inactive']  as $inactive){
                                             echo'
                                             <tr>
-                                                <td>'. $inactive['alias'] .'</td>
-                                                <td>'. $inactive['name'] .'</td>
+                                                <td class="table_search">'. $inactive['alias'] .'</td>
+                                                <td class="table_search">'. $inactive['name'] .'</td>
                                                 <td style="background-color:'. $inactive['color'] .';">'. $inactive['color'] .'</td>
                                                 <td>
                                                   <a href="?b=group_edit&g='. $inactive['alias'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
@@ -205,10 +183,6 @@ if(!empty($group['inactive'])){
                                                   </a>
                                                 </td>
                                             </tr>';
-                                    }}else{
-                                    echo'<tr>
-                                      <td colspan="4">Keine Einträge</td>
-                                    </tr>';
                                     }
                                 ?>
                 </tbody>

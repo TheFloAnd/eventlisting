@@ -2,46 +2,13 @@
 use app\controller\group;
 $group = group::find($_GET['g']);
 
-if($group->deleted_at != 'NULL'){
+if($group->deleted_at == NULL){
     $checked = 'checked';
 }else{
     $checked = '';
 }
+require __DIR__ . '/../layout/navigation.php';
 ?>
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <a href="/">
-          <span class="navbar-text">
-            <?php echo lang['index'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=events">
-          <span class="navbar-text">
-            <?php echo lang['events'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=groups">
-          <span class="navbar-text">
-            <?php echo lang['groups'] ?>
-          </span>
-        </a>
-      </div>
-      <div class="col">
-        <a href="?b=settings">
-          <span class="navbar-text">
-            <?php echo lang['settings'] ?>
-          </span>
-        </a>
-      </div>
-    </div>
-  </div>
-</nav>
 <article class="row">
   <section class="col">
     <div class="card">
@@ -51,15 +18,16 @@ if($group->deleted_at != 'NULL'){
             <fieldset class="" hidden>
               <div class="form-group">
                 <input type="text" class="form-control" name="id" id="group_id" value="<?php echo$group->id ?>">
-            </div>
-          </fieldset><fieldset class="" hidden>
-            <div class="form-group">
-              <input type="text" class="form-control" name="alias" id="alias" value="<?php echo$group->alias ?>">
-            </div>
-          </fieldset>
+              </div>
+            </fieldset>
+            <fieldset class="" hidden>
+              <div class="form-group">
+                <input type="text" class="form-control" name="alias" id="alias" value="<?php echo$group->alias ?>">
+              </div>
+            </fieldset>
             <div class="col-md-10">
               <fieldset>
-                <div class="form-check">
+                <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" name="deactivate_group" id="deactivate_group"
                     value="1" <?php echo$checked; ?>>
                   <label class="form-check-label" for="deactivate_group">

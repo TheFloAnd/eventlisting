@@ -1,20 +1,23 @@
+// @use "../../node_modules/bootstrap/scss/bootstrap";
+@use "../../node_modules/bootstrap-icons/font/bootstrap-icons";
+
 .card {
   border-radius: 0.5em !important;
 }
-.btn-hidden {
+.btn_hidden {
   border-top-left-radius: 0 !important;
-  border-bottom-right-radius: .75em !important;
+  border-bottom-right-radius: 0.75em !important;
   position: fixed;
-  width: 10rem;
-  height: 5rem;
+  width: 5rem;
+  height: 2.5rem;
   top: 0;
   left: 0;
-  z-index: 10 !important;
+  z-index: 20 !important;
   &:focus {
     // border: none !important;
     box-shadow: none !important;
   }
-  &:hover{
+  &:hover {
     background-color: rgba(180, 180, 180, 0.25) !important;
   }
 }
@@ -34,6 +37,7 @@ td {
 
 .table td {
   text-align: center;
+  height: 2rem;
 }
 td {
   position: relative;
@@ -62,14 +66,24 @@ tr.strikeout td:after {
   font-size: 1.5em !important;
 }
 .main-card {
-  z-index: 5;
+  z-index: 10;
   position: sticky;
   top: 0;
   & > .card {
-    border-bottom: 5px solid #000;
+    border-bottom: 2.5px solid #000;
   }
 }
-.myOffcanvas{
+.myOffcanvas {
   height: fit-content !important;
   border-bottom-right-radius: 1rem !important;
+}
+
+div.table-responsive>div.dataTables_wrapper>div.row:nth-child(3) >div[class^=col-] {
+  padding: 10px 5px 5px 0px !important;
+}
+div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:first-child {
+  padding-left: 5px !important;
+}
+div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child {
+  padding-right: 5px !important;
 }
