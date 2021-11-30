@@ -78,6 +78,12 @@ tr.strikeout td:after {
   border-bottom-right-radius: 1rem !important;
 }
 
-div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child{
-  padding: 5px !important;
+div.table-responsive>div.dataTables_wrapper>div.row:nth-child(3) >div[class^=col-] {
+  padding: 10px 5px 5px 0px !important;
+}
+div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:first-child {
+  padding-left: 5px !important;
+}
+div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child {
+  padding-right: 5px !important;
 }
