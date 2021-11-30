@@ -180,7 +180,7 @@ require __DIR__ . '/../layout/navigation.php';
                 <a class="toggle-vis" data-column="2"><?php echo lang['room'] ?></a> -
                 <a class="toggle-vis" data-column="5"><?php echo lang['settings'] ?></a>
               </div>
-              <table class="table dataTable stripe display row-border hover order-column compact w-100"
+              <table class="table dataTable table-striped table-hover"
                 id="refresh_edit">
                 <thead>
                   <tr>
@@ -199,7 +199,7 @@ require __DIR__ . '/../layout/navigation.php';
                     <th scope="col">
                       <?php echo lang['till'] ?>
                     </th>
-                    <th></th>
+                    <th class="no-sort"></th>
                   </tr>
                 </thead>
                 <tbody>

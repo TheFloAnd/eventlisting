@@ -4,7 +4,7 @@ use app\controller\main;
 use app\controller\group;
 $result = MAIN::index();
 ?>
-<button class="btn btn-lg btn-hidden" type="button" href="?b=events"
+<button class="btn btn-lg btn_hidden btn_menu" type="button" href="?b=events"
   data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
   <span class="navbar-toggler-icon"></span>
 </button>

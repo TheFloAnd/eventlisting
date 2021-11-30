@@ -4,7 +4,7 @@
 .card {
   border-radius: 0.5em !important;
 }
-.btn-hidden {
+.btn_hidden {
   border-top-left-radius: 0 !important;
   border-bottom-right-radius: 0.75em !important;
   position: fixed;
@@ -37,6 +37,7 @@ td {
 
 .table td {
   text-align: center;
+  height: 2rem;
 }
 td {
   position: relative;
@@ -75,4 +76,8 @@ tr.strikeout td:after {
 .myOffcanvas {
   height: fit-content !important;
   border-bottom-right-radius: 1rem !important;
+}
+
+div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child{
+  padding: 5px !important;
 }

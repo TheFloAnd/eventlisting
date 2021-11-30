@@ -110,7 +110,7 @@ require __DIR__ . '/../layout/navigation.php';
                 <a class="toggle-vis" data-column="2">Farbe</a> -
                 <a class="toggle-vis" data-column="3">Settings</a>
               </div>
-              <table class="table dataTable_group_active table-striped table-hover" id="table-to-refresh">
+              <table class="table dataTable_group_active table-striped table-hover mt-5" id="table-to-refresh">
                 <thead>
                   <tr>
                     <th scope="col">
@@ -122,7 +122,7 @@ require __DIR__ . '/../layout/navigation.php';
                     <th scope="col">
                       <?php echo lang['color'] ?>
                     </th>
-                    <th scope="col"></th>
+                    <th class="no-sort" scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -166,7 +166,7 @@ require __DIR__ . '/../layout/navigation.php';
                     <th scope="col">
                       <?php echo lang['color'] ?>
                     </th>
-                    <th></th>
+                    <th class="no-sort"></th>
                   </tr>
                 </thead>
                 <tbody>

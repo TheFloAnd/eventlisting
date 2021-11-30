@@ -14,8 +14,6 @@ use app\controller\config;
 
   <title><?php echo config::get('name')->value; ?></title>
 
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-
   <!-- Custom CSS -->
   <link href="/resources/css/custom.css" rel="stylesheet" />
   <!-- Bootstrap CSS -->
@@ -23,7 +21,8 @@ use app\controller\config;
   <!-- <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">-->
 
   <link rel="stylesheet" href="/resources/css/select2.min.css">
-  <link rel="stylesheet" type="text/css" href="/resources/css/jquery.dataTables.min.css">
+  <!-- <link rel="stylesheet" href="/resources/css/jquery.dataTables.min.css"> -->
+  <link rel="stylesheet" href="/resources/css/dataTables.bootstrap5.min.css">
 </head>
 
 <body>
@@ -50,15 +49,20 @@ use app\controller\config;
   <script src="/resources/js/jquery-ui.min.js"></script>
 
   <script src="/resources/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" charset="utf8" src="/resources/js/jquery.dataTables.min.js"></script>
+  <script src="/resources/js/dataTables.bootstrap5.min.js"></script>
   <script>
     $(document).ready(function() {
       var table = $(".dataTable").DataTable({
         'responsive': true,
         'displayLength': 15,
         'autoWidth': false,
-        'stateSave': true,
+        // 'stateSave': true,
         'ordering': true,
+        'orderable': true,
+        "columnDefs": [ {
+          "targets": ['no-sort'],
+          "orderable": false
+          }],
         lengthMenu: [
           [15, 25, 50, -1],
           [15, 25, 50, "All"],
@@ -74,7 +78,7 @@ use app\controller\config;
           "decimal": "",
           "emptyTable": "Es wurden keine Einträge gefunden!",
           "info": "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-          "infoEmpty": "Zeige 0 bis 0 von 0 Einträgen",
+          "infoEmpty": "0 Einträgen",
           "infoFiltered": "(Suche aus insgesamt _MAX_ Einträgen)",
           "infoPostFix": "",
           "thousands": ",",
@@ -121,8 +125,13 @@ use app\controller\config;
         'responsive': true,
         'displayLength': 15,
         'autoWidth': false,
-        'stateSave': true,
+        // 'stateSave': true,
         'ordering': true,
+        'orderable': true,
+        "columnDefs": [ {
+          "targets": ['no-sort'],
+          "orderable": false
+          }],
         lengthMenu: [
           [15, 25, 50, -1],
           [15, 25, 50, "All"],
@@ -138,7 +147,7 @@ use app\controller\config;
           "decimal": "",
           "emptyTable": "Es wurden keine Einträge gefunden!",
           "info": "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-          "infoEmpty": "Zeige 0 bis 0 von 0 Einträgen",
+          "infoEmpty": "0 Einträgen",
           "infoFiltered": "(Suche aus insgesamt _MAX_ Einträgen)",
           "infoPostFix": "",
           "thousands": ",",
@@ -183,8 +192,13 @@ use app\controller\config;
         'responsive': true,
         'displayLength': 15,
         'autoWidth': false,
-        'stateSave': true,
+        // 'stateSave': true,
         'ordering': true,
+        'orderable': true,
+        "columnDefs": [ {
+          "targets": ['no-sort'],
+          "orderable": false
+          }],
         lengthMenu: [
           [15, 25, 50, -1],
           [15, 25, 50, "All"],
@@ -200,7 +214,7 @@ use app\controller\config;
           "decimal": "",
           "emptyTable": "Es wurden keine Einträge gefunden!",
           "info": "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-          "infoEmpty": "Zeige 0 bis 0 von 0 Einträgen",
+          "infoEmpty": "0 Einträgen",
           "infoFiltered": "(Suche aus insgesamt _MAX_ Einträgen)",
           "infoPostFix": "",
           "thousands": ",",
