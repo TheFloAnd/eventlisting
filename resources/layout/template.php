@@ -54,7 +54,7 @@ use app\controller\config;
     $(document).ready(function() {
       var table = $(".dataTable").DataTable({
         'responsive': true,
-        'displayLength': 15,
+        'displayLength': 10,
         'autoWidth': false,
         // 'stateSave': true,
         'ordering': true,
@@ -64,8 +64,8 @@ use app\controller\config;
           "orderable": false
           }],
         lengthMenu: [
-          [15, 25, 50, -1],
-          [15, 25, 50, "All"],
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"],
         ],
         "order": [],
         initComplete: function() {
@@ -123,7 +123,7 @@ use app\controller\config;
     $(document).ready(function() {
       var table = $(".dataTable_group_active").DataTable({
         'responsive': true,
-        'displayLength': 15,
+        'displayLength': 10,
         'autoWidth': false,
         // 'stateSave': true,
         'ordering': true,
@@ -133,8 +133,8 @@ use app\controller\config;
           "orderable": false
           }],
         lengthMenu: [
-          [15, 25, 50, -1],
-          [15, 25, 50, "All"],
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"],
         ],
         "order": [],
         initComplete: function() {
@@ -190,7 +190,7 @@ use app\controller\config;
     $(document).ready(function() {
       var table = $(".dataTable_group_inactive").DataTable({
         'responsive': true,
-        'displayLength': 15,
+        'displayLength': 10,
         'autoWidth': false,
         // 'stateSave': true,
         'ordering': true,
@@ -200,8 +200,8 @@ use app\controller\config;
           "orderable": false
           }],
         lengthMenu: [
-          [15, 25, 50, -1],
-          [15, 25, 50, "All"],
+          [10, 25, 50, -1],
+          [10, 25, 50, "All"],
         ],
         "order": [],
         initComplete: function() {
