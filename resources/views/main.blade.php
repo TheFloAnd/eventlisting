@@ -48,7 +48,7 @@ $result = MAIN::index();
       </div>
       <div class="card-body" id="refresh">
         <div class="table-responsive">
-          <table class="table align-center table-striped table-hover">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">
@@ -173,7 +173,7 @@ $result = MAIN::index();
       </div>
       <div class="card-body" id="refresh_2">
         <div class="table-responsive">
-          <table class="table table-striped table-hover">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">

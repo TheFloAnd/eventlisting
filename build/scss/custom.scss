@@ -93,6 +93,7 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child 
   bottom: 0;
 }
 .newsBanner{
+  display: none !important;
   width: 70%;
   // background-color: rgba(180, 180, 180, 0.75) !important;
 }

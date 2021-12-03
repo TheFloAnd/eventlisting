@@ -4,8 +4,8 @@ use app\controller\events;
 use app\controller\group;
 use app\controller\config;
 use app\module\notification;
-use app\module\updates;
-use app\module\system;
+use database\seed\eventsseed;
+use database\seed\teamsseed;
 
 require __DIR__ . '/app/conf/config.php';
 require __DIR__ . '/init.php';
@@ -76,6 +76,32 @@ if (isset($_POST['submit_edit_setting'])) {
   if ($set_setting == true) {
     notification::success('Einstellung wurde Erfolgreich geändert!');
   }
+}
+
+if (isset($_POST['tabel_renew'])) {
+
+  if (isset($_POST['table_empty'])) {
+  switch ($_POST['modal_table_input']) {
+    case lang['events']:
+      new eventsseed('empty');
+      break;
+    case lang['groups']:
+      new eventsseed('empty');
+      new teamsseed('empty');
+      break;
+  }
+}
+if (!isset($_POST['table_empty'])) {
+  switch ($_POST['modal_table_input']) {
+    case lang['events']:
+      new eventsseed('create');
+      break;
+    case lang['groups']:
+      new eventsseed('create');
+      new teamsseed('create');
+      break;
+  }
+}
 }
 
 include __DIR__ . '/resources/layout/template.php';

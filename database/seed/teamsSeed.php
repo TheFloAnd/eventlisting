@@ -5,14 +5,22 @@ namespace database\seed;
 use \PDO;
 use database\connection\admin_connect;
 
-class teams extends admin_connect
+class teamsseed extends admin_connect
 {
 
-    public function __construct()
+    public function __construct($com)
     {
         $pdo = admin_connect::connection();
-        teams::create_table($pdo);
-        teams::create_view($pdo);
+        switch($com){
+            case 'empty':
+                teamsseed::empty_table($pdo);
+                break;
+            case 'create':
+                teamsseed::delete_table($pdo);
+                teamsseed::create_table($pdo);
+                teamsseed::create_view($pdo);
+        }
+        $pdo = admin_connect::connection();
     }
     public static function create_table($pdo)
     {
@@ -88,6 +96,40 @@ class teams extends admin_connect
             //     order by `teams`.`name`
             // ;"
             // );
+            return;
+        } catch (\PDOException $e) {
+            echo "PDOException: " . $e->getMessage();
+        }
+    }
+
+    public static function empty_table()
+    {
+        $pdo = admin_connect::connection();
+        try {
+
+            $pdo->query("use `" . db['database'] . "`;");
+            $pdo->query(
+                "TRUNCATE `events`.`teams`"
+            );
+            return;
+        } catch (\PDOException $e) {
+            echo "PDOException: " . $e->getMessage();
+        }
+    }
+
+    public static function delete_table()
+    {
+        $pdo = admin_connect::connection();
+        try {
+
+            $pdo->query("use `" . db['database'] . "`;");
+
+            $pdo->query(
+                "DROP VIEW `events`.`v_teams`"
+            );
+            $pdo->query(
+                "DROP TABLE `events`.`teams`"
+            );
             return;
         } catch (\PDOException $e) {
             echo "PDOException: " . $e->getMessage();
