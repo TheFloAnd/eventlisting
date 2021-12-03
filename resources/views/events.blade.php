@@ -24,11 +24,11 @@ require __DIR__ . '/../layout/navigation.php';
         </nav>
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="nav-event_add" role="tabpanel" aria-labelledby="nav-event_add-tab">
-            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" novalidate>
               <div class="row mt-3 g-3 justify-content-center">
                 <div class="col-md-10">
                   <fieldset>
-                    <div class="form-floating">
+                    <div class="form-floating has-validation">
                       <input type="text" class="form-control" name="event" id="event"
                         placeholder="<?php echo lang['event'] ?>" list="event_list" required />
                       <label for="event">
@@ -37,6 +37,9 @@ require __DIR__ . '/../layout/navigation.php';
                           *
                         </span>
                       </label>
+                      <div class="invalid-feedback">
+                        Bitte geben sie einen Termin namen an!
+                      </div>
                       <datalist id="event_list">
                         <?php
                           foreach($events['proposals'] as $row){
@@ -51,7 +54,7 @@ require __DIR__ . '/../layout/navigation.php';
                   <div class="row g-3" id="groups">
                     <div class="col-12">
                       <fieldset>
-                        <div class="input-group">
+                        <div class="input-group has-validation">
                           <label for="group">
                             <?php echo lang['group'] ?>
                             <span style="color: red;">
@@ -66,6 +69,9 @@ require __DIR__ . '/../layout/navigation.php';
                                 }
                               ?>
                           </select>
+                          <div class="invalid-feedback">
+                            Bitte geben sie eine oder mehrere Gruppen an!
+                          </div>
                         </div>
                       </fieldset>
                     </div>
@@ -116,7 +122,7 @@ require __DIR__ . '/../layout/navigation.php';
                 </div>
                 <div class="col-md-10">
                   <fieldset>
-                    <div class="form-group">
+                    <div class="form-group was-validated">
                       <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top"
                         title="Keine Wiederholungen">
                         <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_none"
@@ -177,11 +183,14 @@ require __DIR__ . '/../layout/navigation.php';
             <div class="table-responsive mt-2">
               <div class="my-2">
                 Toggle column:
-                <a class="toggle-vis" data-column="2"><?php echo lang['room'] ?></a> -
-                <a class="toggle-vis" data-column="5"><?php echo lang['settings'] ?></a>
+                <a class="toggle-vis" data-column="2">
+                  <?php echo lang['room'] ?>
+                </a> -
+                <a class="toggle-vis" data-column="5">
+                  <?php echo lang['settings'] ?>
+                </a>
               </div>
-              <table class="table dataTable table-striped table-hover"
-                id="refresh_edit">
+              <table class="table dataTable table-striped table-hover" id="refresh_edit">
                 <thead>
                   <tr>
                     <th scope="col">

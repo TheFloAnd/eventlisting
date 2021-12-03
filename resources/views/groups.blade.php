@@ -15,11 +15,11 @@ require __DIR__ . '/../layout/navigation.php';
         </nav>
       </div>
       <div class="card-body">
-        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" novalidate>
           <div class="row mt-3 g-3 justify-content-center">
             <div class="col-md-10">
               <fieldset>
-                <div class="form-floating">
+                <div class="form-floating has-validation">
                   <input type="text" class="form-control" name="group_name" id="group_name"
                     placeholder="<?php echo lang['groups'] .' '.  lang['name'] ?>" required>
                   <label for="group_name">
@@ -28,6 +28,9 @@ require __DIR__ . '/../layout/navigation.php';
                       *
                     </span>
                   </label>
+                  <div class="invalid-feedback">
+                    Bitte geben sie einen Gruppen namen an!
+                  </div>
                 </div>
               </fieldset>
             </div>
@@ -42,6 +45,9 @@ require __DIR__ . '/../layout/navigation.php';
                       *
                     </span>
                   </label>
+                  <div class="invalid-feedback">
+                    Bitte geben sie einen Gruppen alias an!
+                  </div>
                 </div>
               </fieldset>
             </div>

@@ -11,7 +11,7 @@ require __DIR__ . '/../layout/navigation.php';
     <section class="col">
         <div class="card">
             <div class="card-body">
-                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" novalidate>
                     <div class="row mt-3 g-3 justify-content-center">
                         <fieldset class="" hidden>
                             <div class="form-group">
@@ -41,7 +41,7 @@ require __DIR__ . '/../layout/navigation.php';
                         </div>
                         <div class="col-md-10">
                             <fieldset>
-                                <div class="form-floating">
+                                <div class="form-floating has-validation">
                                     <input type="text" class="form-control disable" name="event" id="event"
                                         placeholder="<?php echo$data['result']->event ?:  lang['event'] ?>"
                                         value="<?php echo$data['result']->event ?>" list="event_list" required>
@@ -51,6 +51,9 @@ require __DIR__ . '/../layout/navigation.php';
                                             *
                                         </span>
                                     </label>
+                                    <div class="invalid-feedback">
+                                        Bitte geben sie einen Termin namen an!
+                                    </div>
                                     <datalist id="event_list">
                                         <?php
 
