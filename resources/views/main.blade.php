@@ -42,7 +42,7 @@ $result = MAIN::index();
       </div>
       <div class="card-body" id="refresh">
         <div class="table-responsive">
-          <table class="table align-center table-striped table-hover">
+          <table class="table align-center table-striped">
             <thead>
               <tr>
                 <th scope="col">
@@ -167,7 +167,7 @@ $result = MAIN::index();
       </div>
       <div class="card-body" id="refresh_2">
         <div class="table-responsive">
-          <table class="table table-striped table-hover">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">
@@ -268,6 +268,14 @@ $result = MAIN::index();
           </table>
         </div>
       </div>
+    </div>
+  </section>
+  <section class="col-12 newsBanner-container d-flex justify-content-center">
+    <div class="alert alert-secondary newsBanner" role="alert">
+      <h3 class="alert-heading"><?php echo lang['news']; ?></h3>
+      <hr>
+      <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so
+        that you can see how spacing within an alert works with this kind of content.</p>
     </div>
   </section>
 </article>
