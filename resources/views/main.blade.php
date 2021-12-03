@@ -4,8 +4,8 @@ use app\controller\main;
 use app\controller\group;
 $result = MAIN::index();
 ?>
-<button class="btn btn-lg btn_hidden btn_menu" type="button" href="?b=events"
-  data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+<button class="btn btn-lg btn_hidden btn_menu" type="button" href="?b=events" data-bs-toggle="offcanvas"
+  data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
   <span class="navbar-toggler-icon"></span>
 </button>
 <div class="offcanvas offcanvas-start myOffcanvas" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
@@ -15,9 +15,15 @@ $result = MAIN::index();
   </div>
   <div class="offcanvas-body">
     <div class="btn-group-vertical w-100">
-      <a href="?b=events" type="button" class="btn btn-outline-secondary"><?php echo lang['events'] ?></a>
-      <a href="?b=groups" type="button" class="btn btn-outline-secondary"><?php echo lang['groups'] ?></a>
-      <a href="?b=settings" type="button" class="btn btn-outline-secondary"><?php echo lang['settings'] ?></a>
+      <a href="?b=events" type="button" class="btn btn-outline-secondary">
+        <?php echo lang['events'] ?>
+      </a>
+      <a href="?b=groups" type="button" class="btn btn-outline-secondary">
+        <?php echo lang['groups'] ?>
+      </a>
+      <a href="?b=settings" type="button" class="btn btn-outline-secondary">
+        <?php echo lang['settings'] ?>
+      </a>
     </div>
   </div>
 </div>
@@ -42,7 +48,7 @@ $result = MAIN::index();
       </div>
       <div class="card-body" id="refresh">
         <div class="table-responsive">
-          <table class="table align-center table-striped">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">
@@ -268,6 +274,16 @@ $result = MAIN::index();
           </table>
         </div>
       </div>
+    </div>
+  </section>
+  <section class="col-12 newsBanner-container d-flex justify-content-center">
+    <div class="alert alert-secondary newsBanner" role="alert">
+      <h3 class="alert-heading">
+        <?php echo lang['news']; ?>
+      </h3>
+      <hr>
+      <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so
+        that you can see how spacing within an alert works with this kind of content.</p>
     </div>
   </section>
 </article>

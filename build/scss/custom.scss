@@ -87,3 +87,13 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:first-child
 div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child {
   padding-right: 5px !important;
 }
+.newsBanner-container{
+  z-index: 20;
+  position: sticky;
+  bottom: 0;
+}
+.newsBanner{
+  display: none !important;
+  width: 70%;
+  // background-color: rgba(180, 180, 180, 0.75) !important;
+}

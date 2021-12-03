@@ -5,14 +5,14 @@ namespace database\seed;
 use \PDO;
 use database\connection\admin_connect;
 
-class config extends admin_connect
+class configseed extends admin_connect
 {
 
     public function __construct()
     {
         $pdo = admin_connect::connection();
-        config::create_table($pdo);
-        config::insert($pdo);
+        configseed::create_table($pdo);
+        configseed::insert($pdo);
     }
     public static function create_table($pdo)
     {

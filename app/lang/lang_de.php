@@ -35,6 +35,8 @@ $lang['de']['remaining_days'] = 'In';
 $lang['de']['repeat']         = 'Wiederholungen';
 $lang['de']['not_applicable'] = 'Entfällt';
 
+$lang['de']['news'] = 'Neuigkeiten';
+
 $lang['de']['monday']         = 'Montag';
 $lang['de']['tuesday']        = 'Dienstag';
 $lang['de']['wednesday']      = 'Mittwoch';

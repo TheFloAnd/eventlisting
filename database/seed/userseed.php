@@ -5,13 +5,13 @@ namespace database\seed;
 use \PDO;
 use database\connection\admin_connect;
 
-class user extends admin_connect
+class userseed extends admin_connect
 {
 
     public function __construct()
     {
         $pdo = admin_connect::connection();
-        user::create($pdo);
+        userseed::create($pdo);
     }
     public static function create($pdo)
     {

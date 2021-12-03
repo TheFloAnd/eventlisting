@@ -5,14 +5,21 @@ namespace database\seed;
 use \PDO;
 use database\connection\admin_connect;
 
-class events extends admin_connect
+class eventsseed extends admin_connect
 {
 
-    public function __construct()
+    public function __construct($com)
     {
         $pdo = admin_connect::connection();
-        events::create_table($pdo);
-        events::create_view($pdo);
+        switch($com){
+            case 'empty':
+                eventsseed::empty_table($pdo);
+                break;
+            case 'create':
+                eventsseed::delete_table($pdo);
+                eventsseed::create_table($pdo);
+                eventsseed::create_view($pdo);
+        }
     }
     public static function create_table($pdo)
     {
@@ -115,6 +122,36 @@ class events extends admin_connect
             //     order by `start`
             // ;"
             //     );
+            return;
+        } catch (\PDOException $e) {
+            echo "PDOException: " . $e->getMessage();
+        }
+    }
+    public static function empty_table($pdo)
+    {
+        try {
+
+            $pdo->query("use `" . db['database'] . "`;");
+            $pdo->query(
+                "TRUNCATE `events`.`events`"
+            );
+            return;
+        } catch (\PDOException $e) {
+            echo "PDOException: " . $e->getMessage();
+        }
+    }
+
+    public static function delete_table($pdo)
+    {
+        try {
+
+            $pdo->query("use `" . db['database'] . "`;");
+            $pdo->query(
+                "DROP VIEW `events`.`v_events`"
+            );
+            $pdo->query(
+                "DROP TABLE `events`.`events`"
+            );
             return;
         } catch (\PDOException $e) {
             echo "PDOException: " . $e->getMessage();

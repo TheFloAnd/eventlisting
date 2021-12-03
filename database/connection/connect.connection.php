@@ -3,10 +3,10 @@
 namespace database\connection;
 
 use \PDO;
-use database\seed\user;
-use database\seed\config;
-use database\seed\events;
-use database\seed\teams;
+use database\seed\userseed;
+use database\seed\configseed;
+use database\seed\eventsseed;
+use database\seed\teamsseed;
 
 class connect
 {
@@ -26,10 +26,10 @@ class connect
             return $pdo;
         } catch (\PDOException $e) {
             //connect::createDB();
-            new User;
-            new config;
-            new events;
-            new teams;
+            new Userseed;
+            new configseed;
+            new eventsseed('create');
+            new teamsseed('create');
             header("Refresh:0");
         }
     }
