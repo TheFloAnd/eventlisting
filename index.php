@@ -102,6 +102,8 @@ if (!isset($_POST['table_empty'])) {
       break;
   }
 }
+
+  header('location:?b=settings');
 }
 
 include __DIR__ . '/resources/layout/template.php';
