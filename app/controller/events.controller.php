@@ -46,7 +46,7 @@ class events
         $group = '';
         $i = 0;
         $j = 1;
-        $count_groups = count($input['groups']);
+        $count_groups = count($input['group']);
         foreach ($input['group'] as $row) {
             if($count_groups == $j){
                 $group .= $row;
@@ -71,7 +71,7 @@ class events
         $group = '';
         $i = 0;
         $j = 1;
-        $count_groups = count($input['groups']);
+        $count_groups = count($input['group']);
         foreach ($input['group'] as $row) {
             if($count_groups == $j){
                 $group .= $row;
