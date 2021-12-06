@@ -43,18 +43,22 @@ class events
 
     public static function store($input)
     {
-        $group = '';
-        $i = 0;
-        $j = 1;
-        $count_groups = count($input['group']);
-        foreach ($input['group'] as $row) {
-            if($count_groups == $j){
-                $group .= $row;
-            }else{
-                $group .= $row . ';';
+        if (is_array($input['group'])) {
+            $group = '';
+            $i = 0;
+            $j = 1;
+            $count_groups = count($input['group']);
+            foreach ($input['group'] as $row) {
+                if ($count_groups == $j) {
+                    $group .= $row;
+                } else {
+                    $group .= $row . ';';
+                }
+                $i++;
+                $j++;
             }
-            $i++;
-            $j++;
+        } else {
+            $group = $input['group'];
         }
 
         $stmt = "INSERT INTO `events`(`event`, `team`, `start`, `end`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $input['start_date'] . "', '" . $input['end_date'] . "', '" . $input['room'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
@@ -67,19 +71,22 @@ class events
     }
     public static function store_repeat($input)
     {
-
-        $group = '';
-        $i = 0;
-        $j = 1;
-        $count_groups = count($input['group']);
-        foreach ($input['group'] as $row) {
-            if($count_groups == $j){
-                $group .= $row;
-            }else{
-                $group .= $row . ';';
+        if (is_array($input['group'])) {
+            $group = '';
+            $i = 0;
+            $j = 1;
+            $count_groups = count($input['group']);
+            foreach ($input['group'] as $row) {
+                if ($count_groups == $j) {
+                    $group .= $row;
+                } else {
+                    $group .= $row . ';';
+                }
+                $i++;
+                $j++;
             }
-            $i++;
-            $j++;
+        } else {
+            $group = $input['group'];
         }
 
         switch ($input['set_repeat']) {
@@ -127,20 +134,25 @@ class events
 
     public static function update($input)
     {
-        $group = '';
-        $i = 0;
-        $j = 1;
-        $count_groups = count($input['group']);
-        foreach ($input['group'] as $row) {
-            if($count_groups == $j){
-                $group .= $row;
-            }else{
-                $group .= $row . ';';
-            }
-            $i++;
-            $j++;
-        }
         if (!isset($input['removed'])) {
+
+            if (is_array($input['group'])) {
+                $group = '';
+                $i = 0;
+                $j = 1;
+                $count_groups = count($input['group']);
+                foreach ($input['group'] as $row) {
+                    if ($count_groups == $j) {
+                        $group .= $row;
+                    } else {
+                        $group .= $row . ';';
+                    }
+                    $i++;
+                    $j++;
+                }
+            } else {
+                $group = $input['group'];
+            }
             $stmt = "UPDATE `events` SET `not_applicable`= NULL, `event`='" . $input['event'] . "',`team`='" . $group . "' ,`start`='" . $input['start_date'] . "' ,`end`='" . $input['end_date'] . "' ,`room`='" . $input['room'] . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' WHERE id = '" . $input['event_id'] . "'";
 
             $exec = connect::connection()->prepare($stmt);
@@ -157,22 +169,28 @@ class events
     }
     public static function update_repeat($input)
     {
-        $group = '';
-        $i = 0;
-        $j = 1;
-        $count_groups = count($input['group']);
-        foreach ($input['group'] as $row) {
-            if($count_groups == $j){
-                $group .= $row;
-            }else{
-                $group .= $row . ';';
-            }
-            $i++;
-            $j++;
-        }
         $event = events::find($input['event_id']);
         $id = $event->repeat_parent ? $event->repeat_parent : $event->id;
         if (!isset($input['removed'])) {
+
+            if (is_array($input['group'])) {
+                $group = '';
+                $i = 0;
+                $j = 1;
+                $count_groups = count($input['group']);
+                foreach ($input['group'] as $row) {
+                    if ($count_groups == $j) {
+                        $group .= $row;
+                    } else {
+                        $group .= $row . ';';
+                    }
+                    $i++;
+                    $j++;
+                }
+            } else {
+                $group = $input['group'];
+            }
+
             $stmt_all = "SELECT * FROM `v_events` 
                                         WHERE id = '" . $id . "'
                                             OR `repeat_parent` = " . $id . "
