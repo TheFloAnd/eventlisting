@@ -57,8 +57,8 @@ use app\controller\config;
         displayLength: 10,
         autoWidth: false,
         stateSave: true,
-        ordering: true,
-        orderable: true,
+        ordering: false,
+        // orderable: false,
         columnDefs: [{
             targets: ['no-sort'],
             orderable: false

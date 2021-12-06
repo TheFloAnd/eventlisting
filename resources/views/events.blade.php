@@ -208,10 +208,10 @@ require __DIR__ . '/../layout/navigation.php';
                     <th scope="col">
                       <?php echo lang['room'] ?>
                     </th>
-                    <th class="date_time">
+                    <th scope="col">
                       <?php echo lang['from'] ?>
                     </th>
-                    <th class="date_time">
+                    <th scope="col">
                       <?php echo lang['till'] ?>
                     </th>
                     <th class="no-sort">In</th>
