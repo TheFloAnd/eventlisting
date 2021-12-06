@@ -86,7 +86,8 @@ require __DIR__ . '/../layout/navigation.php';
                             placeholder="<?php echo lang['room'] ?>" maxlength="25">
                           <label for="room">
                             <?php echo lang['room'] ?>
-                          </label><div class="invalid-feedback">
+                          </label>
+                          <div class="invalid-feedback">
                             Die maximale länge beträgt 10 Zeichen!
                           </div>
                         </div>
@@ -189,6 +190,9 @@ require __DIR__ . '/../layout/navigation.php';
                   <?php echo lang['room'] ?>
                 </a> -
                 <a class="toggle-vis" data-column="5">
+                  In
+                </a> - 
+                <a class="toggle-vis" data-column="6">
                   <?php echo lang['settings'] ?>
                 </a>
               </div>
@@ -204,12 +208,13 @@ require __DIR__ . '/../layout/navigation.php';
                     <th scope="col">
                       <?php echo lang['room'] ?>
                     </th>
-                    <th scope="col">
+                    <th class="date_time">
                       <?php echo lang['from'] ?>
                     </th>
-                    <th scope="col">
+                    <th class="date_time">
                       <?php echo lang['till'] ?>
                     </th>
+                    <th class="no-sort">In</th>
                     <th class="no-sort"></th>
                   </tr>
                 </thead>
@@ -272,7 +277,7 @@ require __DIR__ . '/../layout/navigation.php';
                             echo'<td class="table_search">'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
                           }
                         }
-                      }
+                      }echo'<td class="table_search">'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .'Tagen</td>';
                       echo'<td><a href="?b=events_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative"><i class="bi bi-gear-wide"></i></a></td>';
                     }
                   }

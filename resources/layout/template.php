@@ -52,50 +52,55 @@ use app\controller\config;
   <script src="/resources/js/dataTables.bootstrap5.min.js"></script>
   <script>
     $(document).ready(function() {
-      var table = $(".dataTable").DataTable({
-        'responsive': true,
-        'displayLength': 10,
-        'autoWidth': false,
-        'stateSave': true,
-        'ordering': true,
-        'orderable': true,
-        "columnDefs": [ {
-          "targets": ['no-sort'],
-          "orderable": false
-          }],
+      var table = $('.dataTable').DataTable({
+        responsive: true,
+        displayLength: 10,
+        autoWidth: false,
+        stateSave: true,
+        ordering: true,
+        orderable: true,
+        columnDefs: [{
+            targets: ['no-sort'],
+            orderable: false
+          },
+          {
+            targets: ['date_time'],
+            type: 'date-eu'
+          }
+        ],
         lengthMenu: [
           [10, 25, 50, -1],
-          [10, 25, 50, "All"],
+          [10, 25, 50, 'All'],
         ],
-        "order": [],
+        'order': [],
         initComplete: function() {
           var api = this.api();
-          api.$(".table_search").click(function() {
+          api.$('.table_search').click(function() {
             api.search($.trim(this.innerHTML)).draw();
           });
         },
-        "language": {
-          "decimal": "",
-          "emptyTable": "Es wurden keine Einträge gefunden!",
-          "info": "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-          "infoEmpty": "0 Einträgen",
-          "infoFiltered": "(Suche aus insgesamt _MAX_ Einträgen)",
-          "infoPostFix": "",
-          "thousands": ",",
-          "lengthMenu": "Einträge anzeigen: _MENU_",
-          "loadingRecords": "Laden...",
-          "processing": "Verarbeiten...",
-          "search": "Suche:",
-          "zeroRecords": "Es sind keine Einträge vorhanden!",
-          "paginate": {
-            "first": "Erste",
-            "last": "Letzte",
-            "next": "Nächste",
-            "previous": "Vorherige"
+        language: {
+          decimal: '',
+          emptyTable: 'Es wurden keine Einträge gefunden!',
+          info: 'Zeige _START_ bis _END_ von _TOTAL_ Einträgen',
+          infoEmpty: '0 Einträgen',
+          infoFiltered: '(Suche aus insgesamt _MAX_ Einträgen)',
+          infoPostFix: '',
+          thousands: ',',
+          lengthMenu: 'Einträge anzeigen: _MENU_',
+          loadingRecords: 'Laden...',
+          processing: 'Verarbeiten...',
+          search: 'Suche:',
+          zeroRecords: 'Es sind keine Einträge vorhanden!',
+          paginate: {
+            first: 'Erste',
+            last: 'Letzte',
+            next: 'Nächste',
+            previous: 'Vorherige'
           },
-          "aria": {
-            "sortAscending": ": activate to sort column ascending",
-            "sortDescending": ": activate to sort column descending"
+          aria: {
+            sortAscending: ': activate to sort column ascending',
+            sortDescending: ': activate to sort column descending'
           },
         }
       });
@@ -110,61 +115,61 @@ use app\controller\config;
         column.visible(!column.visible());
       });
 
-      $(".dataTable tbody").on("click", "tr", function() {
-        if ($(this).hasClass("selected")) {
-          $(this).removeClass("selected");
+      $('.dataTable tbody').on('click', 'tr', function() {
+        if ($(this).hasClass('selected')) {
+          $(this).removeClass('selected');
         } else {
-          table.$("tr.selected").removeClass("selected");
-          $(this).addClass("selected");
+          table.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
         }
       });
     });
 
     $(document).ready(function() {
-      var table = $(".dataTable_group_active").DataTable({
-        'responsive': true,
-        'displayLength': 10,
-        'autoWidth': false,
-        'stateSave': true,
-        'ordering': true,
-        'orderable': true,
-        "columnDefs": [ {
-          "targets": ['no-sort'],
-          "orderable": false
-          }],
+      var table = $('.dataTable_group_active').DataTable({
+        responsive: true,
+        displayLength: 10,
+        autoWidth: false,
+        stateSave: true,
+        ordering: true,
+        orderable: true,
+        columnDefs: [{
+          targets: ['no-sort'],
+          orderable: false
+        }],
         lengthMenu: [
           [10, 25, 50, -1],
-          [10, 25, 50, "All"],
+          [10, 25, 50, 'All'],
         ],
-        "order": [],
+        order: [],
         initComplete: function() {
           var api = this.api();
-          api.$(".table_search").click(function() {
+          api.$('.table_search').click(function() {
             api.search($.trim(this.innerHTML)).draw();
           });
         },
-        "language": {
-          "decimal": "",
-          "emptyTable": "Es wurden keine Einträge gefunden!",
-          "info": "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-          "infoEmpty": "0 Einträgen",
-          "infoFiltered": "(Suche aus insgesamt _MAX_ Einträgen)",
-          "infoPostFix": "",
-          "thousands": ",",
-          "lengthMenu": "Einträge anzeigen: _MENU_",
-          "loadingRecords": "Laden...",
-          "processing": "Verarbeiten...",
-          "search": "Suche:",
-          "zeroRecords": "Es sind keine Einträge vorhanden!",
-          "paginate": {
-            "first": "Erste",
-            "last": "Letzte",
-            "next": "Nächste",
-            "previous": "Vorherige"
+        language: {
+          decimal: '',
+          emptyTable: 'Es wurden keine Einträge gefunden!',
+          info: 'Zeige _START_ bis _END_ von _TOTAL_ Einträgen',
+          infoEmpty: '0 Einträgen',
+          infoFiltered: '(Suche aus insgesamt _MAX_ Einträgen)',
+          infoPostFix: '',
+          thousands: ',',
+          lengthMenu: 'Einträge anzeigen: _MENU_',
+          loadingRecords: 'Laden...',
+          processing: 'Verarbeiten...',
+          search: 'Suche:',
+          zeroRecords: 'Es sind keine Einträge vorhanden!',
+          paginate: {
+            first: 'Erste',
+            last: 'Letzte',
+            next: 'Nächste',
+            previous: 'Vorherige'
           },
-          "aria": {
-            "sortAscending": ": activate to sort column ascending",
-            "sortDescending": ": activate to sort column descending"
+          aria: {
+            sortAscending: ': activate to sort column ascending',
+            sortDescending: ': activate to sort column descending'
           },
         }
       });
@@ -178,60 +183,60 @@ use app\controller\config;
         column.visible(!column.visible());
       });
 
-      $(".dataTable_group_active tbody").on("click", "tr", function() {
-        if ($(this).hasClass("selected")) {
-          $(this).removeClass("selected");
+      $('.dataTable_group_active tbody').on('click', 'tr', function() {
+        if ($(this).hasClass('selected')) {
+          $(this).removeClass('selected');
         } else {
-          table.$("tr.selected").removeClass("selected");
-          $(this).addClass("selected");
+          table.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
         }
       });
     });
     $(document).ready(function() {
-      var table = $(".dataTable_group_inactive").DataTable({
-        'responsive': true,
-        'displayLength': 10,
-        'autoWidth': false,
-        'stateSave': true,
-        'ordering': true,
-        'orderable': true,
-        "columnDefs": [ {
-          "targets": ['no-sort'],
-          "orderable": false
-          }],
+      var table = $('.dataTable_group_inactive').DataTable({
+        responsive: true,
+        displayLength: 10,
+        autoWidth: false,
+        stateSave: true,
+        ordering: true,
+        orderable: true,
+        columnDefs: [{
+          targets: ['no-sort'],
+          orderable: false
+        }],
         lengthMenu: [
           [10, 25, 50, -1],
-          [10, 25, 50, "All"],
+          [10, 25, 50, 'All'],
         ],
-        "order": [],
+        order: [],
         initComplete: function() {
           var api = this.api();
-          api.$(".table_search").click(function() {
+          api.$('.table_search').click(function() {
             api.search($.trim(this.innerHTML)).draw();
           });
         },
-        "language": {
-          "decimal": "",
-          "emptyTable": "Es wurden keine Einträge gefunden!",
-          "info": "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-          "infoEmpty": "0 Einträgen",
-          "infoFiltered": "(Suche aus insgesamt _MAX_ Einträgen)",
-          "infoPostFix": "",
-          "thousands": ",",
-          "lengthMenu": "Einträge anzeigen: _MENU_",
-          "loadingRecords": "Laden...",
-          "processing": "Verarbeiten...",
-          "search": "Suche:",
-          "zeroRecords": "Es sind keine Einträge vorhanden!",
-          "paginate": {
-            "first": "Erste",
-            "last": "Letzte",
-            "next": "Nächste",
-            "previous": "Vorherige"
+        language: {
+          decimal: '',
+          emptyTable: 'Es wurden keine Einträge gefunden!',
+          info: 'Zeige _START_ bis _END_ von _TOTAL_ Einträgen',
+          infoEmpty: '0 Einträgen',
+          infoFiltered: '(Suche aus insgesamt _MAX_ Einträgen)',
+          infoPostFix: '',
+          thousands: ',',
+          lengthMenu: 'Einträge anzeigen: _MENU_',
+          loadingRecords: 'Laden...',
+          processing: 'Verarbeiten...',
+          search: 'Suche:',
+          zeroRecords: 'Es sind keine Einträge vorhanden!',
+          paginate: {
+            first: 'Erste',
+            last: 'Letzte',
+            next: 'Nächste',
+            previous: 'Vorherige'
           },
-          "aria": {
-            "sortAscending": ": activate to sort column ascending",
-            "sortDescending": ": activate to sort column descending"
+          aria: {
+            sortAscending: ': activate to sort column ascending',
+            sortDescending: ': activate to sort column descending'
           },
         }
       });
@@ -245,12 +250,12 @@ use app\controller\config;
         column.visible(!column.visible());
       });
 
-      $(".dataTable_group_inactive tbody").on("click", "tr", function() {
-        if ($(this).hasClass("selected")) {
-          $(this).removeClass("selected");
+      $('.dataTable_group_inactive tbody').on('click', 'tr', function() {
+        if ($(this).hasClass('selected')) {
+          $(this).removeClass('selected');
         } else {
-          table.$("tr.selected").removeClass("selected");
-          $(this).addClass("selected");
+          table.$('tr.selected').removeClass('selected');
+          $(this).addClass('selected');
         }
       });
     });
@@ -262,28 +267,28 @@ use app\controller\config;
     });
   </script>
 
-<script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-'use strict'
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict'
 
-// Fetch all the forms we want to apply custom Bootstrap validation styles to
-var forms = document.querySelectorAll('.needs-validation')
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
 
-// Loop over them and prevent submission
-Array.prototype.slice.call(forms)
-.forEach(function (form) {
-form.addEventListener('submit', function (event) {
-if (!form.checkValidity()) {
-event.preventDefault()
-event.stopPropagation()
-}
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function(form) {
+          form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
 
-form.classList.add('was-validated')
-}, false)
-})
-})()
-</script>
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
 </body>
 
 </html>
