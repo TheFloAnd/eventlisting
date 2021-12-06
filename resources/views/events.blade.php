@@ -83,7 +83,7 @@ require __DIR__ . '/../layout/navigation.php';
                       <fieldset>
                         <div class="form-floating">
                           <input type="text" class="form-control" name="room" id="room"
-                            placeholder="<?php echo lang['room'] ?>" maxlength="10">
+                            placeholder="<?php echo lang['room'] ?>" maxlength="25">
                           <label for="room">
                             <?php echo lang['room'] ?>
                           </label><div class="invalid-feedback">

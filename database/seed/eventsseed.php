@@ -37,7 +37,7 @@ class eventsseed extends admin_connect
                 `repeat` int DEFAULT NULL,
                 `repeat_parent` int DEFAULT NULL,
                 `repeat_dif` int DEFAULT NULL,
-                `room` varchar(10) DEFAULT NULL,
+                `room` varchar(25) DEFAULT NULL,
                 `created_at` datetime DEFAULT NULL,
                 `updated_at` datetime DEFAULT NULL,
                 `deleted_at` datetime DEFAULT NULL
