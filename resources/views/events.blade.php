@@ -231,7 +231,7 @@ require __DIR__ . '/../layout/navigation.php';
                         </td>
                         <td>';
                           $teams = explode(';', $row['team']);
-                          array_pop($teams);
+                          
                           foreach($teams as $team){
                             $color = GROUP::find($team)->color;
                             echo'<span class="badge text-dark table_search" style="background-color:'. $color.';">'. $team .'</span> ';

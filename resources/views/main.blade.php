@@ -86,7 +86,7 @@ $result = MAIN::index();
                 echo'<td>';
 
                   $teams = explode(';', $row['team']);
-                      array_pop($teams);
+                      
                       foreach($teams as $team){
 
                         $color = GROUP::find($team)->color;
@@ -216,7 +216,7 @@ $result = MAIN::index();
                 <td>';
 
                   $teams = explode(';', $row['team']);
-                      array_pop($teams);
+                      
                       foreach($teams as $team){
                         $group_color = GROUP::find($team)->color;
                         echo'<span class="badge text-dark" style="background-color:'. $group_color.';">'. $team .'</span> ';
@@ -264,7 +264,7 @@ $result = MAIN::index();
                           }
                           }
                           }
-              echo'<td>'. date('j', strtotime($row['start']) - strtotime(strftime('%Y-%m-%d').' +1 day')) .' Tagen</td>
+              echo'<td>'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .' Tagen</td>
               </tr>';
                   }
                 }

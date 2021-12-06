@@ -79,7 +79,6 @@ require __DIR__ . '/../layout/navigation.php';
                                         multiple="multiple" required>
                                         <?php
                                 $teams = explode(';', $data['result']->team );
-                                array_pop($teams);
                                 foreach($data['group'] as $row){
                                     if(in_array($row['alias'], $teams)){
                                         echo'<option value="'. $row['alias'] .'" selected>'. $row['name'] .' ('. $row['alias'] .')</option>';

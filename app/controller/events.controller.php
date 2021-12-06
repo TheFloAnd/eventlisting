@@ -45,9 +45,16 @@ class events
     {
         $group = '';
         $i = 0;
+        $j = 1;
+        $count_groups = count($input['groups']);
         foreach ($input['group'] as $row) {
-            $group .= $input['group'][$i] . ';';
+            if($count_groups == $j){
+                $group .= $row;
+            }else{
+                $group .= $row . ';';
+            }
             $i++;
+            $j++;
         }
 
         $stmt = "INSERT INTO `events`(`event`, `team`, `start`, `end`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $input['start_date'] . "', '" . $input['end_date'] . "', '" . $input['room'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
@@ -63,9 +70,16 @@ class events
 
         $group = '';
         $i = 0;
+        $j = 1;
+        $count_groups = count($input['groups']);
         foreach ($input['group'] as $row) {
-            $group .= $input['group'][$i] . ';';
+            if($count_groups == $j){
+                $group .= $row;
+            }else{
+                $group .= $row . ';';
+            }
             $i++;
+            $j++;
         }
 
         switch ($input['set_repeat']) {
@@ -115,9 +129,16 @@ class events
     {
         $group = '';
         $i = 0;
+        $j = 1;
+        $count_groups = count($input['group']);
         foreach ($input['group'] as $row) {
-            $group .= $input['group'][$i] . ';';
+            if($count_groups == $j){
+                $group .= $row;
+            }else{
+                $group .= $row . ';';
+            }
             $i++;
+            $j++;
         }
         if (!isset($input['removed'])) {
             $stmt = "UPDATE `events` SET `not_applicable`= NULL, `event`='" . $input['event'] . "',`team`='" . $group . "' ,`start`='" . $input['start_date'] . "' ,`end`='" . $input['end_date'] . "' ,`room`='" . $input['room'] . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' WHERE id = '" . $input['event_id'] . "'";
@@ -138,9 +159,16 @@ class events
     {
         $group = '';
         $i = 0;
+        $j = 1;
+        $count_groups = count($input['group']);
         foreach ($input['group'] as $row) {
-            $group .= $row . ';';
-            // $i++;
+            if($count_groups == $j){
+                $group .= $row;
+            }else{
+                $group .= $row . ';';
+            }
+            $i++;
+            $j++;
         }
         $event = events::find($input['event_id']);
         $id = $event->repeat_parent ? $event->repeat_parent : $event->id;
