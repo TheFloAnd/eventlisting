@@ -30,14 +30,14 @@ class eventsseed extends admin_connect
                 "CREATE TABLE   IF NOT EXISTS `events` (
                 `id` int NOT NULL,
                 `not_applicable` int DEFAULT NULL,
-                `event` varchar(255),
+                `event` varchar(50),
                 `team` varchar(255) DEFAULT NULL,
                 `start` datetime NOT NULL,
                 `end` datetime NOT NULL,
                 `repeat` int DEFAULT NULL,
                 `repeat_parent` int DEFAULT NULL,
                 `repeat_dif` int DEFAULT NULL,
-                `room` varchar(50) DEFAULT NULL,
+                `room` varchar(10) DEFAULT NULL,
                 `created_at` datetime DEFAULT NULL,
                 `updated_at` datetime DEFAULT NULL,
                 `deleted_at` datetime DEFAULT NULL

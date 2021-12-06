@@ -30,7 +30,7 @@ require __DIR__ . '/../layout/navigation.php';
                   <fieldset>
                     <div class="form-floating has-validation">
                       <input type="text" class="form-control" name="event" id="event"
-                        placeholder="<?php echo lang['event'] ?>" list="event_list" required />
+                        placeholder="<?php echo lang['event'] ?>" list="event_list" maxlength="50" required />
                       <label for="event">
                         <?php echo lang['event'] ?>
                         <span style="color: red;">
@@ -38,7 +38,7 @@ require __DIR__ . '/../layout/navigation.php';
                         </span>
                       </label>
                       <div class="invalid-feedback">
-                        Bitte geben sie einen Termin namen an!
+                        Bitte geben sie einen Termin namen an (Maximal 50 Zeichen länge)!
                       </div>
                       <datalist id="event_list">
                         <?php
@@ -79,14 +79,16 @@ require __DIR__ . '/../layout/navigation.php';
                 </div>
                 <div class="col-md-10">
                   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <fieldset>
                         <div class="form-floating">
                           <input type="text" class="form-control" name="room" id="room"
-                            placeholder="<?php echo lang['room'] ?>">
+                            placeholder="<?php echo lang['room'] ?>" maxlength="10">
                           <label for="room">
                             <?php echo lang['room'] ?>
-                          </label>
+                          </label><div class="invalid-feedback">
+                            Die maximale länge beträgt 10 Zeichen!
+                          </div>
                         </div>
                       </fieldset>
                     </div>
