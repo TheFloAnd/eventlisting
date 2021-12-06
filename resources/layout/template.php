@@ -56,7 +56,7 @@ use app\controller\config;
         'responsive': true,
         'displayLength': 10,
         'autoWidth': false,
-        // 'stateSave': true,
+        'stateSave': true,
         'ordering': true,
         'orderable': true,
         "columnDefs": [ {
@@ -125,7 +125,7 @@ use app\controller\config;
         'responsive': true,
         'displayLength': 10,
         'autoWidth': false,
-        // 'stateSave': true,
+        'stateSave': true,
         'ordering': true,
         'orderable': true,
         "columnDefs": [ {
@@ -192,7 +192,7 @@ use app\controller\config;
         'responsive': true,
         'displayLength': 10,
         'autoWidth': false,
-        // 'stateSave': true,
+        'stateSave': true,
         'ordering': true,
         'orderable': true,
         "columnDefs": [ {
