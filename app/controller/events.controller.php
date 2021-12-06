@@ -191,7 +191,7 @@ class events
                 $group = $input['group'];
             }
 
-            $stmt_all = "SELECT * FROM `v_events` 
+            $stmt_all = "SELECT * FROM `events` 
                                         WHERE id = '" . $id . "'
                                             OR `repeat_parent` = " . $id . "
                                         ORDER BY `id` ASC";
