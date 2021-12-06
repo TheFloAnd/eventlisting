@@ -138,7 +138,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <label class="form-check-label" for="set_repeat_days">Tage</label>
                       </div>
                       <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Setzt die Wiederholung automatisch auf ein Jahr (52 Mal)">
+                        title="Setzt die Wiederholung automatisch auf 10 Mal">
                         <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_weeks"
                           value="weeks">
                         <label class="form-check-label" for="set_repeat_weeks">Wochen</label>
@@ -300,7 +300,7 @@ require __DIR__ . '/../layout/navigation.php';
                 for(j = 0; j < disable.length; j++){
                   disable[j].disabled = false;
                 }
-                document.getElementById('repeats').value = 52;
+                document.getElementById('repeats').value = 10;
                 break;
               case 'days':
                 for(j = 0; j < disable.length; j++){

@@ -20,7 +20,7 @@ if (isset($_GET['b'])) {
 }
 
 if (isset($_POST['submit_event'])) {
-  if (!isset($_POST['set_repeat'])) {
+  if ($_POST['set_repeat'] == 'none') {
     events::store($_POST);
     header('Refresh:0');
   } else {
