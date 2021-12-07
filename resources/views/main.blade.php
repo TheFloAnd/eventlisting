@@ -264,7 +264,7 @@ $result = MAIN::index();
                           }
                           }
                           }
-              echo'<td>'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .' Tagen</td>
+              echo'<td>'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .' '. lang['meet'] .'</td>
               </tr>';
                   }
                 }

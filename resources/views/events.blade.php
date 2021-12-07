@@ -277,7 +277,7 @@ require __DIR__ . '/../layout/navigation.php';
                             echo'<td class="table_search">'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
                           }
                         }
-                      }echo'<td class="table_search">'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .'Tagen</td>';
+                      }echo'<td class="table_search">'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .' '. lang['meet'] .'</td>';
                       echo'<td><a href="?b=events_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative"><i class="bi bi-gear-wide"></i></a></td>';
                     }
                   }

@@ -7,10 +7,19 @@ use app\module\notification;
 use database\seed\eventsseed;
 use database\seed\teamsseed;
 
-require __DIR__ . '/app/conf/config.php';
 require __DIR__ . '/init.php';
-require __DIR__ . '/app/lang/lang_de.php';
-define('lang', $lang['de']);
+
+require __DIR__ . '/app/conf/config.php';
+
+if (file_exists(__DIR__ .'/app/locale/'. config::get('language')->value .'.php')) {
+  require __DIR__ . '/app/locale/'. config::get('language')->value .'.php';
+}else{
+  require __DIR__ . '/app/locale/de_DE.php';
+}
+
+define('lang', $lang);
+
+// define('lang', $lang[str_split(config::get('language')->value, 2)[0]]);
 
 if (isset($_GET['b'])) {
   define('blade', $_GET['b']);

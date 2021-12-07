@@ -40,9 +40,11 @@ require __DIR__ . '/../layout/navigation.php';
                 }
                                 echo ucwords($row['view']);
                                 echo'</td>
-                              <td>
-                                '. $row['value'] .' '. $output_time_unit .'
-                              </td>';
+                              <td>';
+
+                                echo $row['setting'] != 'language' ? $row['value'] .' '. $output_time_unit : config::get_language($row['value'])->view;
+                                
+                                echo'</td>';
                           echo'<td>
                             <a href="?b=settings_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative">
                               <i class="bi bi-gear-wide"></i>
