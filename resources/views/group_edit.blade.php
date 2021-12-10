@@ -1,11 +1,13 @@
-<?php 
+<?php
+
 use app\controller\group;
+
 $group = group::find($_GET['g']);
 
-if($group->deleted_at == NULL){
-    $checked = 'checked';
-}else{
-    $checked = '';
+if ($group->deleted_at == NULL) {
+  $checked = 'checked';
+} else {
+  $checked = '';
 }
 require __DIR__ . '/../layout/navigation.php';
 ?>
@@ -17,21 +19,20 @@ require __DIR__ . '/../layout/navigation.php';
           <div class="row mt-3 g-3 justify-content-center">
             <fieldset class="" hidden>
               <div class="form-group">
-                <input type="text" class="form-control" name="id" id="group_id" value="<?php echo$group->id ?>">
+                <input type="text" class="form-control" name="id" id="group_id" value="<?php echo $group->id ?>">
               </div>
             </fieldset>
             <fieldset class="" hidden>
               <div class="form-group">
-                <input type="text" class="form-control" name="alias" id="alias" value="<?php echo$group->alias ?>">
+                <input type="text" class="form-control" name="alias" id="alias" value="<?php echo $group->alias ?>">
               </div>
             </fieldset>
             <div class="col-md-10">
               <fieldset>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" name="deactivate_group" id="deactivate_group"
-                    value="1" <?php echo$checked; ?>>
+                  <input class="form-check-input" type="checkbox" name="deactivate_group" id="deactivate_group" value="1" <?php echo $checked; ?>>
                   <label class="form-check-label" for="deactivate_group">
-                    <?php echo lang['active'] .' '.  lang['group'] ?>
+                    <?php echo lang['active'] . ' ' .  lang['group'] ?>
                   </label>
                 </div>
               </fieldset>
@@ -39,17 +40,15 @@ require __DIR__ . '/../layout/navigation.php';
             <div class="col-md-10">
               <fieldset id="input_name">
                 <div class="form-floating has-validation">
-                  <input type="text" class="form-control disable" name="group_name" id="group_name"
-                    placeholder="<?php echo$group->name ?:  lang['groups'] .' '.  lang['name'] ?>"
-                    value="<?php echo$group->name ?>" required>
+                  <input type="text" class="form-control disable" name="group_name" id="group_name" placeholder="<?php echo $group->name ?:  lang['groups'] . ' ' .  lang['name'] ?>" value="<?php echo $group->name ?>" required>
                   <label for="group_name">
-                    <?php echo lang['groups'] .' '.  lang['name'] ?>
+                    <?php echo lang['groups'] . ' ' .  lang['name'] ?>
                     <span style="color: red;">
                       *
                     </span>
                   </label>
                   <div class="invalid-feedback">
-                    Bitte geben sie einen Gruppen namen an!
+                    <?php echo lang['invalide-group_name-input']; ?>
                   </div>
                 </div>
               </fieldset>
@@ -57,11 +56,9 @@ require __DIR__ . '/../layout/navigation.php';
             <div class="col-md-8">
               <fieldset>
                 <div class="form-floating">
-                  <input type="text" class="form-control" name="group_alias" id="group_alias"
-                    placeholder="<?php echo $group->alias ?:  lang['groups'] .' '.  lang['alias'] ?>"
-                    value="<?php echo $group->alias ?>" required disabled>
+                  <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="<?php echo $group->alias ?:  lang['groups'] . ' ' .  lang['alias'] ?>" value="<?php echo $group->alias ?>" required disabled>
                   <label for="group_alias">
-                    <?php echo lang['groups'] .' '.  lang['alias'] ?>
+                    <?php echo lang['groups'] . ' ' .  lang['alias'] ?>
                     <span style="color: red;">
                       *
                     </span>
@@ -74,14 +71,12 @@ require __DIR__ . '/../layout/navigation.php';
               <fieldset id="input_color">
                 <div class="form-group">
                   <label for="group_color">
-                    <?php echo lang['groups'] .' '.  lang['color'] ?>
+                    <?php echo lang['groups'] . ' ' .  lang['color'] ?>
                     <span style="color: red;">
                       *
                     </span>
                   </label>
-                  <input type="color" class="form-control form-control-color disable" name="group_color"
-                    id="group_color" placeholder="<?php echo $group->color ?>" value="<?php echo $group->color ?>"
-                    required>
+                  <input type="color" class="form-control form-control-color disable" name="group_color" id="group_color" placeholder="<?php echo $group->color ?>" value="<?php echo $group->color ?>" required>
                 </div>
               </fieldset>
             </div>
@@ -113,22 +108,22 @@ require __DIR__ . '/../layout/navigation.php';
 <script>
   var toogle_disable = document.getElementById("deactivate_group");
   var disable = document.getElementsByClassName('disable');
-  if(toogle_disable.checked != true){
-    for(var i = 0; i < disable.length; i++){
-      disable[i].disabled=true;
-      disable[i].readOnly=true;
+  if (toogle_disable.checked != true) {
+    for (var i = 0; i < disable.length; i++) {
+      disable[i].disabled = true;
+      disable[i].readOnly = true;
     }
   }
-  toogle_disable.onchange=function() {
-    if(toogle_disable.checked!=true){
-      for(var i=0; i < disable.length; i++){
-        disable[i].disabled=true;
-        disable[i].readOnly=true;
+  toogle_disable.onchange = function() {
+    if (toogle_disable.checked != true) {
+      for (var i = 0; i < disable.length; i++) {
+        disable[i].disabled = true;
+        disable[i].readOnly = true;
       }
-    }else{
-      for(var i=0; i < disable.length; i++){
-        disable[i].disabled=false;
-        disable[i].readOnly=false;
+    } else {
+      for (var i = 0; i < disable.length; i++) {
+        disable[i].disabled = false;
+        disable[i].readOnly = false;
       }
     }
   }

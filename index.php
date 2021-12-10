@@ -103,11 +103,11 @@ if (isset($_POST['tabel_renew'])) {
 if (!isset($_POST['table_empty'])) {
   switch ($_POST['modal_table_input']) {
     case lang['events']:
-      new eventsseed('create');
+      new eventsseed('recreate');
       break;
     case lang['groups']:
-      new eventsseed('create');
-      new teamsseed('create');
+      new eventsseed('recreate');
+      new teamsseed('recreate');
       break;
   }
 }

@@ -44,23 +44,26 @@ require __DIR__ . '/../layout/navigation.php';
                             *
                           </span>
                         </label>
+                        <div class="invalid-feedback">
+                          '. lang['invalide-settings_value-input'] .'
+                        </div>
                       </div>
                     </fieldset>
                   </div>
                   <div class="col-md-4">
                     <fieldset id="input_name">
                       <div class="form-floating">
-                        <select class="form-select" id="time_unit" name="time_unit" aria-label="Einheit">';
+                        <select class="form-select" id="time_unit" name="time_unit" aria-label="'. lang['unit'] .'">';
               if($setting->time_unit == 'day'){
-                echo'<option value="day">in Tagen</option>';
-                echo'<option value="week">in Wochen</option>';
+                echo'<option value="day">'. lang['days'] .'</option>';
+                echo'<option value="week">'. lang['weeks'] .'</option>';
               }
               if($setting->time_unit == 'week'){
-                echo'<option value="week">in Wochen</option>';
-                echo'<option value="day">in Tagen</option>';
+                echo'<option value="week">'. lang['weeks'] .'</option>';
+                echo'<option value="day">'. lang['days'] .'</option>';
               }
                         echo'</select>
-                        <label for="time_unit">Einheit</label>
+                        <label for="time_unit">'. lang['unit'] .'</label>
                       </div>
                     </fieldset>
                   </div>
@@ -82,7 +85,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div id="setting_value_label" class="label">
                         </div>
                         <div class="invalid-feedback">
-                          Bitte geben sie einen Wert an (Maximal 50 Zeichen länge)!
+                          '. lang['invalide-settings_value-input'] .'
                         </div>
                       </div>
                     </fieldset>
@@ -100,9 +103,9 @@ require __DIR__ . '/../layout/navigation.php';
                               *
                             </span>
                           </label>
-                          <div class="invalid-feedback">
-                            Bitte geben sie einen Wert an!
-                          </div>
+                        <div class="invalid-feedback">
+                          '. lang['invalide-settings_value-input'] .'
+                        </div>
                         </div>
                       </fieldset>
                     </div>';

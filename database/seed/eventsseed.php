@@ -15,8 +15,11 @@ class eventsseed extends admin_connect
             case 'empty':
                 eventsseed::empty_table($pdo);
                 break;
-            default:
+            case 'recreate':
                 eventsseed::delete_table($pdo);
+                eventsseed::create_table($pdo);
+                eventsseed::create_view($pdo);
+            default:
                 eventsseed::create_table($pdo);
                 eventsseed::create_view($pdo);
         }

@@ -15,8 +15,11 @@ class teamsseed extends admin_connect
             case 'empty':
                 teamsseed::empty_table($pdo);
                 break;
-            default:
+            case 'recreate':
                 teamsseed::delete_table($pdo);
+                teamsseed::create_table($pdo);
+                teamsseed::create_view($pdo);
+            default:
                 teamsseed::create_table($pdo);
                 teamsseed::create_view($pdo);
         }

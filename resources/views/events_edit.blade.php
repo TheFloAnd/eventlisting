@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 use app\controller\events;
 use app\controller\group;
 
@@ -15,23 +16,21 @@ require __DIR__ . '/../layout/navigation.php';
                     <div class="row mt-3 g-3 justify-content-center">
                         <fieldset class="" hidden>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="event_id" id="event_id"
-                                    value="<?php echo$data['result']->id ?>">
+                                <input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo $data['result']->id ?>">
                             </div>
                         </fieldset>
                         <div class="col-md-10">
                             <fieldset id="fieldset_remove">
                                 <div class="form-check form-switch">
                                     <?php
-                                    if($data['result']->not_applicable == 1){
+                                    if ($data['result']->not_applicable == 1) {
                                         $checked = 'checked';
-                                    }else{
+                                    } else {
                                         $checked = '';
                                     }
 
                                     ?>
-                                    <input class="form-check-input" type="checkbox" value="1" name="removed"
-                                        id="removed" <?php echo$checked ?>>
+                                    <input class="form-check-input" type="checkbox" value="1" name="removed" id="removed" <?php echo $checked ?>>
                                     <label class="form-check-label" for="removed">
                                         <?php echo lang['not_applicable'] ?>
                                     </label>
@@ -42,9 +41,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-10">
                             <fieldset>
                                 <div class="form-floating has-validation">
-                                    <input type="text" class="form-control disable" name="event" id="event"
-                                        placeholder="<?php echo$data['result']->event ?:  lang['event'] ?>"
-                                        value="<?php echo$data['result']->event ?>" list="event_list" required>
+                                    <input type="text" class="form-control disable" name="event" id="event" placeholder="<?php echo $data['result']->event ?:  lang['event'] ?>" value="<?php echo $data['result']->event ?>" list="event_list" required>
                                     <label for="event">
                                         <?php echo lang['event'] ?>
                                         <span style="color: red;">
@@ -52,15 +49,15 @@ require __DIR__ . '/../layout/navigation.php';
                                         </span>
                                     </label>
                                     <div class="invalid-feedback">
-                                        Bitte geben sie einen Termin namen an!
+                                        <?php echo lang['invalide-event-input']; ?>
                                     </div>
                                     <datalist id="event_list">
                                         <?php
 
-                                    foreach($data['proposals'] as $row){
-                                        echo'<option value="'. $row['event'] .'">';
-                                    }
-                                    ?>
+                                        foreach ($data['proposals'] as $row) {
+                                            echo '<option value="' . $row['event'] . '">';
+                                        }
+                                        ?>
                                     </datalist>
                                 </div>
                             </fieldset>
@@ -75,43 +72,43 @@ require __DIR__ . '/../layout/navigation.php';
                                             *
                                         </span>
                                     </label>
-                                    <select class="form-select multiple-select disable" name="group[]"
-                                        multiple="multiple" required>
+                                    <select class="form-select multiple-select disable" name="group[]" multiple="multiple" required>
                                         <?php
-                                $teams = explode(';', $data['result']->team );
-                                foreach($data['group'] as $row){
-                                    if(in_array($row['alias'], $teams)){
-                                        echo'<option value="'. $row['alias'] .'" selected>'. $row['name'] .' ('. $row['alias'] .')</option>';
-                                    }else{
-                                        echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
-                                    }
-                                }
-                            ?>
+                                        $teams = explode(';', $data['result']->team);
+                                        foreach ($data['group'] as $row) {
+                                            if (in_array($row['alias'], $teams)) {
+                                                echo '<option value="' . $row['alias'] . '" selected>' . $row['name'] . ' (' . $row['alias'] . ')</option>';
+                                            } else {
+                                                echo '<option value="' . $row['alias'] . '">' . $row['name'] . ' (' . $row['alias'] . ')</option>';
+                                            }
+                                        }
+                                        ?>
                                     </select>
+                                    <div class="invalid-feedback">
+                                        <?php echo lang['invalide-group-input']; ?>
+                                    </div>
                                 </div>
                             </fieldset>
                         </div>
                         <div class="col-md-3">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control disable" name="room" id="room"
-                                        placeholder="<?php echo$data['result']->room ?:  lang['room'] ?>"
-                                        value="<?php echo$data['result']->room ?>">
+                                    <input type="text" class="form-control disable" name="room" id="room" placeholder="<?php echo $data['result']->room ?:  lang['room'] ?>" value="<?php echo $data['result']->room ?>" maxlength="25">
                                     <label for="room">
                                         <?php echo lang['room'] ?>
                                     </label>
+                                    <div class="invalid-feedback">
+                                        <?php echo lang['invalide-room-input']; ?>
+                                    </div>
                                 </div>
                             </fieldset>
                         </div>
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control disable" name="start_date"
-                                        id="start_date"
-                                        value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->start)) ?>"
-                                        required>
+                                    <input type="datetime-local" class="form-control disable" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->start)) ?>" required>
                                     <label for="start_date">
-                                        <?php echo lang['start'] .' '.  lang['date'] ?>
+                                        <?php echo lang['start'] . ' ' .  lang['date'] ?>
                                         <span style="color: red;">
                                             *
                                         </span>
@@ -122,12 +119,9 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control disable" name="end_date"
-                                        id="end_date"
-                                        value="<?php  echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->end)) ?>"
-                                        required>
+                                    <input type="datetime-local" class="form-control disable" name="end_date" id="end_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->end)) ?>" required>
                                     <label for="end_date">
-                                        <?php echo lang['end'] .' '.  lang['date'] ?>
+                                        <?php echo lang['end'] . ' ' .  lang['date'] ?>
                                         <span style="color: red;">
                                             *
                                         </span>
@@ -138,14 +132,14 @@ require __DIR__ . '/../layout/navigation.php';
 
 
                         <?php
-if(!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)){
-echo'<div class="col-md-10"><fieldset>
+                        if (!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)) {
+                            echo '<div class="col-md-10"><fieldset>
     <div class="form-group">
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle"
                 autocomplete="off">
             <label class="form-check-label" for="edit_repeat">
-                '. lang['repeat'] .' ebenfalls '. lang['update'] .'?
+                ' . lang['updat'] . ' ' . lang['repeat'] . '?
             </label>
         </div>
     </div>
@@ -156,30 +150,28 @@ echo'<div class="col-md-10"><fieldset>
                                 title="In wievielen Tagen/Wochen sich der Termin wiederholen soll">
                                 <fieldset>
                                     <label class="form-label" for="days">
-                                        '. lang['days'] .' :
+                                        ' . lang['days'] . ' :
                                     </label>
-                                    <input class="form-control" type="number" placeholder="'. lang['days'] .'" min="1" name="repeat_days" id="repeat_days" value="'. $data['result']->repeat_dif .'" disabled>
+                                    <input class="form-control" type="number" placeholder="' . lang['days'] . '" min="1" name="repeat_days" id="repeat_days" value="' . $data['result']->repeat_dif . '" disabled>
                                 </fieldset>
                             </div>
                         </div>';
-}
-?>
+                        }
+                        ?>
 
 
                         <div class="col-md-10">
                             <div class="row g-2 justify-content-evenly">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-outline-success w-100"
-                                            name="submit_edit_event" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <button type="submit" class="btn btn-outline-success w-100" name="submit_edit_event" data-bs-toggle="modal" data-bs-target="#editModal">
                                             <?php echo lang['update'] ?>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-outline-danger w-100"
-                                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <button type="button" class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             <?php echo lang['delete'] ?>
                                         </button>
                                     </div>
@@ -214,26 +206,25 @@ echo'<div class="col-md-10"><fieldset>
 
                     <fieldset class="" hidden>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="event_id" id="event_id"
-                                value="<?php echo$data['result']->id ?>">
+                            <input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo $data['result']->id ?>">
                         </div>
                     </fieldset>
                     <p>Wollen die den Termin wirklich Löschen?</p>
                     <?php
-if(!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)){
-    echo'<fieldset>
+                    if (!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)) {
+                        echo '<fieldset>
         <div class="form-group">
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" name="delete_repeat" id="delete_repeat" data-toggle="toggle" autocomplete="off">
                 <label class="form-check-label" for="delete_repeat">
-'. lang['repeat'] .' '. lang['delete'] .'?
+' . lang['repeat'] . ' ' . lang['delete'] . '?
                 </label>
             </div>
         </div>
     </fieldset>';
-    }
+                    }
 
-?>
+                    ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -250,20 +241,20 @@ if(!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)){
 <script>
     var toogle_disable = document.getElementById('removed');
     var disable = document.getElementsByClassName('disable');
-if(toogle_disable.checked == true){
-        for(var i = 0; i < disable.length; i++){
-            disable[i].disabled=true;
+    if (toogle_disable.checked == true) {
+        for (var i = 0; i < disable.length; i++) {
+            disable[i].disabled = true;
             disable[i].readOnly = true;
         }
     }
     toogle_disable.onchange = function() {
-        if(toogle_disable.checked == true){
-            for(var i = 0; i < disable.length; i++){
+        if (toogle_disable.checked == true) {
+            for (var i = 0; i < disable.length; i++) {
                 disable[i].disabled = true;
                 disable[i].readOnly = true;
             }
-        }else{
-            for(var i = 0; i < disable.length; i++){
+        } else {
+            for (var i = 0; i < disable.length; i++) {
                 disable[i].disabled = false;
                 disable[i].readOnly = false;
             }
@@ -273,35 +264,35 @@ if(toogle_disable.checked == true){
 
 <script>
     var start_date = document.getElementById("start_date");
-        var end_date = document.getElementById("end_date");
-        
-        start_date.onchange = function () {
-          if (start_date.value > end_date.value) {
+    var end_date = document.getElementById("end_date");
+
+    start_date.onchange = function() {
+        if (start_date.value > end_date.value) {
             end_date.value = start_date.value
-          }
-          if (!end_date.value) {
+        }
+        if (!end_date.value) {
             end_date.value = start_date.value
-          }
-        };
-        end_date.onchange = function () {
-          if (end_date.value < start_date.value) {
+        }
+    };
+    end_date.onchange = function() {
+        if (end_date.value < start_date.value) {
             start_date.value = end_date.value
-          }
-          if (!start_date.value) {
+        }
+        if (!start_date.value) {
             start_date.value = end_date.value
-          }
-        };
+        }
+    };
 </script>
 <script>
     var edit_repeat = document.getElementById('edit_repeat');
-var set_repeat = document.getElementById('repeat_days');
-edit_repeat.checked = false;
-set_repeat.disabled = true;
-edit_repeat.onchange = function() {
-    if(edit_repeat.checked == true) {
-        set_repeat.disabled = false;
-    }else {
-        set_repeat.disabled = true;
-    }
-};
+    var set_repeat = document.getElementById('repeat_days');
+    edit_repeat.checked = false;
+    set_repeat.disabled = true;
+    edit_repeat.onchange = function() {
+        if (edit_repeat.checked == true) {
+            set_repeat.disabled = false;
+        } else {
+            set_repeat.disabled = true;
+        }
+    };
 </script>
