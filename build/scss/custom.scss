@@ -1,5 +1,8 @@
-// @use "../../node_modules/bootstrap/scss/bootstrap";
-@use "../../node_modules/bootstrap-icons/font/bootstrap-icons";
+
+$light: #dddddd;
+$dark: #011100;
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 .card {
   border-radius: 0.5em !important;
@@ -14,7 +17,6 @@
   left: 0;
   z-index: 20 !important;
   &:focus {
-    // border: none !important;
     box-shadow: none !important;
   }
   &:hover {
@@ -58,6 +60,9 @@ tr.strikeout td:after {
 .main * {
   font-size: 1.055em;
 }
+.main .badge{
+  font-size: .80em;
+}
 
 .header-primary {
   font-size: 2em !important;
@@ -74,6 +79,7 @@ tr.strikeout td:after {
   }
 }
 .myOffcanvas {
+  z-index: 9999 !important;
   height: fit-content !important;
   border-bottom-right-radius: 1rem !important;
 }
@@ -87,16 +93,16 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:first-child
 div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child {
   padding-right: 5px !important;
 }
-.newsBanner-container{
-  z-index: 20;
-  position: sticky;
-  bottom: 0;
-}
-.newsBanner{
-  display: none !important;
-  width: 70%;
-  // background-color: rgba(180, 180, 180, 0.75) !important;
-}
+// .newsBanner-container{
+//   z-index: 20;
+//   position: sticky;
+//   bottom: 0;
+// }
+// .newsBanner{
+//   display: none !important;
+//   width: 70%;
+//   // background-color: rgba(180, 180, 180, 0.75) !important;
+// }
 .label{
   margin-left: 5px;
   font-size:80%;

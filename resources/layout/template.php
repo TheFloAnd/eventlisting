@@ -19,7 +19,7 @@ use app\module\file_exists;
     <link href="/resources/css/custom.css" rel="stylesheet" />
 
     <!-- Bootstrap CSS -->
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link href="/resources/css/bootstrap.min.css" rel="stylesheet" /> -->
     <!-- <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">-->
 
     <link rel="stylesheet" href="/resources/css/select2.min.css">
