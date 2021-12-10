@@ -27,13 +27,13 @@ require __DIR__ . '/../layout/navigation.php';
                               <td>';
               switch ($row['time_unit']){
                 case 'day':
-                  $output_time_unit = 'Tagen';
+                  $output_time_unit = lang['meet'];
                   break;
                 case 'week':
-                  $output_time_unit = 'Wochen';
+                  $output_time_unit = lang['weeks'];
                   break;
                 case 'seconds':
-                  $output_time_unit = 'Sekunden';
+                  $output_time_unit = lang['seconds'];
                   break;
                 default:
                   $output_time_unit = '';

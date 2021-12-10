@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var table = $(".dataTable").DataTable({
+    var table = $(".dataTable_default").DataTable({
         responsive: true,
         displayLength: 10,
         autoWidth: false,
@@ -28,28 +28,7 @@ $(document).ready(function () {
             });
         },
         language: {
-            decimal: "",
-            emptyTable: "Es wurden keine Einträge gefunden!",
-            info: "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-            infoEmpty: "0 Einträgen",
-            infoFiltered: "(Suche aus insgesamt _MAX_ Einträgen)",
-            infoPostFix: "",
-            thousands: ",",
-            lengthMenu: "Einträge anzeigen: _MENU_",
-            loadingRecords: "Laden...",
-            processing: "Verarbeiten...",
-            search: "Suche:",
-            zeroRecords: "Es sind keine Einträge vorhanden!",
-            paginate: {
-                first: "Erste",
-                last: "Letzte",
-                next: "Nächste",
-                previous: "Vorherige",
-            },
-            aria: {
-                sortAscending: ": activate to sort column ascending",
-                sortDescending: ": activate to sort column descending",
-            },
+            url: "/resources/js/init/German.json",
         },
     });
 
@@ -98,29 +77,9 @@ $(document).ready(function () {
                 api.search($.trim(this.innerHTML)).draw();
             });
         },
+
         language: {
-            decimal: "",
-            emptyTable: "Es wurden keine Einträge gefunden!",
-            info: "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-            infoEmpty: "0 Einträgen",
-            infoFiltered: "(Suche aus insgesamt _MAX_ Einträgen)",
-            infoPostFix: "",
-            thousands: ",",
-            lengthMenu: "Einträge anzeigen: _MENU_",
-            loadingRecords: "Laden...",
-            processing: "Verarbeiten...",
-            search: "Suche:",
-            zeroRecords: "Es sind keine Einträge vorhanden!",
-            paginate: {
-                first: "Erste",
-                last: "Letzte",
-                next: "Nächste",
-                previous: "Vorherige",
-            },
-            aria: {
-                sortAscending: ": activate to sort column ascending",
-                sortDescending: ": activate to sort column descending",
-            },
+            url: "/resources/js/init/German.json",
         },
     });
     $("a.toggle-vis").on("click", function (e) {
@@ -168,28 +127,7 @@ $(document).ready(function () {
             });
         },
         language: {
-            decimal: "",
-            emptyTable: "Es wurden keine Einträge gefunden!",
-            info: "Zeige _START_ bis _END_ von _TOTAL_ Einträgen",
-            infoEmpty: "0 Einträgen",
-            infoFiltered: "(Suche aus insgesamt _MAX_ Einträgen)",
-            infoPostFix: "",
-            thousands: ",",
-            lengthMenu: "Einträge anzeigen: _MENU_",
-            loadingRecords: "Laden...",
-            processing: "Verarbeiten...",
-            search: "Suche:",
-            zeroRecords: "Es sind keine Einträge vorhanden!",
-            paginate: {
-                first: "Erste",
-                last: "Letzte",
-                next: "Nächste",
-                previous: "Vorherige",
-            },
-            aria: {
-                sortAscending: ": activate to sort column ascending",
-                sortDescending: ": activate to sort column descending",
-            },
+            url: "/resources/js/init/German.json",
         },
     });
     $("a.toggle-vis").on("click", function (e) {

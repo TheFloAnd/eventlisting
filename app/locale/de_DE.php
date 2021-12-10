@@ -1,6 +1,8 @@
 <?php
 $lang = array();
 
+
+$lang['nav']          = 'Navigation';
 $lang['index']          = 'Hauptseite';
 $lang['event']          = 'Termin';
 $lang['events']         = 'Termine';
@@ -20,7 +22,7 @@ $lang['name']           = 'Name';
 $lang['alias']          = 'Alias';
 $lang['color']          = 'Farbe';
 
-$lang['preview']          = 'Vorschau';
+$lang['preview']        = 'Vorschau';
 
 $lang['room']           = 'Raum';
 $lang['start']          = 'Start';
@@ -34,7 +36,7 @@ $lang['remaining_days'] = 'In';
 $lang['repeat']         = 'Wiederholungen';
 $lang['not_applicable'] = 'Entfällt';
 
-$lang['news'] = 'Neuigkeiten';
+$lang['news']           = 'Neuigkeiten';
 
 $lang['monday']         = 'Montag';
 $lang['tuesday']        = 'Dienstag';
@@ -46,3 +48,17 @@ $lang['sunday']         = 'Sonntag';
 $lang['weeks']          = 'Wochen';
 $lang['days']           = 'Tage';
 $lang['meet']           = 'Tagen';
+$lang['seconds']        = 'Sekunden';
+
+$lang['no-repeat']        = 'Keine Wiederholung';
+$lang['toggle-column']        = 'Spalte umschalten';
+
+// Error
+
+
+$lang['invalide-event-input']       = 'Bitte geben sie einen Termin namen an (Maximal 50 Zeichen länge)!';
+$lang['invalide-group-input']       = 'Bitte geben sie eine oder mehrere Gruppen an!';
+$lang['invalide-room-input']        = 'Die maximale länge beträgt 10 Zeichen!';
+
+// Datatable
+$lang['datatable_lang-file']        = '/resources/js/init/German.json';

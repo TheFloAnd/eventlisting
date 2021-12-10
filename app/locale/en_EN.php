@@ -2,6 +2,7 @@
 
 $lang = array();
 
+$lang['nav']          = 'Navigation';
 $lang['index']          = 'Main';
 $lang['event']          = 'Event';
 $lang['events']         = 'Events';
@@ -47,3 +48,17 @@ $lang['sunday']         = 'Sunday';
 $lang['weeks']          = 'Weeks';
 $lang['days']           = 'Days';
 $lang['meet']           = 'Days';
+$lang['seconds']        = 'Seconds';
+
+$lang['no-repeat']        = 'No Repeats';
+$lang['toggle-column']        = 'Toggle Column';
+
+// Error
+
+
+$lang['invalide-event-input']       = 'Please set an Event name (max. 50 symbols)!';
+$lang['invalide-group-input']       = 'Please add one or more Groups!';
+$lang['invalide-room-input']        = 'The max. length is 10 Symbols';
+
+// Datatable
+$lang['datatable_lang-file']        = '';

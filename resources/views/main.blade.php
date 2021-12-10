@@ -10,7 +10,7 @@ $result = MAIN::index();
 </button>
 <div class="offcanvas offcanvas-start myOffcanvas" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
   <div class="offcanvas-header">
-    <h4 id="offcanvasTopLabel">Navigation</h4>
+    <h4 id="offcanvasTopLabel"><?php echo lang['nav'] ?></h4>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
@@ -159,10 +159,10 @@ $result = MAIN::index();
               $future = config::get('future_day');
               switch ($future->time_unit){
                 case 'day':
-                  $output_time_unit = 'Tage';
+                  $output_time_unit = lang['days'];
                   break;
                 case 'week':
-                  $output_time_unit = 'Wochen';
+                  $output_time_unit = lang['weeks'];
                   break;
                 }
 
