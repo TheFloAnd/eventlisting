@@ -41,8 +41,7 @@ require __DIR__ . '/../layout/navigation.php';
                                 echo ucwords($row['view']);
                                 echo'</td>
                               <td>';
-
-                                echo $row['setting'] != 'language' ? $row['value'] .' '. $output_time_unit : config::get_language($row['value'])->view;
+                                echo $row['value'] .' '. $output_time_unit;
                                 
                                 echo'</td>';
                           echo'<td>

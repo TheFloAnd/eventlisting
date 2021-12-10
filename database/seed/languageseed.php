@@ -11,14 +11,13 @@ class languageseed extends admin_connect
     public function __construct()
     {
         $pdo = admin_connect::connection();
+
         languageseed::create_table($pdo);
         languageseed::insert($pdo);
     }
     public static function create_table($pdo)
     {
         try {
-            $pdo->query("use `" . db['database'] . "`;");
-
             $pdo->query(
                 "CREATE TABLE  IF NOT EXISTS `language` (
                 `id` int NOT NULL,
@@ -41,8 +40,6 @@ class languageseed extends admin_connect
     public static function insert($pdo)
     {
         try {
-            $pdo->query("use `" . db['database'] . "`;");
-
             $pdo->query(
                 "INSERT INTO `language` (
                 `id`,

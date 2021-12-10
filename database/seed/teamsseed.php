@@ -15,7 +15,7 @@ class teamsseed extends admin_connect
             case 'empty':
                 teamsseed::empty_table($pdo);
                 break;
-            case 'create':
+            default:
                 teamsseed::delete_table($pdo);
                 teamsseed::create_table($pdo);
                 teamsseed::create_view($pdo);
@@ -25,7 +25,6 @@ class teamsseed extends admin_connect
     public static function create_table($pdo)
     {
         try {
-            $pdo->query("use `" . db['database'] . "`;");
             $pdo->query(
                 "CREATE TABLE IF NOT EXISTS `teams` (
                 `id` int NOT NULL,
@@ -54,7 +53,6 @@ class teamsseed extends admin_connect
     public static function create_view($pdo)
     {
         try {
-            $pdo->query("use `" . db['database'] . "`;");
             $pdo->query(
                 "CREATE VIEW IF NOT EXISTS `v_teams`  AS  select
                 `teams`.`id` AS `id`,
@@ -69,45 +67,16 @@ class teamsseed extends admin_connect
             ;"
             );
 
-            // $pdo->query(
-            //     "CREATE VIEW IF NOT EXISTS `v_teams_active`  AS  select 
-            //     `teams`.`id` AS `id`,
-            //     `teams`.`name` AS `name`,
-            //     `teams`.`alias` AS `alias`,
-            //     `teams`.`color` AS `color` ,
-            //     `events`.`created_at` AS `created_at`,
-            //     `events`.`updated_at` AS `updated_at`
-            // from `teams` 
-            //     where `teams`.`deleted_at` = NULL 
-            //     order by `teams`.`name`
-            // ;"
-            // );
-
-            // $pdo->query(
-            //     "CREATE VIEW IF NOT EXISTS `v_teams_inactive`  AS  select 
-            //     `teams`.`id` AS `id`,
-            //     `teams`.`name` AS `name`,
-            //     `teams`.`alias` AS `alias`,
-            //     `teams`.`color` AS `color` ,
-            //     `events`.`created_at` AS `created_at`,
-            //     `events`.`updated_at` AS `updated_at`
-            // from `teams` 
-            //     where `teams`.`deleted_at` != 0 
-            //     order by `teams`.`name`
-            // ;"
-            // );
             return;
         } catch (\PDOException $e) {
             echo "PDOException: " . $e->getMessage();
         }
     }
 
-    public static function empty_table()
+    public static function empty_table($pdo)
     {
         $pdo = admin_connect::connection();
         try {
-
-            $pdo->query("use `" . db['database'] . "`;");
             $pdo->query(
                 "TRUNCATE `events`.`teams`"
             );
@@ -117,13 +86,9 @@ class teamsseed extends admin_connect
         }
     }
 
-    public static function delete_table()
+    public static function delete_table($pdo)
     {
-        $pdo = admin_connect::connection();
         try {
-
-            $pdo->query("use `" . db['database'] . "`;");
-
             $pdo->query(
                 "DROP VIEW `events`.`v_teams`"
             );

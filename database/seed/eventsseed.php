@@ -15,7 +15,7 @@ class eventsseed extends admin_connect
             case 'empty':
                 eventsseed::empty_table($pdo);
                 break;
-            case 'create':
+            default:
                 eventsseed::delete_table($pdo);
                 eventsseed::create_table($pdo);
                 eventsseed::create_view($pdo);
@@ -24,8 +24,6 @@ class eventsseed extends admin_connect
     public static function create_table($pdo)
     {
         try {
-
-            $pdo->query("use `" . db['database'] . "`;");
             $pdo->query(
                 "CREATE TABLE   IF NOT EXISTS `events` (
                 `id` int NOT NULL,
@@ -60,8 +58,6 @@ class eventsseed extends admin_connect
     public static function create_view($pdo)
     {
         try {
-
-            $pdo->query("use `" . db['database'] . "`;");
             $pdo->query(
                 "CREATE VIEW IF NOT EXISTS `v_events`  AS  select 
                 `events`.`id` AS `id`,
@@ -81,47 +77,6 @@ class eventsseed extends admin_connect
             ;"
             );
 
-            //     $pdo->query(
-            //         "CREATE VIEW IF NOT EXISTS  `v_events_future`  AS  select 
-            //         `events`.`id` AS `id`,
-            //         `events`.`not_applicable` AS `not_applicable`,
-            //         `events`.`event` AS `event`,
-            //         `events`.`team` AS `team`,
-            //         `events`.`start` AS `start`,
-            //         `events`.`end` AS `end`,
-            //         `events`.`repeat` AS `repeat`,
-            //         `events`.`repeat_parent` AS `repeat_parent`,
-            //         `events`.`room` AS `room`
-            //     from `events` 
-            //         where `start` <= curdate() + interval (
-            //             select `config`.`value` from `config` 
-            //                 where `config`.`setting` = 'future_day'
-            //             ) day 
-            //         and 
-            //             `start` >= curdate() + interval 1 day 
-            //         and `deleted_at` is null 
-            //     order by `start`
-            // ;"
-            //     );
-
-            //     $pdo->query(
-            //         "CREATE VIEW IF NOT EXISTS  `v_events_current`  AS  select 
-            //         `events`.`id` AS `id`,
-            //         `events`.`not_applicable` AS `not_applicable`,
-            //         `events`.`event` AS `event`,
-            //         `events`.`team` AS `team`,
-            //         `events`.`start` AS `start`,
-            //         `events`.`end` AS `end`,
-            //         `events`.`repeat` AS `repeat`,
-            //         `events`.`repeat_parent` AS `repeat_parent`,
-            //         `events`.`room` AS `room`
-            //     from `events` 
-            //         where `deleted_at` is null 
-            //         and `start` <= curdate() 
-            //         and `end` >= curdate() 
-            //     order by `start`
-            // ;"
-            //     );
             return;
         } catch (\PDOException $e) {
             echo "PDOException: " . $e->getMessage();
@@ -130,8 +85,6 @@ class eventsseed extends admin_connect
     public static function empty_table($pdo)
     {
         try {
-
-            $pdo->query("use `" . db['database'] . "`;");
             $pdo->query(
                 "TRUNCATE `events`.`events`"
             );
@@ -144,8 +97,6 @@ class eventsseed extends admin_connect
     public static function delete_table($pdo)
     {
         try {
-
-            $pdo->query("use `" . db['database'] . "`;");
             $pdo->query(
                 "DROP VIEW `events`.`v_events`"
             );
