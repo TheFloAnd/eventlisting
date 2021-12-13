@@ -1,5 +1,5 @@
 <?php
-
+use app\controller\config;
 /*
  * Datenbank
  */
@@ -28,7 +28,7 @@ ini_set('error_reporting', E_ALL);
 * Language
 */
 
-setlocale(LC_ALL, 'de_DE.utf8');
+setlocale(LC_ALL, config::get('language')->value . '.utf8');
 
 // require __DIR__ . '/app/lang/lang_de.php';
 // define('lang', $lang['de']);

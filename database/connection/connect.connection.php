@@ -7,6 +7,7 @@ use database\seed\userseed;
 use database\seed\configseed;
 use database\seed\eventsseed;
 use database\seed\teamsseed;
+use database\seed\languageseed;
 
 class connect
 {
@@ -28,6 +29,7 @@ class connect
             //connect::createDB();
             new Userseed;
             new configseed;
+            new languageseed;
             new eventsseed('create');
             new teamsseed('create');
             header("Refresh:0");

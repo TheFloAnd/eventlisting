@@ -10,7 +10,7 @@ $result = MAIN::index();
 </button>
 <div class="offcanvas offcanvas-start myOffcanvas" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
   <div class="offcanvas-header">
-    <h4 id="offcanvasTopLabel">Navigation</h4>
+    <h4 id="offcanvasTopLabel"><?php echo lang['nav'] ?></h4>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
@@ -32,8 +32,8 @@ $result = MAIN::index();
   <section class="col-12 main-card">
     <div class="card">
       <div class="card-header">
-        <nav class="navbar navbar-dark">
-          <div id="refresh_title">
+        <nav class="navbar">
+          <div class="refresh" id="refresh-title">
             <h1 class="header-primary">
               <?php echo config::get('name')->value; ?>
             </h1>
@@ -46,7 +46,7 @@ $result = MAIN::index();
           </h1>
         </nav>
       </div>
-      <div class="card-body" id="refresh">
+      <div class="card-body refresh" id="refresh-card-main">
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -150,7 +150,7 @@ $result = MAIN::index();
   <section class="col-12">
     <div class="card">
       <div class="card-header">
-        <nav class="navbar navbar-dark" id="refresh_title_future">
+        <nav class="navbar navbar-dark refresh" id="refresh-title-preview">
           <h2 class="header-secondary">
             <?php echo lang['event'] .' '.  lang['preview']; ?>
           </h2>
@@ -159,10 +159,10 @@ $result = MAIN::index();
               $future = config::get('future_day');
               switch ($future->time_unit){
                 case 'day':
-                  $output_time_unit = 'Tage';
+                  $output_time_unit = lang['days'];
                   break;
                 case 'week':
-                  $output_time_unit = 'Wochen';
+                  $output_time_unit = lang['weeks'];
                   break;
                 }
 
@@ -171,7 +171,7 @@ $result = MAIN::index();
           </h2>
         </nav>
       </div>
-      <div class="card-body" id="refresh_2">
+      <div class="card-body refresh" id="refresh-card-preview">
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -264,7 +264,7 @@ $result = MAIN::index();
                           }
                           }
                           }
-              echo'<td>'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .' Tagen</td>
+              echo'<td>'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .' '. lang['meet'] .'</td>
               </tr>';
                   }
                 }
@@ -288,15 +288,14 @@ $result = MAIN::index();
   </section>
 </article>
 <script>
+setInterval(function(){
   refresh_loop();
+}, <?php echo config::get('refresh')->value; ?> * 1000);
+
 function refresh_loop(){
-    setInterval(function(){
-        // window.location.reload();
-    $( "#refresh" ).load(window.location.href + " #refresh > *" );
-    $( "#refresh_2" ).load(window.location.href + " #refresh_2 > *" );
-    $( "#refresh_title" ).load(window.location.href + " #refresh_title > *" );
-    $( "#refresh_title_future" ).load(window.location.href + " #refresh_title_future > *" );
-    }, <?php echo config::get('refresh')->value; ?> * 1000)
+  $('.refresh').each( function(index, element){
+    $(element).load(window.location.href + " #" + this.id + " > *");
+  });
 }
 </script>
 <?php

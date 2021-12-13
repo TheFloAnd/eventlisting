@@ -7,10 +7,20 @@ use database\connection\admin_connect;
 
 class userseed extends admin_connect
 {
+    private $admin_user = db_admin['user'];
+    private $admin_pass = db_admin['pass'];
+
+    private $server = db['host'];
 
     public function __construct()
     {
-        $pdo = admin_connect::connection();
+        try {
+
+            $pdo = new PDO("mysql:host=" . $this->server . ";charset=utf8", $this->admin_user, $this->admin_pass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (\PDOException $e) {
+            echo "PDOException: " . $e->getMessage();
+        }
         userseed::create($pdo);
     }
     public static function create($pdo)

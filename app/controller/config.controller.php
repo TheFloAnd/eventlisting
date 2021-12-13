@@ -40,4 +40,17 @@ class config
         $exec->execute();
         return true;
     }
+
+    public static function language()
+    {
+        $stmt = "SELECT * FROM `language`";
+        $data = connect::connection()->query($stmt);
+        return $data->fetchAll();
+    }
+    public static function get_language($lang_code)
+    {
+        $stmt = "SELECT * FROM `language` where `code` = '" . $lang_code . "'";
+        $data = connect::connection()->query($stmt);
+        return $data->fetchObject();
+    }
 }

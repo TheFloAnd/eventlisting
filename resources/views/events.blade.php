@@ -38,7 +38,7 @@ require __DIR__ . '/../layout/navigation.php';
                         </span>
                       </label>
                       <div class="invalid-feedback">
-                        Bitte geben sie einen Termin namen an (Maximal 50 Zeichen länge)!
+                        <?php echo lang['invalide-event-input']; ?>
                       </div>
                       <datalist id="event_list">
                         <?php
@@ -70,7 +70,7 @@ require __DIR__ . '/../layout/navigation.php';
                               ?>
                           </select>
                           <div class="invalid-feedback">
-                            Bitte geben sie eine oder mehrere Gruppen an!
+                        <?php echo lang['invalide-group-input']; ?>
                           </div>
                         </div>
                       </fieldset>
@@ -88,7 +88,7 @@ require __DIR__ . '/../layout/navigation.php';
                             <?php echo lang['room'] ?>
                           </label>
                           <div class="invalid-feedback">
-                            Die maximale länge beträgt 10 Zeichen!
+                        <?php echo lang['invalide-room-input']; ?>
                           </div>
                         </div>
                       </fieldset>
@@ -130,19 +130,19 @@ require __DIR__ . '/../layout/navigation.php';
                         title="Keine Wiederholungen">
                         <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_none"
                           value="none" checked>
-                        <label class="form-check-label" for="set_repeat_none">Keine Wiederholung</label>
+                        <label class="form-check-label" for="set_repeat_none"><?php echo lang['no-repeat']; ?></label>
                       </div>
                       <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top"
                         title="Setzt die Wiederholung automatisch auf 10 Mal">
                         <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_days"
                           value="days">
-                        <label class="form-check-label" for="set_repeat_days">Tage</label>
+                        <label class="form-check-label" for="set_repeat_days"><?php echo lang['days']; ?></label>
                       </div>
                       <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top"
                         title="Setzt die Wiederholung automatisch auf 10 Mal">
                         <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_weeks"
                           value="weeks">
-                        <label class="form-check-label" for="set_repeat_weeks">Wochen</label>
+                        <label class="form-check-label" for="set_repeat_weeks"><?php echo lang['weeks']; ?></label>
                       </div>
                     </div>
                   </fieldset>
@@ -185,7 +185,7 @@ require __DIR__ . '/../layout/navigation.php';
           <div class="tab-pane fade" id="nav-event_edit" role="tabpanel" aria-labelledby="nav-event_edit-tab">
             <div class="table-responsive mt-2">
               <div class="my-2">
-                Toggle column:
+                <?php echo lang['toggle-column']; ?>:
                 <a class="toggle-vis" data-column="2">
                   <?php echo lang['room'] ?>
                 </a> -
@@ -196,7 +196,7 @@ require __DIR__ . '/../layout/navigation.php';
                   <?php echo lang['settings'] ?>
                 </a>
               </div>
-              <table class="table dataTable table-striped table-hover" id="refresh_edit">
+              <table class="table dataTable dataTable_default table-striped table-hover" id="refresh_edit">
                 <thead>
                   <tr>
                     <th scope="col">
@@ -214,7 +214,8 @@ require __DIR__ . '/../layout/navigation.php';
                     <th scope="col">
                       <?php echo lang['till'] ?>
                     </th>
-                    <th class="no-sort">In</th>
+                    <th class="no-sort">
+                  <?php echo lang['remaining_days'] ?></th>
                     <th class="no-sort"></th>
                   </tr>
                 </thead>
@@ -277,7 +278,7 @@ require __DIR__ . '/../layout/navigation.php';
                             echo'<td class="table_search">'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
                           }
                         }
-                      }echo'<td class="table_search">'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .'Tagen</td>';
+                      }echo'<td class="table_search">'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .' '. lang['meet'] .'</td>';
                       echo'<td><a href="?b=events_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative"><i class="bi bi-gear-wide"></i></a></td>';
                     }
                   }

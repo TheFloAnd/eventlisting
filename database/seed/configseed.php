@@ -34,7 +34,7 @@ class configseed extends admin_connect
                 "ALTER TABLE `config`
                 ADD PRIMARY KEY (`id`),
                 ADD UNIQUE KEY `setting` (`setting`),
-                MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;"
+                MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;"
             );
             return;
         } catch (\PDOException $e) {
@@ -75,6 +75,13 @@ class configseed extends admin_connect
                 'name',
                 '',
                 '',
+                '" . strftime('%Y-%m-%dT%H:%M') . "'
+            ), (
+                4,
+                'Sprache',
+                'language',
+                'Deutsch',
+                'de_DE',
                 '" . strftime('%Y-%m-%dT%H:%M') . "'
             );"
             );
