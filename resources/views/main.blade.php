@@ -32,7 +32,7 @@ $result = MAIN::index();
   <section class="col-12 main-card">
     <div class="card">
       <div class="card-header">
-        <nav class="navbar navbar-dark">
+        <nav class="navbar">
           <div class="refresh" id="refresh-title">
             <h1 class="header-primary">
               <?php echo config::get('name')->value; ?>
