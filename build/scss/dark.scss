@@ -1,0 +1,154 @@
+$bg: #232b32;
+$color: #152028;
+
+@media (prefers-color-scheme: dark) {
+
+    /* CSS Code wenn Dark Mode aktiv */
+    body {
+        background: $bg;
+    }
+
+    .card {
+        background: $color;
+    }
+
+    :root * {
+        // filter: brightness(.7) contrast(1.2);
+        color: white;
+    }
+
+    .navbar {
+        background-color: #212529 !important;
+    }
+
+    a:hover, a:hover * {
+        color: #ced4daaa;
+        text-decoration: underline solid currentColor;
+    }
+
+    tr.strikethrough td:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        border-bottom: 2px solid #111;
+        width: 100%;
+    }
+
+    tr.strikeout td:after {
+        content: "\00B7";
+        font-size: 1em;
+    }
+
+    .table-danger {
+        --bs-table-bg: #d14954c0;
+        --bs-table-striped-bg: #fd5969c0;
+        --bs-table-striped-color: rgb(44, 44, 44);
+        color: #000;
+        border-color: #ee959c;
+    }
+
+    .table {
+        --bs-table-bg: transparent;
+        --bs-table-accent-bg: transparent;
+        --bs-table-striped-color: #bbb;
+        --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+        --bs-table-active-color: #212529;
+        --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+        --bs-table-hover-color: #212529;
+        --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+        color: #ddd;
+    }
+
+    .myOffcanvas {
+        background: $color;
+    }
+
+    .form-control,
+    .form-select {
+        background: $color;
+        color: white;
+
+        &:focus {
+            background: $color !important;
+            border-color: #ced4da;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem #ced4da50;
+            color: white;
+        }
+    }
+
+    .select2-results__options,
+    .select2-container--default .select2-selection--multiple,
+    .select2-container--default .select2-selection--multiple .select2-selection__choice,
+    .select2-container--default.select2-container--focus .select2-selection--multiple,
+    .select2-results__options {
+        background: $color !important;
+        color: white !important;
+        border-color: #ced4da;
+
+        &:focus {
+            background: #ced4da05 !important;
+            border-color: #ced4da;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem #ced4da50;
+        }
+    }
+
+    .select2-results__option:hover {
+        background: #ced4da15 !important;
+        border-color: #ced4da;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem #ced4da50;
+    }
+
+    .nav-tabs .nav-link.active,
+    .nav-tabs .nav-item.show .nav-link {
+        background: rgba(187, 187, 187, 0.5);
+        color: white;
+    }
+
+    .nav-tabs .nav-link:hover,
+    .nav-tabs .nav-item .nav-link :hover {
+        color: white;
+    }
+
+    .dataTables_paginate .pagination .paginate_button,
+    .dataTables_paginate .pagination .active,
+    .dataTables_paginate .pagination .paginate_button a.page-link {
+        background: #ced4da50;
+        color: white;
+
+        &:focus,
+        &:hover,
+        &:active {
+            background: #ced4da10;
+            border-color: #ced4da;
+            outline: 0;
+            box-shadow: 0 0 0 0.15rem #ced4da50;
+        }
+    }
+
+    .dataTables_paginate .pagination .page-item.active .page-link {
+        background: #ced4da10;
+        box-shadow: 0 0 0 0.15rem #ced4da50;
+        border-color: #ced4da;
+    }
+
+    .table-hover>tbody>tr:hover {
+        background: #ced4da25;
+    }
+
+    .modal * {
+        background: $bg;
+    }
+
+    .modal-dialog {
+        border-radius: 0.75rem;
+    }
+
+    [readonly],
+    :disabled {
+        background: #ced4da15 !important;
+    }
+}

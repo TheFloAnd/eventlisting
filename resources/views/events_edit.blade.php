@@ -136,7 +136,7 @@ require __DIR__ . '/../layout/navigation.php';
                             echo '<div class="col-md-10"><fieldset>
     <div class="form-group">
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle"
+            <input class="form-check-input disable" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle"
                 autocomplete="off">
             <label class="form-check-label" for="edit_repeat">
                 ' . lang['updat'] . ' ' . lang['repeat'] . '?
@@ -213,14 +213,12 @@ require __DIR__ . '/../layout/navigation.php';
                     <?php
                     if (!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)) {
                         echo '<fieldset>
-        <div class="form-group">
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" name="delete_repeat" id="delete_repeat" data-toggle="toggle" autocomplete="off">
-                <label class="form-check-label" for="delete_repeat">
-' . lang['repeat'] . ' ' . lang['delete'] . '?
-                </label>
-            </div>
-        </div>
+                        <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" value="1" name="delete_repeat" id="delete_repeat">
+                                    <label class="form-check-label" for="delete_repeat">
+                                    ' . lang['repeat'] . ' ' . lang['delete'] . '?
+                                    </label>
+                                </div>
     </fieldset>';
                     }
 

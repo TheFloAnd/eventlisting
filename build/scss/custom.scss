@@ -1,12 +1,23 @@
-
-$light: #dddddd;
-$dark: #011100;
 @import "../../node_modules/bootstrap-icons/font/bootstrap-icons";
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@import "dark.scss";
+
+@media (prefers-color-scheme: light) {
+  .navbar {
+    background-color: #f8f9fa !important;
+  }
+}
+
+.navbar a:hover {
+  color: default;
+  text-decoration-color: currentColor;
+  text-decoration: underline solid currentColor;
+}
 
 .card {
   border-radius: 0.5em !important;
 }
+
 .btn_hidden {
   border-top-left-radius: 0 !important;
   border-bottom-right-radius: 0.75em !important;
@@ -16,18 +27,22 @@ $dark: #011100;
   top: 0;
   left: 0;
   z-index: 20 !important;
+
   &:focus {
     box-shadow: none !important;
   }
+
   &:hover {
     background-color: rgba(180, 180, 180, 0.25) !important;
   }
 }
+
 .btn-show {
   position: absolute;
   top: 0;
   left: 0;
 }
+
 table,
 thead,
 tr,
@@ -41,9 +56,11 @@ td {
   text-align: center;
   height: 2rem;
 }
+
 td {
   position: relative;
 }
+
 tr.strikethrough td:before {
   content: "";
   position: absolute;
@@ -57,53 +74,68 @@ tr.strikeout td:after {
   content: "\00B7";
   font-size: 1em;
 }
+
 .main * {
   font-size: 1.055em;
 }
-.main .badge{
+
+
+.badge {
   font-size: .80em;
 }
 
 .header-primary {
   font-size: 2em !important;
 }
+
 .header-secondary {
   font-size: 1.5em !important;
 }
+
 .main-card {
   z-index: 10;
   position: sticky;
   top: 0;
-  & > .card {
+
+  &>.card {
     border-bottom: 2.5px solid #000;
   }
 }
+
 .myOffcanvas {
   z-index: 9999 !important;
   height: fit-content !important;
   border-bottom-right-radius: 1rem !important;
 }
 
-div.table-responsive>div.dataTables_wrapper>div.row:nth-child(3) >div[class^=col-] {
+div.table-responsive>div.dataTables_wrapper>div.row:nth-child(3)>div[class^=col-] {
   padding: 10px 5px 5px 0px !important;
 }
+
 div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:first-child {
   padding-left: 5px !important;
 }
+
 div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child {
   padding-right: 5px !important;
 }
-.newsBanner-container{
+
+.newsBanner-container {
   z-index: 20;
   position: sticky;
   bottom: 0;
 }
-.newsBanner{
+
+.newsBanner {
   display: none !important;
   width: 70%;
   // background-color: rgba(180, 180, 180, 0.75) !important;
 }
-.label{
+
+.label {
   margin-left: 5px;
-  font-size:80%;
+  font-size: 80%;
+}
+.invalid-feedback{
+  color: red;
 }

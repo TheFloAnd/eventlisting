@@ -15,16 +15,17 @@ use app\module\file_exists;
 
     <title><?php echo config::get('name')->value; ?></title>
 
-    <!-- Custom CSS -->
-    <link href="/resources/css/custom.css" rel="stylesheet" />
-
     <!-- Bootstrap CSS -->
-    <!-- <link href="/resources/css/bootstrap.min.css" rel="stylesheet" /> -->
-    <!-- <link rel="stylesheet" href="/resources/css/bootstrap-icons.css">-->
+    <!-- <link  rel="stylesheet" href="/resources/css/bootstrap.min.css" /> -->
+    <!-- <link rel="stylesheet" href="/resources/css/bootstrap-icons.css"> -->
 
     <link rel="stylesheet" href="/resources/css/select2.min.css">
     <!-- <link rel="stylesheet" href="/resources/css/jquery.dataTables.min.css"> -->
     <link rel="stylesheet" href="/resources/css/dataTables.bootstrap5.min.css">
+
+
+    <!-- Custom CSS -->
+    <link href="/resources/css/custom.css" rel="stylesheet" />
 </head>
 
 <body>
