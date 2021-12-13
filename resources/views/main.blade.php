@@ -33,7 +33,7 @@ $result = MAIN::index();
     <div class="card">
       <div class="card-header">
         <nav class="navbar navbar-dark">
-          <div id="refresh_title">
+          <div class="refresh" id="refresh-title">
             <h1 class="header-primary">
               <?php echo config::get('name')->value; ?>
             </h1>
@@ -46,7 +46,7 @@ $result = MAIN::index();
           </h1>
         </nav>
       </div>
-      <div class="card-body" id="refresh">
+      <div class="card-body refresh" id="refresh-card-main">
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -150,7 +150,7 @@ $result = MAIN::index();
   <section class="col-12">
     <div class="card">
       <div class="card-header">
-        <nav class="navbar navbar-dark" id="refresh_title_future">
+        <nav class="navbar navbar-dark refresh" id="refresh-title-preview">
           <h2 class="header-secondary">
             <?php echo lang['event'] .' '.  lang['preview']; ?>
           </h2>
@@ -171,7 +171,7 @@ $result = MAIN::index();
           </h2>
         </nav>
       </div>
-      <div class="card-body" id="refresh_2">
+      <div class="card-body refresh" id="refresh-card-preview">
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -288,15 +288,14 @@ $result = MAIN::index();
   </section>
 </article>
 <script>
+setInterval(function(){
   refresh_loop();
+}, <?php echo config::get('refresh')->value; ?> * 1000);
+
 function refresh_loop(){
-    setInterval(function(){
-        // window.location.reload();
-    $( "#refresh" ).load(window.location.href + " #refresh > *" );
-    $( "#refresh_2" ).load(window.location.href + " #refresh_2 > *" );
-    $( "#refresh_title" ).load(window.location.href + " #refresh_title > *" );
-    $( "#refresh_title_future" ).load(window.location.href + " #refresh_title_future > *" );
-    }, <?php echo config::get('refresh')->value; ?> * 1000)
+  $('.refresh').each( function(index, element){
+    $(element).load(window.location.href + " #" + this.id + " > *");
+  });
 }
 </script>
 <?php
