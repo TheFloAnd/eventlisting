@@ -46,7 +46,7 @@ $palette-divider: rgba(255, 255, 255, 0.12);
     }
 
     .default-navbar {
-        background-color: #212529 !important;
+        background-color: $palette-background-paper !important;
     }
 
     a:hover, a:hover * {
