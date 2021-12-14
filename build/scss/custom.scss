@@ -2,11 +2,6 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "dark.scss";
 
-@media (prefers-color-scheme: light) {
-  .navbar {
-    background-color: #f8f9fa !important;
-  }
-}
 
 .navbar a:hover {
   color: default;
