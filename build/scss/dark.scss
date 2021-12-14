@@ -18,8 +18,9 @@ $palette-action-selected: rgba(255, 255, 255, 0.16);
 $palette-action-disabled: rgba(255, 255, 255, 0.3);
 $palette-action-disabledBackground: rgba(255, 255, 255, 0.12);
 
-$palette-background-default: #121212;
-$palette-background-paper: #121212;
+$palette-background-default: rgb(22, 22, 22);
+$palette-background-paper: rgb(18, 18, 18);
+$palette-background-header: rgb(30, 30, 30);
 
 $box-shadow-default: 0 0 0 0.25rem;
 
@@ -34,6 +35,9 @@ $palette-divider: rgba(255, 255, 255, 0.12);
 
     .card {
         background: $palette-background-default;
+    }
+    .card .card-header{
+        background: $palette-background-header;
     }
 
     :root * {
@@ -75,13 +79,13 @@ $palette-divider: rgba(255, 255, 255, 0.12);
     .table {
         --bs-table-bg: transparent;
         --bs-table-accent-bg: transparent;
-        --bs-table-striped-color: #bbb;
+        --bs-table-striped-color: rgba(255, 255, 255, 0.7);
         --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
         --bs-table-active-color: #212529;
         --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-        --bs-table-hover-color: #212529;
+        --bs-table-hover-color: $palette-text-primary;
         --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-        color: #ddd;
+        color: $palette-text-primary;
     }
 
     .myOffcanvas {
