@@ -1,5 +1,30 @@
-$bg: #232b32;
+$bg: #000;
 $color: #152028;
+$white: #fff;
+$border-color: #ced4da;
+$border-color-35: rgba(206, 212, 218, 0.35);
+$border-color-075: rgba(206, 212, 218, 0.075);
+$border-color-35: #ced4da25;
+
+
+$palette-text-primary: #fff;
+$palette-text-secondary: rgba(255, 255, 255, 0.7);
+$palette-text-disabled: rgba(255, 255, 255, 0.5);
+
+
+$palette-action-active: #fff;
+$palette-action-hover: rgba(255, 255, 255, 0.08);
+$palette-action-selected: rgba(255, 255, 255, 0.16);
+$palette-action-disabled: rgba(255, 255, 255, 0.3);
+$palette-action-disabledBackground: rgba(255, 255, 255, 0.12);
+
+$palette-background-default: rgb(22, 22, 22);
+$palette-background-paper: rgb(18, 18, 18);
+$palette-background-header: rgb(30, 30, 30);
+
+$box-shadow-default: 0 0 0 0.25rem;
+
+$palette-divider: rgba(255, 255, 255, 0.12);
 
 @media (prefers-color-scheme: dark) {
 
@@ -9,12 +34,15 @@ $color: #152028;
     }
 
     .card {
-        background: $color;
+        background: $palette-background-default;
+    }
+    .card .card-header{
+        background: $palette-background-header;
     }
 
     :root * {
         // filter: brightness(.7) contrast(1.2);
-        color: white;
+        color: $palette-text-primary;
     }
 
     .default-navbar {
@@ -22,7 +50,7 @@ $color: #152028;
     }
 
     a:hover, a:hover * {
-        color: #ced4daaa;
+        color: $palette-text-secondary;
         text-decoration: underline solid currentColor;
     }
 
@@ -51,13 +79,13 @@ $color: #152028;
     .table {
         --bs-table-bg: transparent;
         --bs-table-accent-bg: transparent;
-        --bs-table-striped-color: #bbb;
+        --bs-table-striped-color: rgba(255, 255, 255, 0.7);
         --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
         --bs-table-active-color: #212529;
         --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-        --bs-table-hover-color: #212529;
+        --bs-table-hover-color: $palette-text-primary;
         --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-        color: #ddd;
+        color: $palette-text-primary;
     }
 
     .myOffcanvas {
@@ -66,15 +94,15 @@ $color: #152028;
 
     .form-control,
     .form-select {
-        background: $color;
-        color: white;
+        background: $palette-background-paper;
+        color: $palette-text-primary;
 
         &:focus {
-            background: $color !important;
-            border-color: #ced4da;
+            background: $palette-background-paper !important;
+            border-color: $border-color;
             outline: 0;
-            box-shadow: 0 0 0 0.25rem #ced4da50;
-            color: white;
+            box-shadow: $box-shadow-default $border-color-35;
+            color: $palette-text-primary;
         }
     }
 
@@ -83,56 +111,59 @@ $color: #152028;
     .select2-container--default .select2-selection--multiple .select2-selection__choice,
     .select2-container--default.select2-container--focus .select2-selection--multiple,
     .select2-results__options {
-        background: $color !important;
-        color: white !important;
-        border-color: #ced4da;
+        background: $palette-background-paper;
+        color: $palette-text-primary;
+        border-color: $border-color;
 
         &:focus {
-            background: #ced4da05 !important;
-            border-color: #ced4da;
+            background: $palette-background-paper;
+            border-color: rgb(206, 212, 218);
             outline: 0;
-            box-shadow: 0 0 0 0.25rem #ced4da50;
+            box-shadow: $box-shadow-default $border-color-35;
         }
     }
-
+    .select2-container--default.select2-container--disabled  .select2-selection--multiple{
+        background: $palette-action-disabled !important;
+    }
     .select2-results__option:hover {
-        background: #ced4da15 !important;
-        border-color: #ced4da;
+        background: $palette-background-paper;
+        color: $palette-text-primary;
+        border-color: $border-color;
         outline: 0;
-        box-shadow: 0 0 0 0.25rem #ced4da50;
+        box-shadow: $box-shadow-default $border-color-35;
     }
 
     .nav-tabs .nav-link.active,
     .nav-tabs .nav-item.show .nav-link {
         background: rgba(187, 187, 187, 0.5);
-        color: white;
+        color: $palette-text-primary;
     }
 
     .nav-tabs .nav-link:hover,
     .nav-tabs .nav-item .nav-link :hover {
-        color: white;
+        color: $palette-text-primary;
     }
 
     .dataTables_paginate .pagination .paginate_button,
     .dataTables_paginate .pagination .active,
     .dataTables_paginate .pagination .paginate_button a.page-link {
-        background: #ced4da50;
-        color: white;
+        background: $border-color-35;
+        color: $palette-text-primary;
 
         &:focus,
         &:hover,
         &:active {
-            background: #ced4da10;
-            border-color: #ced4da;
+            background: $border-color-075;
+            border-color: $border-color;
             outline: 0;
-            box-shadow: 0 0 0 0.15rem #ced4da50;
+            box-shadow: 0 0 0 0.15rem $border-color-35;
         }
     }
 
     .dataTables_paginate .pagination .page-item.active .page-link {
-        background: #ced4da10;
-        box-shadow: 0 0 0 0.15rem #ced4da50;
-        border-color: #ced4da;
+        background: $border-color-075;
+        box-shadow: 0 0 0 0.15rem $border-color-35;
+        border-color: $border-color;
     }
 
     .table-hover>tbody>tr:hover {
@@ -140,7 +171,7 @@ $color: #152028;
     }
 
     .modal * {
-        background: $bg;
+        background: $palette-background-default;
     }
 
     .modal-dialog {
@@ -149,6 +180,10 @@ $color: #152028;
 
     [readonly],
     :disabled {
-        background: #ced4da15 !important;
+        background: $palette-action-disabled !important;
+    }
+    .select2-search__field{
+        background: none !important;
+        display: hidden !important;
     }
 }
