@@ -16,13 +16,26 @@
 
 
 ## Install
+### Repo
+
+#### curl
 ```
 bash <(curl -sL https://raw.githubusercontent.com/TheFloAnd/eventlisting/production/install.sh)
 ```
-#### OR
+#### wget
 ```
 bash <(wget -nv -O - https://raw.githubusercontent.com/TheFloAnd/eventlisting/production/install.sh)
 ```
+### Gist
+#### curl
+```
+bash <(curl -sL https://gist.githubusercontent.com/TheFloAnd/b73c5bfbffc5acb649b02fd62968e33e/raw/704f9781a02ca471cf5112036fea5eed44bc3808/Eventlisting-install.sh)
+```
+#### wget
+```
+bash <(wget -nv -O - https://gist.githubusercontent.com/TheFloAnd/b73c5bfbffc5acb649b02fd62968e33e/raw/704f9781a02ca471cf5112036fea5eed44bc3808/Eventlisting-install.sh)
+```
+
 ### Alternative Autostart
 ```
 > sudo apt-get install x11-xserver-utils unclutter
