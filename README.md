@@ -16,12 +16,13 @@
 
 
 ## Install
+```
 bash <(curl -sL https://raw.githubusercontent.com/TheFloAnd/eventlisting/production/install.sh)
-
+```
 #### OR
-
+```
 bash <(wget -nv -O - https://raw.githubusercontent.com/TheFloAnd/eventlisting/production/install.sh)
-
+```
 ### Alternative Autostart
 > sudo apt-get install x11-xserver-utils unclutter
 
