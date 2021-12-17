@@ -17,13 +17,9 @@
 
 ## Install
 
-Install Apache2
-> sudo apt install apache2
+https://raw.githubusercontent.com/TheFloAnd/eventlisting/production/install.sh
 
-Install PHP
-> sudo apt install
-
-### Autostart
+### Alternative Autostart
 > sudo apt-get install x11-xserver-utils unclutter
 
 > cp /etc/xdg/lxsession/LXDE-pi/autostart ~/.config/lxsession/LXDE-pi/
