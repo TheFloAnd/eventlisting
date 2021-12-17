@@ -24,14 +24,19 @@ bash <(curl -sL https://raw.githubusercontent.com/TheFloAnd/eventlisting/product
 bash <(wget -nv -O - https://raw.githubusercontent.com/TheFloAnd/eventlisting/production/install.sh)
 ```
 ### Alternative Autostart
+```
 > sudo apt-get install x11-xserver-utils unclutter
-
+```
+```
 > cp /etc/xdg/lxsession/LXDE-pi/autostart ~/.config/lxsession/LXDE-pi/
-
+```
+```
 > nano ~/.config/lxsession/LXDE-pi/autostart
-
+```
+```
 > @xset s noblank <br>
 > @xset s off <br>
 > @xset -dpms <br>
 > @unclutter -idle 0.1 -roo <br>
 > /usr/bin/chromium-browser --kiosk --start {DOMAIN/IP}
+```
