@@ -1,5 +1,5 @@
 @import "../../node_modules/bootstrap-icons/font/bootstrap-icons";
-@import "../../node_modules/bootstrap/scss/bootstrap";
+//@import "../../node_modules/bootstrap/scss/bootstrap";
 @import "dark.scss";
 
 
@@ -87,14 +87,22 @@ tr.strikeout td:after {
   font-size: 1.5em !important;
 }
 
+.card-header{
+  position:sticky;
+  top:0;
+}
 .main-card {
-  z-index: 10;
+  z-index: 0;
   position: sticky;
   top: 0;
-
-  &>.card {
+}
+.main-card .card {
     border-bottom: 2.5px solid #000;
-  }
+}
+@media only screen and (min-height: 650px) {
+.main-card {
+  z-index: 10;
+}
 }
 
 .myOffcanvas {

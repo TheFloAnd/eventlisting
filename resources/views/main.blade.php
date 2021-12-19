@@ -31,7 +31,7 @@ $result = MAIN::index();
 <article class="row g-3 main">
   <section class="col-12 main-card">
     <div class="card">
-      <div class="card-header">
+      <div class="card-header main-card-header">
         <nav class="navbar">
           <div class="refresh" id="refresh-title">
             <h1 class="header-primary">
@@ -46,7 +46,7 @@ $result = MAIN::index();
           </h1>
         </nav>
       </div>
-      <div class="card-body refresh" id="refresh-card-main">
+      <div class="card-body main-card-body refresh" id="refresh-card-main">
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
