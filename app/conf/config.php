@@ -6,14 +6,6 @@ use app\controller\config;
 
 define("db", array(
     "host" => "localhost",
-    "user" => "events",
-    "password" => "",
-    "database" => "events",
-));
-define("db_admin", array(
-    "host" => "localhost",
-    "user" => "root",
-    "pass" => "admin",
     "database" => "events",
 ));
 /*

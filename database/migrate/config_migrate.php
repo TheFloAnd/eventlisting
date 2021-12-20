@@ -1,23 +1,23 @@
 <?php
 
-namespace database\seed;
+namespace database\migrate;
 
 use \PDO;
-use database\connection\admin_connect;
+use database\connect;
+use database\seed\config_seed;
 
-class configseed extends admin_connect
+class config_migrate extends connect
 {
 
     public function __construct()
     {
-        $pdo = admin_connect::connection();
-        configseed::create_table($pdo);
-        configseed::insert($pdo);
+        $pdo = connect::admin();
+        config_migrate::create_table($pdo);
+        config_seed::index();
     }
     public static function create_table($pdo)
     {
         try {
-            $pdo->query("use `" . db['database'] . "`;");
 
             $pdo->query(
                 "CREATE TABLE  IF NOT EXISTS `config` (
@@ -45,7 +45,6 @@ class configseed extends admin_connect
     public static function insert($pdo)
     {
         try {
-            $pdo->query("use `" . db['database'] . "`;");
 
             $pdo->query(
                 "INSERT INTO `config` (

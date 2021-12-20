@@ -2,7 +2,7 @@
 
 namespace app\controller;
 
-use database\connection\connect;
+use database\connect;
 use app\controller\config;
 use app\controller\group;
 

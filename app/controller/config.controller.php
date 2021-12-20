@@ -2,8 +2,7 @@
 
 namespace app\controller;
 
-use database\connection\connect;
-use \PDO;
+use database\connect;
 
 class config
 {

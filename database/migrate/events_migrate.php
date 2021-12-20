@@ -1,27 +1,26 @@
 <?php
 
-namespace database\seed;
+namespace database\migrate;
 
-use \PDO;
-use database\connection\admin_connect;
+use database\connect;
 
-class eventsseed extends admin_connect
+class events_migrate
 {
 
     public function __construct($com)
     {
-        $pdo = admin_connect::connection();
+        $pdo = connect::admin();
         switch($com){
             case 'empty':
-                eventsseed::empty_table($pdo);
+                events_migrate::empty_table($pdo);
                 break;
             case 'recreate':
-                eventsseed::delete_table($pdo);
-                eventsseed::create_table($pdo);
-                eventsseed::create_view($pdo);
+                events_migrate::delete_table($pdo);
+                events_migrate::create_table($pdo);
+                events_migrate::create_view($pdo);
             default:
-                eventsseed::create_table($pdo);
-                eventsseed::create_view($pdo);
+                events_migrate::create_table($pdo);
+                events_migrate::create_view($pdo);
         }
     }
     public static function create_table($pdo)

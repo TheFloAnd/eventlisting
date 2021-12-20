@@ -91,16 +91,16 @@ tr.strikeout td:after {
   position:sticky;
   top:0;
 }
-.main-card {
+.section-main-today {
   z-index: 0;
   position: sticky;
   top: 0;
 }
-.main-card .card {
+.section-main-today .card {
     border-bottom: 2.5px solid #000;
 }
 @media only screen and (min-height: 650px) {
-.main-card {
+.section-main-today {
   z-index: 10;
 }
 }
@@ -108,6 +108,7 @@ tr.strikeout td:after {
 .myOffcanvas {
   z-index: 9999 !important;
   height: fit-content !important;
+  height: min-content;
   border-bottom-right-radius: 1rem !important;
 }
 
