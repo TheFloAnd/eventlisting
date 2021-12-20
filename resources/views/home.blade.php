@@ -1,10 +1,10 @@
 <?php
 
 use app\controller\config;
-use app\controller\main;
+use app\controller\home;
 use app\controller\group;
 
-$result = MAIN::index();
+$result = home::index();
 ?>
 <button class="btn btn-lg btn_hidden btn_menu" type="button" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
   <span class="navbar-toggler-icon"></span>
@@ -29,11 +29,11 @@ $result = MAIN::index();
   </div>
 </div>
 
-<article class="row g-3 main article-main">
-  <section class="col-12 section-main-today">
-    <div class="card card-main-today">
-      <div class="card-header main-card-header card-main-today-header">
-        <nav class="navbar card-main-today-header-nav">
+<article class="row g-3 home article-home">
+  <section class="col-12 section-home-today">
+    <div class="card card-home-today">
+      <div class="card-header home-card-header card-home-today-header">
+        <nav class="navbar card-home-today-header-nav">
           <div class="refresh" id="refresh-title">
             <h1 class="header-primary">
               <?php echo config::get('name')->value; ?>
@@ -47,7 +47,7 @@ $result = MAIN::index();
           </h1>
         </nav>
       </div>
-      <div class="card-body main-card-body card-main-today-body refresh" id="refresh-card-main">
+      <div class="card-body home-card-body card-home-today-body refresh" id="refresh-card-home">
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -148,10 +148,10 @@ $result = MAIN::index();
       </div>
     </div>
   </section>
-  <section class="col-12 section-main-preview">
-    <div class="card card-main-preview">
-      <div class="card-header card-main-preview-header">
-        <nav class="navbar navbar-dark refresh card-main-preview-header-nav" id="refresh-title-preview">
+  <section class="col-12 section-home-preview">
+    <div class="card card-home-preview">
+      <div class="card-header card-home-preview-header">
+        <nav class="navbar navbar-dark refresh card-home-preview-header-nav" id="refresh-title-preview">
           <h2 class="header-secondary">
             <?php echo lang['event'] . ' ' .  lang['preview']; ?>
           </h2>
@@ -172,7 +172,7 @@ $result = MAIN::index();
           </h2>
         </nav>
       </div>
-      <div class="card-body refresh card-main-preview-body" id="refresh-card-preview">
+      <div class="card-body refresh card-home-preview-body" id="refresh-card-preview">
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>

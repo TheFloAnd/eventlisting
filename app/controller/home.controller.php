@@ -5,7 +5,7 @@ namespace app\controller;
 use database\connect;
 use app\controller\config;
 
-class MAIN
+class home
 {
 
     public static function index()

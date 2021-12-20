@@ -3,7 +3,7 @@
 $lang = array();
 
 $lang['nav']            = 'Navigation';
-$lang['index']          = 'Main';
+$lang['index']          = 'home';
 $lang['event']          = 'Event';
 $lang['events']         = 'Events';
 $lang['add']            = 'Add';

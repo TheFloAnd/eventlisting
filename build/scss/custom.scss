@@ -70,7 +70,7 @@ tr.strikeout td:after {
   font-size: 1em;
 }
 
-.main * {
+.article-home * {
   font-size: 1.055em;
 }
 
@@ -87,20 +87,20 @@ tr.strikeout td:after {
   font-size: 1.5em !important;
 }
 
-.card-header{
+.card-home-today-header,.card-home-preview-header{
   position:sticky;
   top:0;
 }
-.section-main-today {
+.section-home-today {
   z-index: 0;
   position: sticky;
   top: 0;
 }
-.section-main-today .card {
+.section-home-today .card {
     border-bottom: 2.5px solid #000;
 }
 @media only screen and (min-height: 650px) {
-.section-main-today {
+.section-home-today {
   z-index: 10;
 }
 }

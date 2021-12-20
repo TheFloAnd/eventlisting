@@ -25,7 +25,7 @@ if (isset($_GET['b'])) {
   define('blade', $_GET['b']);
   $blade = $_GET['b'];
 } else {
-  define('blade', 'main');
+  define('blade', 'home');
 }
 
 if (isset($_POST['submit_event'])) {
