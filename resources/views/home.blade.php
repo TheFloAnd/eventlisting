@@ -34,10 +34,22 @@ $result = home::index();
     <div class="card card-home-today">
       <div class="card-header home-card-header card-home-today-header">
         <nav class="navbar card-home-today-header-nav">
-          <div class="refresh" id="refresh-title">
-            <h1 class="header-primary">
-              <?php echo config::get('name')->value; ?>
-            </h1>
+          <div class="row">
+            <div class="col-auto">
+              <div class="refresh" id="refresh-title">
+                <h1 class="header-primary">
+                  <?php echo config::get('name')->value; ?>
+                </h1>
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="refresh-icon invisible">
+                <div class="spinner-grow" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+
           </div>
           <h1 class="header-primary">
             <!--
@@ -151,10 +163,23 @@ $result = home::index();
   <section class="col-12 section-home-preview">
     <div class="card card-home-preview">
       <div class="card-header card-home-preview-header">
-        <nav class="navbar navbar-dark refresh card-home-preview-header-nav" id="refresh-title-preview">
-          <h2 class="header-secondary">
-            <?php echo lang['event'] . ' ' .  lang['preview']; ?>
-          </h2>
+        <nav class="navbar navbar-dark card-home-preview-header-nav">
+
+          <div class="row">
+            <div class="col-auto">
+              <h2 class="header-secondary">
+                <?php echo lang['event'] . ' ' .  lang['preview']; ?>
+              </h2>
+            </div>
+            <div class="col-auto">
+              <div class="refresh-icon invisible">
+                <div class="spinner-grow" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="refresh" id="refresh-title-preview">
           <h2 class="header-secondary">
             <?php
             $future = config::get('future_day');
@@ -170,6 +195,7 @@ $result = home::index();
             echo $future->value . ' ' .  $output_time_unit;
             ?>
           </h2>
+          </div>
         </nav>
       </div>
       <div class="card-body refresh card-home-preview-body" id="refresh-card-preview">
@@ -294,9 +320,20 @@ $result = home::index();
   }, <?php echo config::get('refresh')->value; ?> * 1000);
 
   function refresh_loop() {
+    $('.refresh-icon').each(function(index, element) {
+      $(element).removeClass("invisible");
+      $(element).addClass("visible");
+    });
     $('.refresh').each(function(index, element) {
       $(element).load(window.location.href + " #" + this.id + " > *");
     });
+    setTimeout(function() {
+      $('.refresh-icon').each(function(index, element) {
+        $(element).removeClass("visible");
+        $(element).addClass("invisible");
+      });
+    }, 1 * 1000);
+    console.log(Date.now() +' Content  Refreshed!');
   }
 </script>
 <?php
