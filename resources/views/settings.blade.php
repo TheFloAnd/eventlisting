@@ -40,10 +40,40 @@ require __DIR__ . '/../layout/navigation.php';
                   default:
                     $output_time_unit = '';
                 }
-                echo ucwords($row['view']);
+
+                switch ($row['setting']) {
+                  case 'refresh':
+                    echo lang['setting-refresh'];
+                    break;
+                  case 'future_day':
+                    echo lang['setting-future_day'];
+                    break;
+                  case 'name':
+                    echo lang['setting-name'];
+                    break;
+                  case 'language':
+                    echo lang['setting-language'];
+                    break;
+                  case 'design':
+                    echo lang['setting-design'];
+                    break;
+                }
                 echo '</td>
                               <td>';
-                echo $row['value'] . ' ' . $output_time_unit;
+
+                if($row['setting'] == 'design'){
+
+                }
+                switch ($row['value']) {
+                  case 'light':
+                    echo lang['light'];
+                    break;
+                  case 'dark':
+                    echo lang['dark'];
+                    break;
+                  default:
+                    echo $row['value'] . ' ' . $output_time_unit;
+                }
 
                 echo '</td>';
                 echo '<td>

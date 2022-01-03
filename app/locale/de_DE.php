@@ -81,3 +81,20 @@ $lang['datatable_lang-file']        = '/resources/js/init/German.json';
 
 $lang['delete_table']        = 'Wollen sie die Datenbanktabelle wirklich löschen/leeren?';
 $lang['delete_table-info']        = 'Wenn sie Gruppen neu erstellen wird auch automatisch die Datenbanktabelle Termine neu erstellt!';
+
+$lang['light']           = 'Hell';
+$lang['dark']           = 'Dunkel';
+
+
+$lang['setting-refresh'] = 'Automatisches Neuladen';
+$lang['setting-future_day'] = 'Termin Preview Zeitraum';
+$lang['setting-name'] = 'Überschrift';
+$lang['setting-language'] = 'Sprache';
+$lang['setting-design'] = 'Aussehen';
+
+
+$lang['german'] = 'Deutsch';
+$lang['english'] = 'Englisch';
+
+$lang['de_DE'] = 'Deutsch';
+$lang['en_EN'] = 'Englisch';

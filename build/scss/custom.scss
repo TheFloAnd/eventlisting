@@ -1,7 +1,9 @@
 @import "../../node_modules/bootstrap-icons/font/bootstrap-icons";
 //@import "../../node_modules/bootstrap/scss/bootstrap";
 @import "scrollbar.scss";
-@import "dark.scss";
+// @media (prefers-color-scheme: dark) {
+//     @import "dark.scss";
+// }
 .navbar a:hover {
     color: default;
     text-decoration-color: currentColor;

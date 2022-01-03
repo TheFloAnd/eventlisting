@@ -18,9 +18,28 @@ require __DIR__ . '/../layout/navigation.php';
             <div class="col-md-10">
               <fieldset id="input_name">
                 <div class="form-floating">
+                  <?php
+switch ($setting->setting) {
+                  case 'refresh':
+                    $setting_title = lang['setting-refresh'];
+                    break;
+                  case 'future_day':
+                    $setting_title = lang['setting-future_day'];
+                    break;
+                  case 'name':
+                    $setting_title = lang['setting-name'];
+                    break;
+                  case 'language':
+                    $setting_title = lang['setting-language'];
+                    break;
+                  case 'design':
+                    $setting_title = lang['setting-design'];
+                    break;
+                }
+                  ?>
                   <input type="text" class="form-control" name="setting_name" id="setting_name"
-                    placeholder="<?php echo ucwords($setting->view) ?: ucwords( lang['settings']) ?>"
-                    value="<?php echo ucwords($setting->view) ?>" required disabled>
+                    placeholder="<?php echo ucwords($setting_title) ?: ucwords( lang['settings']) ?>"
+                    value="<?php echo ucwords($setting_title) ?>" required disabled>
                   <label for="setting_name">
                     <?php echo lang['settings'] ?>
                     <span style="color: red;">
@@ -117,13 +136,43 @@ require __DIR__ . '/../layout/navigation.php';
                       <div class="form-floating">
                         <select class="form-select" id="setting_value" name="setting_value" aria-label="Sprache">';
                           // var_dump(config::language());
+
                           foreach(config::language() as $lang){
                             $setting->value == $lang['code'] ? $selected = 'selected' : $selected = '';
-                            echo'<option value="'. $lang['code'] .'" '. $selected .'>'. $lang['view'] .'</option>';
+                            echo'<option value="'. $lang['code'] .'" '. $selected .'>'. lang[$lang['code']] .'</option>';
                           }
                           echo'</select>
-                        <label for="setting_value">Spache</label>
+                        <label for="setting_value">'. lang['value'] .'</label>
                       </div>
+                    </div>';
+                    }
+
+
+                    
+                    if($setting->setting == 'design'){
+                      if($setting->value == 'light'){
+                        $check_light = "checked";
+                        $check_dark = "";
+                      }
+
+                      if($setting->value == 'dark'){
+                        $check_light = "";
+                        $check_dark = "checked";
+                      }
+                    echo'<div class="col-md-10">
+                      <fieldset id="input_name">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="setting_value" id="setting_value_design-1" value="light" '. $check_light .'>
+                          <label class="form-check-label" for="setting_value_design-1">
+                            '. $lang['light'] .'
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="setting_value" id="setting_value_design-2" value="dark" '. $check_dark .'>
+                          <label class="form-check-label" for="setting_value_design-1">
+                            '. $lang['dark'] .'
+                          </label>
+                        </div>
                     </div>';
                     }
                   ?>

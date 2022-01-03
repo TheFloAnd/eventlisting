@@ -1,7 +1,6 @@
 <?php
 
 use app\controller\config;
-use app\module\file_exists;
 ?>
 <!doctype html>
 <html lang="de">
@@ -26,6 +25,11 @@ use app\module\file_exists;
 
     <!-- Custom CSS -->
     <link href="/resources/css/custom.css" rel="stylesheet" />
+    <?php
+    if(config::get('design')->value == 'dark'){
+        echo'<link href="/resources/css/dark.css" rel="stylesheet" />';
+    }
+    ?>
 </head>
 
 <body>
