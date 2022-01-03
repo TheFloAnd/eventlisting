@@ -2,7 +2,7 @@
 $lang = array();
 
 
-$lang['nav']          = 'Navigation';
+$lang['nav']            = 'Navigation';
 $lang['index']          = 'Hauptseite';
 $lang['event']          = 'Termin';
 $lang['events']         = 'Termine';
