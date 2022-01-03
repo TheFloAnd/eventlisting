@@ -1,4 +1,5 @@
 <?php
+
 use app\controller\events;
 use app\controller\group;
 
@@ -11,14 +12,11 @@ require __DIR__ . '/../layout/navigation.php';
       <div class="card-body">
         <nav>
           <div class="nav nav-tabs justify-content-evenly" id="nav-tab" role="tablist">
-            <button class="nav-link col active" id="nav-event_add-tab" data-bs-toggle="tab"
-              data-bs-target="#nav-event_add" type="button" role="tab" aria-controls="nav-event_add"
-              aria-selected="false">
-              <?php echo lang['event'] .' '.  lang['add'] ?>
+            <button class="nav-link col active" id="nav-event_add-tab" data-bs-toggle="tab" data-bs-target="#nav-event_add" type="button" role="tab" aria-controls="nav-event_add" aria-selected="false">
+              <?php echo lang['event'] . ' ' .  lang['add'] ?>
             </button>
-            <button class="nav-link col" id="nav-event_edit-tab" data-bs-toggle="tab" data-bs-target="#nav-event_edit"
-              type="button" role="tab" aria-controls="nav-event_edit" aria-selected="true">
-              <?php echo lang['events'] .' '.  lang['edit'] ?>
+            <button class="nav-link col" id="nav-event_edit-tab" data-bs-toggle="tab" data-bs-target="#nav-event_edit" type="button" role="tab" aria-controls="nav-event_edit" aria-selected="true">
+              <?php echo lang['events'] . ' ' .  lang['edit'] ?>
             </button>
           </div>
         </nav>
@@ -29,23 +27,24 @@ require __DIR__ . '/../layout/navigation.php';
                 <div class="col-md-10">
                   <fieldset>
                     <div class="form-floating has-validation">
-                      <input type="text" class="form-control" name="event" id="event"
-                        placeholder="<?php echo lang['event'] ?>" list="event_list" maxlength="50" required />
+                      <input type="text" class="form-control" name="event" id="event" placeholder="<?php echo lang['event'] ?>" list="event_list" maxlength="50" required  data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="<?php echo lang['tooltip-event-name'] ?>"/>
                       <label for="event">
                         <?php echo lang['event'] ?>
                         <span style="color: red;">
                           *
                         </span>
+                        <span id="event_label" class="label"></span>
                       </label>
                       <div class="invalid-feedback">
                         <?php echo lang['invalide-event-input']; ?>
                       </div>
                       <datalist id="event_list">
                         <?php
-                          foreach($events['proposals'] as $row){
-                            echo'<option value="'. $row['event'] .'">';
-                          }
-                          ?>
+                        foreach ($events['proposals'] as $row) {
+                          echo '<option value="' . $row['event'] . '">';
+                        }
+                        ?>
                       </datalist>
                     </div>
                   </fieldset>
@@ -61,16 +60,17 @@ require __DIR__ . '/../layout/navigation.php';
                               *
                             </span>
                           </label>
-                          <select class="form-select multiple-select" name="group[]" multiple="multiple" required>
+                          <select class="form-select multiple-select" name="group[]" multiple="multiple" required data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="<?php echo lang['tooltip-event-group'] ?>">
                             <?php
-                              
-                                foreach($events['group'] as $row){
-                                    echo'<option value="'. $row['alias'] .'">'. $row['name'] .' ('. $row['alias'] .')</option>';
-                                }
-                              ?>
+
+                            foreach ($events['group'] as $row) {
+                              echo '<option value="' . $row['alias'] . '">' . $row['name'] . ' (' . $row['alias'] . ')</option>';
+                            }
+                            ?>
                           </select>
                           <div class="invalid-feedback">
-                        <?php echo lang['invalide-group-input']; ?>
+                            <?php echo lang['invalide-group-input']; ?>
                           </div>
                         </div>
                       </fieldset>
@@ -82,14 +82,24 @@ require __DIR__ . '/../layout/navigation.php';
                     <div class="col-md-4">
                       <fieldset>
                         <div class="form-floating">
-                          <input type="text" class="form-control" name="room" id="room"
-                            placeholder="<?php echo lang['room'] ?>" maxlength="25">
+                          <input type="text" class="form-control" name="room" id="room" placeholder="<?php echo lang['room'] ?>" list="room_list" maxlength="25" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="<?php echo lang['tooltip-event-room'] ?>">
                           <label for="room">
                             <?php echo lang['room'] ?>
+
+                            <span id="room_label" class="label"></span>
                           </label>
                           <div class="invalid-feedback">
-                        <?php echo lang['invalide-room-input']; ?>
+                            <?php echo lang['invalide-room-input']; ?>
                           </div>
+
+                          <datalist id="room_list">
+                            <?php
+                            foreach ($events['proposals_room'] as $row) {
+                              echo '<option value="' . $row['room'] . '">';
+                            }
+                            ?>
+                          </datalist>
                         </div>
                       </fieldset>
                     </div>
@@ -98,10 +108,10 @@ require __DIR__ . '/../layout/navigation.php';
                 <div class="col-md-5">
                   <fieldset>
                     <div class="form-floating">
-                      <input type="datetime-local" class="form-control" name="start_date" id="start_date"
-                        value="<?php echo strftime('%Y-%m-%dT00:00') ?>" required>
+                      <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT00:00') ?>" required data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="<?php echo lang['tooltip-event-start'] ?>">
                       <label for="start_date">
-                        <?php echo lang['start'] .' '.  lang['date'] ?>
+                        <?php echo lang['start'] . ' ' .  lang['date'] ?>
                         <span style="color: red;">
                           *
                         </span>
@@ -112,10 +122,10 @@ require __DIR__ . '/../layout/navigation.php';
                 <div class="col-md-5">
                   <fieldset>
                     <div class="form-floating">
-                      <input type="datetime-local" class="form-control" name="end_date" id="end_date"
-                        value="<?php echo strftime('%Y-%m-%dT00:00') ?>" required>
+                      <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="<?php echo strftime('%Y-%m-%dT00:00') ?>" required data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="<?php echo lang['tooltip-event-end'] ?>">
                       <label for="end_date">
-                        <?php echo lang['end'] .' '.  lang['date'] ?>
+                        <?php echo lang['end'] . ' ' .  lang['date'] ?>
                         <span style="color: red;">
                           *
                         </span>
@@ -126,48 +136,38 @@ require __DIR__ . '/../layout/navigation.php';
                 <div class="col-md-10">
                   <fieldset>
                     <div class="form-group was-validated">
-                      <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Keine Wiederholungen">
-                        <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_none"
-                          value="none" checked>
+                      <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat-set-none'] ?>">
+                        <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_none" value="none" checked>
                         <label class="form-check-label" for="set_repeat_none"><?php echo lang['no-repeat']; ?></label>
                       </div>
-                      <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Setzt die Wiederholung automatisch auf 10 Mal">
-                        <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_days"
-                          value="days">
+                      <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat-set-days'] ?>">
+                        <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_days" value="days">
                         <label class="form-check-label" for="set_repeat_days"><?php echo lang['days']; ?></label>
                       </div>
-                      <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Setzt die Wiederholung automatisch auf 10 Mal">
-                        <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_weeks"
-                          value="weeks">
+                      <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat-set-weeks'] ?>">
+                        <input class="form-check-input set_repeat" type="radio" name="set_repeat" id="set_repeat_weeks" value="weeks">
                         <label class="form-check-label" for="set_repeat_weeks"><?php echo lang['weeks']; ?></label>
                       </div>
                     </div>
                   </fieldset>
                 </div>
                 <div class="col-md-5">
-                  <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="In wievielen Tagen/Wochen sich der Termin wiederholen soll">
+                  <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat-days'] ?>">
                     <fieldset>
                       <label class="form-label" for="days">
-                        <?php echo lang['days'] .'/'. lang['weeks'] ?> :
+                        <?php echo lang['days'] . '/' . lang['weeks'] ?> :
                       </label>
-                      <input class="form-control disable" type="number" placeholder="<?php echo lang['days'] ?>" min="1"
-                        name="repeat_days" id="repeat_days" value="1" disabled>
+                      <input class="form-control disable" type="number" placeholder="<?php echo lang['days'] ?>" min="1" name="repeat_days" id="repeat_days" value="1" disabled>
                     </fieldset>
                   </div>
                 </div>
                 <div class="col-md-5">
-                  <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Wie oft sich der Termin wiederholen soll">
+                  <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat'] ?>">
                     <fieldset>
                       <label class="form-label" for="repeats">
                         <?php echo lang['repeat'] ?> :
                       </label>
-                      <input class="form-control disable" type="number" placeholder="<?php echo lang['repeat'] ?>"
-                        min="1" name="repeats" id="repeats" value="1" disabled>
+                      <input class="form-control disable" type="number" placeholder="<?php echo lang['repeat'] ?>" min="1" name="repeats" id="repeats" value="1" disabled>
                     </fieldset>
                   </div>
                 </div>
@@ -191,7 +191,7 @@ require __DIR__ . '/../layout/navigation.php';
                 </a> -
                 <a class="toggle-vis" data-column="5">
                   In
-                </a> - 
+                </a> -
                 <a class="toggle-vis" data-column="6">
                   <?php echo lang['settings'] ?>
                 </a>
@@ -215,74 +215,75 @@ require __DIR__ . '/../layout/navigation.php';
                       <?php echo lang['till'] ?>
                     </th>
                     <th class="no-sort">
-                  <?php echo lang['remaining_days'] ?></th>
+                      <?php echo lang['remaining_days'] ?></th>
                     <th class="no-sort"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   $i = 0;
-                  foreach($events['result'] as $row){
+                  foreach ($events['result'] as $row) {
                     $start = strftime('%Y-%m-%d', strtotime($row['start']));
                     $end = strftime('%Y-%m-%d', strtotime($row['end']));
-                    if($start >= strftime('%Y-%m-%d') OR $end >= strftime('%Y-%m-%d')){
-                      if($row['not_applicable'] == 1){
+                    if ($start >= strftime('%Y-%m-%d') or $end >= strftime('%Y-%m-%d')) {
+                      if ($row['not_applicable'] == 1) {
                         $disabled = 'class="table-danger strikethrough"';
-                      }else{
+                      } else {
                         $disabled = '';
                       }
-                      echo'<tr '.$disabled.'>
+                      echo '<tr ' . $disabled . '>
                         <td class="table_search">
-                          '. $row['event'] .'
+                          ' . $row['event'] . '
                         </td>
                         <td>';
-                          $teams = explode(';', $row['team']);
-                          
-                          foreach($teams as $team){
-                            $color = GROUP::find($team)->color;
-                            echo'<span class="badge text-dark table_search" style="background-color:'. $color.';">'. $team .'</span> ';
-                          }
-                      echo'</td>
+                      $teams = explode(';', $row['team']);
+
+                      foreach ($teams as $team) {
+                        $color = GROUP::find($team)->color;
+                        echo '<span class="badge text-dark table_search" style="background-color:' . $color . ';">' . $team . '</span> ';
+                      }
+                      echo '</td>
                         <td class="table_search">
-                          '. $row['room'] .'
+                          ' . $row['room'] . '
                         </td>';
-                      if(strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))){              
-                        if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                          echo'<td class="table_search">'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
-                        }else{
-                          echo'<td class="table_search">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+                      if (strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))) {
+                        if (strftime('%H:%M', strtotime($row['start'])) == '00:00') {
+                          echo '<td class="table_search">' . strftime('%d.%m.%Y', strtotime($row['start'])) . '</td>';
+                        } else {
+                          echo '<td class="table_search">' . strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) . '</td>';
                         }
-                        if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
-                          echo'<td class="table_search">'. strftime('%d.%m.%Y ', strtotime($row['end'])) .'</td>';
-                        }else{
-                          echo'<td class="table_search">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['end'])) .'</td>';
+                        if (strftime('%H:%M', strtotime($row['end'])) == '00:00') {
+                          echo '<td class="table_search">' . strftime('%d.%m.%Y ', strtotime($row['end'])) . '</td>';
+                        } else {
+                          echo '<td class="table_search">' . strftime('%d.%m.%Y - %H:%M', strtotime($row['end'])) . '</td>';
                         }
                       }
-                      if(strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))){
-                        if(strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))){
-                          if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                            echo'<td colspan="2" class="table_search">'. strftime('%d.%m.%Y ', strtotime($row['start'])) .'</td><td style="display:none;">';
-                          }else{
-                            echo'<td colspan="2" class="table_search">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td><td style="display:none;">';
+                      if (strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))) {
+                        if (strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))) {
+                          if (strftime('%H:%M', strtotime($row['start'])) == '00:00') {
+                            echo '<td colspan="2" class="table_search">' . strftime('%d.%m.%Y ', strtotime($row['start'])) . '</td><td style="display:none;">';
+                          } else {
+                            echo '<td colspan="2" class="table_search">' . strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) . '</td><td style="display:none;">';
                           }
                         }
-                        if(strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))){
-                          if(strftime('%H:%M', strtotime($row['start'])) == '00:00'){
-                            echo'<td class="table_search">'. strftime('%d.%m.%Y', strtotime($row['start'])) .'</td>';
-                          }else{
-                            echo'<td class="table_search">'. strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) .'</td>';
+                        if (strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))) {
+                          if (strftime('%H:%M', strtotime($row['start'])) == '00:00') {
+                            echo '<td class="table_search">' . strftime('%d.%m.%Y', strtotime($row['start'])) . '</td>';
+                          } else {
+                            echo '<td class="table_search">' . strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) . '</td>';
                           }
-                          if(strftime('%H:%M', strtotime($row['end'])) == '00:00'){
-                            echo'<td class="table_search">'. strftime('%d.%m.%Y', strtotime($row['end'])) .'</td>';
-                          }else{
-                            echo'<td class="table_search">'. strftime('%H:%M', strtotime($row['end'])) .'</td>';
+                          if (strftime('%H:%M', strtotime($row['end'])) == '00:00') {
+                            echo '<td class="table_search">' . strftime('%d.%m.%Y', strtotime($row['end'])) . '</td>';
+                          } else {
+                            echo '<td class="table_search">' . strftime('%H:%M', strtotime($row['end'])) . '</td>';
                           }
                         }
-                      }echo'<td class="table_search">'. abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d')))/60/60/24 .' '. lang['meet'] .'</td>';
-                      echo'<td><a href="?b=events_edit&id='. $row['id'] .'" type="button" class="btn btn-sm btn-secondary position-relative"><i class="bi bi-gear-wide"></i></a></td>';
+                      }
+                      echo '<td class="table_search">' . abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d'))) / 60 / 60 / 24 . ' ' . lang['meet'] . '</td>';
+                      echo '<td data-bs-toggle="tooltip" data-bs-placement="top" title="'. lang['edit'] .'"><a href="?b=events_edit&id=' . $row['id'] . '" type="button" class="btn btn-sm btn-secondary position-relative"><i class="bi bi-gear-wide"></i></a></td>';
                     }
                   }
-                  echo'</tr>';
+                  echo '</tr>';
                   ?>
                 </tbody>
               </table>
@@ -299,50 +300,87 @@ require __DIR__ . '/../layout/navigation.php';
   var set_disable = document.getElementById('set_repeat_none');
   var disable = document.getElementsByClassName('disable');
   set_disable.checked = true;
-        for(i = 0; i<set_repeat.length; i++) {
-        set_repeat[i].onclick = function () {
-            switch(this.value){
-              case 'weeks':
-                for(j = 0; j < disable.length; j++){
-                  disable[j].disabled = false;
-                }
-                document.getElementById('repeats').value = 10;
-                break;
-              case 'days':
-                for(j = 0; j < disable.length; j++){
-                  disable[j].disabled = false;
-                }
-                document.getElementById('repeats').value = 10;
-                break;
-              case 'none':
-                for(j = 0; j < disable.length; j++){
-                  disable[j].disabled = true;
-                }
-                document.getElementById('repeats').value = 1;
-                break;
-            }
-          
-        }
+  for (i = 0; i < set_repeat.length; i++) {
+    set_repeat[i].onclick = function() {
+      switch (this.value) {
+        case 'weeks':
+          for (j = 0; j < disable.length; j++) {
+            disable[j].disabled = false;
+          }
+          document.getElementById('repeats').value = 10;
+          break;
+        case 'days':
+          for (j = 0; j < disable.length; j++) {
+            disable[j].disabled = false;
+          }
+          document.getElementById('repeats').value = 10;
+          break;
+        case 'none':
+          for (j = 0; j < disable.length; j++) {
+            disable[j].disabled = true;
+          }
+          document.getElementById('repeats').value = 1;
+          break;
       }
+
+    }
+  }
 </script>
 <script>
   var start_date = document.getElementById("start_date");
-        var end_date = document.getElementById("end_date");
-        
-        start_date.onchange = function () {
-          if (start_date.value > end_date.value) {
-            end_date.value = start_date.value
-          }
-          if (!end_date.value) {
-            end_date.value = start_date.value
-          }
-        };
-        end_date.onchange = function () {
-          if (end_date.value < start_date.value) {
-            start_date.value = end_date.value
-          }
-          if (!start_date.value) {
-            start_date.value = end_date.value
-          }
-        };
+  var end_date = document.getElementById("end_date");
+
+  start_date.onchange = function() {
+    if (start_date.value > end_date.value) {
+      end_date.value = start_date.value
+    }
+    if (!end_date.value) {
+      end_date.value = start_date.value
+    }
+  };
+  end_date.onchange = function() {
+    if (end_date.value < start_date.value) {
+      start_date.value = end_date.value
+    }
+    if (!start_date.value) {
+      start_date.value = end_date.value
+    }
+  };
+</script>
+<script>
+  event_value = document.getElementById('event');
+  event_value_label = document.getElementById('event_label');
+  event_value_label.innerHTML = event_value.value.length + ' von 50';
+  event_value.addEventListener('input', input_change_events);
+
+  function input_change_events(e) {
+    event_value_label.innerHTML = e.target.value.length + ' von 50';
+    if (e.target.value.length >= 30) {
+      event_value_label.style.color = 'orange';
+    }
+    if (e.target.value.length >= 45) {
+      event_value_label.style.color = 'red';
+    }
+    if (e.target.value.length < 30) {
+      event_value_label.style.color = 'green';
+    }
+  }
+
+  room_value = document.getElementById('room');
+  room_value_label = document.getElementById('room_label');
+  room_value_label.innerHTML = room_value.value.length + ' von 25';
+  room_value.addEventListener('input', input_change_room);
+
+  function input_change_room(e) {
+    room_value_label.innerHTML = e.target.value.length + ' von 25';
+    if (e.target.value.length >= 10) {
+      room_value_label.style.color = 'orange';
+    }
+    if (e.target.value.length >= 20) {
+      room_value_label.style.color = 'red';
+    }
+    if (e.target.value.length < 10) {
+      room_value_label.style.color = 'green';
+    }
+  }
 </script>

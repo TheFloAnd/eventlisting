@@ -97,3 +97,28 @@ $lang['german'] = 'German';
 $lang['english'] = 'English';
 $lang['de_DE'] = 'German';
 $lang['en_EN'] = 'English';
+
+
+$lang['tooltip-event-repeat'] = 'How often the event is repeated.';
+$lang['tooltip-event-repeat-update'] = 'Update the following events.';
+$lang['tooltip-event-repeat-days'] = 'Sets the interval of how often the event is repeated.';
+
+
+$lang['tooltip-event-repeat-set-none'] = 'No repeats.';
+$lang['tooltip-event-repeat-set-days'] = 'Sets the repeats in days.';
+$lang['tooltip-event-repeat-set-weeks'] = 'Sets the repeats in weeks.';
+
+
+
+$lang['tooltip-event-name'] = 'Name of the Event';
+$lang['tooltip-event-group'] = 'One or more Groups.';
+$lang['tooltip-event-room'] = 'The room where the Event is';
+$lang['tooltip-event-start'] = 'Date and time when the event starts';
+$lang['tooltip-event-end'] = 'Date and time when the event ends';
+$lang['tooltip-event-disable'] = 'Event is suspendet or not.';
+
+
+$lang['tooltip-group-name'] = 'Name of the group.';
+$lang['tooltip-group-alias'] = 'Alias of the group.';
+$lang['tooltip-group-color'] = 'Color of the group.';
+$lang['tooltip-group-disable'] = 'Sets the group as active/inactive.';

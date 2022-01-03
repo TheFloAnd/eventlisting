@@ -98,3 +98,27 @@ $lang['english'] = 'Englisch';
 
 $lang['de_DE'] = 'Deutsch';
 $lang['en_EN'] = 'Englisch';
+
+
+$lang['tooltip-event-repeat'] = 'Wie oft sich der Termin wiederholen soll.';
+$lang['tooltip-event-repeat-update'] = 'Aktuallisiert die folgenden Termine.';
+$lang['tooltip-event-repeat-days'] = 'In wievielen Tagen/Wochen sich der Termin wiederholen soll.';
+
+
+$lang['tooltip-event-repeat-set-none'] = 'Keine Wiederholungen.';
+$lang['tooltip-event-repeat-set-days'] = 'Setzt die wiederholung in Tagen.';
+$lang['tooltip-event-repeat-set-weeks'] = 'Setzt die Wiederholungen in Wochen.';
+
+
+$lang['tooltip-event-name'] = 'Name des Termines.';
+$lang['tooltip-event-group'] = 'Eine oder mehrere Gruppen';
+$lang['tooltip-event-room'] = 'Raum in welchen der Termin stattfindet.';
+$lang['tooltip-event-start'] = 'Datum und Uhrzeit wann der Termin Startet';
+$lang['tooltip-event-end'] = 'Datum und Uhrzeit wann der Termin Endet';
+$lang['tooltip-event-disable'] = 'Findet statt/Findet NICHT statt';
+
+
+$lang['tooltip-group-name'] = 'Name der Gruppe.';
+$lang['tooltip-group-alias'] = 'Alias der Gruppe.';
+$lang['tooltip-group-color'] = 'Farbe der Gruppe.';
+$lang['tooltip-group-disable'] = 'Setzt die Gruppe als Aktiv/Inaktive.';

@@ -30,7 +30,7 @@ require __DIR__ . '/../layout/navigation.php';
             <div class="col-md-10">
               <fieldset>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" name="deactivate_group" id="deactivate_group" value="1" <?php echo $checked; ?>>
+                  <input class="form-check-input" type="checkbox" name="deactivate_group" id="deactivate_group" value="1" <?php echo $checked; ?> data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-group-disable'] ?>">
                   <label class="form-check-label" for="deactivate_group">
                     <?php echo lang['active'] . ' ' .  lang['group'] ?>
                   </label>
@@ -40,12 +40,13 @@ require __DIR__ . '/../layout/navigation.php';
             <div class="col-md-10">
               <fieldset id="input_name">
                 <div class="form-floating has-validation">
-                  <input type="text" class="form-control disable" name="group_name" id="group_name" placeholder="<?php echo $group->name ?:  lang['groups'] . ' ' .  lang['name'] ?>" value="<?php echo $group->name ?>" required>
+                  <input type="text" class="form-control disable" name="group_name" id="group_name" placeholder="<?php echo $group->name ?:  lang['groups'] . ' ' .  lang['name'] ?>" value="<?php echo $group->name ?>" maxlength="100" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-group-name'] ?>">
                   <label for="group_name">
                     <?php echo lang['groups'] . ' ' .  lang['name'] ?>
                     <span style="color: red;">
                       *
                     </span>
+                        <span id="group_name_label" class="label"></span>
                   </label>
                   <div class="invalid-feedback">
                     <?php echo lang['invalide-group_name-input']; ?>
@@ -56,7 +57,7 @@ require __DIR__ . '/../layout/navigation.php';
             <div class="col-md-8">
               <fieldset>
                 <div class="form-floating">
-                  <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="<?php echo $group->alias ?:  lang['groups'] . ' ' .  lang['alias'] ?>" value="<?php echo $group->alias ?>" required disabled>
+                  <input type="text" class="form-control" name="group_alias" id="group_alias" placeholder="<?php echo $group->alias ?:  lang['groups'] . ' ' .  lang['alias'] ?>" value="<?php echo $group->alias ?>" required disabled data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-group-alias'] ?>">
                   <label for="group_alias">
                     <?php echo lang['groups'] . ' ' .  lang['alias'] ?>
                     <span style="color: red;">
@@ -76,7 +77,7 @@ require __DIR__ . '/../layout/navigation.php';
                       *
                     </span>
                   </label>
-                  <input type="color" class="form-control form-control-color disable" name="group_color" id="group_color" placeholder="<?php echo $group->color ?>" value="<?php echo $group->color ?>" required>
+                  <input type="color" class="form-control form-control-color disable" name="group_color" id="group_color" placeholder="<?php echo $group->color ?>" value="<?php echo $group->color ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-group-color'] ?>">
                 </div>
               </fieldset>
             </div>
@@ -127,4 +128,23 @@ require __DIR__ . '/../layout/navigation.php';
       }
     }
   }
+</script>
+<script>
+    event_value = document.getElementById('group_name');
+    event_value_label = document.getElementById('group_name_label');
+    event_value_label.innerHTML = event_value.value.length + ' von 100';
+    event_value.addEventListener('input', input_change_groupe_name);
+
+    function input_change_groupe_name(e) {
+        event_value_label.innerHTML = e.target.value.length + ' von 100';
+        if (e.target.value.length >= 50) {
+            event_value_label.style.color = 'orange';
+        }
+        if (e.target.value.length >= 90) {
+            event_value_label.style.color = 'red';
+        }
+        if (e.target.value.length < 50) {
+            event_value_label.style.color = 'green';
+        }
+    }
 </script>
