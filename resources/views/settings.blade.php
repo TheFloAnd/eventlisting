@@ -61,8 +61,7 @@ require __DIR__ . '/../layout/navigation.php';
                 echo '</td>
                               <td>';
 
-                if($row['setting'] == 'design'){
-
+                if ($row['setting'] == 'design') {
                 }
                 switch ($row['value']) {
                   case 'light':
@@ -76,7 +75,7 @@ require __DIR__ . '/../layout/navigation.php';
                 }
 
                 echo '</td>';
-                echo '<td data-bs-toggle="tooltip" data-bs-placement="top" title="'. lang['edit'] .'">
+                echo '<td data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['edit'] . '">
                             <a href="?b=settings_edit&id=' . $row['id'] . '" type="button" class="btn btn-sm btn-secondary position-relative">
                               <i class="bi bi-gear-wide"></i>
                             </a>
