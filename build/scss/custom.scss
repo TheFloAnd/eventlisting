@@ -1,41 +1,38 @@
 @import "../../node_modules/bootstrap-icons/font/bootstrap-icons";
 //@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "scrollbar.scss";
 @import "dark.scss";
-
-
 .navbar a:hover {
-  color: default;
-  text-decoration-color: currentColor;
-  text-decoration: underline solid currentColor;
+    color: default;
+    text-decoration-color: currentColor;
+    text-decoration: underline solid currentColor;
 }
 
 .card {
-  border-radius: 0.5em !important;
+    border-radius: 0.5em !important;
 }
 
 .btn_hidden {
-  border-top-left-radius: 0 !important;
-  border-bottom-right-radius: 0.75em !important;
-  position: fixed;
-  width: 5rem;
-  height: 2.5rem;
-  top: 0;
-  left: 0;
-  z-index: 20 !important;
-
-  &:focus {
-    box-shadow: none !important;
-  }
-
-  &:hover {
-    background-color: rgba(180, 180, 180, 0.25) !important;
-  }
+    border-top-left-radius: 0 !important;
+    border-bottom-right-radius: 0.75em !important;
+    position: fixed;
+    width: 5rem;
+    height: 2.5rem;
+    top: 0;
+    left: 0;
+    z-index: 20 !important;
+    &:focus {
+        box-shadow: none !important;
+    }
+    &:hover {
+        background-color: rgba(180, 180, 180, 0.25) !important;
+    }
 }
 
 .btn-show {
-  position: absolute;
-  top: 0;
-  left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 table,
@@ -44,102 +41,106 @@ tr,
 tbody,
 th,
 td {
-  text-align: center;
+    text-align: center;
 }
 
 .table td {
-  text-align: center;
-  height: 2rem;
+    text-align: center;
+    height: 2rem;
 }
 
 td {
-  position: relative;
+    position: relative;
 }
 
 tr.strikethrough td:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  border-bottom: 2px solid #111;
-  width: 100%;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    border-bottom: 2px solid #111;
+    width: 100%;
 }
 
 tr.strikeout td:after {
-  content: "\00B7";
-  font-size: 1em;
+    content: "\00B7";
+    font-size: 1em;
 }
 
 .article-home * {
-  font-size: 1.055em;
+    font-size: 1.055em;
 }
 
-
 .badge {
-  font-size: .80em;
+    font-size: .80em;
 }
 
 .header-primary {
-  font-size: 2em !important;
+    font-size: 2em !important;
 }
 
 .header-secondary {
-  font-size: 1.5em !important;
+    font-size: 1.5em !important;
 }
 
-.card-home-today-header,.card-home-preview-header{
-  position:sticky;
-  top:0;
+.card-home-today-header,
+.card-home-preview-header {
+    position: sticky;
+    top: 0;
 }
+
 .section-home-today {
-  z-index: 0;
-  position: sticky;
-  top: 0;
+    z-index: 0;
+    position: sticky;
+    top: 0;
 }
+
 .section-home-today .card {
     border-bottom: 2.5px solid #000;
 }
+
 @media only screen and (min-height: 650px) {
-.section-home-today {
-  z-index: 10;
-}
+    .section-home-today {
+        z-index: 10;
+    }
 }
 
 .myOffcanvas {
-  z-index: 9999 !important;
-  height: fit-content !important;
-  height: min-content;
-  border-bottom-right-radius: 1rem !important;
+    z-index: 9999 !important;
+    height: fit-content !important;
+    height: min-content;
+    border-bottom-right-radius: 1rem !important;
 }
 
 div.table-responsive>div.dataTables_wrapper>div.row:nth-child(3)>div[class^=col-] {
-  padding: 10px 5px 5px 0px !important;
+    padding: 10px 5px 5px 0px !important;
 }
 
 div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:first-child {
-  padding-left: 5px !important;
+    padding-left: 5px !important;
 }
 
 div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child {
-  padding-right: 5px !important;
+    padding-right: 5px !important;
 }
 
 .newsBanner-container {
-  z-index: 20;
-  position: sticky;
-  bottom: 0;
+    z-index: 20;
+    position: sticky;
+    bottom: 0;
 }
 
 .newsBanner {
-  display: none !important;
-  width: 70%;
-  // background-color: rgba(180, 180, 180, 0.75) !important;
+    display: none !important;
+    width: 70%;
+    // background-color: rgba(180, 180, 180, 0.75) !important;
 }
 
 .label {
-  margin-left: 5px;
-  font-size: 80%;
+    margin-left: 5px;
+    font-size: 80%;
 }
-.invalid-feedback{
-  color: red;
+
+.invalid-feedback {
+    color: red;
 }
