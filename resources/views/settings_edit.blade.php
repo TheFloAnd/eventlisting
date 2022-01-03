@@ -204,11 +204,11 @@ switch ($setting->setting) {
 <script>
   setting_value = document.getElementById('setting_value');
   setting_value_label = document.getElementById('setting_value_label');
-  setting_value_label.innerHTML = setting_value.value.length + ' von 50';
+  setting_value_label.innerHTML = setting_value.value.length + '/50';
   setting_value.addEventListener('input', input_change);
 
   function input_change(e){
-    setting_value_label.innerHTML = e.target.value.length + ' von 50';
+    setting_value_label.innerHTML = e.target.value.length + '/50';
     if(e.target.value.length >= 30){
       setting_value_label.style.color = 'orange';
     }
