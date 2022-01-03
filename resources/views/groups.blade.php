@@ -108,9 +108,9 @@ require __DIR__ . '/../layout/navigation.php';
           <div class="tab-pane fade show active" id="nav-active_group" role="tabpanel" aria-labelledby="nav-active_group-tab">
             <div class="table-responsive mt-2">
               <div class="my-2">
-                Toggle column:
-                <a class="toggle-vis" data-column="2">Farbe</a> -
-                <a class="toggle-vis" data-column="3">Settings</a>
+                <?php echo lang['toggle-column'] ?>:
+                <a class="toggle-vis" data-column="2"><?php echo lang['color'] ?></a> -
+                <a class="toggle-vis" data-column="3"><?php echo lang['settings'] ?></a>
               </div>
               <table class="table dataTable_group_active table-striped table-hover mt-5" id="table-to-refresh">
                 <thead>
@@ -151,9 +151,9 @@ require __DIR__ . '/../layout/navigation.php';
           <div class="tab-pane fade" id="nav-deactivated_group" role="tabpanel" aria-labelledby="nav-deactivated_group-tab">
             <div class="table-responsive mt-2">
               <div class="my-2">
-                Toggle column:
-                <a class="toggle-vis" data-column="2">Farbe</a> -
-                <a class="toggle-vis" data-column="3">Settings</a>
+                <?php echo lang['toggle-column'] ?>:
+                <a class="toggle-vis" data-column="2"><?php echo lang['color'] ?></a> -
+                <a class="toggle-vis" data-column="3"><?php echo lang['settings'] ?></a>
               </div>
               <table class="table dataTable_group_inactive table-striped table-hover" id="table-to-refresh">
                 <thead>
