@@ -2,7 +2,7 @@
 
 namespace app\model;
 
-use database\connection\connect;
+use database\connect;
 use \PDO;
 class config{
 

@@ -2,10 +2,10 @@
 
 namespace app\controller;
 
-use database\connection\connect;
+use database\connect;
 use app\controller\config;
 
-class MAIN
+class home
 {
 
     public static function index()

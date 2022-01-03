@@ -1,19 +1,19 @@
 <?php
 
-namespace database\seed;
+namespace database\migrate;
 
 use \PDO;
-use database\connection\admin_connect;
+use database\connect;
 
-class languageseed extends admin_connect
+class language_migrate
 {
 
     public function __construct()
     {
-        $pdo = admin_connect::connection();
+        $pdo = connect::admin();
 
-        languageseed::create_table($pdo);
-        languageseed::insert($pdo);
+        language_migrate::create_table($pdo);
+        language_migrate::insert($pdo);
     }
     public static function create_table($pdo)
     {

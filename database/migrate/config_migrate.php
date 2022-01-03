@@ -1,28 +1,27 @@
 <?php
 
-namespace database\seed;
+namespace database\migrate;
 
 use \PDO;
-use database\connection\admin_connect;
+use database\connect;
+use database\seed\config_seed;
 
-class configseed extends admin_connect
+class config_migrate extends connect
 {
 
     public function __construct()
     {
-        $pdo = admin_connect::connection();
-        configseed::create_table($pdo);
-        configseed::insert($pdo);
+        $pdo = connect::admin();
+        config_migrate::create_table($pdo);
+        config_seed::index();
     }
     public static function create_table($pdo)
     {
         try {
-            $pdo->query("use `" . db['database'] . "`;");
 
             $pdo->query(
                 "CREATE TABLE  IF NOT EXISTS `config` (
                 `id` int NOT NULL,
-                `view` varchar(50) NOT NULL,
                 `setting` varchar(50) NOT NULL,
                 `value` varchar(50) NOT NULL,
                 `time_unit` varchar(50) NOT NULL,
@@ -45,40 +44,34 @@ class configseed extends admin_connect
     public static function insert($pdo)
     {
         try {
-            $pdo->query("use `" . db['database'] . "`;");
 
             $pdo->query(
                 "INSERT INTO `config` (
                 `id`,
-                `view`,
                 `setting`,
                 `value`,
                 `time_unit`,
                 `created_at`
             ) VALUES (
                 1,
-                'Automatisches Neuladen',
                 'refresh',
                 '15',
                 'seconds',
                 '" . strftime('%Y-%m-%dT%H:%M') . "'
             ),(
                 2,
-                'Termin Preview Zeitraum',
                 'future_day',
                 '30',
                 'day',
                 '" . strftime('%Y-%m-%dT%H:%M') . "'
             ), (
                 3,
-                'Überschrift',
                 'name',
                 '',
                 '',
                 '" . strftime('%Y-%m-%dT%H:%M') . "'
             ), (
                 4,
-                'Sprache',
                 'language',
                 'Deutsch',
                 'de_DE',

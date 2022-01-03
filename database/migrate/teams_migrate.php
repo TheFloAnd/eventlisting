@@ -1,29 +1,29 @@
 <?php
 
-namespace database\seed;
+namespace database\migrate;
 
 use \PDO;
-use database\connection\admin_connect;
+use database\connect;
 
-class teamsseed extends admin_connect
+class teams_migrate
 {
 
     public function __construct($com)
     {
-        $pdo = admin_connect::connection();
+        $pdo = connect::admin();
         switch($com){
             case 'empty':
-                teamsseed::empty_table($pdo);
+                teams_migrate::empty_table($pdo);
                 break;
             case 'recreate':
-                teamsseed::delete_table($pdo);
-                teamsseed::create_table($pdo);
-                teamsseed::create_view($pdo);
+                teams_migrate::delete_table($pdo);
+                teams_migrate::create_table($pdo);
+                teams_migrate::create_view($pdo);
             default:
-                teamsseed::create_table($pdo);
-                teamsseed::create_view($pdo);
+                teams_migrate::create_table($pdo);
+                teams_migrate::create_view($pdo);
         }
-        $pdo = admin_connect::connection();
+        $pdo = connect::admin();
     }
     public static function create_table($pdo)
     {
@@ -78,7 +78,7 @@ class teamsseed extends admin_connect
 
     public static function empty_table($pdo)
     {
-        $pdo = admin_connect::connection();
+        $pdo = connect::admin();
         try {
             $pdo->query(
                 "TRUNCATE `events`.`teams`"

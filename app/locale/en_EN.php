@@ -3,7 +3,7 @@
 $lang = array();
 
 $lang['nav']            = 'Navigation';
-$lang['index']          = 'Main';
+$lang['index']          = 'Home';
 $lang['event']          = 'Event';
 $lang['events']         = 'Events';
 $lang['add']            = 'Add';
@@ -81,3 +81,19 @@ $lang['datatable_lang-file']                = '';
 
 $lang['delete_table']                       = 'Do you really want to delete/empty the Databasetable?';
 $lang['delete_table-info']                  = 'If the table Groups is reset, the table events will also be reset!';
+
+$lang['light']           = 'Light';
+$lang['dark']           = 'Dark';
+
+
+$lang['setting-refresh'] = 'Automatic Refresh';
+$lang['setting-future_day'] = 'Event Preview Time';
+$lang['setting-name'] = 'Headline';
+$lang['setting-language'] = 'Language';
+$lang['setting-design'] = 'Design';
+
+
+$lang['german'] = 'German';
+$lang['english'] = 'English';
+$lang['de_DE'] = 'German';
+$lang['en_EN'] = 'English';

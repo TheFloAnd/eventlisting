@@ -4,8 +4,8 @@ use app\controller\events;
 use app\controller\group;
 use app\controller\config;
 use app\module\notification;
-use database\seed\eventsseed;
-use database\seed\teamsseed;
+use database\migrate\events_migrate;
+use database\migrate\teams_migrate;
 
 require __DIR__ . '/init.php';
 
@@ -25,7 +25,7 @@ if (isset($_GET['b'])) {
   define('blade', $_GET['b']);
   $blade = $_GET['b'];
 } else {
-  define('blade', 'main');
+  define('blade', 'home');
 }
 
 if (isset($_POST['submit_event'])) {
@@ -92,22 +92,22 @@ if (isset($_POST['tabel_renew'])) {
   if (isset($_POST['table_empty'])) {
   switch ($_POST['modal_table_input']) {
     case lang['events']:
-      new eventsseed('empty');
+      new events_migrate('empty');
       break;
     case lang['groups']:
-      new eventsseed('empty');
-      new teamsseed('empty');
+      new events_migrate('empty');
+      new teams_migrate('empty');
       break;
   }
 }
 if (!isset($_POST['table_empty'])) {
   switch ($_POST['modal_table_input']) {
     case lang['events']:
-      new eventsseed('recreate');
+      new events_migrate('recreate');
       break;
     case lang['groups']:
-      new eventsseed('recreate');
-      new teamsseed('recreate');
+      new events_migrate('recreate');
+      new teams_migrate('recreate');
       break;
   }
 }
