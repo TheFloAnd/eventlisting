@@ -306,11 +306,11 @@ require __DIR__ . '/../layout/navigation.php';
 <script>
     event_value = document.getElementById('event');
     event_value_label = document.getElementById('event_label');
-    event_value_label.innerHTML = event_value.value.length + ' von 50';
+    event_value_label.innerHTML = event_value.value.length + '/50';
     event_value.addEventListener('input', input_change_events);
 
     function input_change_events(e) {
-        event_value_label.innerHTML = e.target.value.length + ' von 50';
+        event_value_label.innerHTML = e.target.value.length + '/50';
         if (e.target.value.length >= 30) {
             event_value_label.style.color = 'orange';
         }
@@ -324,11 +324,11 @@ require __DIR__ . '/../layout/navigation.php';
 
     room_value = document.getElementById('room');
     room_value_label = document.getElementById('room_label');
-    room_value_label.innerHTML = room_value.value.length + ' von 25';
+    room_value_label.innerHTML = room_value.value.length + '/25';
     room_value.addEventListener('input', input_change);
 
     function input_change_room(e) {
-        room_value_label.innerHTML = e.target.value.length + ' von 25';
+        room_value_label.innerHTML = e.target.value.length + '/25';
         if (e.target.value.length >= 10) {
             room_value_label.style.color = 'orange';
         }

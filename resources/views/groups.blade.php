@@ -200,11 +200,11 @@ require __DIR__ . '/../layout/navigation.php';
 <script>
     event_value = document.getElementById('group_name');
     event_value_label = document.getElementById('group_name_label');
-    event_value_label.innerHTML = event_value.value.length + ' von 100';
+    event_value_label.innerHTML = event_value.value.length + '/100';
     event_value.addEventListener('input', input_change_groupe_name);
 
     function input_change_groupe_name(e) {
-        event_value_label.innerHTML = e.target.value.length + ' von 100';
+        event_value_label.innerHTML = e.target.value.length + '/100';
         if (e.target.value.length >= 50) {
             event_value_label.style.color = 'orange';
         }
@@ -218,11 +218,11 @@ require __DIR__ . '/../layout/navigation.php';
 
     room_value = document.getElementById('group_alias');
     room_value_label = document.getElementById('group_alias_label');
-    room_value_label.innerHTML = room_value.value.length + ' von 10';
+    room_value_label.innerHTML = room_value.value.length + '/10';
     room_value.addEventListener('input', input_change_group_alias);
 
     function input_change_room_group_alias(e) {
-        room_value_label.innerHTML = e.target.value.length + ' von 10';
+        room_value_label.innerHTML = e.target.value.length + '/10';
         if (e.target.value.length >= 5) {
             room_value_label.style.color = 'orange';
         }
