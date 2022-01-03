@@ -30,7 +30,7 @@ require __DIR__ . '/../layout/navigation.php';
                                     }
 
                                     ?>
-                                    <input class="form-check-input" type="checkbox" value="1" name="removed" id="removed" <?php echo $checked ?>>
+                                    <input class="form-check-input" type="checkbox" value="1" name="removed" id="removed" <?php echo $checked ?> data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-disable'] ?>">
                                     <label class="form-check-label" for="removed">
                                         <?php echo lang['not_applicable'] ?>
                                     </label>
@@ -41,12 +41,13 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-10">
                             <fieldset>
                                 <div class="form-floating has-validation">
-                                    <input type="text" class="form-control disable" name="event" id="event" placeholder="<?php echo $data['result']->event ?:  lang['event'] ?>" value="<?php echo $data['result']->event ?>" list="event_list" required>
+                                    <input type="text" class="form-control disable" name="event" id="event" placeholder="<?php echo $data['result']->event ?:  lang['event'] ?>" value="<?php echo $data['result']->event ?>" list="event_list" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-name'] ?>">
                                     <label for="event">
                                         <?php echo lang['event'] ?>
                                         <span style="color: red;">
                                             *
                                         </span>
+                                        <span id="event_label" class="label"></span>
                                     </label>
                                     <div class="invalid-feedback">
                                         <?php echo lang['invalide-event-input']; ?>
@@ -72,7 +73,7 @@ require __DIR__ . '/../layout/navigation.php';
                                             *
                                         </span>
                                     </label>
-                                    <select class="form-select multiple-select disable" name="group[]" multiple="multiple" required>
+                                    <select class="form-select multiple-select disable" name="group[]" multiple="multiple" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-group'] ?>">
                                         <?php
                                         $teams = explode(';', $data['result']->team);
                                         foreach ($data['group'] as $row) {
@@ -93,20 +94,28 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-3">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control disable" name="room" id="room" placeholder="<?php echo $data['result']->room ?:  lang['room'] ?>" value="<?php echo $data['result']->room ?>" maxlength="25">
+                                    <input type="text" class="form-control disable" name="room" id="room" placeholder="<?php echo $data['result']->room ?:  lang['room'] ?>" value="<?php echo $data['result']->room ?>" maxlength="25" list="room_list" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-room'] ?>">
                                     <label for="room">
                                         <?php echo lang['room'] ?>
+                                        <span id="room_label" class="label"></span>
                                     </label>
                                     <div class="invalid-feedback">
                                         <?php echo lang['invalide-room-input']; ?>
                                     </div>
+                                    <datalist id="room_list">
+                                        <?php
+                                        foreach ($data['proposals_room'] as $row) {
+                                            echo '<option value="' . $row['room'] . '">';
+                                        }
+                                        ?>
+                                    </datalist>
                                 </div>
                             </fieldset>
                         </div>
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control disable" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->start)) ?>" required>
+                                    <input type="datetime-local" class="form-control disable" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->start)) ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-start'] ?>">
                                     <label for="start_date">
                                         <?php echo lang['start'] . ' ' .  lang['date'] ?>
                                         <span style="color: red;">
@@ -119,7 +128,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control disable" name="end_date" id="end_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->end)) ?>" required>
+                                    <input type="datetime-local" class="form-control disable" name="end_date" id="end_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->end)) ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-end'] ?>">
                                     <label for="end_date">
                                         <?php echo lang['end'] . ' ' .  lang['date'] ?>
                                         <span style="color: red;">
@@ -137,7 +146,7 @@ require __DIR__ . '/../layout/navigation.php';
     <div class="form-group">
         <div class="form-check form-switch">
             <input class="form-check-input disable" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle"
-                autocomplete="off">
+                autocomplete="off" data-bs-toggle="tooltip" data-bs-placement="top" title="'. lang['tooltip-event-repeat-update'] .'">
             <label class="form-check-label" for="edit_repeat">
                 ' . lang['updat'] . ' ' . lang['repeat'] . '?
             </label>
@@ -146,13 +155,12 @@ require __DIR__ . '/../layout/navigation.php';
 </fieldset>
 </div>
                         <div class="col-md-5">
-                            <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="In wievielen Tagen/Wochen sich der Termin wiederholen soll">
+                            <div class="form-group">
                                 <fieldset>
                                     <label class="form-label" for="days">
                                         ' . lang['days'] . ' :
                                     </label>
-                                    <input class="form-control" type="number" placeholder="' . lang['days'] . '" min="1" name="repeat_days" id="repeat_days" value="' . $data['result']->repeat_dif . '" disabled>
+                                    <input class="form-control" type="number" placeholder="' . lang['days'] . '" min="1" name="repeat_days" id="repeat_days" value="' . $data['result']->repeat_dif . '" disabled data-bs-toggle="tooltip" data-bs-placement="top" title="'. lang['tooltip-event-repeat-days'] .'">
                                 </fieldset>
                             </div>
                         </div>';
@@ -293,4 +301,42 @@ require __DIR__ . '/../layout/navigation.php';
             set_repeat.disabled = true;
         }
     };
+</script>
+
+<script>
+    event_value = document.getElementById('event');
+    event_value_label = document.getElementById('event_label');
+    event_value_label.innerHTML = event_value.value.length + ' von 50';
+    event_value.addEventListener('input', input_change_events);
+
+    function input_change_events(e) {
+        event_value_label.innerHTML = e.target.value.length + ' von 50';
+        if (e.target.value.length >= 30) {
+            event_value_label.style.color = 'orange';
+        }
+        if (e.target.value.length >= 45) {
+            event_value_label.style.color = 'red';
+        }
+        if (e.target.value.length < 30) {
+            event_value_label.style.color = 'green';
+        }
+    }
+
+    room_value = document.getElementById('room');
+    room_value_label = document.getElementById('room_label');
+    room_value_label.innerHTML = room_value.value.length + ' von 25';
+    room_value.addEventListener('input', input_change);
+
+    function input_change_room(e) {
+        room_value_label.innerHTML = e.target.value.length + ' von 25';
+        if (e.target.value.length >= 10) {
+            room_value_label.style.color = 'orange';
+        }
+        if (e.target.value.length >= 20) {
+            room_value_label.style.color = 'red';
+        }
+        if (e.target.value.length < 10) {
+            room_value_label.style.color = 'green';
+        }
+    }
 </script>

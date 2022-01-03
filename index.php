@@ -84,6 +84,7 @@ if (isset($_POST['submit_edit_setting'])) {
   $set_setting = config::update($_POST);
   if ($set_setting == true) {
     notification::success('Einstellung wurde Erfolgreich geändert!');
+    header('Refresh:0');
   }
 }
 

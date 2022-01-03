@@ -21,10 +21,14 @@ class events
         $data_proposals = connect::connection()->query($stmt_proposals);
         $proposals = $data_proposals->fetchAll();
 
+        $stmt_proposals_room = "SELECT `room`, COUNT(`room`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
+        $stmt_proposals_room = connect::connection()->query($stmt_proposals_room);
+        $proposals_room = $stmt_proposals_room->fetchAll();
+
         $group = GROUP::index();
         $group = $group['active'];
 
-        return compact('proposals', 'result', 'group');
+        return compact('proposals', 'proposals_room', 'result', 'group');
     }
     public static function edit($id)
     {
@@ -35,10 +39,15 @@ class events
         $data_proposals = connect::connection()->query($stmt_proposals);
         $proposals = $data_proposals->fetchAll();
 
+
+        $stmt_proposals_room = "SELECT `room`, COUNT(`room`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
+        $stmt_proposals_room = connect::connection()->query($stmt_proposals_room);
+        $proposals_room = $stmt_proposals_room->fetchAll();
+
         $group = GROUP::index();
         $group = $group['active'];
 
-        return compact('proposals', 'result', 'group');
+        return compact('proposals', 'proposals_room', 'result', 'group');
     }
 
     public static function store($input)
