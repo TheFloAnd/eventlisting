@@ -27,7 +27,7 @@ require __DIR__ . '/../layout/navigation.php';
                 <div class="col-md-10">
                   <fieldset>
                     <div class="form-floating has-validation">
-                      <input type="text" class="form-control" name="event" id="event" placeholder="<?php echo lang['event'] ?>" list="event_list" maxlength="50" required  data-bs-toggle="tooltip" data-bs-placement="top"
+                      <input type="text" class="form-control show_length" name="event" id="event" placeholder="<?php echo lang['event'] ?>" list="event_list" maxlength="50" required  data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="<?php echo lang['tooltip-event-name'] ?>"/>
                       <label for="event">
                         <?php echo lang['event'] ?>
@@ -82,7 +82,7 @@ require __DIR__ . '/../layout/navigation.php';
                     <div class="col-md-4">
                       <fieldset>
                         <div class="form-floating">
-                          <input type="text" class="form-control" name="room" id="room" placeholder="<?php echo lang['room'] ?>" list="room_list" maxlength="25" data-bs-toggle="tooltip" data-bs-placement="top"
+                          <input type="text" class="form-control show_length" name="room" id="room" placeholder="<?php echo lang['room'] ?>" list="room_list" maxlength="25" data-bs-toggle="tooltip" data-bs-placement="top"
                                 title="<?php echo lang['tooltip-event-room'] ?>">
                           <label for="room">
                             <?php echo lang['room'] ?>
@@ -346,41 +346,4 @@ require __DIR__ . '/../layout/navigation.php';
       start_date.value = end_date.value
     }
   };
-</script>
-<script>
-  event_value = document.getElementById('event');
-  event_value_label = document.getElementById('event_label');
-  event_value_label.innerHTML = event_value.value.length + '/50';
-  event_value.addEventListener('input', input_change_events);
-
-  function input_change_events(e) {
-    event_value_label.innerHTML = e.target.value.length + '/50';
-    if (e.target.value.length >= 30) {
-      event_value_label.style.color = 'orange';
-    }
-    if (e.target.value.length >= 45) {
-      event_value_label.style.color = 'red';
-    }
-    if (e.target.value.length < 30) {
-      event_value_label.style.color = 'green';
-    }
-  }
-
-  room_value = document.getElementById('room');
-  room_value_label = document.getElementById('room_label');
-  room_value_label.innerHTML = room_value.value.length + '/25';
-  room_value.addEventListener('input', input_change_room);
-
-  function input_change_room(e) {
-    room_value_label.innerHTML = e.target.value.length + '/25';
-    if (e.target.value.length >= 10) {
-      room_value_label.style.color = 'orange';
-    }
-    if (e.target.value.length >= 20) {
-      room_value_label.style.color = 'red';
-    }
-    if (e.target.value.length < 10) {
-      room_value_label.style.color = 'green';
-    }
-  }
 </script>

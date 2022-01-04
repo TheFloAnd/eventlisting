@@ -41,7 +41,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-10">
                             <fieldset>
                                 <div class="form-floating has-validation">
-                                    <input type="text" class="form-control disable" name="event" id="event" placeholder="<?php echo $data['result']->event ?:  lang['event'] ?>" value="<?php echo $data['result']->event ?>" list="event_list" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-name'] ?>">
+                                    <input type="text" class="form-control disable show_length" name="event" id="event" placeholder="<?php echo $data['result']->event ?:  lang['event'] ?>" value="<?php echo $data['result']->event ?>" list="event_list" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-name'] ?>" maxlength="100">
                                     <label for="event">
                                         <?php echo lang['event'] ?>
                                         <span style="color: red;">
@@ -94,7 +94,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-3">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control disable" name="room" id="room" placeholder="<?php echo $data['result']->room ?:  lang['room'] ?>" value="<?php echo $data['result']->room ?>" maxlength="25" list="room_list" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-room'] ?>">
+                                    <input type="text" class="form-control disable show_length" name="room" id="room" placeholder="<?php echo $data['result']->room ?:  lang['room'] ?>" value="<?php echo $data['result']->room ?>" maxlength="25" list="room_list" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-room'] ?>">
                                     <label for="room">
                                         <?php echo lang['room'] ?>
                                         <span id="room_label" class="label"></span>
@@ -301,42 +301,4 @@ require __DIR__ . '/../layout/navigation.php';
             set_repeat.disabled = true;
         }
     };
-</script>
-
-<script>
-    event_value = document.getElementById('event');
-    event_value_label = document.getElementById('event_label');
-    event_value_label.innerHTML = event_value.value.length + '/50';
-    event_value.addEventListener('input', input_change_events);
-
-    function input_change_events(e) {
-        event_value_label.innerHTML = e.target.value.length + '/50';
-        if (e.target.value.length >= 30) {
-            event_value_label.style.color = 'orange';
-        }
-        if (e.target.value.length >= 45) {
-            event_value_label.style.color = 'red';
-        }
-        if (e.target.value.length < 30) {
-            event_value_label.style.color = 'green';
-        }
-    }
-
-    room_value = document.getElementById('room');
-    room_value_label = document.getElementById('room_label');
-    room_value_label.innerHTML = room_value.value.length + '/25';
-    room_value.addEventListener('input', input_change);
-
-    function input_change_room(e) {
-        room_value_label.innerHTML = e.target.value.length + '/25';
-        if (e.target.value.length >= 10) {
-            room_value_label.style.color = 'orange';
-        }
-        if (e.target.value.length >= 20) {
-            room_value_label.style.color = 'red';
-        }
-        if (e.target.value.length < 10) {
-            room_value_label.style.color = 'green';
-        }
-    }
 </script>

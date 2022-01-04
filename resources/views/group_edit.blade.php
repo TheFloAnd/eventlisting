@@ -40,7 +40,7 @@ require __DIR__ . '/../layout/navigation.php';
             <div class="col-md-10">
               <fieldset id="input_name">
                 <div class="form-floating has-validation">
-                  <input type="text" class="form-control disable" name="group_name" id="group_name" placeholder="<?php echo $group->name ?:  lang['groups'] . ' ' .  lang['name'] ?>" value="<?php echo $group->name ?>" maxlength="100" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-group-name'] ?>">
+                  <input type="text" class="form-control disable show_length" name="group_name" id="group_name" placeholder="<?php echo $group->name ?:  lang['groups'] . ' ' .  lang['name'] ?>" value="<?php echo $group->name ?>" maxlength="100" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-group-name'] ?>">
                   <label for="group_name">
                     <?php echo lang['groups'] . ' ' .  lang['name'] ?>
                     <span style="color: red;">
@@ -128,23 +128,4 @@ require __DIR__ . '/../layout/navigation.php';
       }
     }
   }
-</script>
-<script>
-    event_value = document.getElementById('group_name');
-    event_value_label = document.getElementById('group_name_label');
-    event_value_label.innerHTML = event_value.value.length + '/100';
-    event_value.addEventListener('input', input_change_groupe_name);
-
-    function input_change_groupe_name(e) {
-        event_value_label.innerHTML = e.target.value.length + '/100';
-        if (e.target.value.length >= 50) {
-            event_value_label.style.color = 'orange';
-        }
-        if (e.target.value.length >= 90) {
-            event_value_label.style.color = 'red';
-        }
-        if (e.target.value.length < 50) {
-            event_value_label.style.color = 'green';
-        }
-    }
 </script>
