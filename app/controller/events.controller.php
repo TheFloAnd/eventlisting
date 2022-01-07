@@ -47,7 +47,6 @@ class events
 
         // $stmt_future_events = "SELECT * FROM `v_events` where `start` >= '" . strftime('%Y-%m-%d', strtotime('+ 1 day')) . "' OR `end` >= '" . strftime('%Y-%m-%d', strtotime('+ 1 day')) . "' AND `repeat_parent` = '". $result->repeat_parent ."' OR `id` = '". $result->repeat_parent ."' ORDER BY start ASC";
         $stmt_future_events = "SELECT * FROM `v_events` WHERE `repeat_parent` = '". $result->repeat_parent ."' OR `id` = '". $result->id ."' ORDER BY start ASC";
-        var_dump($stmt_future_events);
         $future_events = connect::connection()->query($stmt_future_events);
         $future_events = $future_events->fetchAll();
 
