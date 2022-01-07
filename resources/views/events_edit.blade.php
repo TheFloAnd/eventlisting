@@ -1,6 +1,4 @@
 <?php
-
-use app\controller\config;
 use app\controller\events;
 use app\controller\group;
 
@@ -232,7 +230,6 @@ require __DIR__ . '/../layout/navigation.php';
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $config = config::get('future_day');
                                     foreach ($data['future_events'] as $row) {
                                         $start = strftime('%Y-%m-%d', strtotime($row['start']));
                                         $end = strftime('%Y-%m-%d', strtotime($row['end']));

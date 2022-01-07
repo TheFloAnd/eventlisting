@@ -3,7 +3,6 @@
 namespace app\controller;
 
 use database\connect;
-use app\controller\config;
 use app\controller\group;
 
 class events
