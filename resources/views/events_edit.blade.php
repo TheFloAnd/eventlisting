@@ -236,8 +236,7 @@ require __DIR__ . '/../layout/navigation.php';
                                     foreach ($data['future_events'] as $row) {
                                         $start = strftime('%Y-%m-%d', strtotime($row['start']));
                                         $end = strftime('%Y-%m-%d', strtotime($row['end']));
-                                        if ($start >= strftime('%Y-%m-%d', strtotime('+ 1 day'))) {
-                                            if ($start <= strftime('%Y-%m-%d', strtotime(' + ' . $config->value . ' ' . $config->time_unit))) {
+                                        if ($start >= strftime($data['result']->start, strtotime('+ 1 day'))) {
                                                 if ($row['not_applicable'] == 1) {
                                                     $disabled = 'class="table-danger strikethrough"';
                                                 } else {
@@ -300,7 +299,7 @@ require __DIR__ . '/../layout/navigation.php';
                                                 }
                                                 echo '<td>' . abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d'))) / 60 / 60 / 24 . ' ' . lang['meet'] . '</td>
               </tr>';
-                                            }
+                                            
                                         }
                                     }
                                     ?>
