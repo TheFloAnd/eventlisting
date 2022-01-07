@@ -56,12 +56,13 @@ switch ($setting->setting) {
                       <div class="col-md-8">
                     <fieldset id="input_name">
                       <div class="form-floating">
-                        <input type="text" class="form-control" name="setting_value" id="setting_value" placeholder="'. $setting->value .'" value="'. $setting->value .'" maxlength="50" required>
+                        <input type="text" class="form-control show_length" name="setting_value" id="setting_value" placeholder="'. $setting->value .'" value="'. $setting->value .'" maxlength="3" required>
                         <label for="setting_value">
 '. lang['value'] .'
                           <span style="color: red;">
                             *
                           </span>
+                        <span id="setting_value_label" class="label"></span>
                         </label>
                         <div class="invalid-feedback">
                           '. lang['invalide-settings_value-input'] .'
@@ -93,7 +94,7 @@ switch ($setting->setting) {
                       echo'<div class="col-md-10">
                     <fieldset id="input_name">
                       <div class="form-floating has-validation">
-                        <input type="text" class="form-control" name="setting_value" id="setting_value" placeholder="'. $setting->value.'" value="'. $setting->value .'" maxlength="50" required>
+                        <input type="text" class="form-control show_length" name="setting_value" id="setting_value" placeholder="'. $setting->value.'" value="'. $setting->value .'" maxlength="50" required>
                         <label for="setting_value">
 '. lang['value'] .'
                           <span style="color: red;">
@@ -115,7 +116,7 @@ switch ($setting->setting) {
                       <fieldset id="input_name">
                         <div class="form-floating has-validation">
                           <input type="text" class="form-control" name="setting_value" id="setting_value" placeholder="'. $setting->value.'"
-                            value="'. $setting->value .'" maxlength="50" required>
+                            value="'. $setting->value .'" maxlength="4" required>
                           <label for="setting_value">
                             '. lang['value'] .'
                             <span style="color: red;">
@@ -201,22 +202,4 @@ switch ($setting->setting) {
     </div>
   </section>
 </article>
-<script>
-  setting_value = document.getElementById('setting_value');
-  setting_value_label = document.getElementById('setting_value_label');
-  setting_value_label.innerHTML = setting_value.value.length + '/50';
-  setting_value.addEventListener('input', input_change);
-
-  function input_change(e){
-    setting_value_label.innerHTML = e.target.value.length + '/50';
-    if(e.target.value.length >= 30){
-      setting_value_label.style.color = 'orange';
-    }
-    if(e.target.value.length >= 45){
-      setting_value_label.style.color = 'red';
-    }
-    if(e.target.value.length < 30){
-      setting_value_label.style.color='green' ;
-    }
-  }
 </script>

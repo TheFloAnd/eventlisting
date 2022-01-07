@@ -15,7 +15,7 @@ use app\controller\config;
     <title><?php echo config::get('name')->value; ?></title>
 
     <!-- Bootstrap CSS -->
-    <link  rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
     <!-- <link rel="stylesheet" href="/resources/css/bootstrap-icons.css"> -->
 
     <link rel="stylesheet" href="/resources/css/select2.min.css">
@@ -26,8 +26,8 @@ use app\controller\config;
     <!-- Custom CSS -->
     <link href="/resources/css/custom.css" rel="stylesheet" />
     <?php
-    if(config::get('design')->value == 'dark'){
-        echo'<link href="/resources/css/dark.css" rel="stylesheet" />';
+    if (config::get('design')->value == 'dark') {
+        echo '<link href="/resources/css/dark.css" rel="stylesheet" />';
     }
     ?>
 </head>
@@ -225,6 +225,39 @@ use app\controller\config;
                     }, false)
                 })
         })()
+    </script>
+
+    <script>
+        $('.show_length').each(function(index, element) {
+            var label = document.getElementById(element.id + '_label');
+            label.innerHTML = element.value.length + '/' + element.maxLength;
+            
+            if (element.value.length >= (element.maxLength / 100) * 50) {
+                label.style.color = 'orange';
+            }
+            if (element.value.length >= (element.maxLength / 100) * 90) {
+                label.style.color = 'red';
+            }
+            if (element.value.length < (element.maxLength / 100) * 50) {
+                label.style.color = 'green';
+            }
+
+            element.addEventListener('input', input_change);
+            
+
+        function input_change(e) {
+            label.innerHTML = e.target.value.length + '/'+ element.maxLength;
+            if (e.target.value.length >= (element.maxLength / 100) * 50) {
+                label.style.color = 'orange';
+            }
+            if (e.target.value.length >= (element.maxLength / 100) * 90) {
+                label.style.color = 'red';
+            }
+            if (e.target.value.length < (element.maxLength / 100) * 50) {
+                label.style.color = 'green';
+            }
+        }
+        });
     </script>
 </body>
 
