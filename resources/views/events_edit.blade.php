@@ -13,7 +13,7 @@ require __DIR__ . '/../layout/navigation.php';
         <section class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row mt-3 g-3 justify-content-center">
+                    <div class="row g-3 justify-content-center">
                         <fieldset class="" hidden>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo $data['result']->id ?>">
@@ -171,12 +171,13 @@ require __DIR__ . '/../layout/navigation.php';
         <?php
         if (!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)) {
         ?>
-            <section class="col">
+            <section class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="row mt-3 g-3 justify-content-center">
+                        <div class="row g-3 justify-content-center">
                             <?php
-                            echo '<div class="col"><fieldset>
+                            echo '<div class="col-12">
+                            <fieldset>
                                 <div class="form-group">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input disable" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle" autocomplete="off" data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['tooltip-event-repeat-update'] . '">
@@ -202,8 +203,7 @@ require __DIR__ . '/../layout/navigation.php';
                             ?>
                         </div>
                     </div>
-                    <div class="crad-body">
-
+                    <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
