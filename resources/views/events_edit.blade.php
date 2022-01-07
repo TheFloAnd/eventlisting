@@ -294,7 +294,8 @@ require __DIR__ . '/../layout/navigation.php';
                                                         }
                                                     }
                                                 }
-                                                echo '<td>' . abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d'))) / 60 / 60 / 24 . ' ' . lang['meet'] . '</td>
+                                                
+                      echo '<td data-bs-toggle="tooltip" data-bs-placement="top" title="'. lang['edit'] .'"><a href="?b=events_edit&id=' . $row['id'] . '" type="button" class="btn btn-sm btn-secondary position-relative"><i class="bi bi-gear-wide"></i></a></td>
               </tr>';
                                             
                                         }
