@@ -1,5 +1,6 @@
 <?php
 
+use app\controller\config;
 use app\controller\events;
 use app\controller\group;
 
@@ -8,11 +9,12 @@ $data = events::edit($_GET['id']);
 $current_group = group::find($data['result']->team);
 require __DIR__ . '/../layout/navigation.php';
 ?>
-<article class="row">
-    <section class="col">
-        <div class="card">
-            <div class="card-body">
-                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" novalidate>
+
+<form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" novalidate>
+    <article class="row g-3">
+        <section class="col-12">
+            <div class="card">
+                <div class="card-body">
                     <div class="row mt-3 g-3 justify-content-center">
                         <fieldset class="" hidden>
                             <div class="form-group">
@@ -138,36 +140,6 @@ require __DIR__ . '/../layout/navigation.php';
                                 </div>
                             </fieldset>
                         </div>
-
-
-                        <?php
-                        if (!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)) {
-                            echo '<div class="col-md-10"><fieldset>
-    <div class="form-group">
-        <div class="form-check form-switch">
-            <input class="form-check-input disable" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle"
-                autocomplete="off" data-bs-toggle="tooltip" data-bs-placement="top" title="'. lang['tooltip-event-repeat-update'] .'">
-            <label class="form-check-label" for="edit_repeat">
-                ' . lang['updat'] . ' ' . lang['repeat'] . '?
-            </label>
-        </div>
-    </div>
-</fieldset>
-</div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <fieldset>
-                                    <label class="form-label" for="days">
-                                        ' . lang['days'] . ' :
-                                    </label>
-                                    <input class="form-control" type="number" placeholder="' . lang['days'] . '" min="1" name="repeat_days" id="repeat_days" value="' . $data['result']->repeat_dif . '" disabled data-bs-toggle="tooltip" data-bs-placement="top" title="'. lang['tooltip-event-repeat-days'] .'">
-                                </fieldset>
-                            </div>
-                        </div>';
-                        }
-                        ?>
-
-
                         <div class="col-md-10">
                             <div class="row g-2 justify-content-evenly">
                                 <div class="col-12">
@@ -194,11 +166,153 @@ require __DIR__ . '/../layout/navigation.php';
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </section>
-</article>
+        </section>
+
+        <?php
+        if (!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)) {
+        ?>
+            <section class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row mt-3 g-3 justify-content-center">
+                            <?php
+                            echo '<div class="col"><fieldset>
+                                <div class="form-group">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input disable" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle" autocomplete="off" data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['tooltip-event-repeat-update'] . '">
+                                        <label class="form-check-label" for="edit_repeat">
+                                            ' . lang['updat'] . ' ' . lang['repeat'] . '?
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-floating">
+                                <fieldset>
+                                    <div class="form-floating has-validation">
+                                        <input class="form-control" type="number" placeholder="' . lang['days'] . '" min="1" name="repeat_days" id="repeat_days" value="' . $data['result']->repeat_dif . '" disabled data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['tooltip-event-repeat-days'] . '">
+                                            <label class="form-label" for="days">
+                                                ' . lang['days'] . ' :
+                                            </label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>';
+                            ?>
+                        </div>
+                    </div>
+                    <div class="crad-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            <?php echo lang['project'] ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo lang['group'] ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo lang['room'] ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo lang['from'] ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo lang['till'] ?>
+                                        </th>
+                                        <th scope="col">
+                                            <?php echo lang['remaining_days'] ?>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $config = config::get('future_day');
+                                    foreach ($data['future_events'] as $row) {
+                                        $start = strftime('%Y-%m-%d', strtotime($row['start']));
+                                        $end = strftime('%Y-%m-%d', strtotime($row['end']));
+                                        if ($start >= strftime('%Y-%m-%d', strtotime('+ 1 day'))) {
+                                            if ($start <= strftime('%Y-%m-%d', strtotime(' + ' . $config->value . ' ' . $config->time_unit))) {
+                                                if ($row['not_applicable'] == 1) {
+                                                    $disabled = 'class="table-danger strikethrough"';
+                                                } else {
+                                                    $disabled = '';
+                                                }
+
+                                                echo '
+              <tr ' . $disabled . '>
+                <td>' . $row['event'] . '</td>
+                <td>';
+
+                                                $teams = explode(';', $row['team']);
+
+                                                foreach ($teams as $team) {
+                                                    $group_color = GROUP::find($team)->color;
+                                                    echo '<span class="badge text-dark" style="background-color:' . $group_color . ';">' . $team . '</span> ';
+                                                }
+
+                                                echo '</td>
+                <td>' . $row['room'] . '</td>';
+
+                                                if (strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))) {
+
+                                                    if (strftime('%H:%M', strtotime($row['start'])) == '00:00') {
+                                                        echo '<td>' . strftime('%a - %d.%m.%Y', strtotime($row['start'])) . '</td>';
+                                                    } else {
+                                                        echo '<td>' . strftime('%a - %d.%m.%Y - %H:%M', strtotime($row['start'])) . '</td>';
+                                                    }
+                                                    if (strftime('%H:%M', strtotime($row['end'])) == '00:00') {
+                                                        echo '<td>' . strftime('%a - %d.%m.%Y ', strtotime($row['end'])) . '</td>';
+                                                    } else {
+                                                        echo '<td>' . strftime('%a - %d.%m.%Y - %H:%M', strtotime($row['end'])) . '</td>';
+                                                    }
+                                                }
+                                                if (strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))) {
+                                                    if (strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))) {
+
+                                                        if (strftime('%H:%M', strtotime($row['start'])) == '00:00') {
+                                                            echo '<td colspan="2">' . strftime('%a - %d.%m.%Y ', strtotime($row['start'])) . '</td>
+                          <td style="display:none;">';
+                                                        } else {
+                                                            echo '
+                          <td colspan="2">' . strftime('%a - %d.%m.%Y - %H:%M', strtotime($row['start'])) . '</td>
+                          <td style="display:none;">';
+                                                        }
+                                                    }
+                                                    if (strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))) {
+                                                        if (strftime('%H:%M', strtotime($row['start'])) == '00:00') {
+                                                            echo '
+                          <td>' . strftime('%a - %d.%m.%Y', strtotime($row['start'])) . '</td>';
+                                                        } else {
+                                                            echo '<td>' . strftime('%a - %d.%m.%Y - %H:%M', strtotime($row['start'])) . '</td>';
+                                                        }
+                                                        if (strftime('%H:%M', strtotime($row['end'])) == '00:00') {
+                                                            echo '<td>' . strftime('%a - %d.%m.%Y', strtotime($row['end'])) . '</td>';
+                                                        } else {
+                                                            echo '<td>' . strftime('%a - %H:%M', strtotime($row['end'])) . '</td>';
+                                                        }
+                                                    }
+                                                }
+                                                echo '<td>' . abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d'))) / 60 / 60 / 24 . ' ' . lang['meet'] . '</td>
+              </tr>';
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <?php } ?>
+    </article>
+</form>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
