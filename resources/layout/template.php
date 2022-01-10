@@ -32,8 +32,8 @@ use app\controller\config;
     ?>
 </head>
 
-<body class="body">
-    <main class="container-fluid main">
+<body>
+    <main class="container-fluid">
         <?php
         if (file_exists(__DIR__ . '/../views/' . blade . '.blade.php')) {
             require __DIR__ . '/../views/' . blade . '.blade.php';
@@ -227,55 +227,11 @@ use app\controller\config;
         })()
     </script>
 
-<script>
-    var toogle_disable = document.getElementById('removed');
-    var disable = document.getElementsByClassName('disable');
-    if (toogle_disable.checked == true) {
-        for (var i = 0; i < disable.length; i++) {
-            disable[i].disabled = true;
-            disable[i].readOnly = true;
-        }
-    }
-    toogle_disable.onchange = function() {
-        if (toogle_disable.checked == true) {
-            for (var i = 0; i < disable.length; i++) {
-                disable[i].disabled = true;
-                disable[i].readOnly = true;
-            }
-        } else {
-            for (var i = 0; i < disable.length; i++) {
-                disable[i].disabled = false;
-                disable[i].readOnly = false;
-            }
-        }
-    }
-</script>
-<script>
-    var start_date = document.getElementById("start_date");
-    var end_date = document.getElementById("end_date");
-
-    start_date.onchange = function() {
-        if (start_date.value > end_date.value) {
-            end_date.value = start_date.value
-        }
-        if (!end_date.value) {
-            end_date.value = start_date.value
-        }
-    };
-    end_date.onchange = function() {
-        if (end_date.value < start_date.value) {
-            start_date.value = end_date.value
-        }
-        if (!start_date.value) {
-            start_date.value = end_date.value
-        }
-    };
-</script>
     <script>
         $('.show_length').each(function(index, element) {
             var label = document.getElementById(element.id + '_label');
             label.innerHTML = element.value.length + '/' + element.maxLength;
-
+            
             if (element.value.length >= (element.maxLength / 100) * 50) {
                 label.style.color = 'orange';
             }
@@ -287,20 +243,20 @@ use app\controller\config;
             }
 
             element.addEventListener('input', input_change);
+            
 
-
-            function input_change(e) {
-                label.innerHTML = e.target.value.length + '/' + element.maxLength;
-                if (e.target.value.length >= (element.maxLength / 100) * 50) {
-                    label.style.color = 'orange';
-                }
-                if (e.target.value.length >= (element.maxLength / 100) * 90) {
-                    label.style.color = 'red';
-                }
-                if (e.target.value.length < (element.maxLength / 100) * 50) {
-                    label.style.color = 'green';
-                }
+        function input_change(e) {
+            label.innerHTML = e.target.value.length + '/'+ element.maxLength;
+            if (e.target.value.length >= (element.maxLength / 100) * 50) {
+                label.style.color = 'orange';
             }
+            if (e.target.value.length >= (element.maxLength / 100) * 90) {
+                label.style.color = 'red';
+            }
+            if (e.target.value.length < (element.maxLength / 100) * 50) {
+                label.style.color = 'green';
+            }
+        }
         });
     </script>
 </body>

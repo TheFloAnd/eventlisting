@@ -27,8 +27,7 @@ require __DIR__ . '/../layout/navigation.php';
                 <div class="col-md-10">
                   <fieldset>
                     <div class="form-floating has-validation">
-                      <input type="text" class="form-control show_length" name="event" id="event" placeholder="<?php echo lang['event'] ?>" list="event_list" maxlength="50" required  data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="<?php echo lang['tooltip-event-name'] ?>"/>
+                      <input type="text" class="form-control show_length" name="event" id="event" placeholder="<?php echo lang['event'] ?>" list="event_list" maxlength="50" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-name'] ?>" />
                       <label for="event">
                         <?php echo lang['event'] ?>
                         <span style="color: red;">
@@ -60,8 +59,7 @@ require __DIR__ . '/../layout/navigation.php';
                               *
                             </span>
                           </label>
-                          <select class="form-select multiple-select" name="group[]" multiple="multiple" required data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="<?php echo lang['tooltip-event-group'] ?>">
+                          <select class="form-select multiple-select" name="group[]" multiple="multiple" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-group'] ?>">
                             <?php
 
                             foreach ($events['group'] as $row) {
@@ -82,8 +80,7 @@ require __DIR__ . '/../layout/navigation.php';
                     <div class="col-md-4">
                       <fieldset>
                         <div class="form-floating">
-                          <input type="text" class="form-control show_length" name="room" id="room" placeholder="<?php echo lang['room'] ?>" list="room_list" maxlength="25" data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="<?php echo lang['tooltip-event-room'] ?>">
+                          <input type="text" class="form-control show_length" name="room" id="room" placeholder="<?php echo lang['room'] ?>" list="room_list" maxlength="25" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-room'] ?>">
                           <label for="room">
                             <?php echo lang['room'] ?>
 
@@ -108,8 +105,7 @@ require __DIR__ . '/../layout/navigation.php';
                 <div class="col-md-5">
                   <fieldset>
                     <div class="form-floating">
-                      <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT00:00') ?>" required data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="<?php echo lang['tooltip-event-start'] ?>">
+                      <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT00:00') ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-start'] ?>">
                       <label for="start_date">
                         <?php echo lang['start'] . ' ' .  lang['date'] ?>
                         <span style="color: red;">
@@ -122,8 +118,7 @@ require __DIR__ . '/../layout/navigation.php';
                 <div class="col-md-5">
                   <fieldset>
                     <div class="form-floating">
-                      <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="<?php echo strftime('%Y-%m-%dT00:00') ?>" required data-bs-toggle="tooltip" data-bs-placement="top"
-                                title="<?php echo lang['tooltip-event-end'] ?>">
+                      <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="<?php echo strftime('%Y-%m-%dT00:00') ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-end'] ?>">
                       <label for="end_date">
                         <?php echo lang['end'] . ' ' .  lang['date'] ?>
                         <span style="color: red;">
@@ -151,7 +146,7 @@ require __DIR__ . '/../layout/navigation.php';
                     </div>
                   </fieldset>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-10">
                   <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat-days'] ?>">
                     <fieldset>
                       <label class="form-label" for="days">
@@ -161,14 +156,46 @@ require __DIR__ . '/../layout/navigation.php';
                     </fieldset>
                   </div>
                 </div>
-                <div class="col-md-5">
-                  <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat'] ?>">
-                    <fieldset>
-                      <label class="form-label" for="repeats">
-                        <?php echo lang['repeat'] ?> :
-                      </label>
-                      <input class="form-control disable" type="number" placeholder="<?php echo lang['repeat'] ?>" min="1" name="repeats" id="repeats" value="1" disabled>
-                    </fieldset>
+                <div class="col-md-10">
+                  <div class="row">
+                    <div class="col-12">
+
+                  <fieldset>
+                    <div class="form-group was-validated">
+                      <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat-set-days'] ?>">
+                        <input class="form-check-input set_repeat_time disable" type="radio" name="set_repeat_time" id="set_repeat_time_date" value="date" checked disabled>
+                        <label class="form-check-label" for="set_repeat_time_date"><?php echo lang['till']; ?></label>
+                      </div>
+                      <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat-set-weeks'] ?>">
+                        <input class="form-check-input set_repeat_time disable" type="radio" name="set_repeat_time" id="set_repeat_time_repeats" value="repeats" disabled>
+                        <label class="form-check-label" for="set_repeat_time_repeats"><?php echo lang['repeat']; ?></label>
+                      </div>
+                    </div>
+                  </fieldset>
+                    </div>
+                    <div class="col-md-6">
+
+                      <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat'] ?>">
+                        <fieldset>
+                          <label class="form-label" for="repeats">
+                            <?php echo lang['till'] ?> :
+                          </label>
+                          <input class="form-control disable" type="date" placeholder="<?php echo strftime('%Y-%m-%d', strtotime(strftime('%Y-%m-%d') . ' +1 month')) ?>" name="repeats_date" id="repeats_date" value="<?php echo strftime('%Y-%m-%d', strtotime(strftime('%Y-%m-%d') . ' +1 month')) ?>" disabled>
+                        </fieldset>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+
+                      <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat'] ?>">
+                        <fieldset>
+                          <label class="form-label" for="repeats">
+                            <?php echo lang['repeat'] ?> :
+                          </label>
+                          <input class="form-control disable" type="number" placeholder="<?php echo lang['repeat'] ?>" min="1" name="repeats_repeats" id="repeats_repeats" value="1" disabled>
+                        </fieldset>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
 
@@ -280,7 +307,7 @@ require __DIR__ . '/../layout/navigation.php';
                         }
                       }
                       echo '<td class="table_search">' . abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d'))) / 60 / 60 / 24 . ' ' . lang['meet'] . '</td>';
-                      echo '<td data-bs-toggle="tooltip" data-bs-placement="top" title="'. lang['edit'] .'"><a href="?b=events_edit&id=' . $row['id'] . '" type="button" class="btn btn-sm btn-secondary position-relative"><i class="bi bi-gear-wide"></i></a></td>';
+                      echo '<td data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['edit'] . '"><a href="?b=events_edit&id=' . $row['id'] . '" type="button" class="btn btn-sm btn-secondary position-relative"><i class="bi bi-gear-wide"></i></a></td>';
                     }
                   }
                   echo '</tr>';
@@ -297,6 +324,7 @@ require __DIR__ . '/../layout/navigation.php';
 
 <script>
   var set_repeat = document.getElementsByName('set_repeat');
+  var set_repeat_time = document.getElementsByName('set_repeat_time');
   var set_disable = document.getElementById('set_repeat_none');
   var disable = document.getElementsByClassName('disable');
   set_disable.checked = true;
@@ -307,19 +335,16 @@ require __DIR__ . '/../layout/navigation.php';
           for (j = 0; j < disable.length; j++) {
             disable[j].disabled = false;
           }
-          document.getElementById('repeats').value = 10;
           break;
         case 'days':
           for (j = 0; j < disable.length; j++) {
             disable[j].disabled = false;
           }
-          document.getElementById('repeats').value = 10;
           break;
         case 'none':
           for (j = 0; j < disable.length; j++) {
             disable[j].disabled = true;
           }
-          document.getElementById('repeats').value = 1;
           break;
       }
 

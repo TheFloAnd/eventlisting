@@ -5,6 +5,7 @@ use app\controller\home;
 use app\controller\group;
 
 $result = home::index();
+// if(strtotime(strftime('%Y-%m-%d')) < )
 ?>
 <button class="btn btn-lg btn_hidden btn_menu" type="button" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#home-offcanvasTop" aria-controls="home-offcanvasTop">
   <span class="navbar-toggler-icon"></span>
