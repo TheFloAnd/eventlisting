@@ -82,8 +82,11 @@ tr.strikeout td:after {
     color: $palette-text-primary;
 }
 
-.myOffcanvas {
+.home-offcanvas {
     background: $color;
+    & .home-offcanvas-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
+    }
 }
 
 .form-control,

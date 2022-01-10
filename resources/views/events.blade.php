@@ -8,20 +8,20 @@ require __DIR__ . '/../layout/navigation.php';
 ?>
 <article class="row">
   <section class="col">
-    <div class="card">
-      <div class="card-body">
-        <nav>
-          <div class="nav nav-tabs justify-content-evenly" id="nav-tab" role="tablist">
-            <button class="nav-link col active" id="nav-event_add-tab" data-bs-toggle="tab" data-bs-target="#nav-event_add" type="button" role="tab" aria-controls="nav-event_add" aria-selected="false">
+    <div class="card events-card">
+      <div class="card-body events-card-body">
+        <nav class="events-card-tab">
+          <div class="nav nav-tabs justify-content-evenly events-card-tab-items" id="nav-tab" role="tablist">
+            <button class="nav-link events-card-tab-item-link col active" id="nav-event_add-tab" data-bs-toggle="tab" data-bs-target="#nav-event_add" type="button" role="tab" aria-controls="nav-event_add" aria-selected="false">
               <?php echo lang['event'] . ' ' .  lang['add'] ?>
             </button>
-            <button class="nav-link col" id="nav-event_edit-tab" data-bs-toggle="tab" data-bs-target="#nav-event_edit" type="button" role="tab" aria-controls="nav-event_edit" aria-selected="true">
+            <button class="nav-link events-card-tab-item-link col" id="nav-event_edit-tab" data-bs-toggle="tab" data-bs-target="#nav-event_edit" type="button" role="tab" aria-controls="nav-event_edit" aria-selected="true">
               <?php echo lang['events'] . ' ' .  lang['edit'] ?>
             </button>
           </div>
         </nav>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="nav-event_add" role="tabpanel" aria-labelledby="nav-event_add-tab">
+        <div class="tab-content events-card-tab-content" id="myTabContent">
+          <div class="tab-pane events-card-tab-content-pane  events-card-tab-content-add fade show active" id="nav-event_add" role="tabpanel" aria-labelledby="nav-event_add-tab">
             <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" novalidate>
               <div class="row mt-3 g-3 justify-content-center">
                 <div class="col-md-10">

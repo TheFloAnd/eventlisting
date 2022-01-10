@@ -6,23 +6,23 @@ use app\controller\group;
 
 $result = home::index();
 ?>
-<button class="btn btn-lg btn_hidden btn_menu" type="button" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+<button class="btn btn-lg btn_hidden btn_menu" type="button" href="?b=events" data-bs-toggle="offcanvas" data-bs-target="#home-offcanvasTop" aria-controls="home-offcanvasTop">
   <span class="navbar-toggler-icon"></span>
 </button>
-<div class="offcanvas offcanvas-start myOffcanvas" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+<div class="offcanvas offcanvas-start home-offcanvas" tabindex="-1" id="home-offcanvasTop" aria-labelledby="home-offcanvasTopLabel">
   <div class="offcanvas-header">
-    <h4 id="offcanvasTopLabel"><?php echo lang['nav'] ?></h4>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <h4 id="home-offcanvasTopLabel"><?php echo lang['nav'] ?></h4>
+    <button type="button" class="btn-close text-reset home-offcanvas-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">
+  <div class="offcanvas-body home-offcanvas-body">
     <div class="btn-group-vertical w-100">
-      <a href="?b=events" type="button" class="btn btn-outline-secondary">
+      <a href="?b=events" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
         <?php echo lang['events'] ?>
       </a>
-      <a href="?b=groups" type="button" class="btn btn-outline-secondary">
+      <a href="?b=groups" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
         <?php echo lang['groups'] ?>
       </a>
-      <a href="?b=settings" type="button" class="btn btn-outline-secondary">
+      <a href="?b=settings" type="button" class="btn btn-outline-secondary home-offcanvas-body-link">
         <?php echo lang['settings'] ?>
       </a>
     </div>
@@ -30,19 +30,19 @@ $result = home::index();
 </div>
 
 <article class="row g-3 home article-home">
-  <section class="col-12 section-home-today">
-    <div class="card card-home-today">
-      <div class="card-header home-card-header card-home-today-header">
-        <nav class="navbar card-home-today-header-nav">
-          <div class="row">
-            <div class="col-auto">
+  <section class="col-12 home-section-today">
+    <div class="card home-card-today">
+      <div class="card-header home-card-header home-card-today-header">
+        <nav class="navbar home-card-today-header-nav">
+          <div class="row home-card-today-header-row">
+            <div class="col-auto home-card-today-header-col">
               <div class="refresh" id="refresh-title">
-                <h1 class="header-primary">
+                <h1 class="header-primary home-card-today-header-title">
                   <?php echo config::get('name')->value; ?>
                 </h1>
               </div>
             </div>
-            <div class="col-auto">
+            <div class="col-auto home-card-today-header-col">
               <div class="refresh-icon invisible">
                 <div class="spinner-grow" role="status">
                   <span class="visually-hidden">Loading...</span>
@@ -51,7 +51,7 @@ $result = home::index();
             </div>
 
           </div>
-          <h1 class="header-primary">
+          <h1 class="header-primary home-card-today-header-title">
             <!--
             <?php echo  strftime('%A %d.%m.%Y - '); ?>
             -->
@@ -59,29 +59,29 @@ $result = home::index();
           </h1>
         </nav>
       </div>
-      <div class="card-body home-card-body card-home-today-body refresh" id="refresh-card-home">
+      <div class="card-body home-card-body home-card-today-body refresh" id="refresh-home-card">
         <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
+          <table class="table table-striped home-card-today-body-table">
+            <thead class="home-card-today-table-head">
               <tr>
-                <th scope="col">
+                <th scope="col" class="home-card-today-table-head-item">
                   <?php echo lang['project'] ?>
                 </th>
-                <th scope="col">
+                <th scope="col" class="home-card-today-table-head-item">
                   <?php echo lang['group'] ?>
                 </th>
-                <th scope="col">
+                <th scope="col" class="home-card-today-table-head-item">
                   <?php echo lang['room'] ?>
                 </th>
-                <th scope="col">
+                <th scope="col" class="home-card-today-table-head-item">
                   <?php echo lang['from'] ?>
                 </th>
-                <th scope="col">
+                <th scope="col" class="home-card-today-table-head-item">
                   <?php echo lang['till'] ?>
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="home-card-today-table-body">
               <?php
 
               foreach ($result as $row) {
@@ -160,18 +160,18 @@ $result = home::index();
       </div>
     </div>
   </section>
-  <section class="col-12 section-home-preview">
-    <div class="card card-home-preview">
-      <div class="card-header card-home-preview-header">
-        <nav class="navbar navbar-dark card-home-preview-header-nav">
+  <section class="col-12 home-section-preview">
+    <div class="card home-card-preview">
+      <div class="card-header home-card-preview-header">
+        <nav class="navbar navbar-dark home-card-preview-header-nav">
 
-          <div class="row">
-            <div class="col-auto">
-              <h2 class="header-secondary">
+          <div class="row home-card-preview-header-row">
+            <div class="col-auto home-card-preview-header-col">
+              <h2 class="header-secondary home-card-preview-header-title">
                 <?php echo lang['event'] . ' ' .  lang['preview']; ?>
               </h2>
             </div>
-            <div class="col-auto">
+            <div class="col-auto home-card-preview-header-col">
               <div class="refresh-icon invisible">
                 <div class="spinner-grow" role="status">
                   <span class="visually-hidden">Loading...</span>
@@ -180,50 +180,50 @@ $result = home::index();
             </div>
           </div>
           <div class="refresh" id="refresh-title-preview">
-          <h2 class="header-secondary">
-            <?php
-            $future = config::get('future_day');
-            switch ($future->time_unit) {
-              case 'day':
-                $output_time_unit = lang['days'];
-                break;
-              case 'week':
-                $output_time_unit = lang['weeks'];
-                break;
-            }
+            <h2 class="header-secondary home-card-preview-header-title">
+              <?php
+              $future = config::get('future_day');
+              switch ($future->time_unit) {
+                case 'day':
+                  $output_time_unit = lang['days'];
+                  break;
+                case 'week':
+                  $output_time_unit = lang['weeks'];
+                  break;
+              }
 
-            echo $future->value . ' ' .  $output_time_unit;
-            ?>
-          </h2>
+              echo $future->value . ' ' .  $output_time_unit;
+              ?>
+            </h2>
           </div>
         </nav>
       </div>
-      <div class="card-body refresh card-home-preview-body" id="refresh-card-preview">
+      <div class="card-body refresh home-card-preview-body" id="refresh-card-preview">
         <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
+          <table class="table table-striped home-card-preview-table">
+            <thead class="home-card-preview-table-head">
               <tr>
-                <th scope="col">
+                <th scope="col" class="home-card-preview-table-head-item">
                   <?php echo lang['project'] ?>
                 </th>
-                <th scope="col">
+                <th scope="col" class="home-card-preview-table-head-item">
                   <?php echo lang['group'] ?>
                 </th>
-                <th scope="col">
+                <th scope="col" class="home-card-preview-table-head-item">
                   <?php echo lang['room'] ?>
                 </th>
-                <th scope="col">
+                <th scope="col" class="home-card-preview-table-head-item">
                   <?php echo lang['from'] ?>
                 </th>
-                <th scope="col">
+                <th scope="col" class="home-card-preview-table-head-item">
                   <?php echo lang['till'] ?>
                 </th>
-                <th scope="col">
+                <th scope="col" class="home-card-preview-table-head-item">
                   <?php echo lang['remaining_days'] ?>
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="home-card-preview-table-body">
               <?php
               $config = config::get('future_day');
               foreach ($result as $row) {
@@ -333,7 +333,7 @@ $result = home::index();
         $(element).addClass("invisible");
       });
     }, 1 * 1000);
-    console.log(Date.now() +' Content  Refreshed!');
+    console.log(Date.now() + ' Content  Refreshed!');
   }
 </script>
 <?php

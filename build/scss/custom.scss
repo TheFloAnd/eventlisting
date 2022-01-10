@@ -89,29 +89,29 @@ tr.strikeout td:after {
     font-size: 1.5em !important;
 }
 
-.card-home-today-header,
-.card-home-preview-header {
+.home-card-header-today,
+.home-card-preview-header {
     position: sticky;
     top: 0;
 }
 
-.section-home-today {
+.home-section-today {
     z-index: 0;
     position: sticky;
     top: 0;
 }
 
-.section-home-today .card {
+.home-section-today .card {
     border-bottom: 2.5px solid #000;
 }
 
 @media only screen and (min-height: 650px) {
-    .section-home-today {
+    .home-section-today {
         z-index: 10;
     }
 }
 
-.myOffcanvas {
+.home-offcanvas {
     z-index: 9999 !important;
     height: fit-content !important;
     height: min-content;
