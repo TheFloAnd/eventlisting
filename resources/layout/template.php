@@ -227,6 +227,50 @@ use app\controller\config;
         })()
     </script>
 
+<script>
+    var toogle_disable = document.getElementById('removed');
+    var disable = document.getElementsByClassName('disable');
+    if (toogle_disable.checked == true) {
+        for (var i = 0; i < disable.length; i++) {
+            disable[i].disabled = true;
+            disable[i].readOnly = true;
+        }
+    }
+    toogle_disable.onchange = function() {
+        if (toogle_disable.checked == true) {
+            for (var i = 0; i < disable.length; i++) {
+                disable[i].disabled = true;
+                disable[i].readOnly = true;
+            }
+        } else {
+            for (var i = 0; i < disable.length; i++) {
+                disable[i].disabled = false;
+                disable[i].readOnly = false;
+            }
+        }
+    }
+</script>
+<script>
+    var start_date = document.getElementById("start_date");
+    var end_date = document.getElementById("end_date");
+
+    start_date.onchange = function() {
+        if (start_date.value > end_date.value) {
+            end_date.value = start_date.value
+        }
+        if (!end_date.value) {
+            end_date.value = start_date.value
+        }
+    };
+    end_date.onchange = function() {
+        if (end_date.value < start_date.value) {
+            start_date.value = end_date.value
+        }
+        if (!start_date.value) {
+            start_date.value = end_date.value
+        }
+    };
+</script>
     <script>
         $('.show_length').each(function(index, element) {
             var label = document.getElementById(element.id + '_label');

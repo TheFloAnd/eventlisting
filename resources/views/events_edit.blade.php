@@ -7,6 +7,12 @@ $data = events::edit($_GET['id']);
 
 $current_group = group::find($data['result']->team);
 require __DIR__ . '/../layout/navigation.php';
+// echo abs(strtotime(strftime(strtotime($data['result']->start))) - strtotime(strftime('18.06.2022'))) / 60 / 60 / 24;
+
+$date1 = new DateTime($data['result']->start);
+$date2 = new DateTime($data['result']->end);
+$interval = date_diff($date1, $date2);
+echo $interval->format('%R%a days %R%h hours %R%i minutes');
 ?>
 
 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" novalidate>
@@ -181,7 +187,7 @@ require __DIR__ . '/../layout/navigation.php';
                             <fieldset>
                                 <div class="form-group">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input disable" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle" autocomplete="off" data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['tooltip-event-repeat-update'] . '">
+                                        <input class="form-check-input" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle" autocomplete="off" data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['tooltip-event-repeat-update'] . '">
                                         <label class="form-check-label" for="edit_repeat">
                                             ' . lang['updat'] . ' ' . lang['repeat'] . '?
                                         </label>
@@ -189,7 +195,7 @@ require __DIR__ . '/../layout/navigation.php';
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 d-none">
                             <div class="form-floating">
                                 <fieldset>
                                     <div class="form-floating has-validation">
@@ -200,7 +206,19 @@ require __DIR__ . '/../layout/navigation.php';
                                         </div>
                                     </fieldset>
                                 </div>
-                            </div>';
+                            </div>
+                            <div class="col-12 d-none" id="selectAll-col">
+                            <fieldset>
+                                <div class="form-group">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input events-edit-card-future-table-body-check-selectAll " type="checkbox" name="edit_repeat-selectAll" id="edit_repeat-selectAll" data-toggle="toggle" autocomplete="off" data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['tooltip-event-repeat-update'] . '">
+                                        <label class="form-check-label" for="edit_repeat">
+                                            ' . lang['updat'] . ' ' . lang['repeat'] . '?
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>';
                             ?>
                         </div>
                     </div>
@@ -209,6 +227,7 @@ require __DIR__ . '/../layout/navigation.php';
                             <table class="table table-striped future_events">
                                 <thead>
                                     <tr>
+                                        <th scope="col" id="select_switch" class="d-none">-</th>
                                         <th scope="col">
                                             <?php echo lang['project'] ?>
                                         </th>
@@ -243,6 +262,16 @@ require __DIR__ . '/../layout/navigation.php';
 
                                             echo '
               <tr ' . $disabled . '>
+                <td class="events-edit-card-future-table-body-check d-none">
+                    
+                            <fieldset>
+                                <div class="form-group">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input events-edit-card-future-table-body-check-switch" type="checkbox" name="repeat_list[]" id="repeat_list" value="'. $row['id'] .'" data-toggle="toggle" autocomplete="off">
+                                    </div>
+                                </div>
+                            </fieldset>
+                </td>
                 <td>' . $row['event'] . '</td>
                 <td>';
 
@@ -355,61 +384,65 @@ require __DIR__ . '/../layout/navigation.php';
         </div>
     </div>
 </div>
-<script>
-    var toogle_disable = document.getElementById('removed');
-    var disable = document.getElementsByClassName('disable');
-    if (toogle_disable.checked == true) {
-        for (var i = 0; i < disable.length; i++) {
-            disable[i].disabled = true;
-            disable[i].readOnly = true;
-        }
-    }
-    toogle_disable.onchange = function() {
-        if (toogle_disable.checked == true) {
-            for (var i = 0; i < disable.length; i++) {
-                disable[i].disabled = true;
-                disable[i].readOnly = true;
-            }
-        } else {
-            for (var i = 0; i < disable.length; i++) {
-                disable[i].disabled = false;
-                disable[i].readOnly = false;
-            }
-        }
-    }
-</script>
 
 <script>
-    var start_date = document.getElementById("start_date");
-    var end_date = document.getElementById("end_date");
-
-    start_date.onchange = function() {
-        if (start_date.value > end_date.value) {
-            end_date.value = start_date.value
-        }
-        if (!end_date.value) {
-            end_date.value = start_date.value
-        }
-    };
-    end_date.onchange = function() {
-        if (end_date.value < start_date.value) {
-            start_date.value = end_date.value
-        }
-        if (!start_date.value) {
-            start_date.value = end_date.value
-        }
-    };
-</script>
-<script>
+    var removed = document.getElementById('removed');
     var edit_repeat = document.getElementById('edit_repeat');
     var set_repeat = document.getElementById('repeat_days');
+    var check_switch_row = document.getElementsByClassName('events-edit-card-future-table-body-check');
+    var check_switch = document.getElementsByClassName('events-edit-card-future-table-body-check-switch');
+    var select_switch = document.getElementById('select_switch');
+    var selectAll_switch_col = document.getElementById('selectAll-col');
+    var selectAll_switch = document.getElementById('edit_repeat-selectAll');
+
+    function enable_select() {
+
+        set_repeat.disabled = false;
+        select_switch.classList.add('d-table-cell');
+        select_switch.classList.remove('d-none');
+        selectAll_switch_col.classList.add('d-block');
+        selectAll_switch_col.classList.remove('d-none');
+        for (var i = 0; i < check_switch_row.length; i++) {
+            check_switch_row[i].classList.add('d-table-cell');
+            check_switch_row[i].classList.remove('d-none');
+        };
+    };
+
+    function disable_select() {
+
+        set_repeat.disabled = true;
+        select_switch.classList.add('d-none');
+        select_switch.classList.remove('d-table-cell');
+        selectAll_switch_col.classList.add('d-none');
+        selectAll_switch_col.classList.remove('d-block');
+        for (var i = 0; i < check_switch_row.length; i++) {
+            check_switch_row[i].classList.add('d-none');
+            check_switch_row[i].classList.remove('d-table-cell');
+        };
+    };
+
     edit_repeat.checked = false;
     set_repeat.disabled = true;
-    edit_repeat.onchange = function() {
-        if (edit_repeat.checked == true) {
-            set_repeat.disabled = false;
-        } else {
-            set_repeat.disabled = true;
+
+    edit_repeat.addEventListener("change", function(event) {
+        if (edit_repeat.checked) {
+            enable_select();
+        };
+        if (!edit_repeat.checked) {
+            disable_select();
+        };
+    });
+
+    selectAll_switch.addEventListener("change", function(event) {
+        if (selectAll_switch.checked) {
+            for (var i = 0; i < check_switch.length; i++) {
+                check_switch[i].checked = true;
+            }
         }
-    };
+        if (!selectAll_switch.checked) {
+            for (var i = 0; i < check_switch.length; i++) {
+                check_switch[i].checked = false;
+            }
+        }
+    });
 </script>
