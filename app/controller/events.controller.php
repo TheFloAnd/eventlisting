@@ -163,30 +163,21 @@ class events
             $data_find = connect::connection()->query($stmt_find);
             $result_found = $data_find->fetch();
 
-            // for ($i = 0; $i <= iterator_count($period_start); $i++) {
-            // foreach ($period_start as $key => $start) {
-            //     $stmt_repeat = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $start->format('Y-m-d H:i') . "', '" . $end . "', '" . $result_found['id'] . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
+            
+            $diff_start_date = new DateTime($input['start_date']);
+            $diff_end_date = new DateTime($input['end_date']);
+            $interval = date_diff($diff_start_date, $diff_end_date);
+            foreach ($period_start as $row) {
 
-            //     $exec_repeat = connect::connection()->prepare($stmt_repeat);
-            //     $exec_repeat->execute();
-            // }
-            for($i = $begin_start, $j = $begin_end; $i <= $end->format('Y-m-d H:i'); $i->modify('+'. $input['repeat_days'] . ' ' . $input['set_repeat']), $i->modify('+'. $input['repeat_days'] . ' ' . $input['set_repeat'])){
-    
-                $stmt_repeat = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $i . "', '" . $j . "', '" . $result_found['id'] . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
+                $start = $row->format("Y-m-d H:i");
+                $end_date = $row->modify($interval->format('%R%a days %R%h hours %R%i minutes'));
+                $end = $end_date->format("Y-m-d H:i");
+
+                $stmt_repeat = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $start . "', '" . $end . "', '" . $result_found['id'] . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
 
                 $exec_repeat = connect::connection()->prepare($stmt_repeat);
                 $exec_repeat->execute();
-}
-
-            // while(strtotime(strftime('%Y-%m-%d', $start_date)) <= strtotime(strftime('%Y-%m-%d', $input['repeats']))) {
-            //     $start_date = strftime('%Y-%m-%d %H:%M', strtotime($start_date . ' +' . $input['repeat_days'] . ' ' . $input['set_repeat'] . ''));
-            //     $end_date = strftime('%Y-%m-%d %H:%M', strtotime($end_date . ' +' . $input['repeat_days'] . ' ' . $input['set_repeat'] . ''));
-
-            //     $stmt_repeat = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $start_date . "', '" . $end_date . "', '" . $result_found['id'] . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
-
-            //     $exec_repeat = connect::connection()->prepare($stmt_repeat);
-            //     $exec_repeat->execute();
-            // }
+            }
         }
         return;
     }
