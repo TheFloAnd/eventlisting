@@ -57,10 +57,14 @@ require __DIR__ . '/../layout/navigation.php';
                   case 'design':
                     echo lang['setting-design'];
                     break;
+                  case 'protection':
+                    echo lang['password'];
+                    break;
                 }
                 echo '</td>
                               <td>';
 
+                if ($row['setting'] != 'protection') {
                 if ($row['setting'] == 'design') {
                 }
                 switch ($row['value']) {
@@ -73,6 +77,7 @@ require __DIR__ . '/../layout/navigation.php';
                   default:
                     echo $row['value'] . ' ' . $output_time_unit;
                 }
+              }
 
                 echo '</td>';
                 echo '<td data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['edit'] . '">
@@ -116,36 +121,57 @@ require __DIR__ . '/../layout/navigation.php';
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="row mb-2">
-            <div class="col-auto mx-0">
-              <label class="form-check-label" for="table_empty">
-                <?php echo lang['delete'] ?>
-              </label>
-            </div>
-            <div class="col-auto mx-0">
-              <div class="form-check form-switch">
-                <input class=" form-check-input" type="checkbox" value="1" name="table_empty" id="table_empty" checked>
+          <div class="row g-3 mb-2">
+            <div class="col-12">
+              <div class="row mb-2">
+                <div class="col-auto mx-0">
+                  <label class="form-check-label" for="table_empty">
+                    <?php echo lang['delete'] ?>
+                  </label>
+                </div>
+                <div class="col-auto mx-0">
+                  <div class="form-check form-switch">
+                    <input class=" form-check-input" type="checkbox" value="1" name="table_empty" id="table_empty" checked>
+                  </div>
+                </div>
+                <div class="col-auto mx-0">
+
+                  <label class="form-check-label" for="table_empty">
+                    <?php echo lang['to_empty'] ?>
+                  </label>
+                </div>
               </div>
             </div>
-            <div class="col-auto mx-0">
+            <div class="col-12">
 
-              <label class="form-check-label" for="table_empty">
-                <?php echo lang['to_empty'] ?>
-              </label>
+              <fieldset>
+                <div class="form-group">
+                  <input class="input_table" id="modal_table_input" value="" name="modal_table_input" readOnly>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-12">
+              <p>
+                <?php echo lang['delete_table'] ?>
+              </p>
+              <span>
+                <?php echo lang['delete_table-info'] ?>
+              </span>
             </div>
           </div>
-          <input class="input_table" id="modal_table_input" value="" name="modal_table_input" readOnly>
-          <p>
-            <?php echo lang['delete_table'] ?>
-          </p>
-          <span>
-            <?php echo lang['delete_table-info'] ?>
-          </span>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo lang['close'] ?></button>
-          <button type="submit" class="btn btn-danger" name="tabel_renew"><?php echo lang['submit'] ?></button>
-        </div>
+            <div class="col-12 mb-2">
+
+              <fieldset>
+                <div class="form-floating">
+                  <input type="password" class="form-control" name="protection_pass" id="protection_pass" placeholder="Password">
+                  <label for="protection_pass">Password</label>
+                </div>
+              </fieldset>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo lang['close'] ?></button>
+            <button type="submit" class="btn btn-danger" name="tabel_renew"><?php echo lang['submit'] ?></button>
+          </div>
       </form>
     </div>
   </div>

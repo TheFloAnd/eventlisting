@@ -27,6 +27,7 @@ $lang['color']          = 'Color';
 
 $lang['preview']        = 'Preview';
 $lang['unit']           = 'Unit';
+$lang['password']       = 'Password';
 
 $lang['room']           = 'Room';
 $lang['start']          = 'Start';
@@ -37,7 +38,7 @@ $lang['project']        = 'Project';
 $lang['from']           = 'From';
 $lang['till']           = 'Until';
 $lang['remaining_days'] = 'In';
-$lang['repeat']         = 'Repeats';
+$lang['repeats']         = 'Repeats';
 $lang['not_applicable'] = 'Not Applcable';
 
 $lang['news']           = 'News';

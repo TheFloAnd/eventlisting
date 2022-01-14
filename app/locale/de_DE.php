@@ -26,7 +26,11 @@ $lang['alias']          = 'Alias';
 $lang['color']          = 'Farbe';
 
 $lang['preview']        = 'Vorschau';
-$lang['unit']        = 'Einheit';
+$lang['unit']           = 'Einheit';
+$lang['password']       = 'Passwort';
+$lang['password_new']   = 'Neues Passwort';
+$lang['password_wrong']   = 'Das Passwort ist falsch!';
+$lang['password_differnet']   = 'Die Passwörter stimmen nicht überein!';
 
 $lang['room']           = 'Raum';
 $lang['start']          = 'Start';
@@ -37,7 +41,8 @@ $lang['project']        = 'Vorhaben';
 $lang['from']           = 'Vom';
 $lang['till']           = 'Bis';
 $lang['remaining_days'] = 'In';
-$lang['repeat']         = 'Wiederholungen';
+$lang['repeats']         = 'Wiederholungen';
+$lang['repeat']         = 'Wiederholen';
 $lang['not_applicable'] = 'Entfällt';
 
 $lang['news']           = 'Neuigkeiten';

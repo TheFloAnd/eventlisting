@@ -184,7 +184,7 @@ require __DIR__ . '/../layout/navigation.php';
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" name="edit_repeat" id="edit_repeat" data-toggle="toggle" autocomplete="off" data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['tooltip-event-repeat-update'] . '">
                                         <label class="form-check-label" for="edit_repeat">
-                                            ' . lang['updat'] . ' ' . lang['repeat'] . '?
+                                            ' . lang['updat'] . ' ' . lang['repeats'] . '?
                                         </label>
                                     </div>
                                 </div>
@@ -358,7 +358,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="1" name="delete_repeat" id="delete_repeat">
                                     <label class="form-check-label" for="delete_repeat">
-                                    ' . lang['repeat'] . ' ' . lang['delete'] . '?
+                                    ' . lang['repeats'] . ' ' . lang['delete'] . '?
                                     </label>
                                 </div>
     </fieldset>';
@@ -403,7 +403,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" value="1" name="delete_repeat" id="delete_repeat">
                                     <label class="form-check-label" for="delete_repeat">
-                                    ' . lang['repeat'] . ' ' . lang['delete'] . '?
+                                    ' . lang['repeats'] . ' ' . lang['delete'] . '?
                                     </label>
                                 </div>
     </fieldset>';

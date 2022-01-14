@@ -4,6 +4,7 @@ use app\controller\events;
 use app\controller\event_repeat;
 use app\controller\group;
 use app\controller\config;
+use app\controller\auth\protection;
 use app\module\notification;
 use database\migrate\events_migrate;
 use database\migrate\teams_migrate;
@@ -15,10 +16,10 @@ require __DIR__ . '/init.php';
 require __DIR__ . '/app/conf/config.php';
 
 // Checks if Language file exists and if not reuires a default
-if (file_exists(__DIR__ .'/app/locale/'. config::get('language')->value .'.php')) {
+if (file_exists(__DIR__ . '/app/locale/' . config::get('language')->value . '.php')) {
   // requires language file
-  require __DIR__ . '/app/locale/'. config::get('language')->value .'.php';
-}else{
+  require __DIR__ . '/app/locale/' . config::get('language')->value . '.php';
+} else {
   // requires default language file
   require __DIR__ . '/app/locale/de_DE.php';
 }
@@ -73,7 +74,7 @@ if (isset($_POST['submit_edit_event'])) {
 if (isset($_POST['submit_delete_event'])) {
 
   // Deletes a singe event
-  if (!isset($_POST['delete_repeat']))  {
+  if (!isset($_POST['delete_repeat'])) {
     events::delete($_POST);
   }
 
@@ -88,7 +89,7 @@ if (isset($_POST['submit_delete_event'])) {
 if (isset($_POST['submit_group'])) {
   $add_group = group::store($_POST);
 
-// checks if a group alias already exists
+  // checks if a group alias already exists
   if ($add_group['0'] == false) {
     notification::error('Der Gruppen Alias ' . $add_group['1'] . ' Existiert schon!');
   } else {
@@ -119,34 +120,36 @@ if (isset($_POST['submit_edit_setting'])) {
   }
 }
 
+
 // Checks if the DB should be renewed
 if (isset($_POST['tabel_renew'])) {
+  if (protection::password($_POST['protection_pass'])) {
+    if (isset($_POST['table_empty'])) {
+      switch ($_POST['modal_table_input']) {
+        case lang['events']:
+          new events_migrate('empty');
+          break;
+        case lang['groups']:
+          new events_migrate('empty');
+          new teams_migrate('empty');
+          break;
+      }
+    }
+    // Checks if the DB should be emptied
+    if (!isset($_POST['table_empty'])) {
+      switch ($_POST['modal_table_input']) {
+        case lang['events']:
+          new events_migrate('recreate');
+          break;
+        case lang['groups']:
+          new events_migrate('recreate');
+          new teams_migrate('recreate');
+          break;
+      }
+    }
 
-  if (isset($_POST['table_empty'])) {
-  switch ($_POST['modal_table_input']) {
-    case lang['events']:
-      new events_migrate('empty');
-      break;
-    case lang['groups']:
-      new events_migrate('empty');
-      new teams_migrate('empty');
-      break;
+    header('location:?b=settings');
   }
-}
-// Checks if the DB should be emptied
-if (!isset($_POST['table_empty'])) {
-  switch ($_POST['modal_table_input']) {
-    case lang['events']:
-      new events_migrate('recreate');
-      break;
-    case lang['groups']:
-      new events_migrate('recreate');
-      new teams_migrate('recreate');
-      break;
-  }
-}
-
-  header('location:?b=settings');
 }
 
 // includes the Template view

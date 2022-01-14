@@ -3,6 +3,7 @@
 namespace app\controller;
 
 use database\connect;
+use app\controller\auth\protection;
 
 class config
 {
@@ -30,10 +31,23 @@ class config
 
     public static function update($setting)
     {
+        $setting_value = $setting['setting_value'];
+        if ($setting['setting'] == 'protection') {
+            if(!protection::password($setting['protection_pass'])){
+                return false;
+            }
+            if(!protection::change($setting['setting_value'], $setting['setting_value_2'])){
+                return false;
+            }
+
+            $setting_value = hash('sha512', $setting['setting_value']);
+        }
+
+
         if ($setting['setting_id'] == '2') {
-            $stmt = "UPDATE `config` SET `value` = '" . $setting['setting_value'] . "', `time_unit` = '" . $setting['time_unit'] . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' where `id` = '" . $setting['setting_id'] . "'";
+            $stmt = "UPDATE `config` SET `value` = '" . $setting_value . "', `time_unit` = '" . $setting['time_unit'] . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' where `id` = '" . $setting['setting_id'] . "'";
         } else {
-            $stmt = "UPDATE `config` SET `value` = '" . $setting['setting_value'] . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' where `id` = '" . $setting['setting_id'] . "'";
+            $stmt = "UPDATE `config` SET `value` = '" . $setting_value . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' where `id` = '" . $setting['setting_id'] . "'";
         }
         $exec = connect::connection()->prepare($stmt);
         $exec->execute();

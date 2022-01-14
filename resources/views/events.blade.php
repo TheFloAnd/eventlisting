@@ -168,7 +168,7 @@ require __DIR__ . '/../layout/navigation.php';
                       </div>
                       <div class="form-check form-check-inline" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat-set-weeks'] ?>">
                         <input class="form-check-input set_repeat_time disable" type="radio" name="set_repeat_time" id="set_repeat_time_repeats" value="repeats" disabled>
-                        <label class="form-check-label" for="set_repeat_time_repeats"><?php echo lang['repeat']; ?></label>
+                        <label class="form-check-label" for="set_repeat_time_repeats"><?php echo lang['repeats']; ?></label>
                       </div>
                     </div>
                   </fieldset>
@@ -189,9 +189,9 @@ require __DIR__ . '/../layout/navigation.php';
                       <div class="form-group" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-repeat'] ?>">
                         <fieldset>
                           <label class="form-label" for="repeats">
-                            <?php echo lang['repeat'] ?> :
+                            <?php echo lang['repeats'] ?> :
                           </label>
-                          <input class="form-control disable" type="number" placeholder="<?php echo lang['repeat'] ?>" min="1" name="repeats_repeats" id="repeats_repeats" value="1" disabled>
+                          <input class="form-control disable" type="number" placeholder="<?php echo lang['repeats'] ?>" min="1" name="repeats_repeats" id="repeats_repeats" value="1" disabled>
                         </fieldset>
                       </div>
 

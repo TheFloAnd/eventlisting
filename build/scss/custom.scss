@@ -151,6 +151,9 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^=col-]:last-child 
     color: red;
 }
 
-.events-edit-card-future-table-body-select * {
-    // margin-right: 0px !important;
+// .events-edit-card-future-table-body-select * {
+//     // margin-right: 0px !important;
+// }
+.form-floating>label {
+    background: none;
 }
