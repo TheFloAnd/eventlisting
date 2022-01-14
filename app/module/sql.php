@@ -4,15 +4,16 @@ namespace app\module;
 
 use database\connect;
 
+
+/*
+*   Collection of often used SQL Querys
+*/
 class sql
 {
 /*
 *   Gets Proposals
 *
 *   :return $result
-*   :return $group
-*   :return $proposals
-*   :return $proposals_room
 */
     public static function proposals($col, $table)
     {

@@ -9,6 +9,9 @@ use \DateTime;
 use \DatePeriod;
 use \DateInterval;
 
+/*
+*   Class for Events
+*/
 class events
 {
 /*
