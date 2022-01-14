@@ -120,7 +120,7 @@ if (isset($_POST['submit_edit_setting'])) {
   }
 }
 
-
+if (isset($_POST['table_backup'])) {}
 // Checks if the DB should be renewed
 if (isset($_POST['tabel_renew'])) {
   if (protection::password($_POST['protection_pass'])) {

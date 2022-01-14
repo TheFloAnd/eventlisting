@@ -65,19 +65,19 @@ require __DIR__ . '/../layout/navigation.php';
                               <td>';
 
                 if ($row['setting'] != 'protection') {
-                if ($row['setting'] == 'design') {
+                  if ($row['setting'] == 'design') {
+                  }
+                  switch ($row['value']) {
+                    case 'light':
+                      echo lang['light'];
+                      break;
+                    case 'dark':
+                      echo lang['dark'];
+                      break;
+                    default:
+                      echo $row['value'] . ' ' . $output_time_unit;
+                  }
                 }
-                switch ($row['value']) {
-                  case 'light':
-                    echo lang['light'];
-                    break;
-                  case 'dark':
-                    echo lang['dark'];
-                    break;
-                  default:
-                    echo $row['value'] . ' ' . $output_time_unit;
-                }
-              }
 
                 echo '</td>';
                 echo '<td data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['edit'] . '">
@@ -100,12 +100,19 @@ require __DIR__ . '/../layout/navigation.php';
         <?php echo lang['database'] ?>:
       </div>
       <div class="card-body">
-        <div class="btn-group btn-group-vertical w-100" role="group" aria-label="Basic checkbox toggle button group">
-          <input type="button" class="btn-check" id="table_events" data-bs-toggle="modal" data-bs-target="#modal_table" data-bs-whatever="<?php echo lang['events'] ?>">
-          <label class="btn btn-outline-danger" for="table_events"><?php echo lang['events'] ?></label>
+        <div class="row g-5">
+          <div class="col-12">
+              <input type="submit" class="btn btn-outline-success w-100" name="table_backup" id="table_backup" value="Backup">
+          </div>
+          <div class="col-12">
+            <div class="btn-group btn-group-vertical w-100" role="group" aria-label="Basic checkbox toggle button group">
+              <input type="button" class="btn-check" id="table_events" data-bs-toggle="modal" data-bs-target="#modal_table" data-bs-whatever="<?php echo lang['events'] ?>">
+              <label class="btn btn-outline-danger" for="table_events"><?php echo lang['events'] ?></label>
 
-          <input type="button" class="btn-check" id="table_groups" data-bs-toggle="modal" data-bs-target="#modal_table" data-bs-whatever="<?php echo lang['groups'] ?>">
-          <label class="btn btn-outline-danger" for="table_groups"><?php echo lang['groups'] ?></label>
+              <input type="button" class="btn-check" id="table_groups" data-bs-toggle="modal" data-bs-target="#modal_table" data-bs-whatever="<?php echo lang['groups'] ?>">
+              <label class="btn btn-outline-danger" for="table_groups"><?php echo lang['groups'] ?></label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -159,15 +166,15 @@ require __DIR__ . '/../layout/navigation.php';
               </span>
             </div>
           </div>
-            <div class="col-12 mb-2">
+          <div class="col-12 mb-2">
 
-              <fieldset>
-                <div class="form-floating">
-                  <input type="password" class="form-control" name="protection_pass" id="protection_pass" placeholder="Password">
-                  <label for="protection_pass">Password</label>
-                </div>
-              </fieldset>
-            </div>
+            <fieldset>
+              <div class="form-floating">
+                <input type="password" class="form-control" name="protection_pass" id="protection_pass" placeholder="Password">
+                <label for="protection_pass">Password</label>
+              </div>
+            </fieldset>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo lang['close'] ?></button>
             <button type="submit" class="btn btn-danger" name="tabel_renew"><?php echo lang['submit'] ?></button>
