@@ -122,8 +122,7 @@ if (isset($_POST['submit_edit_setting'])) {
 
 if (isset($_POST['table_backup'])) {
   $m = shell_exec('./backup');
-  // header('Refresh:0');
-  print_r($m);
+  header('Refresh:0');
 }
 // Checks if the DB should be renewed
 if (isset($_POST['tabel_renew'])) {
