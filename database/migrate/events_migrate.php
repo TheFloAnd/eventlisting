@@ -35,7 +35,7 @@ class events_migrate
                 `start` datetime NOT NULL,
                 `end` datetime NOT NULL,
                 `repeat` int DEFAULT NULL,
-                `repeat_parent` int DEFAULT NULL,
+                `repeat_parent` varchat(13) DEFAULT NULL,
                 `repeat_dif` int DEFAULT NULL,
                 `room` varchar(25) DEFAULT NULL,
                 `created_at` datetime DEFAULT NULL,
