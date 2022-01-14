@@ -162,45 +162,6 @@ class event_repeat
                 }
             }
         }
-
-        //     $stmt_all = "SELECT * FROM `events` 
-        //                                 WHERE id = '" . $id . "'
-        //                                     OR `repeat_parent` = " . $id . "
-        //                                 ORDER BY `id` ASC";
-        //     $exec_all = connect::connection()->query($stmt_all);
-        //     $all = $exec_all->fetchAll();
-
-        //     foreach ($all as $row) {
-
-        //         $stmt = "UPDATE `events` SET 
-        //     `not_applicable`= NULL,
-        //     `event`='" . $input['event'] . "',
-        //     `team`='" . $group . "' ,
-        //     `start`='" . $start_date . "' ,
-        //     `end`='" . $end_date . "' ,
-        //     `room`='" . $input['room'] . "',
-        //     `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' 
-        // WHERE id = '" . $row['id'] . "'";
-
-        //         $exec = connect::connection()->prepare($stmt);
-        //         $exec->execute();
-        //         $start_date = strftime('%Y-%m-%d %H:%M', strtotime($start_date . ' +' . $input['repeat_days'] . ' days'));
-        //         $end_date = strftime('%Y-%m-%d %H:%M', strtotime($end_date . ' +' . $input['repeat_days'] . ' days'));
-        //     }
-        // }
-        // if (isset($input['removed'])) {
-
-        //     $stmt = "UPDATE `events` SET 
-        //     `not_applicable`= 1,
-        //     `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' 
-        // WHERE id = '" . $id . "'
-        //     OR `repeat_parent` = " . $id . "
-        //     OR `id` = " . $event->id . "
-        //     AND `start` > '" . $event->start . "'";
-
-        //     $exec = connect::connection()->prepare($stmt);
-        //     $exec->execute();
-        // }
         if (isset($input['removed'])) {
 
             $stmt = "UPDATE `events` SET 

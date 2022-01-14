@@ -7,7 +7,11 @@ use app\controller\config;
 
 class home
 {
-
+/*
+*   Lists and returns All Settings
+*
+*   :return $result
+*/
     public static function index()
     {
         $stmt = "SELECT * FROM `v_events` ORDER BY `start` ASC";

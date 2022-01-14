@@ -4,61 +4,77 @@ namespace app\controller;
 
 use database\connect;
 use app\controller\group;
+use app\module\sql;
 use \DateTime;
 use \DatePeriod;
 use \DateInterval;
 
 class events
 {
-
+/*
+*   Lists and returns All Events that arn't Deleted
+*
+*   :return $result
+*   :return $group
+*   :return $proposals
+*   :return $proposals_room
+*/
     public static function index()
     {
-
+        // SQL statment to select future events
         $stmt = "SELECT * FROM `v_events` where `start` >= '" . strftime('%Y-%m-%d') . "' OR `end` >= '" . strftime('%Y-%m-%d') . "' ORDER BY start ASC";
 
         $data = connect::connection()->query($stmt);
         $result = $data->fetchAll();
 
-        $stmt_proposals = "SELECT `event`, COUNT(`event`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
-        $data_proposals = connect::connection()->query($stmt_proposals);
-        $proposals = $data_proposals->fetchAll();
+        // SQL Statment to select the Proposals for Events
+        $proposals = sql::proposals('event', 'v_events');
 
-        $stmt_proposals_room = "SELECT `room`, COUNT(`room`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
-        $stmt_proposals_room = connect::connection()->query($stmt_proposals_room);
-        $proposals_room = $stmt_proposals_room->fetchAll();
+        // SQL Statment to select the Proposals for Rooms
+        $proposals_room = sql::proposals('room', 'v_events');
 
+        // Get Active Groups
         $group = GROUP::index();
         $group = $group['active'];
 
         return compact('proposals', 'proposals_room', 'result', 'group');
     }
+
+/*
+*   Lists and returns Events, Groups and Proposals for editing the event
+*
+*   :return $result
+*   :return $group
+*   :return $proposals
+*   :return $proposals_room
+*   :return $future_events
+*/
     public static function edit($id)
     {
 
         $result = events::find($id);
+        
+        // SQL Statment to select the Proposals for Events
+        $proposals = sql::proposals('event', 'v_events');
 
-        $stmt_proposals = "SELECT `event`, COUNT(`event`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
-        $data_proposals = connect::connection()->query($stmt_proposals);
-        $proposals = $data_proposals->fetchAll();
-
-
-        $stmt_proposals_room = "SELECT `room`, COUNT(`room`) as counted FROM `v_events` GROUP BY `event` ORDER BY counted DESC";
-        $stmt_proposals_room = connect::connection()->query($stmt_proposals_room);
-        $proposals_room = $stmt_proposals_room->fetchAll();
+        // SQL Statment to select the Proposals for Rooms
+        $proposals_room = sql::proposals('room', 'v_events');
 
 
-        // $stmt_future_events = "SELECT * FROM `v_events` where `start` >= '" . strftime('%Y-%m-%d', strtotime('+ 1 day')) . "' OR `end` >= '" . strftime('%Y-%m-%d', strtotime('+ 1 day')) . "' AND `repeat_parent` = '". $result->repeat_parent ."' OR `id` = '". $result->repeat_parent ."' ORDER BY start ASC";
         $stmt_future_events = "SELECT * FROM `v_events` WHERE `repeat_parent` = '" . $result->repeat_parent . "' OR `id` = '" . $result->id . "' ORDER BY start ASC";
         $future_events = connect::connection()->query($stmt_future_events);
         $future_events = $future_events->fetchAll();
 
-
+        // Get Active Groups
         $group = GROUP::index();
         $group = $group['active'];
 
         return compact('proposals', 'proposals_room', 'result', 'group', 'future_events');
     }
 
+/*
+*   Stores Events in the Database
+*/
     public static function store($input)
     {
         if (is_array($input['group'])) {
@@ -88,6 +104,9 @@ class events
         return;
     }
 
+/*
+*   Searchs for a singe row
+*/
     public static function find($id)
     {
 
@@ -100,6 +119,9 @@ class events
     }
 
 
+/*
+*   Updates existing Event entries
+*/
     public static function update($input)
     {
         if (!isset($input['removed'])) {
@@ -136,6 +158,9 @@ class events
         return array(true, $input);
     }
 
+/*
+*   Deletes Events in the Database
+*/
     public static function delete($input)
     {
         $stmt = "UPDATE `events` SET `deleted_at`= '" . strftime('%Y-%m-%d %H:%M:%S') . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' WHERE id = '" . $input['event_id'] . "'";
