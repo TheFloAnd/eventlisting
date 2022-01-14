@@ -60,6 +60,8 @@ $lang['database-table']  = 'Databasetabel';
 $lang['no-repeat']       = 'No Repeats';
 $lang['toggle-column']   = 'Toggle Column';
 
+$lang['select_all'] = 'Select All';
+
 // Error
 
 

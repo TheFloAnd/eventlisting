@@ -60,6 +60,9 @@ $lang['database-table']  = 'Datenbanktabelle';
 $lang['no-repeat']        = 'Keine Wiederholung';
 $lang['toggle-column']        = 'Spalte umschalten';
 
+
+$lang['select_all'] = 'Alle Auswählen';
+
 // Error
 
 

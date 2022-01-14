@@ -1,6 +1,7 @@
 <?php
 
 use app\controller\events;
+use app\controller\event_repeat;
 use app\controller\group;
 use app\controller\config;
 use app\module\notification;
@@ -33,14 +34,14 @@ if (isset($_POST['submit_event'])) {
     events::store($_POST);
     header('Refresh:0');
   } else {
-    events::store_repeat($_POST);
+    event_repeat::store($_POST);
     // header('Refresh:0');
   }
 }
 
 if (isset($_POST['submit_edit_event'])) {
   if (isset($_POST['edit_repeat'])) {
-    $update_event = events::update_repeat($_POST);
+    $update_event = event_repeat::update($_POST);
   }
   if (!isset($_POST['edit_repeat'])) {
     $update_event = events::update($_POST);
@@ -54,7 +55,7 @@ if (isset($_POST['submit_edit_event'])) {
 
 if (isset($_POST['submit_delete_event'])) {
   if (isset($_POST['delete_repeat'])) {
-    events::delete_repeat($_POST);
+    event_repeat::delete($_POST);
   } else {
     events::delete($_POST);
   }

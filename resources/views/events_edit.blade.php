@@ -7,12 +7,7 @@ $data = events::edit($_GET['id']);
 
 $current_group = group::find($data['result']->team);
 require __DIR__ . '/../layout/navigation.php';
-// echo abs(strtotime(strftime(strtotime($data['result']->start))) - strtotime(strftime('18.06.2022'))) / 60 / 60 / 24;
 
-$date1 = new DateTime($data['result']->start);
-$date2 = new DateTime($data['result']->end);
-$interval = date_diff($date1, $date2);
-echo $interval->format('%R%a days %R%h hours %R%i minutes');
 ?>
 
 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" novalidate>
@@ -210,10 +205,10 @@ echo $interval->format('%R%a days %R%h hours %R%i minutes');
                             <div class="col-12 d-none" id="selectAll-col">
                             <fieldset>
                                 <div class="form-group">
-                                    <div class="form-check form-switch">
+                                    <div class="form-check">
                                         <input class="form-check-input events-edit-card-future-table-body-check-selectAll " type="checkbox" name="edit_repeat-selectAll" id="edit_repeat-selectAll" data-toggle="toggle" autocomplete="off" data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['tooltip-event-repeat-update'] . '">
                                         <label class="form-check-label" for="edit_repeat">
-                                            ' . lang['updat'] . ' ' . lang['repeat'] . '?
+                                            ' . lang['select_all'] . '
                                         </label>
                                     </div>
                                 </div>
@@ -266,8 +261,8 @@ echo $interval->format('%R%a days %R%h hours %R%i minutes');
                     
                             <fieldset>
                                 <div class="form-group">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input events-edit-card-future-table-body-check-switch" type="checkbox" name="repeat_list[]" id="repeat_list" value="'. $row['id'] .'" data-toggle="toggle" autocomplete="off">
+                                    <div class="form-check">
+                                        <input class="form-check-input events-edit-card-future-table-body-check-switch" type="checkbox" name="repeat_list[]" id="repeat_list" value="' . $row['id'] . '" data-toggle="toggle" autocomplete="off">
                                     </div>
                                 </div>
                             </fieldset>
@@ -338,6 +333,50 @@ echo $interval->format('%R%a days %R%h hours %R%i minutes');
             </section>
         <?php } ?>
     </article>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <?php echo lang['delete'] ?>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <fieldset class="" hidden>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="event_id" id="event_id" value="<?php echo $data['result']->id ?>">
+                        </div>
+                    </fieldset>
+                    <p>Wollen die den Termin wirklich Löschen?</p>
+                    <?php
+                    if (!empty($data['result']->repeat) || !empty($data['result']->repeat_parent)) {
+                        echo '<fieldset>
+                        <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" name="delete_repeat" id="delete_repeat">
+                                    <label class="form-check-label" for="delete_repeat">
+                                    ' . lang['repeat'] . ' ' . lang['delete'] . '?
+                                    </label>
+                                </div>
+    </fieldset>';
+                    }
+
+                    ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <?php echo lang['close'] ?>
+                    </button>
+                    <button type="submit" class="btn btn-danger" name="submit_delete_event">
+                        <?php echo lang['delete'] ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
