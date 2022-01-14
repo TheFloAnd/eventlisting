@@ -102,7 +102,9 @@ require __DIR__ . '/../layout/navigation.php';
       <div class="card-body">
         <div class="row g-5">
           <div class="col-12">
-              <input type="submit" class="btn btn-outline-success w-100" name="table_backup" id="table_backup" value="Backup">
+            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+              <button type="submit" class="btn btn-outline-success w-100" name="table_backup" id="table_backup">Backup</button>
+            </form>
           </div>
           <div class="col-12">
             <div class="btn-group btn-group-vertical w-100" role="group" aria-label="Basic checkbox toggle button group">

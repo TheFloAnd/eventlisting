@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 sudo apt update  # To get the latest package lists
 sudo apt upgrade -y
 sudo apt install apache2  -y
@@ -11,6 +11,8 @@ git clone https://github.com/TheFloAnd/eventlisting.git  production
 sudo chmod -R 777 /var/www/production
 sudo rm -rf /var/www/html
 sudo mv -u /var/www/production/ /var/www/html/
+
+sudo chmod -R 777 /var/www/html/database/backups/
 
 sudo systemctl enable cron.service
 #write out current crontab
