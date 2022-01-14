@@ -30,11 +30,11 @@ class teams_migrate
         try {
             $pdo->query(
                 "CREATE TABLE IF NOT EXISTS `teams` (
-                `id` int NOT NULL,
+                `id` int IDENTITY(1,1) PRIMARY KEY,
                 `name` varchar(255) NOT NULL,
                 `alias` varchar(10) NOT NULL,
                 `color` varchar(7) NOT NULL,
-                `created_at` datetime DEFAULT NULL,
+                `created_at` datetime NOT NULL,
                 `updated_at` datetime DEFAULT NULL,
                 `deleted_at` datetime DEFAULT NULL
             );"
@@ -42,9 +42,7 @@ class teams_migrate
 
             $pdo->query(
                 "ALTER TABLE `teams`
-                ADD PRIMARY KEY (`id`),
-                ADD UNIQUE KEY `alias` (`alias`),
-                MODIFY `id` int NOT NULL AUTO_INCREMENT
+                ADD UNIQUE KEY `alias` (`alias`)
             ;"
             );
             return;
