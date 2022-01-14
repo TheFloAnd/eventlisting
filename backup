@@ -14,6 +14,6 @@ backupfolder="${SCRIPT_DIR}/database/backups"
 
 sqlfile=$backupfolder/events-$(date +%Y-%m-%d_%H:%M:%S).sql
 # Create a backup 
-sudo mysqldump -u $user -p $password events > $sqlfile 
+mysqldump -u $user -p$password events > $sqlfile 
 
 echo $sqlfile
