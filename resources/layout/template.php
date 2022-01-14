@@ -35,8 +35,8 @@ use app\controller\config;
 <body>
     <main class="container-fluid">
         <?php
-        if (file_exists(__DIR__ . '/../views/' . blade . '.blade.php')) {
-            require __DIR__ . '/../views/' . blade . '.blade.php';
+        if (file_exists(__DIR__ . '/../views/' . view . '.blade.php')) {
+            require __DIR__ . '/../views/' . view . '.blade.php';
         }
         ?>
     </main>
