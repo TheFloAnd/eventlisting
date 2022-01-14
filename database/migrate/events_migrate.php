@@ -28,7 +28,7 @@ class events_migrate
         try {
             $pdo->query(
                 "CREATE TABLE   IF NOT EXISTS `events` (
-                `id` int NOT NULL,
+                `id` int IDENTITY(1,1) PRIMARY KEY,
                 `not_applicable` int DEFAULT NULL,
                 `event` varchar(50),
                 `team` varchar(255) DEFAULT NULL,
@@ -45,10 +45,7 @@ class events_migrate
             );
             $pdo->query(
                 "ALTER TABLE `events`
-                ADD PRIMARY KEY (`id`),
-                ADD UNIQUE KEY `id` (`id`),
-                ADD KEY `team` (`team`),
-                MODIFY `id` int NOT NULL AUTO_INCREMENT
+                ADD KEY `team` (`team`)
                 ;"
             );
             return;
@@ -89,6 +86,9 @@ class events_migrate
         try {
             $pdo->query(
                 "TRUNCATE `events`.`events`"
+            );
+            $pdo->query(
+                "ALTER TABLE `events`.`events` AUTO_INCREMENT = 0"
             );
             return;
         } catch (\PDOException $e) {
