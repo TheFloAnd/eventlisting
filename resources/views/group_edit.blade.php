@@ -6,8 +6,10 @@ $group = group::find($_GET['g']);
 
 if ($group->deleted_at == NULL) {
   $checked = 'checked';
+  $disabled = '';
 } else {
   $checked = '';
+  $disabled = 'disabled readonly';
 }
 require __DIR__ . '/../layout/navigation.php';
 ?>
@@ -30,7 +32,7 @@ require __DIR__ . '/../layout/navigation.php';
             <div class="col-md-10">
               <fieldset>
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" name="deactivate_group" id="deactivate_group" value="1" <?php echo $checked; ?> data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-group-disable'] ?>">
+                  <input class="form-check-input set_disable" type="checkbox" name="deactivate_group" id="deactivate_group" value="1" <?php echo $checked; ?> data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-group-disable'] ?>">
                   <label class="form-check-label" for="deactivate_group">
                     <?php echo lang['active'] . ' ' .  lang['group'] ?>
                   </label>
@@ -40,7 +42,7 @@ require __DIR__ . '/../layout/navigation.php';
             <div class="col-md-10">
               <fieldset id="input_name">
                 <div class="form-floating has-validation">
-                  <input type="text" class="form-control disable show_length" name="group_name" id="group_name" placeholder="<?php echo $group->name ?:  lang['groups'] . ' ' .  lang['name'] ?>" value="<?php echo $group->name ?>" maxlength="100" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-group-name'] ?>">
+                  <input type="text" class="form-control disable show_length" name="group_name" id="group_name" placeholder="<?php echo $group->name ?:  lang['groups'] . ' ' .  lang['name'] ?>" value="<?php echo $group->name ?>" maxlength="100" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-group-name'] ?>" <?php echo$disabled; ?>>
                   <label for="group_name">
                     <?php echo lang['groups'] . ' ' .  lang['name'] ?>
                     <span style="color: red;">
@@ -106,26 +108,3 @@ require __DIR__ . '/../layout/navigation.php';
     </div>
   </section>
 </article>
-<script>
-  var toogle_disable = document.getElementById("deactivate_group");
-  var disable = document.getElementsByClassName('disable');
-  if (toogle_disable.checked != true) {
-    for (var i = 0; i < disable.length; i++) {
-      disable[i].disabled = true;
-      disable[i].readOnly = true;
-    }
-  }
-  toogle_disable.onchange = function() {
-    if (toogle_disable.checked != true) {
-      for (var i = 0; i < disable.length; i++) {
-        disable[i].disabled = true;
-        disable[i].readOnly = true;
-      }
-    } else {
-      for (var i = 0; i < disable.length; i++) {
-        disable[i].disabled = false;
-        disable[i].readOnly = false;
-      }
-    }
-  }
-</script>

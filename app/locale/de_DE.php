@@ -82,7 +82,7 @@ $lang['invalide-group_alias-input']       = 'Bitte geben sie einen Gruppen alias
 $lang['invalide-settings_value-input']  = 'Bitte geben sie einen Wert an (Maximal 50 Zeichen länge)!';
 
 // Datatable
-$lang['datatable_lang-file']        = '/resources/js/init/German.json';
+$lang['datatable_lang-file']        = '/resources/js/dataTables/German.json';
 
 
 // delete Table

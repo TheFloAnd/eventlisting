@@ -15,12 +15,12 @@ use app\controller\config;
     <title><?php echo config::get('name')->value; ?></title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/resources/css/bootstrap/bootstrap.min.css" />
     <!-- <link rel="stylesheet" href="/resources/css/bootstrap-icons.css"> -->
 
-    <link rel="stylesheet" href="/resources/css/select2.min.css">
+    <link rel="stylesheet" href="/resources/css/select2/select2.min.css">
     <!-- <link rel="stylesheet" href="/resources/css/jquery.dataTables.min.css"> -->
-    <link rel="stylesheet" href="/resources/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="/resources/css/dataTables/dataTables.bootstrap5.min.css">
 
 
     <!-- Custom CSS -->
@@ -43,7 +43,7 @@ use app\controller\config;
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="/resources/js/bootstrap.bundle.js"></script>
+    <script src="/resources/js/bootstrap/bootstrap.bundle.js"></script>
     <!-- <script src="/resources/js/bootstrap-toggle.min.js"></script> -->
     <script>
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -52,12 +52,12 @@ use app\controller\config;
         })
     </script>
     <!-- Jquery -->
-    <script src="/resources/js/jquery.min.js"></script>
-    <script src="/resources/js/jquery-ui.min.js"></script>
+    <script src="/resources/js/jquery/jquery.min.js"></script>
+    <script src="/resources/js/jquery/jquery-ui.min.js"></script>
 
     <!-- Jquery Datatable -->
-    <script src="/resources/js/jquery.dataTables.min.js"></script>
-    <script src="/resources/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/resources/js/dataTables/jquery.dataTables.min.js"></script>
+    <script src="/resources/js/dataTables/dataTables.bootstrap5.min.js"></script>
     <!-- <script src="/resources/js/init/datatables.js"></script> -->
     <script>
         $(document).ready(function() {
@@ -197,14 +197,17 @@ use app\controller\config;
         });
     </script>
     <!-- Select 2 -->
-    <script src="/resources/js/select2.full.min.js"></script>
+    <script src="resources/js/select2/select2.full.min.js"></script>
+    <script src="resources/js/init/select2/select2.init.js"></script>
     <script>
         $(document).ready(function() {
             $('.multiple-select').select2();
         });
     </script>
 
-    <script>
+
+    <script src="resources/js/init/bootstrap/bootstrap.validation.init.js"></script>
+    <!--<script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
             'use strict'
@@ -225,8 +228,11 @@ use app\controller\config;
                     }, false)
                 })
         })()
-    </script>
+    </script>-->
 
+    <script src="/resources/js/input_disable.js"></script>
+    <script src="/resources/js/input_length.js"></script>
+    <!--
     <script>
         $('.show_length').each(function(index, element) {
             var label = document.getElementById(element.id + '_label');
@@ -258,7 +264,8 @@ use app\controller\config;
             }
         }
         });
-    </script>
+    </script>-->
+
 </body>
 
 </html>

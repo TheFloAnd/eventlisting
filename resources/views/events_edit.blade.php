@@ -8,6 +8,15 @@ $data = events::edit($_GET['id']);
 $current_group = group::find($data['result']->team);
 require __DIR__ . '/../layout/navigation.php';
 
+
+if ($data['result']->not_applicable == 1) {
+    $checked = 'checked';
+    $disabled = 'disabled readonly';
+} else {
+    $checked = '';
+    $disabled = '';
+}
+
 ?>
 
 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" novalidate>
@@ -24,15 +33,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-10">
                             <fieldset id="fieldset_remove">
                                 <div class="form-check form-switch">
-                                    <?php
-                                    if ($data['result']->not_applicable == 1) {
-                                        $checked = 'checked';
-                                    } else {
-                                        $checked = '';
-                                    }
-
-                                    ?>
-                                    <input class="form-check-input" type="checkbox" value="1" name="removed" id="removed" <?php echo $checked ?> data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-disable'] ?>">
+                                    <input class="form-check-input set_disable" type="checkbox" value="1" name="removed" id="removed" <?php echo $checked ?> data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-disable'] ?>" set_disable>
                                     <label class="form-check-label" for="removed">
                                         <?php echo lang['not_applicable'] ?>
                                     </label>
@@ -43,7 +44,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-10">
                             <fieldset>
                                 <div class="form-floating has-validation">
-                                    <input type="text" class="form-control disable show_length" name="event" id="event" placeholder="<?php echo $data['result']->event ?:  lang['event'] ?>" value="<?php echo $data['result']->event ?>" list="event_list" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-name'] ?>" maxlength="100">
+                                    <input type="text" class="form-control disable show_length" name="event" id="event" placeholder="<?php echo $data['result']->event ?:  lang['event'] ?>" value="<?php echo $data['result']->event ?>" list="event_list" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-name'] ?>" maxlength="100" <?php echo$disabled; ?>>
                                     <label for="event">
                                         <?php echo lang['event'] ?>
                                         <span style="color: red;">
@@ -75,7 +76,7 @@ require __DIR__ . '/../layout/navigation.php';
                                             *
                                         </span>
                                     </label>
-                                    <select class="form-select multiple-select disable" name="group[]" multiple="multiple" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-group'] ?>">
+                                    <select class="form-select multiple-select disable" name="group[]" multiple="multiple" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-group'] ?>"<?php echo$disabled; ?>>
                                         <?php
                                         $teams = explode(';', $data['result']->team);
                                         foreach ($data['group'] as $row) {
@@ -96,7 +97,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-3">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="text" class="form-control disable show_length" name="room" id="room" placeholder="<?php echo $data['result']->room ?:  lang['room'] ?>" value="<?php echo $data['result']->room ?>" maxlength="25" list="room_list" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-room'] ?>">
+                                    <input type="text" class="form-control disable show_length" name="room" id="room" placeholder="<?php echo $data['result']->room ?:  lang['room'] ?>" value="<?php echo $data['result']->room ?>" maxlength="25" list="room_list" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-room'] ?>"<?php echo$disabled; ?>>
                                     <label for="room">
                                         <?php echo lang['room'] ?>
                                         <span id="room_label" class="label"></span>
@@ -117,7 +118,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control disable" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->start)) ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-start'] ?>">
+                                    <input type="datetime-local" class="form-control disable" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->start)) ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-start'] ?>"<?php echo$disabled; ?>>
                                     <label for="start_date">
                                         <?php echo lang['start'] . ' ' .  lang['date'] ?>
                                         <span style="color: red;">
@@ -130,7 +131,7 @@ require __DIR__ . '/../layout/navigation.php';
                         <div class="col-md-5">
                             <fieldset>
                                 <div class="form-floating">
-                                    <input type="datetime-local" class="form-control disable" name="end_date" id="end_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->end)) ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-end'] ?>">
+                                    <input type="datetime-local" class="form-control disable" name="end_date" id="end_date" value="<?php echo strftime('%Y-%m-%dT%H:%M', strtotime($data['result']->end)) ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-end'] ?>"<?php echo$disabled; ?>>
                                     <label for="end_date">
                                         <?php echo lang['end'] . ' ' .  lang['date'] ?>
                                         <span style="color: red;">
