@@ -27,7 +27,7 @@ class group
         $alias = GROUP::find($input['group_alias']);
         if (!$alias) {
 
-            $stmt = "INSERT INTO `teams`(`name`, `alias`, `color`, `created_at`) VALUES ('" . $input['group_name'] . "', '" . $input['group_alias'] . "', '" . $input['group_color'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
+            $stmt = "INSERT INTO `teams`(`name`, `alias`, `color`, `created_at`) VALUES ('" . $input['group_name'] . "', '" . $input['group_alias'] . "', '" . $input['group_color'] . "', '" . date('Y-m-d H:i') . "')";
 
             $exec = connect::connection()->prepare($stmt);
             $exec->execute();
@@ -50,9 +50,9 @@ class group
     public static function update($group)
     {
         if (isset($group['deactivate_group'])) {
-            $stmt = "UPDATE `teams` SET `name`='" . $group['group_name'] . "',`color`='" . $group['group_color'] . "',`deleted_at`= NULL, `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' WHERE alias = '" . $group['alias'] . "' AND id = '" . $group['id'] . "'";
+            $stmt = "UPDATE `teams` SET `name`='" . $group['group_name'] . "',`color`='" . $group['group_color'] . "',`deleted_at`= NULL, `updated_at`='" . date('Y-m-d H:i') . "' WHERE alias = '" . $group['alias'] . "' AND id = '" . $group['id'] . "'";
         } else {
-            $stmt = "UPDATE `teams` SET `deleted_at`='" . strftime('%Y-%m-%dT%H:%M') . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' WHERE alias = '" . $group['alias'] . "' AND id = '" . $group['id'] . "'";
+            $stmt = "UPDATE `teams` SET `deleted_at`='" . date('Y-m-d H:i') . "', `updated_at`='" . date('Y-m-d H:i') . "' WHERE alias = '" . $group['alias'] . "' AND id = '" . $group['id'] . "'";
         }
 
         $exec = connect::connection()->prepare($stmt);

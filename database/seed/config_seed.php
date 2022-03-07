@@ -26,28 +26,28 @@ class config_seed extends connect
                 'refresh',
                 '15',
                 'seconds',
-                '" . strftime('%Y-%m-%dT%H:%M') . "'
+                '" . date('Y-m-d\TH:i') . "'
             ),(
                 2,
                 'Termin Preview Zeitraum',
                 'future_day',
                 '30',
                 'day',
-                '" . strftime('%Y-%m-%dT%H:%M') . "'
+                '" . date('Y-m-d\TH:i') . "'
             ), (
                 3,
                 'Überschrift',
                 'name',
                 '',
                 '',
-                '" . strftime('%Y-%m-%dT%H:%M') . "'
+                '" . date('Y-m-d\TH:i') . "'
             ), (
                 4,
                 'Sprache',
                 'language',
                 'Deutsch',
                 'de_DE',
-                '" . strftime('%Y-%m-%dT%H:%M') . "'
+                '" . date('Y-m-d\TH:i') . "'
             );"
             );
             return;

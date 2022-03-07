@@ -57,37 +57,37 @@ class config_migrate extends connect
                 'refresh',
                 '15',
                 'seconds',
-                '" . strftime('%Y-%m-%dT%H:%M') . "'
+                '" . date('Y-m-d\TH:i') . "'
             ),(
                 2,
                 'future_day',
                 '30',
                 'day',
-                '" . strftime('%Y-%m-%dT%H:%M') . "'
+                '" . date('Y-m-d\TH:i') . "'
             ), (
                 3,
                 'name',
                 '',
                 '',
-                '" . strftime('%Y-%m-%dT%H:%M') . "'
+                '" . date('Y-m-d\TH:i') . "'
             ), (
                 4,
                 'language',
                 'de_DE',
                 '',
-                '" . strftime('%Y-%m-%dT%H:%M') . "'
+                '" . date('Y-m-d\TH:i') . "'
             ), (
                 5,
                 'design',
                 'light',
                 '',
-                '" . strftime('%Y-%m-%dT%H:%M') . "'
+                '" . date('Y-m-d\TH:i') . "'
             ), (
                 6,
                 'protection',
                 'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec',
                 '',
-                '" . strftime('%Y-%m-%dT%H:%M') . "'
+                '" . date('Y-m-d\TH:i') . "'
             );"
             );
             return;

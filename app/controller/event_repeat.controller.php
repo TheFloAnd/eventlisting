@@ -45,7 +45,7 @@ class event_repeat
         $uuid = uniqid();
         if ($input['set_repeat_time'] == 'repeats') {
 
-            $stmt = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $start_date . "', '" . $end_date . "', '" . $input['repeats_repeats'] . "','" . $uuid . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
+            $stmt = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $start_date . "', '" . $end_date . "', '" . $input['repeats_repeats'] . "','" . $uuid . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . date('Y-m-d\TH:i') . "')";
             $exec = connect::connection()->prepare($stmt);
             $exec->execute();
 
@@ -54,10 +54,10 @@ class event_repeat
             $result_found = $data_find->fetch();
 
             for ($i = 1; $i < $input['repeats_repeats']; $i++) {
-                $start_date = strftime('%Y-%m-%d %H:%M', strtotime($start_date . ' +' . $input['repeat_days'] . ' ' . $input['set_repeat'] . ''));
-                $end_date = strftime('%Y-%m-%d %H:%M', strtotime($end_date . ' +' . $input['repeat_days'] . ' ' . $input['set_repeat'] . ''));
+                $start_date = date('Y-m-d H:i', strtotime($start_date . ' +' . $input['repeat_days'] . ' ' . $input['set_repeat'] . ''));
+                $end_date = date('Y-m-d H:i', strtotime($end_date . ' +' . $input['repeat_days'] . ' ' . $input['set_repeat'] . ''));
 
-                $stmt_repeat = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $start_date . "', '" . $end_date . "', '" . $uuid . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
+                $stmt_repeat = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $start_date . "', '" . $end_date . "', '" . $uuid . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . date('Y-m-d\TH:i') . "')";
 
                 $exec_repeat = connect::connection()->prepare($stmt_repeat);
                 $exec_repeat->execute();
@@ -76,10 +76,10 @@ class event_repeat
             foreach ($period_start as $row) {
 
                 $start = $row->format("Y-m-d H:i");
-                $end_date = $row->modify($interval->format('%R%a days %R%h hours %R%i minutes'));
+                $end_date = $row->modify($interval->format('Ra days Rh hours Ri minutes'));
                 $end = $end_date->format("Y-m-d H:i");
 
-                $stmt_repeat = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $start . "', '" . $end . "', '" . $uuid . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
+                $stmt_repeat = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $start . "', '" . $end . "', '" . $uuid . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . date('Y-m-d\TH:i') . "')";
 
                 $exec_repeat = connect::connection()->prepare($stmt_repeat);
                 $exec_repeat->execute();
@@ -100,13 +100,13 @@ class event_repeat
             $add_start_1 = new DateTime($input['start_date']);
             $add_start_2 = new DateTime($event->start);
             $interval = date_diff($add_start_2, $add_start_1);
-            $start_diff = $interval->format('%R%a days %R%h hours %R%i minutes');
+            $start_diff = $interval->format('Ra days Rh hours Ri minutes');
 
 
             $add_end_1 = new DateTime($input['end_date']);
             $add_end_2 = new DateTime($event->end);
             $interval = date_diff($add_end_2, $add_end_1);
-            $end_diff = $interval->format('%R%a days %R%h hours %R%i minutes');
+            $end_diff = $interval->format('Ra days Rh hours Ri minutes');
 
 
             if (is_array($input['group'])) {
@@ -136,7 +136,7 @@ class event_repeat
                             `start`='" . $start_date . "' ,
                             `end`='" . $end_date . "' ,
                             `room`='" . $input['room'] . "',
-                            `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' 
+                            `updated_at`='" . date('Y-m-d\TH:i') . "' 
                         WHERE id = '" . $event->id . "'";
             $exec = connect::connection()->prepare($stmt)->execute();
 
@@ -146,8 +146,8 @@ class event_repeat
                     $stmt_col = "SELECT * FROM `events` WHERE `id` = '" . $row . "'";
                     $col = connect::connection()->query($stmt_col)->fetchObject();
 
-                    $start_date = strftime('%Y-%m-%d %H:%M', strtotime($col->start . ' ' . $start_diff . ''));
-                    $end_date = strftime('%Y-%m-%d %H:%M', strtotime($col->end . ' ' . $end_diff . ''));
+                    $start_date = date('Y-m-d H:i', strtotime($col->start . ' ' . $start_diff . ''));
+                    $end_date = date('Y-m-d H:i', strtotime($col->end . ' ' . $end_diff . ''));
 
                     $stmt = "UPDATE `events` SET 
                             `not_applicable`= NULL,
@@ -156,7 +156,7 @@ class event_repeat
                             `start`='" . $start_date . "' ,
                             `end`='" . $end_date . "' ,
                             `room`='" . $input['room'] . "',
-                            `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' 
+                            `updated_at`='" . date('Y-m-d\TH:i') . "' 
                         WHERE id = '" . $col->id . "'";
                     $exec = connect::connection()->prepare($stmt)->execute();
                 }
@@ -166,7 +166,7 @@ class event_repeat
 
             $stmt = "UPDATE `events` SET 
                             `not_applicable`= 1,
-                            `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' 
+                            `updated_at`='" . date('Y-m-d\TH:i') . "' 
                         WHERE id = '" . $event->id . "'";
 
             $exec = connect::connection()->prepare($stmt)->execute();
@@ -175,7 +175,7 @@ class event_repeat
                 foreach ($input['repeat_list'] as $row) {
                     $stmt = "UPDATE `events` SET 
                             `not_applicable`= 1,
-                            `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' 
+                            `updated_at`='" . date('Y-m-d\TH:i') . "' 
                         WHERE id = '" . $row . "'";
                     $exec = connect::connection()->prepare($stmt)->execute();
                 }
@@ -189,13 +189,13 @@ class event_repeat
                     if (isset($input['removed'])) {
                         $stmt = "UPDATE `events` SET 
                                             `not_applicable`= 1,
-                                            `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' 
+                                            `updated_at`='" . date('Y-m-d\TH:i') . "' 
                                         WHERE id = '" . $row . "'";
                     }
                     if (!isset($input['removed'])) {
                         $stmt = "UPDATE `events` SET 
                                             `not_applicable`= NULL,
-                                            `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' 
+                                            `updated_at`='" . date('Y-m-d\TH:i') . "' 
                                         WHERE id = '" . $row . "'";
                     }
                     $exec = connect::connection()->prepare($stmt)->execute();
@@ -210,16 +210,16 @@ class event_repeat
         $event = events::find($input['event_id']);
         $id = $event->repeat_parent ? $event->repeat_parent : $event->id;
         $stmt = "UPDATE `events` SET 
-            `deleted_at` = '" .  strftime('%Y-%m-%d %H:%M:%S') . "',
-            `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' 
+            `deleted_at` = '" .  date('Y-m-d H:i:S') . "',
+            `updated_at`='" . date('Y-m-d\TH:i') . "' 
         WHERE id = '" . $id . "'";
         $exec = connect::connection()->prepare($stmt)->execute();
 
         foreach ($input['repeat_list'] as $row) {
 
             $stmt = "UPDATE `events` SET 
-            `deleted_at` = '" .  strftime('%Y-%m-%d %H:%M:%S') . "',
-            `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' 
+            `deleted_at` = '" .  date('Y-m-d H:i:S') . "',
+            `updated_at`='" . date('Y-m-d\TH:i') . "' 
         WHERE id = '" . $row . "'";
 
             $exec = connect::connection()->prepare($stmt)->execute();

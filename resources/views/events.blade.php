@@ -105,7 +105,7 @@ require __DIR__ . '/../layout/navigation.php';
                 <div class="col-md-5">
                   <fieldset>
                     <div class="form-floating">
-                      <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="<?php echo strftime('%Y-%m-%dT00:00') ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-start'] ?>">
+                      <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="<?php echo date('Y-m-d\T00:00') ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-start'] ?>">
                       <label for="start_date">
                         <?php echo lang['start'] . ' ' .  lang['date'] ?>
                         <span style="color: red;">
@@ -118,7 +118,7 @@ require __DIR__ . '/../layout/navigation.php';
                 <div class="col-md-5">
                   <fieldset>
                     <div class="form-floating">
-                      <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="<?php echo strftime('%Y-%m-%dT00:00') ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-end'] ?>">
+                      <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="<?php echo date('Y-m-d\TH:i') ?>" required data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo lang['tooltip-event-end'] ?>">
                       <label for="end_date">
                         <?php echo lang['end'] . ' ' .  lang['date'] ?>
                         <span style="color: red;">
@@ -180,7 +180,7 @@ require __DIR__ . '/../layout/navigation.php';
                           <label class="form-label" for="repeats">
                             <?php echo lang['till'] ?> :
                           </label>
-                          <input class="form-control disable" type="date" placeholder="<?php echo strftime('%Y-%m-%d', strtotime(strftime('%Y-%m-%d') . ' +1 month')) ?>" name="repeats_date" id="repeats_date" value="<?php echo strftime('%Y-%m-%d', strtotime(strftime('%Y-%m-%d') . ' +1 month')) ?>" disabled>
+                          <input class="form-control disable" type="date" placeholder="<?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 month')) ?>" name="repeats_date" id="repeats_date" value="<?php echo date('Y-m-d', strtotime(date('Y-m-d') . ' +1 month')) ?>" disabled>
                         </fieldset>
                       </div>
                     </div>
@@ -250,9 +250,9 @@ require __DIR__ . '/../layout/navigation.php';
                   <?php
                   $i = 0;
                   foreach ($events['result'] as $row) {
-                    $start = strftime('%Y-%m-%d', strtotime($row['start']));
-                    $end = strftime('%Y-%m-%d', strtotime($row['end']));
-                    if ($start >= strftime('%Y-%m-%d') or $end >= strftime('%Y-%m-%d')) {
+                    $start = date('Y-m-d', strtotime($row['start']));
+                    $end = date('Y-m-d', strtotime($row['end']));
+                    if ($start >= date('Y-m-d') or $end >= date('Y-m-d')) {
                       if ($row['not_applicable'] == 1) {
                         $disabled = 'class="table-danger strikethrough"';
                       } else {
@@ -273,40 +273,40 @@ require __DIR__ . '/../layout/navigation.php';
                         <td class="table_search">
                           ' . $row['room'] . '
                         </td>';
-                      if (strftime('%d.%m.%Y', strtotime($row['start'])) != strftime('%d.%m.%Y', strtotime($row['end']))) {
-                        if (strftime('%H:%M', strtotime($row['start'])) == '00:00') {
-                          echo '<td class="table_search">' . strftime('%d.%m.%Y', strtotime($row['start'])) . '</td>';
+                      if (date('d.m.Y', strtotime($row['start'])) != date('d.m.Y', strtotime($row['end']))) {
+                        if (date('H:i', strtotime($row['start'])) == '00:00') {
+                          echo '<td class="table_search">' . date('d.m.Y', strtotime($row['start'])) . '</td>';
                         } else {
-                          echo '<td class="table_search">' . strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) . '</td>';
+                          echo '<td class="table_search">' . date('d.m.Y - H:i', strtotime($row['start'])) . '</td>';
                         }
-                        if (strftime('%H:%M', strtotime($row['end'])) == '00:00') {
-                          echo '<td class="table_search">' . strftime('%d.%m.%Y ', strtotime($row['end'])) . '</td>';
+                        if (date('H:i', strtotime($row['end'])) == '00:00') {
+                          echo '<td class="table_search">' . date('d.m.Y ', strtotime($row['end'])) . '</td>';
                         } else {
-                          echo '<td class="table_search">' . strftime('%d.%m.%Y - %H:%M', strtotime($row['end'])) . '</td>';
+                          echo '<td class="table_search">' . date('d.m.Y - H:i', strtotime($row['end'])) . '</td>';
                         }
                       }
-                      if (strftime('%d.%m.%Y', strtotime($row['start'])) == strftime('%d.%m.%Y', strtotime($row['end']))) {
-                        if (strftime('%H:%M', strtotime($row['start'])) == strftime('%H:%M', strtotime($row['end']))) {
-                          if (strftime('%H:%M', strtotime($row['start'])) == '00:00') {
-                            echo '<td colspan="2" class="table_search">' . strftime('%d.%m.%Y ', strtotime($row['start'])) . '</td><td style="display:none;">';
+                      if (date('d.m.Y', strtotime($row['start'])) == date('d.m.Y', strtotime($row['end']))) {
+                        if (date('H:i', strtotime($row['start'])) == date('H:i', strtotime($row['end']))) {
+                          if (date('H:i', strtotime($row['start'])) == '00:00') {
+                            echo '<td colspan="2" class="table_search">' . date('d.m.Y ', strtotime($row['start'])) . '</td><td style="display:none;">';
                           } else {
-                            echo '<td colspan="2" class="table_search">' . strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) . '</td><td style="display:none;">';
+                            echo '<td colspan="2" class="table_search">' . date('d.m.Y - H:i', strtotime($row['start'])) . '</td><td style="display:none;">';
                           }
                         }
-                        if (strftime('%H:%M', strtotime($row['start'])) != strftime('%H:%M', strtotime($row['end']))) {
-                          if (strftime('%H:%M', strtotime($row['start'])) == '00:00') {
-                            echo '<td class="table_search">' . strftime('%d.%m.%Y', strtotime($row['start'])) . '</td>';
+                        if (date('H:i', strtotime($row['start'])) != date('H:i', strtotime($row['end']))) {
+                          if (date('H:i', strtotime($row['start'])) == '00:00') {
+                            echo '<td class="table_search">' . date('d.m.Y', strtotime($row['start'])) . '</td>';
                           } else {
-                            echo '<td class="table_search">' . strftime('%d.%m.%Y - %H:%M', strtotime($row['start'])) . '</td>';
+                            echo '<td class="table_search">' . date('d.m.Y - H:i', strtotime($row['start'])) . '</td>';
                           }
-                          if (strftime('%H:%M', strtotime($row['end'])) == '00:00') {
-                            echo '<td class="table_search">' . strftime('%d.%m.%Y', strtotime($row['end'])) . '</td>';
+                          if (date('H:i', strtotime($row['end'])) == '00:00') {
+                            echo '<td class="table_search">' . date('d.m.Y', strtotime($row['end'])) . '</td>';
                           } else {
-                            echo '<td class="table_search">' . strftime('%H:%M', strtotime($row['end'])) . '</td>';
+                            echo '<td class="table_search">' . date('H:i', strtotime($row['end'])) . '</td>';
                           }
                         }
                       }
-                      echo '<td class="table_search">' . abs(strtotime(strftime('%Y-%m-%d', strtotime($row['start']))) - strtotime(strftime('%Y-%m-%d'))) / 60 / 60 / 24 . ' ' . lang['meet'] . '</td>';
+                      echo '<td class="table_search">' . abs(strtotime(date('Y-m-d', strtotime($row['start']))) - strtotime(date('Y-m-d'))) / 60 / 60 / 24 . ' ' . lang['meet'] . '</td>';
                       echo '<td data-bs-toggle="tooltip" data-bs-placement="top" title="' . lang['edit'] . '"><a href="?b=events_edit&id=' . $row['id'] . '" type="button" class="btn btn-sm btn-secondary position-relative"><i class="bi bi-gear-wide"></i></a></td>';
                     }
                   }

@@ -45,9 +45,9 @@ class config
 
 
         if ($setting['setting_id'] == '2') {
-            $stmt = "UPDATE `config` SET `value` = '" . $setting_value . "', `time_unit` = '" . $setting['time_unit'] . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' where `id` = '" . $setting['setting_id'] . "'";
+            $stmt = "UPDATE `config` SET `value` = '" . $setting_value . "', `time_unit` = '" . $setting['time_unit'] . "', `updated_at`='" . date('Y-m-d\TH:i') . "' where `id` = '" . $setting['setting_id'] . "'";
         } else {
-            $stmt = "UPDATE `config` SET `value` = '" . $setting_value . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' where `id` = '" . $setting['setting_id'] . "'";
+            $stmt = "UPDATE `config` SET `value` = '" . $setting_value . "', `updated_at`='" . date('Y-m-d\TH:i') . "' where `id` = '" . $setting['setting_id'] . "'";
         }
         $exec = connect::connection()->prepare($stmt);
         $exec->execute();

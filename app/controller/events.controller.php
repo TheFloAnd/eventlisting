@@ -25,7 +25,7 @@ class events
     public static function index()
     {
         // SQL statment to select future events
-        $stmt = "SELECT * FROM `v_events` where `start` >= '" . strftime('%Y-%m-%d') . "' OR `end` >= '" . strftime('%Y-%m-%d') . "' ORDER BY start ASC";
+        $stmt = "SELECT * FROM `v_events` where `start` >= '" . date('Y-m-d') . "' OR `end` >= '" . date('Y-m-d') . "' ORDER BY start ASC";
 
         $data = connect::connection()->query($stmt);
         $result = $data->fetchAll();
@@ -98,7 +98,7 @@ class events
             $group = $input['group'];
         }
 
-        $stmt = "INSERT INTO `events`(`event`, `team`, `start`, `end`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $input['start_date'] . "', '" . $input['end_date'] . "', '" . $input['room'] . "', '" . strftime('%Y-%m-%dT%H:%M') . "')";
+        $stmt = "INSERT INTO `events`(`event`, `team`, `start`, `end`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $input['start_date'] . "', '" . $input['end_date'] . "', '" . $input['room'] . "', '" . date('Y-m-d\TH:i') . "')";
 
         $exec = connect::connection()->prepare($stmt);
         $exec->execute();
@@ -146,13 +146,13 @@ class events
             } else {
                 $group = $input['group'];
             }
-            $stmt = "UPDATE `events` SET `not_applicable`= NULL, `event`='" . $input['event'] . "',`team`='" . $group . "' ,`start`='" . $input['start_date'] . "' ,`end`='" . $input['end_date'] . "' ,`room`='" . $input['room'] . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' WHERE id = '" . $input['event_id'] . "'";
+            $stmt = "UPDATE `events` SET `not_applicable`= NULL, `event`='" . $input['event'] . "',`team`='" . $group . "' ,`start`='" . $input['start_date'] . "' ,`end`='" . $input['end_date'] . "' ,`room`='" . $input['room'] . "', `updated_at`='" . date('Y-m-d\TH:i') . "' WHERE id = '" . $input['event_id'] . "'";
 
             $exec = connect::connection()->prepare($stmt);
             $exec->execute();
         }
         if (isset($input['removed'])) {
-            $stmt = "UPDATE `events` SET `not_applicable`= 1, `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' WHERE id = '" . $input['event_id'] . "'";
+            $stmt = "UPDATE `events` SET `not_applicable`= 1, `updated_at`='" . date('Y-m-d\TH:i') . "' WHERE id = '" . $input['event_id'] . "'";
 
             $exec = connect::connection()->prepare($stmt);
             $exec->execute();
@@ -166,7 +166,7 @@ class events
 */
     public static function delete($input)
     {
-        $stmt = "UPDATE `events` SET `deleted_at`= '" . strftime('%Y-%m-%d %H:%M:%S') . "', `updated_at`='" . strftime('%Y-%m-%dT%H:%M') . "' WHERE id = '" . $input['event_id'] . "'";
+        $stmt = "UPDATE `events` SET `deleted_at`= '" . date('Y-m-d H:i:S') . "', `updated_at`='" . date('Y-m-d\TH:i') . "' WHERE id = '" . $input['event_id'] . "'";
 
         $exec = connect::connection()->prepare($stmt);
         $exec->execute();
