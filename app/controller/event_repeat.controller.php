@@ -76,7 +76,7 @@ class event_repeat
             foreach ($period_start as $row) {
 
                 $start = $row->format("Y-m-d H:i");
-                $end_date = $row->modify($interval->format('Ra days Rh hours Ri minutes'));
+                $end_date = $row->modify($interval->format($interval->d . ' days ' . $interval->h . ' hours ' . $interval->i . ' minutes'));
                 $end = $end_date->format("Y-m-d H:i");
 
                 $stmt_repeat = "INSERT INTO `events`(`event`, `team`, `start`, `end`,`repeat_parent`,`repeat_dif`, `room`, `created_at`) VALUES ('" . $input['event'] . "', '" . $group . "', '" . $start . "', '" . $end . "', '" . $uuid . "','" . $repeat_dif . "', '" . $input['room'] . "', '" . date('Y-m-d\TH:i') . "')";
