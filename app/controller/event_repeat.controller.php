@@ -100,13 +100,13 @@ class event_repeat
             $add_start_1 = new DateTime($input['start_date']);
             $add_start_2 = new DateTime($event->start);
             $interval = date_diff($add_start_2, $add_start_1);
-            $start_diff = $interval->format('Ra days Rh hours Ri minutes');
+            $start_diff = $interval->format($interval->d . ' days ' . $interval->h . ' hours ' . $interval->i . ' minutes');
 
 
             $add_end_1 = new DateTime($input['end_date']);
             $add_end_2 = new DateTime($event->end);
             $interval = date_diff($add_end_2, $add_end_1);
-            $end_diff = $interval->format('Ra days Rh hours Ri minutes');
+            $end_diff = $interval->format($interval->d . ' days ' . $interval->h . ' hours ' . $interval->i . ' minutes');
 
 
             if (is_array($input['group'])) {
